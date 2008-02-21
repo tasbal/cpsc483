@@ -203,9 +203,9 @@ sub get_exif_gps {
 		}
 				
 		$MarkerOutput .= " label=\"$GPScount\"/>\n";
-		$KMLOutput .= "<Placemark>\n<name>" . $filebase->basename ."</name><description>\n";
+		$KMLOutput .= "<Placemark>\n<name>" . $filebase->basename ."</name>\n<description>\n";
 		$KMLOutput .= "<![CDATA[\n<a href=\"http://$domain/mapper/$desc2/images/" . $filebase->basename . "\">";
-		$KMLOutput .= "<img src=\"http://$domain/mapper/$desc2/images/". $filebase->basename ."-thumb.jpg\"></a>\n]]>\n</description>\n";
+		$KMLOutput .= "<img src=\"http://$domain/mapper/$desc2/images/". $filebase->basename ."-thumb.jpg\"></a>\n]]><br/>Date: " . $date . "<br/>Time: " . $time . "\n</description>\n";
 		$KMLOutput .= "<LookAt id =\"tmv$GPScount\">\n";
 		$KMLOutput .= "<longitude>$lng</longitude>\n";
 		$KMLOutput .= "<latitude>$lat</latitude>\n";
