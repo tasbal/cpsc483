@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAuyigHdbC_DfnumErpHTD7hTVEtx55LNcvwA-3DcuSxJr3Q-XTBTCZaMg-3H1jnPgB6uTFedai-wxrA" type="text/javascript"></script>
+<title>Tim's GMapper</title>
+
+
+</head>
+<body onload="makeMap();">
+<div id="page">
+<hr />
+
+	<div id="content" class="narrowcolumn">
+<table border='0'>
+<tr>
+<td>
+<div id="map" style="width: 550px; height: 500px"></div>
+</td><td>
+<div id="sidebar"></div>
+</td>
+</tr>
+</table>
+    <script type="text/javascript">
+    //<![CDATA[
+// this is the Javascript that makes the map.  It should be defined in the head of the document
+var baseIcon = new GIcon();
+baseIcon.shadow = "./icons/shadow50.png";  //may want to host this stuff yourself...
+baseIcon.iconSize = new GSize(20, 34);
+baseIcon.shadowSize = new GSize(37, 34);
+baseIcon.iconAnchor = new GPoint(9, 34);
+baseIcon.infoWindowAnchor = new GPoint(9, 2);
+baseIcon.infoShadowAnchor = new GPoint(18, 25);
+// global variables
+      var map;
+      var number = 1;
+      var north;
+      var south;
+      var east;
+      var west;
+      var first = 1;
+      var sidebar_html="<a href='../'>Return to GMapper</a><table border='0'><tr><td colspan='20'><b><u>Thumbnail Index</u></b></td></tr><tr><td align='center' valign='top'>";
+      var bottombar_html="";
+      var gmarkers = [];
+      var htmls = [];
+
+// A function to create the marker and set up the event window
+function createMarker(point,name,html) {
+// alert("createMarker("+point+","+name+","+html+")");
+	//var letter = String.fromCharCode("A".charCodeAt(0) + index);
+	  var icon = new GIcon(baseIcon);
+	 // icon.image = "http://www.google.com/mapfiles/marker" + letter + ".png";
+	if(number < 100){
+//	  alert("http://www.iceburnslair.com/mapper/icon/b"+ format("\f\0\0\0",number) +".png");
+	  var iconNum = number;
+	  if(iconNum < 10){
+		iconNum = "0" + iconNum;
+	  }
+	  if(iconNum < 100){
+		iconNum = "0" + iconNum;
+	  }
+	  icon.image = "./icons/b"+ iconNum +".png";   //may want to host this yourself 
+	}else{
+	  icon.image = "./icons/b000.png";  //may want to host this yourself
+
+	}
+        var marker = new GMarker(point,icon);
+
+	//add to sidebar
+	sidebar_html += '<a href="javascript:myclick(' + number + ')">' + name + '</a>&nbsp;<br>';
+	if(number % 20 == 0){
+		sidebar_html += "</td><td align='center' valign='top'>";
+	}
+
+	//alert(sidebar_html);
+	gmarkers[number]=marker;
+	htmls[number]=html;
+
+        //var marker = new GMarker(point);
+        GEvent.addListener(marker, "click", function() {
+          marker.openInfoWindowHtml(html);
+        });
+	number++;
+        return marker;
+      }
+
+
+// This function picks up the click and opens the corresponding info window
+function myclick(i) {
+        gmarkers[i].openInfoWindowHtml(htmls[i]);
+      }
+
+// This function is a feable attempt to auto zoom bases on the maximum deltas of markers
+// 0.0150 is obtained through pure trial - i should really figure a formula out
+ function getZoomLevel(latRange,lngRange){
+       var latzoom = latRange / 0.0150;
+       var lngzoom = lngRange / 0.0150;
+       var rt;
+       if(latzoom > lngzoom){
+               rt= latzoom;
+       }else{
+               rt= lngzoom;
+       }
+
+       rt = Math.ceil(rt);
+
+       return rt;
+
+}
+
+
+// This function actually creates the Gmap and places markers from the xml file
+function makeMap() {
+    if (GBrowserIsCompatible()) {
+      var m = document.getElementById("map");
+      m.style.height = "600px";
+      m.style.width = "800px";
+
+      // create the map
+      map = new GMap(document.getElementById("map"));
+      map.addControl(new GLargeMapControl());
+      map.addControl(new GMapTypeControl());
+      map.centerAndZoom(new GPoint(-96.012225,41.244143), 14);
+
+
+      // Read the data from example.xml
+      var request = GXmlHttp.create();
+      var filename = "GMapNew.xml"
+      request.open("GET", filename, true);
+      request.onreadystatechange = function() {
+//        alert("readyState ="+request.readyState);
+        if (request.readyState == 4) {
+          if (request.status == 200) {
+             var xmlDoc = request.responseXML;
+	     if (xmlDoc.documentElement) {
+                // obtain the array of markers and loop through it
+                var markers = xmlDoc.documentElement.getElementsByTagName("marker");
+//              alert("loading "+markers.length+" markers");
+                for (var i = 0; i < markers.length; i++) {
+                  // obtain the attribues of each marker
+                  var lat = parseFloat(markers[i].getAttribute("lat"));
+                  var lng = parseFloat(markers[i].getAttribute("lng"));
+                  var point = new GPoint(lng,lat);
+
+		  //section to help determine the center and range of markers
+		  if(first == 1){
+			first = 0;
+		 	east = west = lng;
+			north = south = lat;
+		  }else{
+		  	if(lat > north){
+				north = lat;
+			}
+			if(lat < south){
+				south = lat;
+			}
+			if(lng > east){
+				east = lng;
+			}
+			if(lng < west){
+				west = lng;
+			}
+
+		  }
+                  var label = markers[i].getAttribute("label");
+                  var html = markers[i].getAttribute("html");
+		  html += "<br>" + label + ")";
+
+                  // create the marker
+                  var marker = createMarker(point,label,html);
+	
+                  map.addOverlay(marker);
+
+		//if this is the last marker, put all the other data on the screen as well
+		if(i == markers.length-1){
+			var latc = north - (north - south) / 2;
+			var lngc = east - (east - west) / 2;
+			var latd = north - south;
+			var lngd = east - west;
+			var zoom = getZoomLevel(latd,lngd);
+			sidebar_html += "</td></tr></table>";
+
+			sidebar_html += "AutoZoom: " + zoom + "&nbsp;<P>";
+			bottombar_html += "Center of Markers: " + latc + "&nbsp;" + lngc + "<p>";
+			document.getElementById("bottombar").innerHTML = bottombar_html;
+			document.getElementById("sidebar").innerHTML = sidebar_html;
+			map.centerAndZoom(new GPoint(lngc,latc), zoom);
+			map.setMapType(G_HYBRID_TYPE);
+			
+		}
+		
+                }
+             } else {
+                alert("invalid xml file:"+filename);
+             }
+          } else {
+          alert("file not found:"+filename);
+          }
+        }
+      }
+//      alert("sending null");
+      request.send(null);
+    }
+}
+
+    //]]>
+    </script>
+	
+		</ul>
+	</div>
+
+
+<hr />
+</div>
+
+<div id="bottombar"></div>
+		</body>
+</html>
+
+
+
+
+
