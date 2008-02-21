@@ -1,0 +1,29 @@
+#summary EXIF Metatag information
+#labels EXIF,metadata,GPS
+
+= Links =
+
+Wikipedia Entry: http://en.wikipedia.org/wiki/Exif
+
+EXIF Tags: http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/EXIF.html
+
+C# Parser Class: http://www.atalasoft.com/products/dotimage/docs/Atalasoft.dotImage~Atalasoft.Imaging.Metadata.ExifParser.html
+
+
+
+
+= Details =
+
+EXIF Fields used by mapper.pl:
+  * Gpslongitude
+  * Gpslatitude
+  * GPSDateStamp
+  * GPSTimeStamp
+
+Formatting of the metatag (lat and long have to be formatted this way):
+  * GPSLatitude    : 41 deg 14' 51.00" N
+  * GPSLongitude   : 96 deg 0' 57.00" W
+
+The following can be formatted in the way we want them displayed, but no spaces between digits:
+  * GPSTimeStamp   : 13:21:32
+  * GPS Date Stamp : 2006:03:03
