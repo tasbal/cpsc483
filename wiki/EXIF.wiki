@@ -20,7 +20,7 @@ EXIF Fields used by mapper.pl:
   * GPSDateStamp
   * GPSTimeStamp
 
-Formatting of the metatag (lat and long have to be formatted this way):
+Formatting of the metatag (mapper.pl is expecting this format):
   * GPSLatitude    : 41 deg 14' 51.00" N
   * GPSLongitude   : 96 deg 0' 57.00" W
 
