@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 
 namespace ReLive
 {
@@ -35,6 +36,23 @@ namespace ReLive
             {
                 populateFileList(fbd.SelectedPath);
             }
+        }
+
+        private void startIE(string path)
+        {
+            // when run from VS.NET
+            System.Diagnostics.Process proc = new
+            System.Diagnostics.Process();
+            proc.StartInfo.FileName = "iexplore";
+            proc.StartInfo.Arguments = path;
+            proc.Start();
+        }
+
+        private void launchSite_Click(object sender, EventArgs e)
+        {
+            string pathFolder = System.Windows.Forms.Application.StartupPath;
+            string path = pathFolder + "\\GMap.html";  //HTML file must be in ReLive\ReLive\bin\Debug
+            startIE(path);
         }
 
         private void populateFileList(string Path)

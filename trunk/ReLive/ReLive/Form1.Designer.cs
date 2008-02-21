@@ -31,6 +31,7 @@ namespace ReLive
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.fileList = new System.Windows.Forms.ComboBox();
             this.directoryBrowse = new System.Windows.Forms.Button();
+            this.launchSite = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +62,16 @@ namespace ReLive
             this.directoryBrowse.Text = "Browse for Image Directory";
             this.directoryBrowse.UseVisualStyleBackColor = true;
             this.directoryBrowse.Click += new System.EventHandler(this.directoryBrowse_Click);
+            //
+            //launchSite
+            //
+            this.launchSite.Location = new System.Drawing.Point(326, 80);
+            this.launchSite.Name = "launchSite";
+            this.launchSite.Size = new System.Drawing.Size(269, 32);
+            this.launchSite.TabIndex = 2;
+            this.launchSite.Text = "Launch Website";
+            this.launchSite.UseVisualStyleBackColor = true;
+            this.launchSite.Click += new System.EventHandler(this.launchSite_Click);
             // 
             // Form1
             // 
@@ -68,6 +79,7 @@ namespace ReLive
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 314);
             this.Controls.Add(this.directoryBrowse);
+            this.Controls.Add(this.launchSite);
             this.Controls.Add(this.fileList);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
@@ -82,6 +94,7 @@ namespace ReLive
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox fileList;
         private System.Windows.Forms.Button directoryBrowse;
+        private System.Windows.Forms.Button launchSite;
     }
 }
 
