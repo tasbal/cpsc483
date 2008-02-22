@@ -88,7 +88,7 @@ GPSData* convert(char* time,char* lat,char* lon,char* date)
 	g = (GPSData*)malloc(sizeof(GPSData));
 
 	g->lat = toDeg(lat,0);
-	g->lon = toDeg(lon,1);
+	g->lon = toDeg(lon,1)*-1;
 
 	tmp[0] = date[0];
 	tmp[1] = date[1];
@@ -176,15 +176,65 @@ double toDeg(char* DDMM,int latorlon)
 }
 
 
+
+double toRad(double degrees)
+{
+	return degrees*DEGTORAD;
+}
+
+double calcDist( GPSData* gps1, GPSData* gps2 )
+{
+	double nLat1, nLon1, nLat2, nLon2;
+	double nDLat, nDLon, nA, nC, nD;
+	double nRadius = 6378140; // Earth’s radius in Kilometers
+
+	nLat1 = gps1->lat;
+	nLon1 = gps1->lon;
+	nLat2 = gps2->lat;
+	nLon2 = gps2->lon;
+
+	// Get the difference between our two points 
+
+	// then convert the difference into radians
+
+	nDLat = toRad(nLat2 - nLat1);  
+
+	nDLon = toRad(nLon2 - nLon1); 
+
+	// Here is the new line
+
+	nLat1 =  toRad(nLat1);
+
+	nLat2 =  toRad(nLat2);
+
+	nA = pow ( sin(nDLat/2), 2 ) +
+
+	cos(nLat1) * cos(nLat2) * 
+
+	pow ( sin(nDLon/2), 2 );
+
+	nC = 2 * atan2( sqrt(nA), sqrt( 1 - nA ));
+
+	nD = nRadius * nC;
+	return nD; // Return our calculated distance
+}
+
+
+
 void readFile()
 {
 	FILE* fptr;
 	char* gps;
 	GPSData* g;
+	GPSData* prev;
+	double totDist;
 	int i;
-	i=0;
+	i = 0;
+	totDist = 0;
+	prev = NULL;
 	
 	gps = (char*)malloc(sizeof(char)*100);
+
 	if( fopen_s(&fptr,"GPS.txt","r") != 0 )
 	{
 		printf("Cannot open file\n");
@@ -196,9 +246,17 @@ void readFile()
 		g = parse(gps);
 		
 		if(g!=NULL)
+		{		
 			printf("%02d\tLat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\n",i,g->lat,g->lon,g->month,g->day,g->year,g->hour,g->minute,g->second);
+			if( prev != NULL )
+			{
+				totDist += calcDist(g,prev);
+			}
+			prev = g;
+		}
 		else
 			printf("%02d\tINVALID\n",i);
 		i++;
 	}
+	printf("\n\nTotal Distance Travelled - %lf meters\n",totDist);
 }
