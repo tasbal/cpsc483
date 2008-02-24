@@ -1,9 +1,0 @@
-C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gbase_querytool\bin\Debug\gbase_querytool.exe
-C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gbase_querytool\bin\Debug\gbase_querytool.pdb
-C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gbase_querytool\bin\Debug\Google.GData.Client.dll
-C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gbase_querytool\bin\Debug\Google.GData.GoogleBase.dll
-C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gbase_querytool\bin\Debug\Google.GData.Client.pdb
-C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gbase_querytool\bin\Debug\Google.GData.GoogleBase.pdb
-C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gbase_querytool\obj\Debug\ResolveAssemblyReference.cache
-C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gbase_querytool\obj\Debug\gbase_querytool.exe
-C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gbase_querytool\obj\Debug\gbase_querytool.pdb
