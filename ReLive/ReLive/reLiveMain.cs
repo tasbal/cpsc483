@@ -7,11 +7,18 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+using Google.GData.Photos;
+using Google.GData.Extensions.MediaRss;
 
 namespace ReLive
 {
     public partial class reLiveMain : Form
     {
+        private String googleAuthToken = null;
+        private String user = null;
+        private PicasaService picasaService = new PicasaService("ReLive");
+        private PicasaFeed picasaFeed = null;
+
         public reLiveMain()
         {
             InitializeComponent();
@@ -37,7 +44,8 @@ namespace ReLive
                 populateFileList(fbd.SelectedPath);
             }
         }
-
+        
+        //depreciated, easier way to launch browser
         private void startIE(string path)
         {
             // when run from VS.NET
@@ -47,12 +55,10 @@ namespace ReLive
             proc.StartInfo.Arguments = path;
             proc.Start();
         }
-
+ 
         private void launchSite_Click(object sender, EventArgs e)
         {
-            string pathFolder = System.Windows.Forms.Application.StartupPath;
-            string path = "http://picasaweb.google.com/";
-            startIE(path);
+            System.Diagnostics.Process.Start("http://picasaweb.google.com/"); 
         }
 
         private void populateFileList(string Path)
@@ -66,17 +72,53 @@ namespace ReLive
                 fileList.Items.Add(i);
             }
         
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
- 
         }
 
         private void panelGoogleData_Paint(object sender, PaintEventArgs e)
         {
             
+        }
+
+        private void reLiveMain_Load(object sender, EventArgs e)
+        {
+            if (this.googleAuthToken == null)
+            {
+                GoogleLogin loginDialog = new GoogleLogin(new PicasaService("reLive"));
+                loginDialog.ShowDialog();
+
+                this.googleAuthToken = loginDialog.AuthenticationToken;
+                this.user = loginDialog.User;
+
+                if (this.googleAuthToken == null)
+                    this.Close();
+
+                picasaService.SetAuthenticationToken(loginDialog.AuthenticationToken);
+                UpdateAlbumFeed();
+            }
+        }
+
+        private void UpdateAlbumFeed()
+        {
+            AlbumQuery query = new AlbumQuery();
+
+            this.AlbumList.Clear();
+
+
+            query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
+
+            this.picasaFeed = this.picasaService.Query(query);
+
+            if (this.picasaFeed != null && this.picasaFeed.Entries.Count > 0)
+            {
+                foreach (PicasaEntry entry in this.picasaFeed.Entries)
+                {
+                    ListViewItem item = new ListViewItem(entry.Title.Text +
+                                    " (" + entry.getPhotoExtensionValue(GPhotoNameTable.NumPhotos) + " )");
+                    item.Tag = entry;
+                    this.AlbumList.Items.Add(item);
+                }
+            }
+            this.AlbumList.Update();
         }
     }
 }
