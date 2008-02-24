@@ -1,0 +1,17 @@
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Release\Spreadsheet.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Release\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Release\Google.GData.Extensions.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Release\Google.GData.Spreadsheets.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\obj\ASP\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\obj\ASP\Spreadsheet.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Debug\Spreadsheet.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Debug\Spreadsheet.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Debug\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Debug\Google.GData.Extensions.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Debug\Google.GData.Spreadsheets.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Debug\Google.GData.Extensions.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Debug\Google.GData.Spreadsheets.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\bin\Debug\Google.GData.Client.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\obj\Debug\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\obj\Debug\Spreadsheet.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Spreadsheet\obj\Debug\Spreadsheet.pdb

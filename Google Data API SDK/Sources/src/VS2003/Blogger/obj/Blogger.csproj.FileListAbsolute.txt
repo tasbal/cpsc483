@@ -1,0 +1,10 @@
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\bin\Debug\Blogger.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\bin\Debug\Blogger.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\bin\Debug\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\bin\Debug\Google.GData.Client.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\obj\Debug\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\obj\Debug\Blogger.addentry.resources
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\obj\Debug\Blogger.Blogger.resources
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\obj\Debug\Blogger.csproj.GenerateResource.Cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\obj\Debug\Blogger.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Blogger\obj\Debug\Blogger.pdb

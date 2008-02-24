@@ -1,0 +1,15 @@
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Calendar.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Calendar.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Google.GData.AccessControl.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Google.GData.Calendar.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Google.GData.Extensions.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Google.GData.Extensions.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Google.GData.AccessControl.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Google.GData.Client.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\bin\Debug\Google.GData.Calendar.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\obj\Debug\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\obj\Debug\SampleApp.Calendar.resources
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\obj\Debug\Calendar.csproj.GenerateResource.Cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\obj\Debug\Calendar.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\Calendar\obj\Debug\Calendar.pdb

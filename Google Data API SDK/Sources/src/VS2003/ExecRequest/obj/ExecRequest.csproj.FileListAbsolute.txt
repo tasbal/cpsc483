@@ -1,0 +1,12 @@
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\bin\Release\ExecRequest.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\bin\Release\ExecRequest.xml
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\bin\Release\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\obj\Release\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\obj\Release\ExecRequest.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\bin\Debug\ExecRequest.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\bin\Debug\ExecRequest.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\bin\Debug\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\bin\Debug\Google.GData.Client.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\obj\Debug\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\obj\Debug\ExecRequest.exe
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\ExecRequest\obj\Debug\ExecRequest.pdb

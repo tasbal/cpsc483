@@ -1,0 +1,16 @@
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\asp\Google.GData.CodeSearch.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\asp\gcodesearch.xml
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\asp\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\asp\Google.GData.Extensions.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\obj\ASP\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\obj\ASP\Google.GData.CodeSearch.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\Debug\Google.GData.CodeSearch.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\Debug\Google.GData.CodeSearch.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\Debug\doc.xml
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\Debug\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\Debug\Google.GData.Extensions.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\Debug\Google.GData.Extensions.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\bin\Debug\Google.GData.Client.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\obj\Debug\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\obj\Debug\Google.GData.CodeSearch.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gcodesearch\obj\Debug\Google.GData.CodeSearch.pdb

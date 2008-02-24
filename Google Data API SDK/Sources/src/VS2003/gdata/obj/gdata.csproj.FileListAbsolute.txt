@@ -1,0 +1,9 @@
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gdata\bin\asp\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gdata\bin\asp\gdata.xml
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gdata\obj\ASP\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gdata\obj\ASP\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gdata\bin\Debug\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gdata\bin\Debug\Google.GData.Client.pdb
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gdata\obj\Debug\ResolveAssemblyReference.cache
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gdata\obj\Debug\Google.GData.Client.dll
+C:\Program Files\Google\Google Data API SDK\Sources\src\VS2003\gdata\obj\Debug\Google.GData.Client.pdb
