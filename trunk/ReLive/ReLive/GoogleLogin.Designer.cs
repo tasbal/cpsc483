@@ -1,3 +1,5 @@
+using Google.GData.Client;
+
 namespace ReLive
 {
     partial class GoogleLogin
@@ -28,22 +30,22 @@ namespace ReLive
         /// </summary>
         private void InitializeComponent()
         {
-            this.textUsername = new System.Windows.Forms.TextBox();
+            this.Username = new System.Windows.Forms.TextBox();
             this.labAccount = new System.Windows.Forms.Label();
             this.labPassword = new System.Windows.Forms.Label();
-            this.textPassword = new System.Windows.Forms.TextBox();
+            this.Password = new System.Windows.Forms.TextBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.linkCreateAccount = new System.Windows.Forms.LinkLabel();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textUsername
+            // Username
             // 
-            this.textUsername.Location = new System.Drawing.Point(68, 12);
-            this.textUsername.Name = "textUsername";
-            this.textUsername.Size = new System.Drawing.Size(156, 20);
-            this.textUsername.TabIndex = 0;
-            this.textUsername.Text = "username@gmail.com";
+            this.Username.Location = new System.Drawing.Point(68, 12);
+            this.Username.Name = "Username";
+            this.Username.Size = new System.Drawing.Size(156, 20);
+            this.Username.TabIndex = 0;
+            this.Username.Text = "username@gmail.com";
             // 
             // labAccount
             // 
@@ -63,13 +65,13 @@ namespace ReLive
             this.labPassword.TabIndex = 2;
             this.labPassword.Text = "Password:";
             // 
-            // textPassword
+            // Password
             // 
-            this.textPassword.Location = new System.Drawing.Point(68, 40);
-            this.textPassword.Name = "textPassword";
-            this.textPassword.PasswordChar = '*';
-            this.textPassword.Size = new System.Drawing.Size(156, 20);
-            this.textPassword.TabIndex = 3;
+            this.Password.Location = new System.Drawing.Point(68, 40);
+            this.Password.Name = "Password";
+            this.Password.PasswordChar = '*';
+            this.Password.Size = new System.Drawing.Size(156, 20);
+            this.Password.TabIndex = 3;
             // 
             // buttonLogin
             // 
@@ -110,10 +112,10 @@ namespace ReLive
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.linkCreateAccount);
             this.Controls.Add(this.buttonLogin);
-            this.Controls.Add(this.textPassword);
+            this.Controls.Add(this.Password);
             this.Controls.Add(this.labPassword);
             this.Controls.Add(this.labAccount);
-            this.Controls.Add(this.textUsername);
+            this.Controls.Add(this.Username);
             this.Name = "GoogleLogin";
             this.Text = "Google Login";
             this.Load += new System.EventHandler(this.GoogleLogin_Load);
@@ -124,12 +126,15 @@ namespace ReLive
 
         #endregion
 
-        private System.Windows.Forms.TextBox textUsername;
+        private string authToken;
+
+        private System.Windows.Forms.TextBox Username;
         private System.Windows.Forms.Label labAccount;
         private System.Windows.Forms.Label labPassword;
-        private System.Windows.Forms.TextBox textPassword;
+        private System.Windows.Forms.TextBox Password;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.LinkLabel linkCreateAccount;
         private System.Windows.Forms.Button buttonCancel;
+        private Service service;
     }
 }

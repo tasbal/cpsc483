@@ -14,7 +14,6 @@ namespace ReLive
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GoogleLogin());
             Application.Run(new reLiveMain());
         }
     }

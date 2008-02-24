@@ -32,6 +32,7 @@ namespace ReLive
             this.fileList = new System.Windows.Forms.ComboBox();
             this.directoryBrowse = new System.Windows.Forms.Button();
             this.launchSite = new System.Windows.Forms.Button();
+            this.AlbumList = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,18 +74,31 @@ namespace ReLive
             this.launchSite.UseVisualStyleBackColor = true;
             this.launchSite.Click += new System.EventHandler(this.launchSite_Click);
             // 
+            // AlbumList
+            // 
+            this.AlbumList.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.AlbumList.FullRowSelect = true;
+            this.AlbumList.GridLines = true;
+            this.AlbumList.Location = new System.Drawing.Point(341, 134);
+            this.AlbumList.Name = "AlbumList";
+            this.AlbumList.Size = new System.Drawing.Size(253, 167);
+            this.AlbumList.TabIndex = 3;
+            this.AlbumList.UseCompatibleStateImageBehavior = false;
+            this.AlbumList.View = System.Windows.Forms.View.List;
+            // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 332);
+            this.Controls.Add(this.AlbumList);
             this.Controls.Add(this.directoryBrowse);
             this.Controls.Add(this.launchSite);
             this.Controls.Add(this.fileList);
             this.Controls.Add(this.pictureBox1);
             this.Name = "reLiveMain";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "explore. reLive. share.";
+            this.Load += new System.EventHandler(this.reLiveMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -96,6 +110,7 @@ namespace ReLive
         private System.Windows.Forms.ComboBox fileList;
         private System.Windows.Forms.Button directoryBrowse;
         private System.Windows.Forms.Button launchSite;
+        private System.Windows.Forms.ListView AlbumList;
     }
 }
 
