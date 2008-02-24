@@ -2,7 +2,7 @@
 
 
 # C files to compile
-CSOURCES=main.c relive.c parser.c
+CSOURCES=relive.c parser.c main.c
 
 # header files
 INCLUDES=relive.h parser.h
