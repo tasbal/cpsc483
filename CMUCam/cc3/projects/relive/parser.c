@@ -1,6 +1,12 @@
-#define _CRT_SECURE_NO_WARNINGS
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 #include "parser.h"
+
+#define MINTODEG .01667
+#define DEGTORAD 0.017453293
+#define _CRT_SECURE_NO_WARNINGS
 
 GPSData* parse(char* gps_string)
 {
@@ -77,6 +83,7 @@ GPSData* parse(char* gps_string)
 	return NULL;
 }
 
+
 GPSData* convert(char* time,char* lat,char* lon,char* date)
 {
 	GPSData* g;
@@ -120,6 +127,7 @@ GPSData* convert(char* time,char* lat,char* lon,char* date)
 
 	return g;
 }
+
 
 double toDeg(char* DDMM,int latorlon)
 {
@@ -182,6 +190,7 @@ double toRad(double degrees)
 	return degrees*DEGTORAD;
 }
 
+
 double calcDist( GPSData* gps1, GPSData* gps2 )
 {
 	double nLat1, nLon1, nLat2, nLon2;
@@ -220,43 +229,12 @@ double calcDist( GPSData* gps1, GPSData* gps2 )
 }
 
 
-
-void readFile()
+void test(char* gps)
 {
-	FILE* fptr;
-	char* gps;
-	GPSData* g;
-	GPSData* prev;
-	double totDist;
-	int i;
-	i = 0;
-	totDist = 0;
-	prev = NULL;
-	
-	gps = (char*)malloc(sizeof(char)*100);
+	GPSData* g= parse(gps);
 
-	if( fopen_s(&fptr,"GPS.txt","r") != 0 )
-	{
-		printf("Cannot open file\n");
-		return;
-	}
-
-	while(fscanf_s(fptr,"%s",gps,100) != EOF)
-	{
-		g = parse(gps);
-		
-		if(g!=NULL)
-		{		
-			printf("%02d\tLat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\n",i,g->lat,g->lon,g->month,g->day,g->year,g->hour,g->minute,g->second);
-			if( prev != NULL )
-			{
-				totDist += calcDist(g,prev);
-			}
-			prev = g;
-		}
-		else
-			printf("%02d\tINVALID\n",i);
-		i++;
-	}
-	printf("\n\nTotal Distance Travelled - %lf meters\n",totDist);
+	if(g!=NULL)
+		printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\n",g->lat,g->lon,g->month,g->day,g->year,g->hour,g->minute,g->second);
+	else
+		printf("INVALID\n");
 }
