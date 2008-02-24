@@ -8,3 +8,10 @@ D:\Documents\Visual Studio 2005\483\ReLive\ReLive\obj\Debug\ReLive.Properties.Re
 D:\Documents\Visual Studio 2005\483\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
 D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.exe
 D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.pdb
+D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\bin\Debug\ReLive.exe
+D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\bin\Debug\ReLive.pdb
+D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ResolveAssemblyReference.cache
+D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.Properties.Resources.resources
+D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
+D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
+D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.reLiveMain.resources
