@@ -37,6 +37,7 @@ namespace ReLive
             this.AlbumPicture = new System.Windows.Forms.PictureBox();
             this.calendarLabel = new System.Windows.Forms.Label();
             this.albumPreviewLabel = new System.Windows.Forms.Label();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.SuspendLayout();
@@ -68,10 +69,9 @@ namespace ReLive
             this.directoryBrowse.Text = "Browse for Image Directory";
             this.directoryBrowse.UseVisualStyleBackColor = true;
             this.directoryBrowse.Click += new System.EventHandler(this.directoryBrowse_Click);
-            //
+            // 
             // uploadDir
-            //
-            
+            // 
             this.uploadDir.Location = new System.Drawing.Point(580, 14);
             this.uploadDir.Name = "uploadDir";
             this.uploadDir.Size = new System.Drawing.Size(130, 32);
@@ -79,7 +79,6 @@ namespace ReLive
             this.uploadDir.Text = "Upload Image Directory";
             this.uploadDir.UseVisualStyleBackColor = true;
             this.uploadDir.Click += new System.EventHandler(this.uploadDir_Click);
-  
             // 
             // launchSite
             // 
@@ -126,11 +125,21 @@ namespace ReLive
             this.albumPreviewLabel.TabIndex = 7;
             this.albumPreviewLabel.Text = "Album Cover";
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(13, 316);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(716, 242);
+            this.webBrowser1.TabIndex = 8;
+            this.webBrowser1.Url = new System.Uri("http://www.google.com", System.UriKind.Absolute);
+            // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 322);
+            this.ClientSize = new System.Drawing.Size(744, 570);
+            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.albumPreviewLabel);
             this.Controls.Add(this.calendarLabel);
             this.Controls.Add(this.AlbumPicture);
@@ -161,6 +170,7 @@ namespace ReLive
         private System.Windows.Forms.PictureBox AlbumPicture;
         private System.Windows.Forms.Label calendarLabel;
         private System.Windows.Forms.Label albumPreviewLabel;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
 
