@@ -32,8 +32,12 @@ namespace ReLive
             this.fileList = new System.Windows.Forms.ComboBox();
             this.directoryBrowse = new System.Windows.Forms.Button();
             this.launchSite = new System.Windows.Forms.Button();
-            this.AlbumList = new System.Windows.Forms.ListView();
+            this.albumCalendar = new System.Windows.Forms.MonthCalendar();
+            this.AlbumPicture = new System.Windows.Forms.PictureBox();
+            this.calendarLabel = new System.Windows.Forms.Label();
+            this.albumPreviewLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -50,7 +54,7 @@ namespace ReLive
             this.fileList.FormattingEnabled = true;
             this.fileList.Location = new System.Drawing.Point(326, 52);
             this.fileList.Name = "fileList";
-            this.fileList.Size = new System.Drawing.Size(272, 21);
+            this.fileList.Size = new System.Drawing.Size(234, 21);
             this.fileList.TabIndex = 1;
             this.fileList.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -58,7 +62,7 @@ namespace ReLive
             // 
             this.directoryBrowse.Location = new System.Drawing.Point(326, 14);
             this.directoryBrowse.Name = "directoryBrowse";
-            this.directoryBrowse.Size = new System.Drawing.Size(269, 32);
+            this.directoryBrowse.Size = new System.Drawing.Size(231, 32);
             this.directoryBrowse.TabIndex = 2;
             this.directoryBrowse.Text = "Browse for Image Directory";
             this.directoryBrowse.UseVisualStyleBackColor = true;
@@ -68,30 +72,56 @@ namespace ReLive
             // 
             this.launchSite.Location = new System.Drawing.Point(326, 80);
             this.launchSite.Name = "launchSite";
-            this.launchSite.Size = new System.Drawing.Size(269, 32);
+            this.launchSite.Size = new System.Drawing.Size(231, 32);
             this.launchSite.TabIndex = 2;
             this.launchSite.Text = "Launch Picasaweb";
             this.launchSite.UseVisualStyleBackColor = true;
             this.launchSite.Click += new System.EventHandler(this.launchSite_Click);
             // 
-            // AlbumList
+            // albumCalendar
             // 
-            this.AlbumList.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.AlbumList.FullRowSelect = true;
-            this.AlbumList.GridLines = true;
-            this.AlbumList.Location = new System.Drawing.Point(341, 134);
-            this.AlbumList.Name = "AlbumList";
-            this.AlbumList.Size = new System.Drawing.Size(253, 167);
-            this.AlbumList.TabIndex = 3;
-            this.AlbumList.UseCompatibleStateImageBehavior = false;
-            this.AlbumList.View = System.Windows.Forms.View.List;
+            this.albumCalendar.Location = new System.Drawing.Point(330, 140);
+            this.albumCalendar.MaxSelectionCount = 1;
+            this.albumCalendar.Name = "albumCalendar";
+            this.albumCalendar.TabIndex = 4;
+            this.albumCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.albumCalendar_DateChanged);
+            // 
+            // AlbumPicture
+            // 
+            this.AlbumPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AlbumPicture.Location = new System.Drawing.Point(569, 140);
+            this.AlbumPicture.Name = "AlbumPicture";
+            this.AlbumPicture.Size = new System.Drawing.Size(160, 160);
+            this.AlbumPicture.TabIndex = 5;
+            this.AlbumPicture.TabStop = false;
+            // 
+            // calendarLabel
+            // 
+            this.calendarLabel.AutoSize = true;
+            this.calendarLabel.Location = new System.Drawing.Point(373, 118);
+            this.calendarLabel.Name = "calendarLabel";
+            this.calendarLabel.Size = new System.Drawing.Size(145, 13);
+            this.calendarLabel.TabIndex = 6;
+            this.calendarLabel.Text = "Browse Web Albums by Date";
+            // 
+            // albumPreviewLabel
+            // 
+            this.albumPreviewLabel.AutoSize = true;
+            this.albumPreviewLabel.Location = new System.Drawing.Point(616, 118);
+            this.albumPreviewLabel.Name = "albumPreviewLabel";
+            this.albumPreviewLabel.Size = new System.Drawing.Size(67, 13);
+            this.albumPreviewLabel.TabIndex = 7;
+            this.albumPreviewLabel.Text = "Album Cover";
             // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 332);
-            this.Controls.Add(this.AlbumList);
+            this.ClientSize = new System.Drawing.Size(744, 322);
+            this.Controls.Add(this.albumPreviewLabel);
+            this.Controls.Add(this.calendarLabel);
+            this.Controls.Add(this.AlbumPicture);
+            this.Controls.Add(this.albumCalendar);
             this.Controls.Add(this.directoryBrowse);
             this.Controls.Add(this.launchSite);
             this.Controls.Add(this.fileList);
@@ -100,7 +130,9 @@ namespace ReLive
             this.Text = "explore. reLive. share.";
             this.Load += new System.EventHandler(this.reLiveMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -110,7 +142,10 @@ namespace ReLive
         private System.Windows.Forms.ComboBox fileList;
         private System.Windows.Forms.Button directoryBrowse;
         private System.Windows.Forms.Button launchSite;
-        private System.Windows.Forms.ListView AlbumList;
+        private System.Windows.Forms.MonthCalendar albumCalendar;
+        private System.Windows.Forms.PictureBox AlbumPicture;
+        private System.Windows.Forms.Label calendarLabel;
+        private System.Windows.Forms.Label albumPreviewLabel;
     }
 }
 

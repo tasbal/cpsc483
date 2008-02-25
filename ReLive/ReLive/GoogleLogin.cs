@@ -36,7 +36,7 @@ namespace ReLive
 
         private void linkCreateAccount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("www.google.com/accounts/NewAccount"); 
+            System.Diagnostics.Process.Start("https://www.google.com/accounts/NewAccount?hl=en_US&continue=http%3A%2F%2Fpicasaweb.google.com%2Flh%2Flogin%3Fcontinue%3Dhttp%253A%252F%252Fpicasaweb.google.com%252F&service=lh2&passive=true"); 
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -50,11 +50,30 @@ namespace ReLive
            
         }
 
+        //need better exception catching
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             this.service.setUserCredentials(this.Username.Text, this.Password.Text);
-            this.authToken = this.service.QueryAuthenticationToken();
-            this.Close();
+
+            try
+            {
+                authToken = this.service.QueryAuthenticationToken();
+            }
+            catch (InvalidCredentialsException)
+            {
+                MessageBox.Show("Invalid Credentials");
+            }
+            catch (AuthenticationException)
+            {
+                MessageBox.Show("Invalid Credentials");
+            }
+            if (authToken != null) //proceed once login accepted
+                Close();
+        }
+
+        private void linkAddPicasaweb_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("www.picasaweb.google.com");
         }
     }
 }

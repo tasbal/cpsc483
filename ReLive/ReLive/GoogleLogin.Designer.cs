@@ -37,6 +37,7 @@ namespace ReLive
             this.buttonLogin = new System.Windows.Forms.Button();
             this.linkCreateAccount = new System.Windows.Forms.LinkLabel();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.linkAddPicasaweb = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // Username
@@ -86,7 +87,7 @@ namespace ReLive
             // linkCreateAccount
             // 
             this.linkCreateAccount.AutoSize = true;
-            this.linkCreateAccount.Location = new System.Drawing.Point(68, 67);
+            this.linkCreateAccount.Location = new System.Drawing.Point(62, 67);
             this.linkCreateAccount.Name = "linkCreateAccount";
             this.linkCreateAccount.Size = new System.Drawing.Size(81, 13);
             this.linkCreateAccount.TabIndex = 5;
@@ -104,11 +105,23 @@ namespace ReLive
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // linkAddPicasaweb
+            // 
+            this.linkAddPicasaweb.AutoSize = true;
+            this.linkAddPicasaweb.Location = new System.Drawing.Point(150, 66);
+            this.linkAddPicasaweb.Name = "linkAddPicasaweb";
+            this.linkAddPicasaweb.Size = new System.Drawing.Size(81, 13);
+            this.linkAddPicasaweb.TabIndex = 7;
+            this.linkAddPicasaweb.TabStop = true;
+            this.linkAddPicasaweb.Text = "Add Picasaweb";
+            this.linkAddPicasaweb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAddPicasaweb_LinkClicked);
+            // 
             // GoogleLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(249, 118);
+            this.Controls.Add(this.linkAddPicasaweb);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.linkCreateAccount);
             this.Controls.Add(this.buttonLogin);
@@ -136,5 +149,6 @@ namespace ReLive
         private System.Windows.Forms.LinkLabel linkCreateAccount;
         private System.Windows.Forms.Button buttonCancel;
         private Service service;
+        private System.Windows.Forms.LinkLabel linkAddPicasaweb;
     }
 }
