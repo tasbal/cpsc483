@@ -31,6 +31,7 @@ namespace ReLive
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.fileList = new System.Windows.Forms.ComboBox();
             this.directoryBrowse = new System.Windows.Forms.Button();
+            this.uploadDir = new System.Windows.Forms.Button();
             this.launchSite = new System.Windows.Forms.Button();
             this.albumCalendar = new System.Windows.Forms.MonthCalendar();
             this.AlbumPicture = new System.Windows.Forms.PictureBox();
@@ -67,6 +68,18 @@ namespace ReLive
             this.directoryBrowse.Text = "Browse for Image Directory";
             this.directoryBrowse.UseVisualStyleBackColor = true;
             this.directoryBrowse.Click += new System.EventHandler(this.directoryBrowse_Click);
+            //
+            // uploadDir
+            //
+            
+            this.uploadDir.Location = new System.Drawing.Point(580, 14);
+            this.uploadDir.Name = "uploadDir";
+            this.uploadDir.Size = new System.Drawing.Size(130, 32);
+            this.uploadDir.TabIndex = 2;
+            this.uploadDir.Text = "Upload Image Directory";
+            this.uploadDir.UseVisualStyleBackColor = true;
+            this.uploadDir.Click += new System.EventHandler(this.uploadDir_Click);
+  
             // 
             // launchSite
             // 
@@ -123,6 +136,7 @@ namespace ReLive
             this.Controls.Add(this.AlbumPicture);
             this.Controls.Add(this.albumCalendar);
             this.Controls.Add(this.directoryBrowse);
+            this.Controls.Add(this.uploadDir);
             this.Controls.Add(this.launchSite);
             this.Controls.Add(this.fileList);
             this.Controls.Add(this.pictureBox1);
@@ -141,6 +155,7 @@ namespace ReLive
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox fileList;
         private System.Windows.Forms.Button directoryBrowse;
+        private System.Windows.Forms.Button uploadDir;
         private System.Windows.Forms.Button launchSite;
         private System.Windows.Forms.MonthCalendar albumCalendar;
         private System.Windows.Forms.PictureBox AlbumPicture;
