@@ -18,6 +18,7 @@ namespace ReLive
         private String user = null;
         private PicasaService picasaService = new PicasaService("ReLive");
         private PicasaFeed picasaFeed = null;
+        private List<PicasaEntry> albumList = new List<PicasaEntry>();
 
         public reLiveMain()
         {
@@ -45,17 +46,6 @@ namespace ReLive
             }
         }
         
-        //depreciated, easier way to launch browser
-        private void startIE(string path)
-        {
-            // when run from VS.NET
-            System.Diagnostics.Process proc = new
-            System.Diagnostics.Process();
-            proc.StartInfo.FileName = "iexplore";
-            proc.StartInfo.Arguments = path;
-            proc.Start();
-        }
- 
         private void launchSite_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://picasaweb.google.com/"); 
@@ -71,7 +61,6 @@ namespace ReLive
                 imageData i = new imageData(file.Name, file.FullName);
                 fileList.Items.Add(i);
             }
-        
         }
 
         private void panelGoogleData_Paint(object sender, PaintEventArgs e)
@@ -90,10 +79,13 @@ namespace ReLive
                 this.user = loginDialog.User;
 
                 if (this.googleAuthToken == null)
-                    this.Close();
-
-                picasaService.SetAuthenticationToken(loginDialog.AuthenticationToken);
-                UpdateAlbumFeed();
+                    //this.Close();
+                    MessageBox.Show("You will not be able to access your web albums without logging in!");
+                else
+                {
+                    picasaService.SetAuthenticationToken(loginDialog.AuthenticationToken);
+                    UpdateAlbumFeed();
+                }
             }
         }
 
@@ -101,8 +93,7 @@ namespace ReLive
         {
             AlbumQuery query = new AlbumQuery();
 
-            this.AlbumList.Clear();
-
+            this.albumList.Clear();
 
             query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
 
@@ -112,13 +103,34 @@ namespace ReLive
             {
                 foreach (PicasaEntry entry in this.picasaFeed.Entries)
                 {
-                    ListViewItem item = new ListViewItem(entry.Title.Text +
-                                    " (" + entry.getPhotoExtensionValue(GPhotoNameTable.NumPhotos) + " )");
-                    item.Tag = entry;
-                    this.AlbumList.Items.Add(item);
+                    albumList.Add(entry);
+                    albumCalendar.AddBoldedDate(entry.Published); //adds album dates to calendar as bold entries
                 }
             }
-            this.AlbumList.Update();
+            this.albumCalendar.UpdateBoldedDates();
+        }
+
+        private void albumCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            this.AlbumPicture.Image = null;
+            //this.AlbumInspector.SelectedObject = null;
+
+            foreach(PicasaEntry entry in this.albumList)
+            {
+                if (this.albumCalendar.SelectionStart.ToShortDateString().Equals(entry.Published.ToShortDateString()))
+                    setSelection(entry);
+            }
+        }
+
+        private void setSelection(PicasaEntry entry)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            MediaThumbnail thumb = entry.Media.Thumbnails[0];
+            Stream stream = this.picasaService.Query(new Uri(thumb.Attributes["url"] as string));
+            this.AlbumPicture.Image = new Bitmap(stream);
+            //this.AlbumInspector.SelectedObject = new AlbumAccessor(entry);
+            this.Cursor = Cursors.Default;
+
         }
     }
 }
