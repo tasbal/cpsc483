@@ -19,6 +19,7 @@ namespace ReLive
         private PicasaService picasaService = new PicasaService("ReLive");
         private PicasaFeed picasaFeed = null;
         private List<PicasaEntry> albumList = new List<PicasaEntry>();
+        private String dirPath;
 
         public reLiveMain()
         {
@@ -42,8 +43,59 @@ namespace ReLive
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                populateFileList(fbd.SelectedPath);
+                dirPath = fbd.SelectedPath;
+                populateFileList(dirPath);
             }
+        }
+
+        private bool checkAlbumExists(string albumName)
+        {
+            bool albumExists = false;
+            AlbumQuery query = new AlbumQuery(PicasaQuery.CreatePicasaUri(this.user));
+
+            PicasaFeed feed = picasaService.Query(query);
+
+            foreach (PicasaEntry entry in feed.Entries)
+            {
+                if (entry.Title.Text.Equals(albumName)) albumExists = true;
+            }
+            return albumExists;
+        }
+
+        private void createNewAlbum(string albumName, string desc)
+        {
+            if(!checkAlbumExists(albumName))
+            {
+                Uri feedUri = new Uri(this.picasaFeed.Post);
+                AlbumEntry newEntry = new AlbumEntry();
+                newEntry.Title.Text = albumName;
+                newEntry.Summary.Text = desc;
+
+                PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
+            }
+        }
+
+        private void uploadDir_Click(object sender, EventArgs e)
+        {
+            DirectoryInfo dir = new DirectoryInfo(dirPath);
+            FileInfo[] jpgFiles = dir.GetFiles("*.jpg");
+            DateTime currTime = DateTime.Now;
+            string currDate = currTime.ToString("yyyyMMdd");
+            string desc = "Album Created " + currDate;
+
+            createNewAlbum(currDate, desc);
+
+            Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, currDate));
+
+            foreach (FileInfo file in jpgFiles)
+            {
+                string fileStr = file.FullName;
+
+                FileStream fileStream = file.OpenRead();
+
+                PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+            }
+
         }
         
         private void launchSite_Click(object sender, EventArgs e)
@@ -54,6 +106,7 @@ namespace ReLive
         private void populateFileList(string Path)
         {
             DirectoryInfo dir = new DirectoryInfo(Path);
+
             FileInfo[] jpgFiles = dir.GetFiles("*.jpg");
 
             foreach (FileInfo file in jpgFiles)
