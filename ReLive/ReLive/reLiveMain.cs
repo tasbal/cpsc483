@@ -92,26 +92,34 @@ namespace ReLive
 
         private void uploadDir_Click(object sender, EventArgs e)
         {
-            DirectoryInfo dir = new DirectoryInfo(dirPath);
-            FileInfo[] jpgFiles = dir.GetFiles("*.jpg");
-            DateTime currTime = DateTime.Now;
-            string currDate = currTime.ToString("yyyyMMdd");
-            string desc = "Album Created " + currDate;
-
-            createNewAlbum(currDate, desc);
-
-            Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, currDate));
-
-            foreach (FileInfo file in jpgFiles)
+            if (dirPath != null)
             {
-                
-                string fileStr = file.FullName;
+                DirectoryInfo dir = new DirectoryInfo(dirPath);
+                FileInfo[] jpgFiles = dir.GetFiles("*.jpg");
+                DateTime currTime = DateTime.Now;
+                string currDate = currTime.ToString("yyyyMMdd");
+                string desc = "Album Created " + currDate;
 
-                if (!checkFileExists(file.Name, currDate))
+                createNewAlbum(currDate, desc);
+
+                Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, currDate));
+
+                foreach (FileInfo file in jpgFiles)
                 {
-                    FileStream fileStream = file.OpenRead();
-                    PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+
+                    string fileStr = file.FullName;
+
+                    if (!checkFileExists(file.Name, currDate))
+                    {
+                        FileStream fileStream = file.OpenRead();
+                        PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+                    }
                 }
+                MessageBox.Show("Uploaded Album: " + currDate + " Successfully!");
+            }
+            else
+            {
+                MessageBox.Show("Please select a directory");
             }
 
         }
