@@ -62,6 +62,21 @@ namespace ReLive
             return albumExists;
         }
 
+        private bool checkFileExists(string fileName, string albumName)
+        {
+            bool fileExists = false;
+
+            PhotoQuery query = new PhotoQuery(PicasaQuery.CreatePicasaUri(this.user, albumName));
+            PicasaFeed feed = picasaService.Query(query);
+
+            foreach (PicasaEntry entry in feed.Entries)
+            {
+                if(entry.Title.Text.Equals(fileName)) fileExists = true;
+            }
+
+            return fileExists;
+        }
+
         private void createNewAlbum(string albumName, string desc)
         {
             if(!checkAlbumExists(albumName))
@@ -89,11 +104,14 @@ namespace ReLive
 
             foreach (FileInfo file in jpgFiles)
             {
+                
                 string fileStr = file.FullName;
 
-                FileStream fileStream = file.OpenRead();
-
-                PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+                if (!checkFileExists(file.Name, currDate))
+                {
+                    FileStream fileStream = file.OpenRead();
+                    PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+                }
             }
 
         }
