@@ -20,6 +20,7 @@ namespace ReLive
         private PicasaFeed picasaFeed = null;
         private List<PicasaEntry> albumList = new List<PicasaEntry>();
         private String dirPath;
+        MapBrowser mapWindow = new MapBrowser();
 
         public reLiveMain()
         {
@@ -192,6 +193,7 @@ namespace ReLive
         private void albumCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
             this.AlbumPicture.Image = null;
+            this.mapLinkLabel.Hide();
             //this.AlbumInspector.SelectedObject = null;
 
             foreach(PicasaEntry entry in this.albumList)
@@ -209,7 +211,17 @@ namespace ReLive
             this.AlbumPicture.Image = new Bitmap(stream);
             //this.AlbumInspector.SelectedObject = new AlbumAccessor(entry);
             this.Cursor = Cursors.Default;
+            //enable map link only when date selected
+            this.mapLinkLabel.Show();
+            //enable changing of map browser url temporarily
+            mapWindow.albumMap.AllowNavigation = true;
+            mapWindow.albumMap.Url = new Uri("http://picasaweb.google.com/" + 
+               this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
+        }
 
+        private void mapLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            mapWindow.ShowDialog();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace ReLive
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reLiveMain));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.fileList = new System.Windows.Forms.ComboBox();
             this.directoryBrowse = new System.Windows.Forms.Button();
@@ -37,7 +38,7 @@ namespace ReLive
             this.AlbumPicture = new System.Windows.Forms.PictureBox();
             this.calendarLabel = new System.Windows.Forms.Label();
             this.albumPreviewLabel = new System.Windows.Forms.Label();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.mapLinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.SuspendLayout();
@@ -110,7 +111,7 @@ namespace ReLive
             // calendarLabel
             // 
             this.calendarLabel.AutoSize = true;
-            this.calendarLabel.Location = new System.Drawing.Point(373, 118);
+            this.calendarLabel.Location = new System.Drawing.Point(373, 124);
             this.calendarLabel.Name = "calendarLabel";
             this.calendarLabel.Size = new System.Drawing.Size(145, 13);
             this.calendarLabel.TabIndex = 6;
@@ -119,27 +120,30 @@ namespace ReLive
             // albumPreviewLabel
             // 
             this.albumPreviewLabel.AutoSize = true;
-            this.albumPreviewLabel.Location = new System.Drawing.Point(616, 118);
+            this.albumPreviewLabel.Location = new System.Drawing.Point(617, 124);
             this.albumPreviewLabel.Name = "albumPreviewLabel";
             this.albumPreviewLabel.Size = new System.Drawing.Size(67, 13);
             this.albumPreviewLabel.TabIndex = 7;
             this.albumPreviewLabel.Text = "Album Cover";
             // 
-            // webBrowser1
+            // mapLinkLabel
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(13, 316);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(716, 242);
-            this.webBrowser1.TabIndex = 8;
-            this.webBrowser1.Url = new System.Uri("http://www.google.com", System.UriKind.Absolute);
+            this.mapLinkLabel.AutoSize = true;
+            this.mapLinkLabel.Location = new System.Drawing.Point(617, 303);
+            this.mapLinkLabel.Name = "mapLinkLabel";
+            this.mapLinkLabel.Size = new System.Drawing.Size(54, 13);
+            this.mapLinkLabel.TabIndex = 8;
+            this.mapLinkLabel.TabStop = true;
+            this.mapLinkLabel.Text = "View Map";
+            this.mapLinkLabel.Visible = false;
+            this.mapLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.mapLinkLabel_LinkClicked);
             // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 570);
-            this.Controls.Add(this.webBrowser1);
+            this.ClientSize = new System.Drawing.Size(743, 337);
+            this.Controls.Add(this.mapLinkLabel);
             this.Controls.Add(this.albumPreviewLabel);
             this.Controls.Add(this.calendarLabel);
             this.Controls.Add(this.AlbumPicture);
@@ -149,7 +153,12 @@ namespace ReLive
             this.Controls.Add(this.launchSite);
             this.Controls.Add(this.fileList);
             this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "reLiveMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "explore. reLive. share.";
             this.Load += new System.EventHandler(this.reLiveMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -170,7 +179,7 @@ namespace ReLive
         private System.Windows.Forms.PictureBox AlbumPicture;
         private System.Windows.Forms.Label calendarLabel;
         private System.Windows.Forms.Label albumPreviewLabel;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.LinkLabel mapLinkLabel;
     }
 }
 

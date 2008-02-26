@@ -21,3 +21,4 @@ D:\Documents\Visual Studio 2005\483\ReLive\ReLive\bin\Debug\Google.GData.Extensi
 D:\Documents\Visual Studio 2005\483\ReLive\ReLive\bin\Debug\Google.GData.Photos.dll
 D:\Documents\Visual Studio 2005\483\ReLive\ReLive\obj\Debug\ReLive.reLiveMain.resources
 D:\Documents\Visual Studio 2005\483\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
+D:\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.MapBrowser.resources
