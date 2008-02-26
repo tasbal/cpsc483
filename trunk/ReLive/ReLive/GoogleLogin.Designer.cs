@@ -47,7 +47,6 @@ namespace ReLive
             this.Username.Name = "Username";
             this.Username.Size = new System.Drawing.Size(156, 20);
             this.Username.TabIndex = 0;
-            this.Username.Text = "username@gmail.com";
             // 
             // labAccount
             // 

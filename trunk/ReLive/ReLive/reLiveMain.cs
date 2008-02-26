@@ -46,6 +46,7 @@ namespace ReLive
             {
                 dirPath = fbd.SelectedPath;
                 populateFileList(dirPath);
+                fileBrowser.Url = new Uri(dirPath);
             }
         }
 
@@ -223,5 +224,6 @@ namespace ReLive
         {
             mapWindow.ShowDialog();
         }
+
     }
 }

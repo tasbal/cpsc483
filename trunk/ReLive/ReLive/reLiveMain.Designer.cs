@@ -39,15 +39,16 @@ namespace ReLive
             this.calendarLabel = new System.Windows.Forms.Label();
             this.albumPreviewLabel = new System.Windows.Forms.Label();
             this.mapLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.fileBrowser = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(13, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(517, 325);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(305, 290);
+            this.pictureBox1.Size = new System.Drawing.Size(405, 177);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -55,7 +56,7 @@ namespace ReLive
             // fileList
             // 
             this.fileList.FormattingEnabled = true;
-            this.fileList.Location = new System.Drawing.Point(326, 52);
+            this.fileList.Location = new System.Drawing.Point(513, 52);
             this.fileList.Name = "fileList";
             this.fileList.Size = new System.Drawing.Size(234, 21);
             this.fileList.TabIndex = 1;
@@ -63,7 +64,7 @@ namespace ReLive
             // 
             // directoryBrowse
             // 
-            this.directoryBrowse.Location = new System.Drawing.Point(326, 14);
+            this.directoryBrowse.Location = new System.Drawing.Point(513, 14);
             this.directoryBrowse.Name = "directoryBrowse";
             this.directoryBrowse.Size = new System.Drawing.Size(231, 32);
             this.directoryBrowse.TabIndex = 2;
@@ -73,7 +74,7 @@ namespace ReLive
             // 
             // uploadDir
             // 
-            this.uploadDir.Location = new System.Drawing.Point(580, 14);
+            this.uploadDir.Location = new System.Drawing.Point(767, 14);
             this.uploadDir.Name = "uploadDir";
             this.uploadDir.Size = new System.Drawing.Size(130, 32);
             this.uploadDir.TabIndex = 2;
@@ -83,7 +84,7 @@ namespace ReLive
             // 
             // launchSite
             // 
-            this.launchSite.Location = new System.Drawing.Point(326, 80);
+            this.launchSite.Location = new System.Drawing.Point(513, 80);
             this.launchSite.Name = "launchSite";
             this.launchSite.Size = new System.Drawing.Size(231, 32);
             this.launchSite.TabIndex = 2;
@@ -93,7 +94,7 @@ namespace ReLive
             // 
             // albumCalendar
             // 
-            this.albumCalendar.Location = new System.Drawing.Point(330, 140);
+            this.albumCalendar.Location = new System.Drawing.Point(517, 140);
             this.albumCalendar.MaxSelectionCount = 1;
             this.albumCalendar.Name = "albumCalendar";
             this.albumCalendar.TabIndex = 4;
@@ -102,7 +103,7 @@ namespace ReLive
             // AlbumPicture
             // 
             this.AlbumPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.AlbumPicture.Location = new System.Drawing.Point(569, 140);
+            this.AlbumPicture.Location = new System.Drawing.Point(756, 140);
             this.AlbumPicture.Name = "AlbumPicture";
             this.AlbumPicture.Size = new System.Drawing.Size(160, 160);
             this.AlbumPicture.TabIndex = 5;
@@ -111,7 +112,7 @@ namespace ReLive
             // calendarLabel
             // 
             this.calendarLabel.AutoSize = true;
-            this.calendarLabel.Location = new System.Drawing.Point(373, 124);
+            this.calendarLabel.Location = new System.Drawing.Point(560, 124);
             this.calendarLabel.Name = "calendarLabel";
             this.calendarLabel.Size = new System.Drawing.Size(145, 13);
             this.calendarLabel.TabIndex = 6;
@@ -120,7 +121,7 @@ namespace ReLive
             // albumPreviewLabel
             // 
             this.albumPreviewLabel.AutoSize = true;
-            this.albumPreviewLabel.Location = new System.Drawing.Point(617, 124);
+            this.albumPreviewLabel.Location = new System.Drawing.Point(804, 124);
             this.albumPreviewLabel.Name = "albumPreviewLabel";
             this.albumPreviewLabel.Size = new System.Drawing.Size(67, 13);
             this.albumPreviewLabel.TabIndex = 7;
@@ -129,7 +130,7 @@ namespace ReLive
             // mapLinkLabel
             // 
             this.mapLinkLabel.AutoSize = true;
-            this.mapLinkLabel.Location = new System.Drawing.Point(617, 303);
+            this.mapLinkLabel.Location = new System.Drawing.Point(804, 303);
             this.mapLinkLabel.Name = "mapLinkLabel";
             this.mapLinkLabel.Size = new System.Drawing.Size(54, 13);
             this.mapLinkLabel.TabIndex = 8;
@@ -138,11 +139,21 @@ namespace ReLive
             this.mapLinkLabel.Visible = false;
             this.mapLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.mapLinkLabel_LinkClicked);
             // 
+            // fileBrowser
+            // 
+            this.fileBrowser.Location = new System.Drawing.Point(13, 14);
+            this.fileBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.fileBrowser.Name = "fileBrowser";
+            this.fileBrowser.Size = new System.Drawing.Size(492, 488);
+            this.fileBrowser.TabIndex = 9;
+            this.fileBrowser.Url = new System.Uri("", System.UriKind.Relative);
+            // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 337);
+            this.ClientSize = new System.Drawing.Size(934, 514);
+            this.Controls.Add(this.fileBrowser);
             this.Controls.Add(this.mapLinkLabel);
             this.Controls.Add(this.albumPreviewLabel);
             this.Controls.Add(this.calendarLabel);
@@ -180,6 +191,7 @@ namespace ReLive
         private System.Windows.Forms.Label calendarLabel;
         private System.Windows.Forms.Label albumPreviewLabel;
         private System.Windows.Forms.LinkLabel mapLinkLabel;
+        private System.Windows.Forms.WebBrowser fileBrowser;
     }
 }
 
