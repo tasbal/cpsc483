@@ -30,6 +30,7 @@ namespace ReLive
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GoogleLogin));
             this.Username = new System.Windows.Forms.TextBox();
             this.labAccount = new System.Windows.Forms.Label();
             this.labPassword = new System.Windows.Forms.Label();
@@ -129,8 +130,14 @@ namespace ReLive
             this.Controls.Add(this.labPassword);
             this.Controls.Add(this.labAccount);
             this.Controls.Add(this.Username);
+            this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "GoogleLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Google Login";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.GoogleLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
