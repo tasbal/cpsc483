@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="ReLive.reLiveMain">
+    <Position X="3.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>reLiveMain.cs</FileName>
+      <HashCode>AABAAAFJgzAAEVAEiDHRpCAmACAEABAAAIAIhQAIAQg=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Delegate Name="ReLive.reLiveMain.EnumChildrenCallback">
+        <TypeIdentifier>
+          <NewMemberFileName>reLiveMain.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+  </Class>
+  <Class Name="ReLive.GoogleLogin">
+    <Position X="6.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>GoogleLogin.cs</FileName>
+      <HashCode>ABAJAAIACCAAAAEAAQGABBgSEAAAIAACQEAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReLive.MapBrowser">
+    <Position X="6.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>MapBrowser.cs</FileName>
+      <HashCode>ABACAAAAACAAAAACAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReLive.Program">
+    <Position X="1.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Program.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

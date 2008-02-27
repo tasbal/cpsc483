@@ -45,18 +45,7 @@ namespace ReLive
         {
             InitializeComponent();
         }
-        /*
-        public void openImage(string path)
-        {
-            pictureBox1.Image = new Bitmap(path);
-        }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (fileList.SelectedIndex != -1)
-                openImage(((imageData)fileList.Items[fileList.SelectedIndex]).filePath);
-        }
-        */
         private void directoryBrowse_Click(object sender, EventArgs e)
         {
             //fileList.Items.Clear();
@@ -69,7 +58,6 @@ namespace ReLive
             }
         }
         
-
         private bool checkAlbumExists(string albumName)
         {
             bool albumExists = false;
@@ -152,20 +140,6 @@ namespace ReLive
         {
             System.Diagnostics.Process.Start("http://picasaweb.google.com/"); 
         }
-        /*
-        private void populateFileList(string Path)
-        {
-            DirectoryInfo dir = new DirectoryInfo(Path);
-
-            FileInfo[] jpgFiles = dir.GetFiles("*.jpg");
-
-            foreach (FileInfo file in jpgFiles)
-            {
-                imageData i = new imageData(file.Name, file.FullName);
-                fileList.Items.Add(i);
-            }
-        }
-         */
 
         private void panelGoogleData_Paint(object sender, PaintEventArgs e)
         {
