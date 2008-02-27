@@ -89,6 +89,8 @@ int main (void)
 			on = true;
 		}
 		cc3_timer_wait_ms (1000);
+		scanf("%s",gps_buff);
+		test(gps_buff);
 	}
 	
 	return 0;
