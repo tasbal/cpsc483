@@ -55,6 +55,7 @@ int main (void)
 	}
 #endif
 	
+	
 //	printf("Done init of CMUCam\n");
 //	setup_copernicus();
 	
@@ -69,7 +70,24 @@ int main (void)
 	//printf("%2d\t",3);
 	//test("$GPRMC,040302.663,A,3939.7,N,10506.6,W,0.27,358.86,200804,,*1A");
 
-	while (1);
+	bool on = true;
+	while (1)
+	{
+		if(on)
+		{
+			cc3_led_set_state (0,false);
+			cc3_led_set_state (1, false);
+			cc3_led_set_state (2, false);
+		}
+		else
+		{
+		
+			cc3_led_set_state (0,true);
+			cc3_led_set_state (1, true);
+			cc3_led_set_state (2, true);
+		}
+		cc3_timer_wait_ms (1000);
+	}
 	
 	return 0;
 }
