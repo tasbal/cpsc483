@@ -12,6 +12,8 @@
 
 void setup_copernicus(FILE* gps)
 {
+	printf("Cofinguring GPS");
+	
 	// set gps to send RMC data every second
 	fprintf(gps, "$PTNLSNM,0100,01*FF");
 }
