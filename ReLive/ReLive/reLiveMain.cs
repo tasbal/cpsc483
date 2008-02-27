@@ -9,6 +9,8 @@ using System.IO;
 using System.Reflection;
 using Google.GData.Photos;
 using Google.GData.Extensions.MediaRss;
+using System.Runtime.InteropServices;
+
 
 namespace ReLive
 {
@@ -21,12 +23,29 @@ namespace ReLive
         private List<PicasaEntry> albumList = new List<PicasaEntry>();
         private String dirPath;
         MapBrowser mapWindow = new MapBrowser();
+        String userPictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
+        public bool viewSet = false;
+
+        //file browser view settings example
+        private const int LV_VIEW_ICON = 0x0000;
+        private const int LVM_SETVIEW = 0x108E;
+        private const string ListViewClassName = "SysListView32";
+        private static readonly HandleRef NullHandleRef = new HandleRef(null, IntPtr.Zero);
+
+        [DllImport("user32.dll", ExactSpelling = true)]
+        private static extern bool EnumChildWindows(HandleRef hwndParent, EnumChildrenCallback lpEnumFunc, HandleRef lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int SendMessage(HandleRef hWnd, uint Msg, int wParam, int lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern uint RealGetWindowClass(IntPtr hwnd, [Out] StringBuilder pszType, uint cchType);
+        private delegate bool EnumChildrenCallback(IntPtr hwnd, IntPtr lParam);
+        private HandleRef listViewHandle;
 
         public reLiveMain()
         {
             InitializeComponent();
         }
-
+        /*
         public void openImage(string path)
         {
             pictureBox1.Image = new Bitmap(path);
@@ -37,18 +56,19 @@ namespace ReLive
             if (fileList.SelectedIndex != -1)
                 openImage(((imageData)fileList.Items[fileList.SelectedIndex]).filePath);
         }
-
+        */
         private void directoryBrowse_Click(object sender, EventArgs e)
         {
-            fileList.Items.Clear();
+            //fileList.Items.Clear();
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 dirPath = fbd.SelectedPath;
-                populateFileList(dirPath);
+                //populateFileList(dirPath);
                 fileBrowser.Url = new Uri(dirPath);
             }
         }
+        
 
         private bool checkAlbumExists(string albumName)
         {
@@ -94,6 +114,7 @@ namespace ReLive
 
         private void uploadDir_Click(object sender, EventArgs e)
         {
+            dirPath = explorerText.Text;
             if (dirPath != null)
             {
                 DirectoryInfo dir = new DirectoryInfo(dirPath);
@@ -118,6 +139,7 @@ namespace ReLive
                     }
                 }
                 MessageBox.Show("Uploaded Album: " + currDate + " Successfully!");
+                UpdateAlbumFeed();
             }
             else
             {
@@ -130,7 +152,7 @@ namespace ReLive
         {
             System.Diagnostics.Process.Start("http://picasaweb.google.com/"); 
         }
-
+        /*
         private void populateFileList(string Path)
         {
             DirectoryInfo dir = new DirectoryInfo(Path);
@@ -143,6 +165,7 @@ namespace ReLive
                 fileList.Items.Add(i);
             }
         }
+         */
 
         private void panelGoogleData_Paint(object sender, PaintEventArgs e)
         {
@@ -168,6 +191,12 @@ namespace ReLive
                     UpdateAlbumFeed();
                 }
             }
+            System.IO.Directory.CreateDirectory(@userPictures + "\\reLive");
+            //MessageBox.Show(userPictures + "\\reLive");
+            fileBrowser.Navigate(userPictures + "\\reLive");
+            //set file browser to view large icons
+            FindListViewHandle();
+            SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
         }
 
         private void UpdateAlbumFeed()
@@ -225,5 +254,41 @@ namespace ReLive
             mapWindow.ShowDialog();
         }
 
+        private void fileBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            fileBrowser.Focus();
+            explorerText.Text = fileBrowser.Url.LocalPath.ToString();
+            //MessageBox.Show(fileBrowser.Url.ToString());
+        }
+
+        //file browser view stuff
+        private void FindListViewHandle()
+        {
+            this.listViewHandle = NullHandleRef;
+
+            EnumChildrenCallback lpEnumFunc = new EnumChildrenCallback(EnumChildren);
+            EnumChildWindows(new HandleRef(this.fileBrowser, this.fileBrowser.Handle), lpEnumFunc, NullHandleRef);
+        }
+
+        private bool EnumChildren(IntPtr hwnd, IntPtr lparam)
+        {
+            StringBuilder sb = new StringBuilder(100);
+            RealGetWindowClass(hwnd, sb, 100);
+            if (sb.ToString() == ListViewClassName) // is this a windows list view?
+            {
+                // this is a windows list view control
+                this.listViewHandle = new HandleRef(null, hwnd);
+            }
+            return true;
+        }
+
+        private void explorerText_Enter(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                dirPath = explorerText.Text;
+                fileBrowser.Url = new Uri(this.explorerText.Text);
+            }
+        }
     }
 }
