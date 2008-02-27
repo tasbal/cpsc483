@@ -40,6 +40,8 @@ int main (void)
 	cc3_led_set_state (0,true);
 	cc3_led_set_state (1, true);
 	cc3_led_set_state (2, true);
+	
+	printf("Hello, Camera initialized");
 
 #ifndef VIRTUAL_CAM
 	// read config file from MMC
@@ -47,13 +49,14 @@ int main (void)
 	printf ("\nReading config file\n");
 	memory = fopen ("c:/config.dat", "r");
 	if (memory == NULL) {
-		perror ("fopen failed");
+		perror ("fopen failed\n");
 	}
 
 	result = fclose (memory);
 	if (result == EOF) {
-		perror ("fclose failed");
+		perror ("fclose failed\n");
 	}
+	printf("\n");
 #endif
 	
 	
@@ -89,16 +92,15 @@ int main (void)
 			cc3_led_set_state (2, true);
 			on = true;
 		}
-		cc3_timer_wait_ms (1000);
-		while(strcmp(gps_buff,"END")!=0)
+		
+		if (!cc3_uart_has_data (0))
 		{
 			printf("\n\n");
 			scanf("%s",gps_buff);
 			printf("\n\n");
 			test(gps_buff);
-			
 		}
-		return 0;
+		cc3_timer_wait_ms (1000);
 	}
 	
 	return 0;
