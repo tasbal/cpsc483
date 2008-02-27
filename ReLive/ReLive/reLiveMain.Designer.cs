@@ -44,9 +44,9 @@ namespace ReLive
             // 
             // directoryBrowse
             // 
-            this.directoryBrowse.Location = new System.Drawing.Point(615, 26);
+            this.directoryBrowse.Location = new System.Drawing.Point(434, 16);
             this.directoryBrowse.Name = "directoryBrowse";
-            this.directoryBrowse.Size = new System.Drawing.Size(160, 30);
+            this.directoryBrowse.Size = new System.Drawing.Size(147, 30);
             this.directoryBrowse.TabIndex = 2;
             this.directoryBrowse.Text = "Browse for Image Directory";
             this.directoryBrowse.UseVisualStyleBackColor = true;
@@ -54,9 +54,9 @@ namespace ReLive
             // 
             // uploadDir
             // 
-            this.uploadDir.Location = new System.Drawing.Point(434, 20);
+            this.uploadDir.Location = new System.Drawing.Point(598, 55);
             this.uploadDir.Name = "uploadDir";
-            this.uploadDir.Size = new System.Drawing.Size(130, 30);
+            this.uploadDir.Size = new System.Drawing.Size(160, 30);
             this.uploadDir.TabIndex = 2;
             this.uploadDir.Text = "Upload Image Directory";
             this.uploadDir.UseVisualStyleBackColor = true;
@@ -64,7 +64,7 @@ namespace ReLive
             // 
             // launchSite
             // 
-            this.launchSite.Location = new System.Drawing.Point(615, 62);
+            this.launchSite.Location = new System.Drawing.Point(598, 91);
             this.launchSite.Name = "launchSite";
             this.launchSite.Size = new System.Drawing.Size(160, 30);
             this.launchSite.TabIndex = 2;
@@ -84,7 +84,7 @@ namespace ReLive
             // 
             this.AlbumPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AlbumPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.AlbumPicture.Location = new System.Drawing.Point(615, 327);
+            this.AlbumPicture.Location = new System.Drawing.Point(598, 326);
             this.AlbumPicture.Name = "AlbumPicture";
             this.AlbumPicture.Size = new System.Drawing.Size(160, 160);
             this.AlbumPicture.TabIndex = 5;
@@ -93,7 +93,7 @@ namespace ReLive
             // calendarLabel
             // 
             this.calendarLabel.AutoSize = true;
-            this.calendarLabel.Location = new System.Drawing.Point(630, 124);
+            this.calendarLabel.Location = new System.Drawing.Point(608, 124);
             this.calendarLabel.Name = "calendarLabel";
             this.calendarLabel.Size = new System.Drawing.Size(145, 13);
             this.calendarLabel.TabIndex = 6;
@@ -102,7 +102,7 @@ namespace ReLive
             // albumPreviewLabel
             // 
             this.albumPreviewLabel.AutoSize = true;
-            this.albumPreviewLabel.Location = new System.Drawing.Point(671, 311);
+            this.albumPreviewLabel.Location = new System.Drawing.Point(652, 310);
             this.albumPreviewLabel.Name = "albumPreviewLabel";
             this.albumPreviewLabel.Size = new System.Drawing.Size(67, 13);
             this.albumPreviewLabel.TabIndex = 7;
@@ -111,7 +111,7 @@ namespace ReLive
             // mapLinkLabel
             // 
             this.mapLinkLabel.AutoSize = true;
-            this.mapLinkLabel.Location = new System.Drawing.Point(671, 490);
+            this.mapLinkLabel.Location = new System.Drawing.Point(656, 489);
             this.mapLinkLabel.Name = "mapLinkLabel";
             this.mapLinkLabel.Size = new System.Drawing.Size(54, 13);
             this.mapLinkLabel.TabIndex = 8;
@@ -141,7 +141,7 @@ namespace ReLive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 514);
+            this.ClientSize = new System.Drawing.Size(776, 514);
             this.Controls.Add(this.explorerText);
             this.Controls.Add(this.fileBrowser);
             this.Controls.Add(this.mapLinkLabel);

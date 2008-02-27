@@ -166,7 +166,6 @@ namespace ReLive
                 }
             }
             System.IO.Directory.CreateDirectory(@userPictures + "\\reLive");
-            //MessageBox.Show(userPictures + "\\reLive");
             fileBrowser.Navigate(userPictures + "\\reLive");
             //set file browser to view large icons
             FindListViewHandle();
@@ -181,7 +180,16 @@ namespace ReLive
 
             query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
 
-            this.picasaFeed = this.picasaService.Query(query);
+            try
+            {
+                this.picasaFeed = this.picasaService.Query(query);
+            }
+            catch(Google.GData.Client.GDataRequestException)
+            {
+                MessageBox.Show("You need to add the Picasaweb Service:\nLogin through your web browser and accept the terms of service.");
+                System.Diagnostics.Process.Start("www.picasaweb.google.com");
+                return;
+            }
 
             if (this.picasaFeed != null && this.picasaFeed.Entries.Count > 0)
             {
