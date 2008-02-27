@@ -36,9 +36,9 @@ int main (void)
 	cc3_camera_set_auto_white_balance (true);
 	cc3_camera_set_auto_exposure (true);
 
-	cc3_led_set_state (0, false);
-	cc3_led_set_state (1, false);
-	cc3_led_set_state (2, false);
+	cc3_led_set_state (0,true);
+	cc3_led_set_state (1, true);
+	cc3_led_set_state (2, true);
 
 #ifndef VIRTUAL_CAM
 	// read config file from MMC
@@ -55,19 +55,22 @@ int main (void)
 	}
 #endif
 	
-	printf("Done init of CMUCam\n");
+//	printf("Done init of CMUCam\n");
+//	setup_copernicus();
 	
 	// get gps data through serial 2
-	//fgets(gps_buff, 100, serial_2);
+//	fgets(gps_buff, 100, serial_2);
 	
-	printf("testing parser\n");
-	printf("%2d\t",1);
-	test(",,,,,,,W*6A");
-	printf("%2d\t",2);
-	test("$GPRMC,,V,,,,,,,,,W*6A");
-	printf("%2d\t",3);
-	test("$GPRMC,040302.663,A,3939.7,N,10506.6,W,0.27,358.86,200804,,*1A");
+	//printf("testing parser\n");
+	//printf("%2d\t",1);
+	//test(",,,,,,,W*6A");
+	//printf("%2d\t",2);
+	//test("$GPRMC,,V,,,,,,,,,W*6A");
+	//printf("%2d\t",3);
+	//test("$GPRMC,040302.663,A,3939.7,N,10506.6,W,0.27,358.86,200804,,*1A");
 
+	while (1);
+	
 	return 0;
 }
 
