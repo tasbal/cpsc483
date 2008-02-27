@@ -29,8 +29,6 @@ namespace ReLive
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reLiveMain));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.fileList = new System.Windows.Forms.ComboBox();
             this.directoryBrowse = new System.Windows.Forms.Button();
             this.uploadDir = new System.Windows.Forms.Button();
             this.launchSite = new System.Windows.Forms.Button();
@@ -40,33 +38,15 @@ namespace ReLive
             this.albumPreviewLabel = new System.Windows.Forms.Label();
             this.mapLinkLabel = new System.Windows.Forms.LinkLabel();
             this.fileBrowser = new System.Windows.Forms.WebBrowser();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.explorerText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(517, 325);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(405, 177);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // fileList
-            // 
-            this.fileList.FormattingEnabled = true;
-            this.fileList.Location = new System.Drawing.Point(513, 52);
-            this.fileList.Name = "fileList";
-            this.fileList.Size = new System.Drawing.Size(234, 21);
-            this.fileList.TabIndex = 1;
-            this.fileList.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
             // directoryBrowse
             // 
-            this.directoryBrowse.Location = new System.Drawing.Point(513, 14);
+            this.directoryBrowse.Location = new System.Drawing.Point(615, 26);
             this.directoryBrowse.Name = "directoryBrowse";
-            this.directoryBrowse.Size = new System.Drawing.Size(231, 32);
+            this.directoryBrowse.Size = new System.Drawing.Size(160, 30);
             this.directoryBrowse.TabIndex = 2;
             this.directoryBrowse.Text = "Browse for Image Directory";
             this.directoryBrowse.UseVisualStyleBackColor = true;
@@ -74,9 +54,9 @@ namespace ReLive
             // 
             // uploadDir
             // 
-            this.uploadDir.Location = new System.Drawing.Point(767, 14);
+            this.uploadDir.Location = new System.Drawing.Point(434, 20);
             this.uploadDir.Name = "uploadDir";
-            this.uploadDir.Size = new System.Drawing.Size(130, 32);
+            this.uploadDir.Size = new System.Drawing.Size(130, 30);
             this.uploadDir.TabIndex = 2;
             this.uploadDir.Text = "Upload Image Directory";
             this.uploadDir.UseVisualStyleBackColor = true;
@@ -84,9 +64,9 @@ namespace ReLive
             // 
             // launchSite
             // 
-            this.launchSite.Location = new System.Drawing.Point(513, 80);
+            this.launchSite.Location = new System.Drawing.Point(615, 62);
             this.launchSite.Name = "launchSite";
-            this.launchSite.Size = new System.Drawing.Size(231, 32);
+            this.launchSite.Size = new System.Drawing.Size(160, 30);
             this.launchSite.TabIndex = 2;
             this.launchSite.Text = "Launch Picasaweb";
             this.launchSite.UseVisualStyleBackColor = true;
@@ -94,7 +74,7 @@ namespace ReLive
             // 
             // albumCalendar
             // 
-            this.albumCalendar.Location = new System.Drawing.Point(517, 140);
+            this.albumCalendar.Location = new System.Drawing.Point(593, 146);
             this.albumCalendar.MaxSelectionCount = 1;
             this.albumCalendar.Name = "albumCalendar";
             this.albumCalendar.TabIndex = 4;
@@ -102,8 +82,9 @@ namespace ReLive
             // 
             // AlbumPicture
             // 
+            this.AlbumPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AlbumPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.AlbumPicture.Location = new System.Drawing.Point(756, 140);
+            this.AlbumPicture.Location = new System.Drawing.Point(615, 327);
             this.AlbumPicture.Name = "AlbumPicture";
             this.AlbumPicture.Size = new System.Drawing.Size(160, 160);
             this.AlbumPicture.TabIndex = 5;
@@ -112,7 +93,7 @@ namespace ReLive
             // calendarLabel
             // 
             this.calendarLabel.AutoSize = true;
-            this.calendarLabel.Location = new System.Drawing.Point(560, 124);
+            this.calendarLabel.Location = new System.Drawing.Point(630, 124);
             this.calendarLabel.Name = "calendarLabel";
             this.calendarLabel.Size = new System.Drawing.Size(145, 13);
             this.calendarLabel.TabIndex = 6;
@@ -121,7 +102,7 @@ namespace ReLive
             // albumPreviewLabel
             // 
             this.albumPreviewLabel.AutoSize = true;
-            this.albumPreviewLabel.Location = new System.Drawing.Point(804, 124);
+            this.albumPreviewLabel.Location = new System.Drawing.Point(671, 311);
             this.albumPreviewLabel.Name = "albumPreviewLabel";
             this.albumPreviewLabel.Size = new System.Drawing.Size(67, 13);
             this.albumPreviewLabel.TabIndex = 7;
@@ -130,7 +111,7 @@ namespace ReLive
             // mapLinkLabel
             // 
             this.mapLinkLabel.AutoSize = true;
-            this.mapLinkLabel.Location = new System.Drawing.Point(804, 303);
+            this.mapLinkLabel.Location = new System.Drawing.Point(671, 490);
             this.mapLinkLabel.Name = "mapLinkLabel";
             this.mapLinkLabel.Size = new System.Drawing.Size(54, 13);
             this.mapLinkLabel.TabIndex = 8;
@@ -141,18 +122,27 @@ namespace ReLive
             // 
             // fileBrowser
             // 
-            this.fileBrowser.Location = new System.Drawing.Point(13, 14);
+            this.fileBrowser.Location = new System.Drawing.Point(13, 52);
             this.fileBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.fileBrowser.Name = "fileBrowser";
-            this.fileBrowser.Size = new System.Drawing.Size(492, 488);
+            this.fileBrowser.Size = new System.Drawing.Size(568, 450);
             this.fileBrowser.TabIndex = 9;
-            this.fileBrowser.Url = new System.Uri("", System.UriKind.Relative);
+            this.fileBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.fileBrowser_DocumentCompleted);
+            // 
+            // explorerText
+            // 
+            this.explorerText.Location = new System.Drawing.Point(13, 26);
+            this.explorerText.Name = "explorerText";
+            this.explorerText.Size = new System.Drawing.Size(415, 20);
+            this.explorerText.TabIndex = 10;
+            this.explorerText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.explorerText_Enter);
             // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(934, 514);
+            this.ClientSize = new System.Drawing.Size(831, 514);
+            this.Controls.Add(this.explorerText);
             this.Controls.Add(this.fileBrowser);
             this.Controls.Add(this.mapLinkLabel);
             this.Controls.Add(this.albumPreviewLabel);
@@ -162,8 +152,6 @@ namespace ReLive
             this.Controls.Add(this.directoryBrowse);
             this.Controls.Add(this.uploadDir);
             this.Controls.Add(this.launchSite);
-            this.Controls.Add(this.fileList);
-            this.Controls.Add(this.pictureBox1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -172,7 +160,6 @@ namespace ReLive
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "explore. reLive. share.";
             this.Load += new System.EventHandler(this.reLiveMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -181,8 +168,6 @@ namespace ReLive
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ComboBox fileList;
         private System.Windows.Forms.Button directoryBrowse;
         private System.Windows.Forms.Button uploadDir;
         private System.Windows.Forms.Button launchSite;
@@ -192,6 +177,7 @@ namespace ReLive
         private System.Windows.Forms.Label albumPreviewLabel;
         private System.Windows.Forms.LinkLabel mapLinkLabel;
         private System.Windows.Forms.WebBrowser fileBrowser;
+        private System.Windows.Forms.TextBox explorerText;
     }
 }
 
