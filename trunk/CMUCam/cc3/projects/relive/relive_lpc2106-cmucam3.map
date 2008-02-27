@@ -700,7 +700,7 @@ LOAD /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/g
 END GROUP
                 0x00002400                STACK_SIZE = 0x2400
 
-.text           0x00000000     0xf248
+.text           0x00000000     0xf280
  *(.init)
  .init          0x00000000      0x140 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
                 0x00000000                _boot
@@ -943,643 +943,642 @@ END GROUP
  .text          0x0000a6a8      0x530 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_udivdi3.o)
                 0x0000a6a8                __udivdi3
  *(.text.*)
- .text.main     0x0000abd8      0x148 lpc2106-cmucam3_buildfiles/main.o
+ .text.main     0x0000abd8      0x184 lpc2106-cmucam3_buildfiles/main.o
                 0x0000abd8                main
  .text.disable_ext_interrupt
-                0x0000ad20       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
-                0x0000ad20                disable_ext_interrupt
+                0x0000ad5c       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000ad5c                disable_ext_interrupt
  .text.enable_button_interrupt
-                0x0000ad4c       0x28 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
-                0x0000ad4c                enable_button_interrupt
+                0x0000ad88       0x28 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000ad88                enable_button_interrupt
  .text.disable_button_interrupt
-                0x0000ad74       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
-                0x0000ad74                disable_button_interrupt
+                0x0000adb0       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000adb0                disable_button_interrupt
  .text.panic_blink
-                0x0000ada4       0x70 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000ade0       0x70 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
  .text.data_abort
-                0x0000ae14       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
-                0x0000ae14                data_abort
+                0x0000ae50       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000ae50                data_abort
  .text.prefetch_abort
-                0x0000ae40       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
-                0x0000ae40                prefetch_abort
+                0x0000ae7c       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000ae7c                prefetch_abort
  .text.undefined
-                0x0000ae6c        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
-                0x0000ae6c                undefined
- .text.swi      0x0000ae74       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
-                0x0000ae74                swi
+                0x0000aea8        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000aea8                undefined
+ .text.swi      0x0000aeb0       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000aeb0                swi
  .text.interrupt
-                0x0000ae90       0x94 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
-                0x0000ae90                interrupt
+                0x0000aecc       0x94 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000aecc                interrupt
  .text.cc3_led_set_state
-                0x0000af24       0x90 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000af24                cc3_led_set_state
+                0x0000af60       0x90 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000af60                cc3_led_set_state
  .text.cc3_timer_get_current_ms
-                0x0000afb4       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000afb4                cc3_timer_get_current_ms
+                0x0000aff0       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000aff0                cc3_timer_get_current_ms
  .text.cc3_timer_wait_ms
-                0x0000afc4       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000afc4                cc3_timer_wait_ms
+                0x0000b000       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b000                cc3_timer_wait_ms
  .text.cc3_pixbuf_frame_set_coi
-                0x0000afe8       0x34 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000afe8                cc3_pixbuf_frame_set_coi
+                0x0000b024       0x34 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b024                cc3_pixbuf_frame_set_coi
  .text._cc3_update_frame_bounds
-                0x0000b01c       0x40 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b058       0x40 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
  .text.cc3_pixbuf_frame_reset
-                0x0000b05c       0x50 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000b05c                cc3_pixbuf_frame_reset
+                0x0000b098       0x50 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b098                cc3_pixbuf_frame_reset
  .text._cc3_set_cam_ddr
-                0x0000b0ac       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b0e8       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
  .text._cc3_set_cam_ddr_sccb_write
-                0x0000b0d8       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b114       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
  .text._cc3_set_cam_ddr_sccb_idle
-                0x0000b104       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b140       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
  .text.cc3_camera_set_raw_register
-                0x0000b134      0x164 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000b134                cc3_camera_set_raw_register
+                0x0000b170      0x164 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b170                cc3_camera_set_raw_register
  .text._cc3_set_register_state
-                0x0000b298      0x178 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b2d4      0x178 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
  .text.cc3_camera_set_auto_white_balance
-                0x0000b410       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000b410                cc3_camera_set_auto_white_balance
+                0x0000b44c       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b44c                cc3_camera_set_auto_white_balance
  .text.cc3_camera_set_auto_exposure
-                0x0000b420       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000b420                cc3_camera_set_auto_exposure
+                0x0000b45c       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b45c                cc3_camera_set_auto_exposure
  .text.cc3_camera_set_colorspace
-                0x0000b430       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000b430                cc3_camera_set_colorspace
+                0x0000b46c       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b46c                cc3_camera_set_colorspace
  .text.cc3_camera_set_resolution
-                0x0000b440       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000b440                cc3_camera_set_resolution
+                0x0000b47c       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b47c                cc3_camera_set_resolution
  .text.cc3_camera_init
-                0x0000b450       0x94 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x0000b450                cc3_camera_init
+                0x0000b48c       0x94 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000b48c                cc3_camera_init
  .text._cc3_delay_us_4
-                0x0000b4e4       0x64 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
-                0x0000b4e4                _cc3_delay_us_4
+                0x0000b520       0x64 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+                0x0000b520                _cc3_delay_us_4
  .text._cc3_fifo_reset
-                0x0000b548       0x68 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
-                0x0000b548                _cc3_fifo_reset
+                0x0000b584       0x68 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+                0x0000b584                _cc3_fifo_reset
  .text._cc3_camera_reset
-                0x0000b5b0       0x40 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
-                0x0000b5b0                _cc3_camera_reset
+                0x0000b5ec       0x40 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+                0x0000b5ec                _cc3_camera_reset
  .text._cc3_delay_sccb
-                0x0000b5f0       0x38 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
-                0x0000b5f0                _cc3_delay_sccb
+                0x0000b62c       0x38 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+                0x0000b62c                _cc3_delay_sccb
  .text._cc3_pixbuf_write_rewind
-                0x0000b628       0x38 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
-                0x0000b628                _cc3_pixbuf_write_rewind
+                0x0000b664       0x38 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+                0x0000b664                _cc3_pixbuf_write_rewind
  .text._cc3_system_setup
-                0x0000b660       0xb0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
-                0x0000b660                _cc3_system_setup
- .text._exit    0x0000b710        0x4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b710                _exit
+                0x0000b69c       0xb0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+                0x0000b69c                _cc3_system_setup
+ .text._exit    0x0000b74c        0x4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b74c                _exit
  .text.normalize_filename
-                0x0000b714       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b750       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
  .text._gettimeofday
-                0x0000b770        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b770                _gettimeofday
- .text._sbrk    0x0000b778       0x54 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b778                _sbrk
- .text._open    0x0000b7cc       0x88 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b7cc                _open
- .text.isatty   0x0000b854       0x38 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b854                isatty
- .text._fstat   0x0000b88c       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b88c                _fstat
- .text._lseek   0x0000b8e8       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b8e8                _lseek
- .text._close   0x0000b944       0x4c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b944                _close
- .text._read    0x0000b990       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b990                _read
- .text._write   0x0000b9ec       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
-                0x0000b9ec                _write
+                0x0000b7ac        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b7ac                _gettimeofday
+ .text._sbrk    0x0000b7b4       0x54 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b7b4                _sbrk
+ .text._open    0x0000b808       0x88 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b808                _open
+ .text.isatty   0x0000b890       0x38 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b890                isatty
+ .text._fstat   0x0000b8c8       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b8c8                _fstat
+ .text._lseek   0x0000b924       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b924                _lseek
+ .text._close   0x0000b980       0x4c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b980                _close
+ .text._read    0x0000b9cc       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000b9cc                _read
+ .text._write   0x0000ba28       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x0000ba28                _write
  .text._cc3_uart0_setup
-                0x0000ba48       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000ba48                _cc3_uart0_setup
+                0x0000ba84       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000ba84                _cc3_uart0_setup
  .text._cc3_uart1_setup
-                0x0000baa4       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000baa4                _cc3_uart1_setup
+                0x0000bae0       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000bae0                _cc3_uart1_setup
  .text.cc3_uart_get_count
-                0x0000bb00        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000bb00                cc3_uart_get_count
+                0x0000bb3c        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000bb3c                cc3_uart_get_count
  .text.uart0_putc
-                0x0000bb08       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000bb08                uart0_putc
+                0x0000bb44       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000bb44                uart0_putc
  .text.uart1_putc
-                0x0000bb24       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000bb24                uart1_putc
+                0x0000bb60       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000bb60                uart1_putc
  .text.uart0_getc
-                0x0000bb40       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000bb40                uart0_getc
+                0x0000bb7c       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000bb7c                uart0_getc
  .text.uart1_getc
-                0x0000bb5c       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000bb5c                uart1_getc
+                0x0000bb98       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000bb98                uart1_getc
  .text.uart0_write
-                0x0000bb78       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000bb78                uart0_write
+                0x0000bbb4       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000bbb4                uart0_write
  .text.uart0_write_hex
-                0x0000bba8       0x70 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000bba8                uart0_write_hex
+                0x0000bbe4       0x70 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000bbe4                uart0_write_hex
  .text.cc3_uart_init
-                0x0000bc18      0x174 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x0000bc18                cc3_uart_init
+                0x0000bc54      0x174 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000bc54                cc3_uart_init
  .text.servo_lo
-                0x0000bd8c       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+                0x0000bdc8       0x1c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
  .text._cc3_servo_int
-                0x0000bda8      0x138 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
-                0x0000bda8                _cc3_servo_int
+                0x0000bde4      0x138 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+                0x0000bde4                _cc3_servo_int
  .text.name_extension_to_spec
-                0x0000bee0       0x68 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000bf1c       0x68 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.initialize_fcb
-                0x0000bf48       0xac ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000bf84       0xac ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.rdcf_get_date_and_time
-                0x0000bff4       0x74 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c030       0x74 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.error_exit
-                0x0000c068       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c0a4       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.check_write_access
-                0x0000c078       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c0b4       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.check_file_character
-                0x0000c08c       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c0c8       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.spec_to_name_extension
-                0x0000c0b0      0x134 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c0ec      0x134 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.check_cluster
-                0x0000c1e4       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c220       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.first_sector_in_cluster
-                0x0000c208       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c244       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.write_sector
-                0x0000c238       0x48 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c274       0x48 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.flush_buffer
-                0x0000c280       0x6c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c2bc       0x6c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.read_sector
-                0x0000c2ec       0x48 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c328       0x48 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.read_buffer
-                0x0000c334       0x54 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c370       0x54 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.find_directory
-                0x0000c388       0x60 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c3c4       0x60 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.update_directory_entry
-                0x0000c3e8       0xe0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c424       0xe0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.rdcf_close
-                0x0000c4c8       0xac ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
-                0x0000c4c8                rdcf_close
+                0x0000c504       0xac ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c504                rdcf_close
  .text.set_FAT_entry
-                0x0000c574       0xf0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c5b0       0xf0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.FAT_entry
-                0x0000c664       0xa8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c6a0       0xa8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.rdcf_seek
-                0x0000c70c       0xe4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
-                0x0000c70c                rdcf_seek
+                0x0000c748       0xe4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c748                rdcf_seek
  .text.rdcf_read
-                0x0000c7f0      0x220 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
-                0x0000c7f0                rdcf_read
+                0x0000c82c      0x220 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000c82c                rdcf_read
  .text.add_new_cluster
-                0x0000ca10       0xac ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000ca4c       0xac ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.real_rdcf_write
-                0x0000cabc      0x2b0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000caf8      0x2b0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.rdcf_write
-                0x0000cd6c       0x34 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
-                0x0000cd6c                rdcf_write
+                0x0000cda8       0x34 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000cda8                rdcf_write
  .text.release_FAT_entries
-                0x0000cda0       0x94 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000cddc       0x94 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.find_file_in_directory_or_find_volume
-                0x0000ce34      0x25c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000ce70      0x25c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.find_file
-                0x0000d090       0xb0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000d0cc       0xb0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .text.rdcf_open
-                0x0000d140      0x1d4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
-                0x0000d140                rdcf_open
+                0x0000d17c      0x1d4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000d17c                rdcf_open
  .text.rdcf_rename
-                0x0000d314      0x128 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
-                0x0000d314                rdcf_rename
+                0x0000d350      0x128 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000d350                rdcf_rename
  .text.rdcf_delete
-                0x0000d43c      0x1a8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
-                0x0000d43c                rdcf_delete
+                0x0000d478      0x1a8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000d478                rdcf_delete
  .text.spiPutByte
-                0x0000d5e4       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d620       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
  .text.spiGetByte
-                0x0000d608       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d644       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
  .text.SPI_Send
-                0x0000d634       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d670       0x30 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
  .text.mmcStatus
-                0x0000d664       0x54 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d6a0       0x54 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
  .text._cc3_mmc_idle
-                0x0000d6b8       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
-                0x0000d6b8                _cc3_mmc_idle
+                0x0000d6f4       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d6f4                _cc3_mmc_idle
  .text.selectMMC
-                0x0000d6d0       0x34 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d70c       0x34 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
  .text.unselectMMC
-                0x0000d704       0x44 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d740       0x44 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
  .text._cc3_mmc_block_write
-                0x0000d748       0xd8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
-                0x0000d748                _cc3_mmc_block_write
+                0x0000d784       0xd8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d784                _cc3_mmc_block_write
  .text._cc3_mmc_block_read
-                0x0000d820       0xb4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
-                0x0000d820                _cc3_mmc_block_read
+                0x0000d85c       0xb4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d85c                _cc3_mmc_block_read
  .text._cc3_mmc_init
-                0x0000d8d4      0x2a8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
-                0x0000d8d4                _cc3_mmc_init
+                0x0000d910      0x2a8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000d910                _cc3_mmc_init
  .text.mmc_recognize
-                0x0000db7c       0x34 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000dbb8       0x34 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.remove_prefix
-                0x0000dbb0        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000dbec        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.mmc_fstat
-                0x0000dbb8       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000dbf4       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.allocate_1_fcb
-                0x0000dbd0       0x3c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000dc0c       0x3c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.mmc_rename
-                0x0000dc0c       0xb8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000dc48       0xb8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.mmc_unlink
-                0x0000dcc4       0xac ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000dd00       0xac ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.mmc_lseek
-                0x0000dd70       0xb4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000ddac       0xb4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.mmc_write
-                0x0000de24       0x8c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000de60       0x8c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.mmc_read
-                0x0000deb0       0x8c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000deec       0x8c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.mmc_close
-                0x0000df3c       0xcc ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000df78       0xcc ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.mmc_open
-                0x0000e008      0x10c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000e044      0x10c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .text.cc3_filesystem_init
-                0x0000e114       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
-                0x0000e114                cc3_filesystem_init
+                0x0000e150       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+                0x0000e150                cc3_filesystem_init
  .text._cc3_get_driver_for_name
-                0x0000e12c       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
-                0x0000e12c                _cc3_get_driver_for_name
+                0x0000e168       0x5c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+                0x0000e168                _cc3_get_driver_for_name
  .text._cc3_get_internal_file_number
-                0x0000e188        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
-                0x0000e188                _cc3_get_internal_file_number
+                0x0000e1c4        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+                0x0000e1c4                _cc3_get_internal_file_number
  .text._cc3_get_driver_for_file_number
-                0x0000e190       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
-                0x0000e190                _cc3_get_driver_for_file_number
+                0x0000e1cc       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+                0x0000e1cc                _cc3_get_driver_for_file_number
  .text._cc3_make_file_number
-                0x0000e1b4       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
-                0x0000e1b4                _cc3_make_file_number
+                0x0000e1f0       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+                0x0000e1f0                _cc3_make_file_number
  .text.uart_close
-                0x0000e1c8        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e204        0x8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  .text.uart_read
-                0x0000e1d0       0xe4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e20c       0xe4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  .text.uart_write
-                0x0000e2b4      0x118 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e2f0      0x118 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  .text.uart_lseek
-                0x0000e3cc       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e408       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  .text.uart_fstat
-                0x0000e3e4       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e420       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  .text.uart_unlink
-                0x0000e3f4       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e430       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  .text.uart_rename
-                0x0000e40c       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e448       0x18 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  .text.process_uart_filename
-                0x0000e424       0x70 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e460       0x70 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  .text.uart_recognize
-                0x0000e494       0x20 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e4d0       0x20 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  .text.uart_open
-                0x0000e4b4       0x3c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000e4f0       0x3c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
  *(.gnu.linkonce.t.*)
  *(.glue_7)
- .glue_7        0x0000e4f0        0x0 lpc2106-cmucam3_buildfiles/relive.o
- .glue_7        0x0000e4f0        0x0 lpc2106-cmucam3_buildfiles/parser.o
- .glue_7        0x0000e4f0        0x0 lpc2106-cmucam3_buildfiles/main.o
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
- .glue_7        0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_cos.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_sin.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_atan2.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_pow.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_sqrt.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_atan2.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_pow.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_rem_pio2.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_sqrt.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_cos.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_rem_pio2.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_sin.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_atan.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_fabs.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_finite.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_floor.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_isnand.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_lib_ver.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_matherr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_rint.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_scalbn.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_copysign.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_udivsi3.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_divsi3.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_dvmd_tls.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_addsubdf3.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_muldivdf3.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_cmpdf2.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_fixdfsi.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(atoi.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(calloc.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(callocr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(ctype_.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(errno.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(exit.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fclose.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fflush.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(findfp.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fopen.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fprintf.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(freer.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fseek.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fstatr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fwalk.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(impure.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(lcltime_r.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(makebuf.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(malloc.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mallocr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memcmp.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memcpy.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memset.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mktm_r.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mlock.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(openr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(perror.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(printf.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reent.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(refill.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sbrkr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setbuf.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setjmp.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setvbuf.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(snprintf.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(stdio.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strcmp.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strcpy.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strdup.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strdup_r.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strerror.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strlen.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtod.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtok.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtok_r.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtol.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sysgettod.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(tzlock.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(tzvars.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(u_strerr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(vfprintf.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wcrtomb.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wcsrtombs.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wctomb_r.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(writer.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wsetup.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(__call_atexit.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(closer.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(dtoa.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(flags.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fputc.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fputs.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fvwrite.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(gettzinfo.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(locale.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(lseekr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memchr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memmove.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mprec.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(readr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reallocr.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(s_isinfd.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(s_nan.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sf_nan.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wbuf.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_truncdfsf2.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_aeabi_uldivmod.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(bpabi.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_divdi3.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_udivdi3.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(unwind-arm.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(libunwind.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(pr-support.o)
- .glue_7        0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_clz.o)
+ .glue_7        0x0000e52c        0x0 lpc2106-cmucam3_buildfiles/relive.o
+ .glue_7        0x0000e52c        0x0 lpc2106-cmucam3_buildfiles/parser.o
+ .glue_7        0x0000e52c        0x0 lpc2106-cmucam3_buildfiles/main.o
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+ .glue_7        0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_cos.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_sin.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_atan2.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_pow.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_sqrt.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_atan2.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_pow.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_rem_pio2.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_sqrt.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_cos.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_rem_pio2.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_sin.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_atan.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_fabs.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_finite.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_floor.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_isnand.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_lib_ver.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_matherr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_rint.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_scalbn.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_copysign.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_udivsi3.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_divsi3.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_dvmd_tls.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_addsubdf3.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_muldivdf3.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_cmpdf2.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_fixdfsi.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(atoi.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(calloc.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(callocr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(ctype_.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(errno.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(exit.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fclose.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fflush.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(findfp.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fopen.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fprintf.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(freer.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fseek.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fstatr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fwalk.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(impure.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(lcltime_r.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(makebuf.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(malloc.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mallocr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memcmp.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memcpy.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memset.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mktm_r.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mlock.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(openr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(perror.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(printf.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reent.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(refill.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sbrkr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setbuf.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setjmp.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setvbuf.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(snprintf.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(stdio.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strcmp.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strcpy.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strdup.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strdup_r.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strerror.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strlen.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtod.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtok.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtok_r.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtol.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sysgettod.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(tzlock.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(tzvars.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(u_strerr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(vfprintf.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wcrtomb.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wcsrtombs.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wctomb_r.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(writer.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wsetup.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(__call_atexit.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(closer.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(dtoa.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(flags.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fputc.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fputs.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fvwrite.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(gettzinfo.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(locale.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(lseekr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memchr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memmove.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mprec.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(readr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reallocr.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(s_isinfd.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(s_nan.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sf_nan.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wbuf.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_truncdfsf2.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_aeabi_uldivmod.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(bpabi.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_divdi3.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_udivdi3.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(unwind-arm.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(libunwind.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(pr-support.o)
+ .glue_7        0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_clz.o)
  *(.glue_7t)
- .glue_7t       0x0000e4f0        0x0 lpc2106-cmucam3_buildfiles/relive.o
- .glue_7t       0x0000e4f0        0x0 lpc2106-cmucam3_buildfiles/parser.o
- .glue_7t       0x0000e4f0        0x0 lpc2106-cmucam3_buildfiles/main.o
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
- .glue_7t       0x0000e4f0        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_cos.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_sin.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_atan2.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_pow.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_sqrt.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_atan2.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_pow.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_rem_pio2.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_sqrt.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_cos.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_rem_pio2.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_sin.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_atan.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_fabs.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_finite.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_floor.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_isnand.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_lib_ver.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_matherr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_rint.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_scalbn.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_copysign.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_udivsi3.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_divsi3.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_dvmd_tls.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_addsubdf3.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_muldivdf3.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_cmpdf2.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_fixdfsi.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(atoi.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(calloc.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(callocr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(ctype_.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(errno.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(exit.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fclose.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fflush.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(findfp.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fopen.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fprintf.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(freer.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fseek.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fstatr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fwalk.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(impure.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(lcltime_r.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(makebuf.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(malloc.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mallocr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memcmp.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memcpy.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memset.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mktm_r.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mlock.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(openr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(perror.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(printf.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reent.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(refill.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sbrkr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setbuf.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setjmp.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setvbuf.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(snprintf.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(stdio.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strcmp.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strcpy.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strdup.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strdup_r.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strerror.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strlen.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtod.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtok.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtok_r.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtol.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sysgettod.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(tzlock.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(tzvars.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(u_strerr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(vfprintf.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wcrtomb.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wcsrtombs.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wctomb_r.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(writer.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wsetup.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(__call_atexit.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(closer.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(dtoa.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(flags.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fputc.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fputs.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fvwrite.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(gettzinfo.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(locale.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(lseekr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memchr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memmove.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mprec.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(readr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reallocr.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(s_isinfd.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(s_nan.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sf_nan.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wbuf.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_truncdfsf2.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_aeabi_uldivmod.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(bpabi.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_divdi3.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_udivdi3.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(unwind-arm.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(libunwind.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(pr-support.o)
- .glue_7t       0x0000e4f0        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_clz.o)
+ .glue_7t       0x0000e52c        0x0 lpc2106-cmucam3_buildfiles/relive.o
+ .glue_7t       0x0000e52c        0x0 lpc2106-cmucam3_buildfiles/parser.o
+ .glue_7t       0x0000e52c        0x0 lpc2106-cmucam3_buildfiles/main.o
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+ .glue_7t       0x0000e52c        0x0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_cos.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_sin.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_atan2.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_pow.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(w_sqrt.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_atan2.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_pow.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_rem_pio2.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(e_sqrt.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_cos.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_rem_pio2.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(k_sin.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_atan.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_fabs.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_finite.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_floor.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_isnand.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_lib_ver.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_matherr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_rint.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_scalbn.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libm.a(s_copysign.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_udivsi3.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_divsi3.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_dvmd_tls.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_addsubdf3.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_muldivdf3.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_cmpdf2.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_fixdfsi.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(atoi.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(calloc.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(callocr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(ctype_.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(errno.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(exit.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fclose.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fflush.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(findfp.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fopen.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fprintf.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(freer.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fseek.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fstatr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fwalk.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(impure.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(lcltime_r.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(makebuf.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(malloc.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mallocr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memcmp.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memcpy.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memset.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mktm_r.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mlock.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(openr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(perror.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(printf.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reent.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(refill.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sbrkr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setbuf.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setjmp.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(setvbuf.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(snprintf.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(stdio.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strcmp.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strcpy.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strdup.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strdup_r.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strerror.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strlen.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtod.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtok.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtok_r.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strtol.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sysgettod.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(tzlock.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(tzvars.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(u_strerr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(vfprintf.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wcrtomb.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wcsrtombs.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wctomb_r.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(writer.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wsetup.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(__call_atexit.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(closer.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(dtoa.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(flags.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fputc.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fputs.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(fvwrite.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(gettzinfo.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(locale.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(lseekr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memchr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(memmove.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mprec.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(readr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reallocr.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(s_isinfd.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(s_nan.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(sf_nan.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wbuf.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_truncdfsf2.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_aeabi_uldivmod.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(bpabi.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_divdi3.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_udivdi3.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(unwind-arm.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(libunwind.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(pr-support.o)
+ .glue_7t       0x0000e52c        0x0 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_clz.o)
  *(.gcc_except_table)
  *(.gnu.linkonce.r.*)
  *(.rodata)
- .rodata        0x0000e4f0      0x101 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(ctype_.o)
-                0x0000e4f0                _ctype_
- *fill*         0x0000e5f1        0x3 00
- .rodata        0x0000e5f4        0x4 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(impure.o)
-                0x0000e5f4                _global_impure_ptr
- .rodata        0x0000e5f8       0x68 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mktm_r.o)
- .rodata        0x0000e660       0x20 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(vfprintf.o)
- .rodata        0x0000e680       0x34 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(locale.o)
- *fill*         0x0000e6b4        0x4 00
- .rodata        0x0000e6b8      0x128 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mprec.o)
-                0x0000e7a8                __mprec_tinytens
-                0x0000e6b8                __mprec_tens
-                0x0000e780                __mprec_bigtens
- .rodata        0x0000e7e0      0x100 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_clz.o)
-                0x0000e7e0                __clz_tab
+ .rodata        0x0000e52c      0x101 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(ctype_.o)
+                0x0000e52c                _ctype_
+ *fill*         0x0000e62d        0x3 00
+ .rodata        0x0000e630        0x4 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(impure.o)
+                0x0000e630                _global_impure_ptr
+ .rodata        0x0000e634       0x68 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mktm_r.o)
+ .rodata        0x0000e69c       0x20 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(vfprintf.o)
+ .rodata        0x0000e6bc       0x34 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(locale.o)
+ .rodata        0x0000e6f0      0x128 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(mprec.o)
+                0x0000e7e0                __mprec_tinytens
+                0x0000e6f0                __mprec_tens
+                0x0000e7b8                __mprec_bigtens
+ .rodata        0x0000e818      0x100 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/libgcc.a(_clz.o)
+                0x0000e818                __clz_tab
  *(.rodata*)
  .rodata.str1.4
-                0x0000e8e0       0x46 lpc2106-cmucam3_buildfiles/main.o
+                0x0000e918       0x46 lpc2106-cmucam3_buildfiles/main.o
                                  0x4c (size before relaxing)
- *fill*         0x0000e926        0x2 00
+ *fill*         0x0000e95e        0x2 00
  .rodata.str1.4
-                0x0000e928       0x2b ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x0000e960       0x2b ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
                                  0x2c (size before relaxing)
- *fill*         0x0000e953        0x1 00
+ *fill*         0x0000e98b        0x1 00
  .rodata.str1.4
-                0x0000e954        0xb ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x0000e98c        0xb ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
                                  0x10 (size before relaxing)
- *fill*         0x0000e95f        0x1 00
+ *fill*         0x0000e997        0x1 00
  .rodata._cc3_servo_map
-                0x0000e960       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
-                0x0000e960                _cc3_servo_map
+                0x0000e998       0x10 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+                0x0000e998                _cc3_servo_map
  .rodata.table.2226
-                0x0000e970       0x20 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x0000e9a8       0x20 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .rodata.cmdReset
-                0x0000e990        0x6 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000e9c8        0x6 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
  .rodata.cmdInitCard
-                0x0000e996        0x6 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x0000e9ce        0x6 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
  .rodata.cmdSetBlock
-                0x0000e99c        0x6 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
- *fill*         0x0000e9a2        0x2 00
+                0x0000e9d4        0x6 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+ *fill*         0x0000e9da        0x2 00
  .rodata._cc3_mmc_driver
-                0x0000e9a4       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
-                0x0000e9a4                _cc3_mmc_driver
+                0x0000e9dc       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x0000e9dc                _cc3_mmc_driver
  .rodata._cc3_uart_driver
-                0x0000e9d0       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
-                0x0000e9d0                _cc3_uart_driver
+                0x0000ea08       0x2c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000ea08                _cc3_uart_driver
  .rodata.str1.4
-                0x0000e9fc        0x2 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(impure.o)
+                0x0000ea34        0x2 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(impure.o)
                                   0x4 (size before relaxing)
- *fill*         0x0000e9fe        0x2 00
+ *fill*         0x0000ea36        0x2 00
  .rodata.str1.4
-                0x0000ea00        0x3 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(perror.o)
+                0x0000ea38        0x3 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(perror.o)
                                   0x4 (size before relaxing)
- *fill*         0x0000ea03        0x1 00
+ *fill*         0x0000ea3b        0x1 00
  .rodata.str1.4
-                0x0000ea04      0x7a2 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strerror.o)
+                0x0000ea3c      0x7a2 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(strerror.o)
                                 0x7a8 (size before relaxing)
- *fill*         0x0000f1a6        0x2 00
+ *fill*         0x0000f1de        0x2 00
  .rodata.str1.4
-                0x0000f1a8       0x63 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(vfprintf.o)
+                0x0000f1e0       0x63 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(vfprintf.o)
                                  0x64 (size before relaxing)
- *fill*         0x0000f20b        0x1 00
+ *fill*         0x0000f243        0x1 00
  .rodata.str1.4
-                0x0000f20c       0x1e /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wctomb_r.o)
+                0x0000f244       0x1e /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(wctomb_r.o)
                                  0x20 (size before relaxing)
- *fill*         0x0000f22a        0x2 00
+ *fill*         0x0000f262        0x2 00
  .rodata.str1.4
-                0x0000f22c       0x10 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(dtoa.o)
+                0x0000f264       0x10 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(dtoa.o)
                                  0x14 (size before relaxing)
  .rodata.str1.4
-                0x0000f23c        0xc /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(locale.o)
+                0x0000f274        0xc /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(locale.o)
                                  0x18 (size before relaxing)
-                0x0000f248                _etext = .
-                0x0000f248                PROVIDE (etext, .)
+                0x0000f280                _etext = .
+                0x0000f280                PROVIDE (etext, .)
 
 .stack          0x40000000     0x2400
                 0x40002400                . = (. + STACK_SIZE)
  *fill*         0x40000000     0x2400 00
                 0x40002400                _stack = .
 
-.data           0x40002400      0x87c load address 0x0000f248
+.data           0x40002400      0x87c load address 0x0000f280
                 0x40002400                _data = .
  *(.data)
  .data          0x40002400        0x4 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(ctype_.o)
@@ -1770,62 +1769,62 @@ END GROUP
  .debug_pubnames
                 0x00000a0a       0x27 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
 
-.debug_info     0x00000000     0x7d10
+.debug_info     0x00000000     0x7d16
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x937 lpc2106-cmucam3_buildfiles/relive.o
  .debug_info    0x00000937      0x3d3 lpc2106-cmucam3_buildfiles/parser.o
- .debug_info    0x00000d0a      0x98f lpc2106-cmucam3_buildfiles/main.o
- .debug_info    0x00001699      0x1e5 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
- .debug_info    0x0000187e     0x1508 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
- .debug_info    0x00002d86      0x137 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
- .debug_info    0x00002ebd      0xa82 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
- .debug_info    0x0000393f      0xd03 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
- .debug_info    0x00004642      0x273 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- .debug_info    0x000048b5     0x1205 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
- .debug_info    0x00005aba      0x7b9 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
- .debug_info    0x00006273      0xbf4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
- .debug_info    0x00006e67      0x18d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
- .debug_info    0x00006ff4      0x547 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
- .debug_info    0x0000753b      0x759 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
- .debug_info    0x00007c94       0x7c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
+ .debug_info    0x00000d0a      0x995 lpc2106-cmucam3_buildfiles/main.o
+ .debug_info    0x0000169f      0x1e5 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+ .debug_info    0x00001884     0x1508 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+ .debug_info    0x00002d8c      0x137 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+ .debug_info    0x00002ec3      0xa82 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+ .debug_info    0x00003945      0xd03 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+ .debug_info    0x00004648      0x273 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ .debug_info    0x000048bb     0x1205 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+ .debug_info    0x00005ac0      0x7b9 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+ .debug_info    0x00006279      0xbf4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+ .debug_info    0x00006e6d      0x18d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
+ .debug_info    0x00006ffa      0x547 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+ .debug_info    0x00007541      0x759 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+ .debug_info    0x00007c9a       0x7c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
 
-.debug_abbrev   0x00000000     0x1c8e
+.debug_abbrev   0x00000000     0x1c9d
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x159 lpc2106-cmucam3_buildfiles/relive.o
  .debug_abbrev  0x00000159      0x109 lpc2106-cmucam3_buildfiles/parser.o
- .debug_abbrev  0x00000262      0x186 lpc2106-cmucam3_buildfiles/main.o
- .debug_abbrev  0x000003e8       0xea ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
- .debug_abbrev  0x000004d2      0x3e4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
- .debug_abbrev  0x000008b6       0x77 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
- .debug_abbrev  0x0000092d      0x2c8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
- .debug_abbrev  0x00000bf5      0x280 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
- .debug_abbrev  0x00000e75      0x157 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- .debug_abbrev  0x00000fcc      0x31c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
- .debug_abbrev  0x000012e8      0x312 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
- .debug_abbrev  0x000015fa      0x259 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
- .debug_abbrev  0x00001853      0x101 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
- .debug_abbrev  0x00001954      0x17c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
- .debug_abbrev  0x00001ad0      0x1aa ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
- .debug_abbrev  0x00001c7a       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
+ .debug_abbrev  0x00000262      0x195 lpc2106-cmucam3_buildfiles/main.o
+ .debug_abbrev  0x000003f7       0xea ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+ .debug_abbrev  0x000004e1      0x3e4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+ .debug_abbrev  0x000008c5       0x77 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+ .debug_abbrev  0x0000093c      0x2c8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+ .debug_abbrev  0x00000c04      0x280 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+ .debug_abbrev  0x00000e84      0x157 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ .debug_abbrev  0x00000fdb      0x31c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+ .debug_abbrev  0x000012f7      0x312 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+ .debug_abbrev  0x00001609      0x259 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+ .debug_abbrev  0x00001862      0x101 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
+ .debug_abbrev  0x00001963      0x17c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+ .debug_abbrev  0x00001adf      0x1aa ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+ .debug_abbrev  0x00001c89       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
 
-.debug_line     0x00000000     0x2b60
+.debug_line     0x00000000     0x2b6c
  *(.debug_line)
  .debug_line    0x00000000      0x1ea lpc2106-cmucam3_buildfiles/relive.o
  .debug_line    0x000001ea      0x15a lpc2106-cmucam3_buildfiles/parser.o
- .debug_line    0x00000344      0x210 lpc2106-cmucam3_buildfiles/main.o
- .debug_line    0x00000554      0x1d4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
- .debug_line    0x00000728      0x679 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
- .debug_line    0x00000da1       0xec ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
- .debug_line    0x00000e8d      0x3ea ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
- .debug_line    0x00001277      0x36a ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
- .debug_line    0x000015e1      0x177 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- .debug_line    0x00001758      0x711 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
- .debug_line    0x00001e69      0x270 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
- .debug_line    0x000020d9      0x402 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
- .debug_line    0x000024db      0x141 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
- .debug_line    0x0000261c      0x241 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
- .debug_line    0x0000285d      0x283 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
- .debug_line    0x00002ae0       0x80 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
+ .debug_line    0x00000344      0x21c lpc2106-cmucam3_buildfiles/main.o
+ .debug_line    0x00000560      0x1d4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+ .debug_line    0x00000734      0x679 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+ .debug_line    0x00000dad       0xec ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+ .debug_line    0x00000e99      0x3ea ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+ .debug_line    0x00001283      0x36a ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+ .debug_line    0x000015ed      0x177 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ .debug_line    0x00001764      0x711 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+ .debug_line    0x00001e75      0x270 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+ .debug_line    0x000020e5      0x402 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+ .debug_line    0x000024e7      0x141 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
+ .debug_line    0x00002628      0x241 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+ .debug_line    0x00002869      0x283 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+ .debug_line    0x00002aec       0x80 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
 
 .debug_frame    0x00000000     0x2ad4
  *(.debug_frame)
@@ -1977,23 +1976,23 @@ END GROUP
  .debug_str     0x00001e05       0xcf ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
                                 0x3c4 (size before relaxing)
 
-.debug_loc      0x00000000     0x3af6
+.debug_loc      0x00000000     0x3b27
  *(.debug_loc)
  .debug_loc     0x00000000       0x3d lpc2106-cmucam3_buildfiles/relive.o
  .debug_loc     0x0000003d      0x4ae lpc2106-cmucam3_buildfiles/parser.o
- .debug_loc     0x000004eb       0x1f lpc2106-cmucam3_buildfiles/main.o
- .debug_loc     0x0000050a      0x104 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
- .debug_loc     0x0000060e      0x8af ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
- .debug_loc     0x00000ebd       0xea ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
- .debug_loc     0x00000fa7      0x672 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
- .debug_loc     0x00001619      0x32d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
- .debug_loc     0x00001946      0x16d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- .debug_loc     0x00001ab3     0x12bd ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
- .debug_loc     0x00002d70      0x28c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
- .debug_loc     0x00002ffc      0x604 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
- .debug_loc     0x00003600       0x98 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
- .debug_loc     0x00003698       0xbe ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
- .debug_loc     0x00003756      0x3a0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+ .debug_loc     0x000004eb       0x50 lpc2106-cmucam3_buildfiles/main.o
+ .debug_loc     0x0000053b      0x104 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+ .debug_loc     0x0000063f      0x8af ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+ .debug_loc     0x00000eee       0xea ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+ .debug_loc     0x00000fd8      0x672 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+ .debug_loc     0x0000164a      0x32d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+ .debug_loc     0x00001977      0x16d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ .debug_loc     0x00001ae4     0x12bd ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+ .debug_loc     0x00002da1      0x28c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+ .debug_loc     0x0000302d      0x604 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+ .debug_loc     0x00003631       0x98 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
+ .debug_loc     0x000036c9       0xbe ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+ .debug_loc     0x00003787      0x3a0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
 
 .debug_macinfo
  *(.debug_macinfo)
