@@ -7,6 +7,7 @@
 #include <cc3.h>
 #include <cc3_ilp.h>
 #include <cc3_img_writer.h>
+#include <string.h>
 #include "parser.h"
 #include "relive.h"
 
@@ -89,8 +90,15 @@ int main (void)
 			on = true;
 		}
 		cc3_timer_wait_ms (1000);
-		scanf("%s",gps_buff);
-		test(gps_buff);
+		while(strcmp(gps_buff,"END")!=0)
+		{
+			printf("\n\n");
+			scanf("%s",gps_buff);
+			printf("\n\n");
+			test(gps_buff);
+			
+		}
+		return 0;
 	}
 	
 	return 0;
