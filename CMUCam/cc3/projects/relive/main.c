@@ -78,6 +78,7 @@ int main (void)
 			cc3_led_set_state (0,false);
 			cc3_led_set_state (1, false);
 			cc3_led_set_state (2, false);
+			on = false;
 		}
 		else
 		{
@@ -85,6 +86,7 @@ int main (void)
 			cc3_led_set_state (0,true);
 			cc3_led_set_state (1, true);
 			cc3_led_set_state (2, true);
+			on = true;
 		}
 		cc3_timer_wait_ms (1000);
 	}
