@@ -16,9 +16,9 @@ namespace ReLive
     public partial class reLiveMain : Form
     {
         private String googleAuthToken = null;
-        private String user = null;
-        private PicasaService picasaService = new PicasaService("ReLive");
-        private PicasaFeed picasaFeed = null;
+        public String user = null;
+        public PicasaService picasaService = new PicasaService("ReLive");
+        public PicasaFeed picasaFeed = null;
         private List<PicasaEntry> albumList = new List<PicasaEntry>();
         private String dirPath;
         MapBrowser mapWindow = new MapBrowser();
@@ -55,6 +55,7 @@ namespace ReLive
             }
         }
         
+        
         private bool checkAlbumExists(string albumName)
         {
             bool albumExists = false;
@@ -68,8 +69,9 @@ namespace ReLive
             }
             return albumExists;
         }
+        
 
-        private bool checkFileExists(string fileName, string albumName)
+        public bool checkFileExists(string fileName, string albumName)
         {
             bool fileExists = false;
 
@@ -83,7 +85,7 @@ namespace ReLive
             return fileExists;
         }
 
-        private void createNewAlbum(string albumName, string desc)
+        public void createNewAlbum(string albumName, string desc)
         {
             if(!checkAlbumExists(albumName))
             {
@@ -95,9 +97,14 @@ namespace ReLive
                 PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
             }
         }
+        
 
         private void uploadDir_Click(object sender, EventArgs e)
         {
+            //imageUploadProgress progressBar = new imageUploadProgress(explorerText.Text);
+            //progressBar.uploadProgress.Step = progressBar.uploadProgress.
+            //progressBar.ShowDialog();
+            
             dirPath = explorerText.Text;
             if (dirPath != null)
             {
@@ -108,9 +115,13 @@ namespace ReLive
                 string desc = "Album Created " + currDate;
 
                 createNewAlbum(currDate, desc);
-
+                
                 Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, currDate));
 
+                uploadProgress.BringToFront();
+                uploadProgress.Visible = true;
+                uploadProgress.Step = 100 / jpgFiles.Length; //set size of progress
+                
                 foreach (FileInfo file in jpgFiles)
                 {
                     string fileStr = file.FullName;
@@ -119,15 +130,19 @@ namespace ReLive
                     {
                         FileStream fileStream = file.OpenRead();
                         PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+                        uploadProgress.PerformStep();
                     }
                 }
                 MessageBox.Show("Uploaded Album: " + currDate + " Successfully!");
+                uploadProgress.SendToBack();
+                uploadProgress.Visible = false;
                 UpdateAlbumFeed();
             }
             else
             {
                 MessageBox.Show("Please select a directory");
             }
+           
         }
         
         private void launchSite_Click(object sender, EventArgs e)
@@ -166,7 +181,7 @@ namespace ReLive
             SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
         }
 
-        private void UpdateAlbumFeed()
+        public void UpdateAlbumFeed()
         {
             AlbumQuery query = new AlbumQuery();
 
