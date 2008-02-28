@@ -307,7 +307,10 @@ namespace ReLive
         private void retrieveSD_Click(object sender, EventArgs e)
         {
             string memCardPath = findSDPath();
-            MessageBox.Show("Card Drive detected to be " + memCardPath);
+            if (memCardPath == "")
+                MessageBox.Show("No SD Card in Drive");
+            else
+                MessageBox.Show("Card Drive detected to be " + memCardPath);
         }
     }
 }
