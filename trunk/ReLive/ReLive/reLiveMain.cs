@@ -11,7 +11,6 @@ using Google.GData.Photos;
 using Google.GData.Extensions.MediaRss;
 using System.Runtime.InteropServices;
 
-
 namespace ReLive
 {
     public partial class reLiveMain : Form
@@ -26,7 +25,7 @@ namespace ReLive
         String userPictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
         public bool viewSet = false;
 
-        //file browser view settings example
+        //file browser view settings
         private const int LV_VIEW_ICON = 0x0000;
         private const int LVM_SETVIEW = 0x108E;
         private const string ListViewClassName = "SysListView32";
@@ -48,12 +47,10 @@ namespace ReLive
 
         private void directoryBrowse_Click(object sender, EventArgs e)
         {
-            //fileList.Items.Clear();
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 dirPath = fbd.SelectedPath;
-                //populateFileList(dirPath);
                 fileBrowser.Url = new Uri(dirPath);
             }
         }
@@ -83,7 +80,6 @@ namespace ReLive
             {
                 if(entry.Title.Text.Equals(fileName)) fileExists = true;
             }
-
             return fileExists;
         }
 
@@ -117,7 +113,6 @@ namespace ReLive
 
                 foreach (FileInfo file in jpgFiles)
                 {
-
                     string fileStr = file.FullName;
 
                     if (!checkFileExists(file.Name, currDate))
@@ -133,20 +128,14 @@ namespace ReLive
             {
                 MessageBox.Show("Please select a directory");
             }
-
         }
         
         private void launchSite_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://picasaweb.google.com/"); 
+           
         }
 
-        private void panelGoogleData_Paint(object sender, PaintEventArgs e)
-        {
-            
-        }
-
-        private void reLiveMain_Load(object sender, EventArgs e)
+        private void login()
         {
             if (this.googleAuthToken == null)
             {
@@ -165,6 +154,11 @@ namespace ReLive
                     UpdateAlbumFeed();
                 }
             }
+        }
+
+        private void reLiveMain_Load(object sender, EventArgs e)
+        {
+            login();
             System.IO.Directory.CreateDirectory(@userPictures + "\\reLive");
             fileBrowser.Navigate(userPictures + "\\reLive");
             //set file browser to view large icons
@@ -177,6 +171,9 @@ namespace ReLive
             AlbumQuery query = new AlbumQuery();
 
             this.albumList.Clear();
+            albumCalendar.BoldedDates = null;
+            this.AlbumPicture.Image = null;
+            this.mapLinkLabel.Hide();
 
             query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
 
@@ -200,19 +197,25 @@ namespace ReLive
                 }
             }
             this.albumCalendar.UpdateBoldedDates();
+            calendarUpdate();
         }
 
-        private void albumCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        private void calendarUpdate()
         {
             this.AlbumPicture.Image = null;
             this.mapLinkLabel.Hide();
             //this.AlbumInspector.SelectedObject = null;
 
-            foreach(PicasaEntry entry in this.albumList)
+            foreach (PicasaEntry entry in this.albumList)
             {
                 if (this.albumCalendar.SelectionStart.ToShortDateString().Equals(entry.Published.ToShortDateString()))
                     setSelection(entry);
             }
+        }
+
+        private void albumCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            calendarUpdate();
         }
 
         private void setSelection(PicasaEntry entry)
@@ -240,7 +243,6 @@ namespace ReLive
         {
             fileBrowser.Focus();
             explorerText.Text = fileBrowser.Url.LocalPath.ToString();
-            //MessageBox.Show(fileBrowser.Url.ToString());
         }
 
         //file browser view stuff
@@ -271,6 +273,17 @@ namespace ReLive
                 dirPath = explorerText.Text;
                 fileBrowser.Url = new Uri(this.explorerText.Text);
             }
+        }
+
+        private void loginLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.googleAuthToken = null;
+            login();
+        }
+
+        private void picasaLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://picasaweb.google.com/"); 
         }
     }
 }

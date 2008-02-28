@@ -45,11 +45,6 @@ namespace ReLive
             Close();
         }
 
-        private void GoogleLogin_Load(object sender, EventArgs e)
-        {
-           
-        }
-
         //need better exception catching
         private void buttonLogin_Click(object sender, EventArgs e)
         {
