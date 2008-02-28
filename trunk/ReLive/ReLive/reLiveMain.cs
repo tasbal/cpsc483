@@ -285,5 +285,29 @@ namespace ReLive
         {
             System.Diagnostics.Process.Start("http://picasaweb.google.com/"); 
         }
+
+        private string findSDPath()
+        {
+            string memCardPath = "";
+            int rootNum = 0;
+            DriveInfo[] allDrives = DriveInfo.GetDrives();  //get a list of all drives
+            foreach (DriveInfo drvInfo in allDrives)        //loop through all drives
+            {
+                DirectoryInfo di = drvInfo.RootDirectory;
+                if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady)
+                {
+                    memCardPath = di.FullName;
+
+                }
+                rootNum++;
+            }
+            return memCardPath;
+        }
+
+        private void retrieveSD_Click(object sender, EventArgs e)
+        {
+            string memCardPath = findSDPath();
+            MessageBox.Show("Card Drive detected to be " + memCardPath);
+        }
     }
 }
