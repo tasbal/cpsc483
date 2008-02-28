@@ -41,6 +41,7 @@ namespace ReLive
             this.loginLink = new System.Windows.Forms.LinkLabel();
             this.picasaLink = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.retrieveSD = new System.Windows.Forms.Button();
             this.tabViewer = new System.Windows.Forms.TabControl();
             this.imageTab = new System.Windows.Forms.TabPage();
             this.settingsTab = new System.Windows.Forms.TabPage();
@@ -161,6 +162,7 @@ namespace ReLive
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.retrieveSD);
             this.panel1.Controls.Add(this.mapLinkLabel);
             this.panel1.Controls.Add(this.albumPreviewLabel);
             this.panel1.Controls.Add(this.calendarLabel);
@@ -171,6 +173,16 @@ namespace ReLive
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(246, 517);
             this.panel1.TabIndex = 13;
+            // 
+            // retrieveSD
+            // 
+            this.retrieveSD.Location = new System.Drawing.Point(37, 447);
+            this.retrieveSD.Name = "retrieveSD";
+            this.retrieveSD.Size = new System.Drawing.Size(148, 43);
+            this.retrieveSD.TabIndex = 9;
+            this.retrieveSD.Text = "Upload Pictures From SD Card";
+            this.retrieveSD.UseVisualStyleBackColor = true;
+            this.retrieveSD.Click += new System.EventHandler(this.retrieveSD_Click);
             // 
             // tabViewer
             // 
@@ -252,6 +264,7 @@ namespace ReLive
         private System.Windows.Forms.TabControl tabViewer;
         private System.Windows.Forms.TabPage imageTab;
         private System.Windows.Forms.TabPage settingsTab;
+        private System.Windows.Forms.Button retrieveSD;
     }
 }
 
