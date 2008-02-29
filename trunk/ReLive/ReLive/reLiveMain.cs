@@ -312,14 +312,119 @@ namespace ReLive
             return memCardPath;
         }
 
+        private void fileCopy(string srcdir, string destdir, bool recursive)
+        {
+            DirectoryInfo dir;
+            DirectoryInfo ddir;
+            FileInfo[] files;
+            FileInfo[] destFiles;
+            DirectoryInfo[] dirs;
+            string tmppath;
+            bool fileExists = false;
+
+            //determine if the destination directory exists, if not create it
+            if (!Directory.Exists(destdir))
+            {
+                Directory.CreateDirectory(destdir);
+            }
+
+            dir = new DirectoryInfo(srcdir);
+            ddir = new DirectoryInfo(destdir);
+
+            //if the source dir doesn't exist, throw
+            if (!dir.Exists)
+            {
+                throw new ArgumentException("source dir doesn't exist -> " + srcdir);
+            }
+
+            //get all files in the current dir
+            files = dir.GetFiles();
+            destFiles = ddir.GetFiles();
+
+            //loop through each file
+            foreach (FileInfo file in files)
+            {
+                foreach (FileInfo destFile in destFiles)
+                {
+                    if (file.Name.Equals(destFile.Name))
+                    {
+                        MessageBox.Show(destFile.Name + " exists..skipping.. Please delete to upload.");
+                        fileExists = true;
+                    }
+                }
+                if (!fileExists)
+                {
+                    //create the path to where this file should be in destdir
+                    tmppath = Path.Combine(destdir, file.Name);
+
+                    MessageBox.Show("Copying " + tmppath);
+                    //copy file to dest dir
+                    file.CopyTo(tmppath, false);
+                }
+                else fileExists = false;
+            }
+
+            //cleanup
+            destFiles = null;
+            files = null;
+
+            //if not recursive, all work is done
+            if (!recursive)
+            {
+                return;
+            }
+
+            //otherwise, get dirs
+            dirs = dir.GetDirectories();
+
+            //loop through each sub directory in the current dir
+            foreach (DirectoryInfo subdir in dirs)
+            {
+                //create the path to the directory in destdir
+                tmppath = Path.Combine(destdir, subdir.Name);
+
+                //recursively call this function over and over again
+                //with each new dir.
+                fileCopy(subdir.FullName, tmppath, recursive);
+            }
+
+            //cleanup
+            dirs = null;
+
+            dir = null;
+        }
+
+
+        private void copySubDirs(string flashRoot, string path)
+        {
+            String msg = "Copying Subdirectories: ";
+            string[] subDirs = Directory.GetDirectories(flashRoot);
+
+            foreach (string subDir in subDirs)
+            {
+                msg = msg + subDir + "\n";
+            }
+            MessageBox.Show(msg);
+            fileCopy(flashRoot, path, false);  //make third parameter false for recursive copy
+
+        }
+
         private void retrieveSD_Click(object sender, EventArgs e)
         {
             string memCardPath = findSDPath();
+            DirectoryInfo dirPath = new DirectoryInfo(@userPictures + "\\reLive");
+            string defPath = @userPictures + "\\reLive";
+
+
             if (memCardPath == "")
                 MessageBox.Show("No SD Card in Drive");
             else
                 MessageBox.Show("Card Drive detected to be " + memCardPath);
+
+            MessageBox.Show("Copying contents to " + defPath);
+            copySubDirs(memCardPath, defPath);
         }
+
 
         private void distanceBox_TextChanged(object sender, EventArgs e)
         {
