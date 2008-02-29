@@ -48,6 +48,16 @@ namespace ReLive
             this.imageTab = new System.Windows.Forms.TabPage();
             this.uploadProgress = new System.Windows.Forms.ProgressBar();
             this.settingsTab = new System.Windows.Forms.TabPage();
+            this.gpsGroup = new System.Windows.Forms.GroupBox();
+            this.haloDistanceBox = new System.Windows.Forms.TextBox();
+            this.haloFeetLabel = new System.Windows.Forms.Label();
+            this.haloDistanceLabel = new System.Windows.Forms.Label();
+            this.lngLabel = new System.Windows.Forms.Label();
+            this.lngBox = new System.Windows.Forms.TextBox();
+            this.latLabel = new System.Windows.Forms.Label();
+            this.latBox = new System.Windows.Forms.TextBox();
+            this.haloSearchGroup = new System.Windows.Forms.GroupBox();
+            this.zipBox = new System.Windows.Forms.TextBox();
             this.stateBox = new System.Windows.Forms.ComboBox();
             this.cityBox = new System.Windows.Forms.TextBox();
             this.streetBox = new System.Windows.Forms.TextBox();
@@ -64,16 +74,6 @@ namespace ReLive
             this.faceLabel = new System.Windows.Forms.Label();
             this.delayBox = new System.Windows.Forms.ComboBox();
             this.delayLabel = new System.Windows.Forms.Label();
-            this.zipBox = new System.Windows.Forms.TextBox();
-            this.latBox = new System.Windows.Forms.TextBox();
-            this.latLabel = new System.Windows.Forms.Label();
-            this.lngLabel = new System.Windows.Forms.Label();
-            this.lngBox = new System.Windows.Forms.TextBox();
-            this.haloDistanceBox = new System.Windows.Forms.TextBox();
-            this.haloFeetLabel = new System.Windows.Forms.Label();
-            this.haloDistanceLabel = new System.Windows.Forms.Label();
-            this.haloSearchGroup = new System.Windows.Forms.GroupBox();
-            this.gpsGroup = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.rightPanel.SuspendLayout();
             this.previewPanel.SuspendLayout();
@@ -81,8 +81,8 @@ namespace ReLive
             this.tabViewer.SuspendLayout();
             this.imageTab.SuspendLayout();
             this.settingsTab.SuspendLayout();
-            this.haloSearchGroup.SuspendLayout();
             this.gpsGroup.SuspendLayout();
+            this.haloSearchGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // directoryBrowse
@@ -307,6 +307,107 @@ namespace ReLive
             this.settingsTab.Size = new System.Drawing.Size(582, 464);
             this.settingsTab.TabIndex = 1;
             this.settingsTab.Text = "Camera Settings";
+            // 
+            // gpsGroup
+            // 
+            this.gpsGroup.Controls.Add(this.haloDistanceBox);
+            this.gpsGroup.Controls.Add(this.haloFeetLabel);
+            this.gpsGroup.Controls.Add(this.haloDistanceLabel);
+            this.gpsGroup.Controls.Add(this.lngLabel);
+            this.gpsGroup.Controls.Add(this.lngBox);
+            this.gpsGroup.Controls.Add(this.latLabel);
+            this.gpsGroup.Controls.Add(this.latBox);
+            this.gpsGroup.Location = new System.Drawing.Point(243, 142);
+            this.gpsGroup.Name = "gpsGroup";
+            this.gpsGroup.Size = new System.Drawing.Size(215, 175);
+            this.gpsGroup.TabIndex = 29;
+            this.gpsGroup.TabStop = false;
+            this.gpsGroup.Text = "Halo Settings";
+            // 
+            // haloDistanceBox
+            // 
+            this.haloDistanceBox.Location = new System.Drawing.Point(54, 97);
+            this.haloDistanceBox.MaxLength = 7;
+            this.haloDistanceBox.Name = "haloDistanceBox";
+            this.haloDistanceBox.Size = new System.Drawing.Size(50, 20);
+            this.haloDistanceBox.TabIndex = 27;
+            this.haloDistanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.haloDistanceBox.TextChanged += new System.EventHandler(this.haloDistanceBox_TextChanged);
+            // 
+            // haloFeetLabel
+            // 
+            this.haloFeetLabel.AutoSize = true;
+            this.haloFeetLabel.Location = new System.Drawing.Point(110, 100);
+            this.haloFeetLabel.Name = "haloFeetLabel";
+            this.haloFeetLabel.Size = new System.Drawing.Size(28, 13);
+            this.haloFeetLabel.TabIndex = 26;
+            this.haloFeetLabel.Text = "Feet";
+            // 
+            // haloDistanceLabel
+            // 
+            this.haloDistanceLabel.AutoSize = true;
+            this.haloDistanceLabel.Location = new System.Drawing.Point(6, 100);
+            this.haloDistanceLabel.Name = "haloDistanceLabel";
+            this.haloDistanceLabel.Size = new System.Drawing.Size(42, 13);
+            this.haloDistanceLabel.TabIndex = 25;
+            this.haloDistanceLabel.Text = "Range:";
+            // 
+            // lngLabel
+            // 
+            this.lngLabel.AutoSize = true;
+            this.lngLabel.Location = new System.Drawing.Point(6, 72);
+            this.lngLabel.Name = "lngLabel";
+            this.lngLabel.Size = new System.Drawing.Size(57, 13);
+            this.lngLabel.TabIndex = 24;
+            this.lngLabel.Text = "Longitude:";
+            // 
+            // lngBox
+            // 
+            this.lngBox.Location = new System.Drawing.Point(69, 71);
+            this.lngBox.Name = "lngBox";
+            this.lngBox.Size = new System.Drawing.Size(120, 20);
+            this.lngBox.TabIndex = 23;
+            // 
+            // latLabel
+            // 
+            this.latLabel.AutoSize = true;
+            this.latLabel.Location = new System.Drawing.Point(6, 43);
+            this.latLabel.Name = "latLabel";
+            this.latLabel.Size = new System.Drawing.Size(48, 13);
+            this.latLabel.TabIndex = 22;
+            this.latLabel.Text = "Latitude:";
+            // 
+            // latBox
+            // 
+            this.latBox.Location = new System.Drawing.Point(69, 40);
+            this.latBox.Name = "latBox";
+            this.latBox.Size = new System.Drawing.Size(120, 20);
+            this.latBox.TabIndex = 21;
+            // 
+            // haloSearchGroup
+            // 
+            this.haloSearchGroup.Controls.Add(this.zipBox);
+            this.haloSearchGroup.Controls.Add(this.stateBox);
+            this.haloSearchGroup.Controls.Add(this.cityBox);
+            this.haloSearchGroup.Controls.Add(this.streetBox);
+            this.haloSearchGroup.Controls.Add(this.zipLabel);
+            this.haloSearchGroup.Controls.Add(this.stateLabel);
+            this.haloSearchGroup.Controls.Add(this.cityLabel);
+            this.haloSearchGroup.Controls.Add(this.streetLabel);
+            this.haloSearchGroup.Controls.Add(this.geoCode);
+            this.haloSearchGroup.Location = new System.Drawing.Point(22, 142);
+            this.haloSearchGroup.Name = "haloSearchGroup";
+            this.haloSearchGroup.Size = new System.Drawing.Size(215, 175);
+            this.haloSearchGroup.TabIndex = 28;
+            this.haloSearchGroup.TabStop = false;
+            this.haloSearchGroup.Text = "Halo Location Search";
+            // 
+            // zipBox
+            // 
+            this.zipBox.Location = new System.Drawing.Point(68, 122);
+            this.zipBox.Name = "zipBox";
+            this.zipBox.Size = new System.Drawing.Size(63, 20);
+            this.zipBox.TabIndex = 18;
             // 
             // stateBox
             // 
@@ -573,107 +674,6 @@ namespace ReLive
             this.delayLabel.TabIndex = 0;
             this.delayLabel.Text = "Time Delay (Minutes):";
             // 
-            // zipBox
-            // 
-            this.zipBox.Location = new System.Drawing.Point(68, 122);
-            this.zipBox.Name = "zipBox";
-            this.zipBox.Size = new System.Drawing.Size(63, 20);
-            this.zipBox.TabIndex = 18;
-            // 
-            // latBox
-            // 
-            this.latBox.Location = new System.Drawing.Point(69, 40);
-            this.latBox.Name = "latBox";
-            this.latBox.Size = new System.Drawing.Size(120, 20);
-            this.latBox.TabIndex = 21;
-            // 
-            // latLabel
-            // 
-            this.latLabel.AutoSize = true;
-            this.latLabel.Location = new System.Drawing.Point(6, 43);
-            this.latLabel.Name = "latLabel";
-            this.latLabel.Size = new System.Drawing.Size(48, 13);
-            this.latLabel.TabIndex = 22;
-            this.latLabel.Text = "Latitude:";
-            // 
-            // lngLabel
-            // 
-            this.lngLabel.AutoSize = true;
-            this.lngLabel.Location = new System.Drawing.Point(6, 72);
-            this.lngLabel.Name = "lngLabel";
-            this.lngLabel.Size = new System.Drawing.Size(57, 13);
-            this.lngLabel.TabIndex = 24;
-            this.lngLabel.Text = "Longitude:";
-            // 
-            // lngBox
-            // 
-            this.lngBox.Location = new System.Drawing.Point(69, 71);
-            this.lngBox.Name = "lngBox";
-            this.lngBox.Size = new System.Drawing.Size(120, 20);
-            this.lngBox.TabIndex = 23;
-            // 
-            // haloDistanceBox
-            // 
-            this.haloDistanceBox.Location = new System.Drawing.Point(54, 97);
-            this.haloDistanceBox.MaxLength = 7;
-            this.haloDistanceBox.Name = "haloDistanceBox";
-            this.haloDistanceBox.Size = new System.Drawing.Size(50, 20);
-            this.haloDistanceBox.TabIndex = 27;
-            this.haloDistanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.haloDistanceBox.TextChanged += new System.EventHandler(this.haloDistanceBox_TextChanged);
-            // 
-            // haloFeetLabel
-            // 
-            this.haloFeetLabel.AutoSize = true;
-            this.haloFeetLabel.Location = new System.Drawing.Point(110, 100);
-            this.haloFeetLabel.Name = "haloFeetLabel";
-            this.haloFeetLabel.Size = new System.Drawing.Size(28, 13);
-            this.haloFeetLabel.TabIndex = 26;
-            this.haloFeetLabel.Text = "Feet";
-            // 
-            // haloDistanceLabel
-            // 
-            this.haloDistanceLabel.AutoSize = true;
-            this.haloDistanceLabel.Location = new System.Drawing.Point(6, 100);
-            this.haloDistanceLabel.Name = "haloDistanceLabel";
-            this.haloDistanceLabel.Size = new System.Drawing.Size(42, 13);
-            this.haloDistanceLabel.TabIndex = 25;
-            this.haloDistanceLabel.Text = "Range:";
-            // 
-            // haloSearchGroup
-            // 
-            this.haloSearchGroup.Controls.Add(this.zipBox);
-            this.haloSearchGroup.Controls.Add(this.stateBox);
-            this.haloSearchGroup.Controls.Add(this.cityBox);
-            this.haloSearchGroup.Controls.Add(this.streetBox);
-            this.haloSearchGroup.Controls.Add(this.zipLabel);
-            this.haloSearchGroup.Controls.Add(this.stateLabel);
-            this.haloSearchGroup.Controls.Add(this.cityLabel);
-            this.haloSearchGroup.Controls.Add(this.streetLabel);
-            this.haloSearchGroup.Controls.Add(this.geoCode);
-            this.haloSearchGroup.Location = new System.Drawing.Point(22, 142);
-            this.haloSearchGroup.Name = "haloSearchGroup";
-            this.haloSearchGroup.Size = new System.Drawing.Size(215, 175);
-            this.haloSearchGroup.TabIndex = 28;
-            this.haloSearchGroup.TabStop = false;
-            this.haloSearchGroup.Text = "Halo Location Search";
-            // 
-            // gpsGroup
-            // 
-            this.gpsGroup.Controls.Add(this.haloDistanceBox);
-            this.gpsGroup.Controls.Add(this.haloFeetLabel);
-            this.gpsGroup.Controls.Add(this.haloDistanceLabel);
-            this.gpsGroup.Controls.Add(this.lngLabel);
-            this.gpsGroup.Controls.Add(this.lngBox);
-            this.gpsGroup.Controls.Add(this.latLabel);
-            this.gpsGroup.Controls.Add(this.latBox);
-            this.gpsGroup.Location = new System.Drawing.Point(243, 142);
-            this.gpsGroup.Name = "gpsGroup";
-            this.gpsGroup.Size = new System.Drawing.Size(215, 175);
-            this.gpsGroup.TabIndex = 29;
-            this.gpsGroup.TabStop = false;
-            this.gpsGroup.Text = "Halo Settings";
-            // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -702,10 +702,10 @@ namespace ReLive
             this.imageTab.PerformLayout();
             this.settingsTab.ResumeLayout(false);
             this.settingsTab.PerformLayout();
-            this.haloSearchGroup.ResumeLayout(false);
-            this.haloSearchGroup.PerformLayout();
             this.gpsGroup.ResumeLayout(false);
             this.gpsGroup.PerformLayout();
+            this.haloSearchGroup.ResumeLayout(false);
+            this.haloSearchGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

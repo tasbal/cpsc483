@@ -91,6 +91,7 @@ namespace ReLive
                 AlbumEntry newEntry = new AlbumEntry();
                 newEntry.Title.Text = albumName;
                 newEntry.Summary.Text = desc;
+//                newEntry.Published = ???
 
                 PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
             }
