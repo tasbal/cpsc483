@@ -54,8 +54,7 @@ namespace ReLive
                 fileBrowser.Url = new Uri(dirPath);
             }
         }
-        
-        
+          
         private bool checkAlbumExists(string albumName)
         {
             bool albumExists = false;
@@ -70,7 +69,6 @@ namespace ReLive
             return albumExists;
         }
         
-
         public bool checkFileExists(string fileName, string albumName)
         {
             bool fileExists = false;
@@ -98,14 +96,15 @@ namespace ReLive
             }
         }
         
-
         private void uploadDir_Click(object sender, EventArgs e)
         {
-            //imageUploadProgress progressBar = new imageUploadProgress(explorerText.Text);
-            //progressBar.uploadProgress.Step = progressBar.uploadProgress.
-            //progressBar.ShowDialog();
-            
             dirPath = explorerText.Text;
+
+            if(this.googleAuthToken == null)
+                login();
+            if (this.googleAuthToken == null) //if service check fails, token set to null so need to check again
+                return;
+                
             if (dirPath != null)
             {
                 DirectoryInfo dir = new DirectoryInfo(dirPath);
@@ -113,41 +112,37 @@ namespace ReLive
                 DateTime currTime = DateTime.Now;
                 string currDate = currTime.ToString("yyyyMMdd");
                 string desc = "Album Created " + currDate;
-
-                createNewAlbum(currDate, desc);
-                
                 Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, currDate));
 
                 uploadProgress.BringToFront();
                 uploadProgress.Visible = true;
-                uploadProgress.Step = 100 / jpgFiles.Length; //set size of progress
+                uploadDir.Visible = false;
+                uploadProgress.Step = 100 / (jpgFiles.Length + 1); //set size of progress
+                uploadProgress.PerformStep();
+
+                createNewAlbum(currDate, desc);        
                 
                 foreach (FileInfo file in jpgFiles)
                 {
                     string fileStr = file.FullName;
 
+                    uploadProgress.PerformStep();
                     if (!checkFileExists(file.Name, currDate))
                     {
                         FileStream fileStream = file.OpenRead();
                         PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
-                        uploadProgress.PerformStep();
                     }
                 }
                 MessageBox.Show("Uploaded Album: " + currDate + " Successfully!");
-                uploadProgress.SendToBack();
+                uploadDir.Visible = true;
                 uploadProgress.Visible = false;
+                uploadProgress.SendToBack();
                 UpdateAlbumFeed();
             }
             else
             {
                 MessageBox.Show("Please select a directory");
             }
-           
-        }
-        
-        private void launchSite_Click(object sender, EventArgs e)
-        {
-           
         }
 
         private void login()
@@ -161,12 +156,21 @@ namespace ReLive
                 this.user = loginDialog.User;
 
                 if (this.googleAuthToken == null)
-                    //this.Close();
                     MessageBox.Show("You will not be able to access your web albums without logging in!");
                 else
                 {
                     picasaService.SetAuthenticationToken(loginDialog.AuthenticationToken);
-                    UpdateAlbumFeed();
+                    try
+                    {
+                        UpdateAlbumFeed();
+                    }
+                    catch (Google.GData.Client.GDataRequestException)
+                    {
+                        MessageBox.Show("You need to add the Picasaweb Service:\nLogin through your web browser and accept the terms of service.");
+                        System.Diagnostics.Process.Start("www.picasaweb.google.com");
+                        this.googleAuthToken = null;
+                        login();
+                    }
                 }
             }
         }
@@ -191,17 +195,7 @@ namespace ReLive
             this.mapLinkLabel.Hide();
 
             query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
-
-            try
-            {
-                this.picasaFeed = this.picasaService.Query(query);
-            }
-            catch(Google.GData.Client.GDataRequestException)
-            {
-                MessageBox.Show("You need to add the Picasaweb Service:\nLogin through your web browser and accept the terms of service.");
-                System.Diagnostics.Process.Start("www.picasaweb.google.com");
-                return;
-            }
+            this.picasaFeed = this.picasaService.Query(query);
 
             if (this.picasaFeed != null && this.picasaFeed.Entries.Count > 0)
             {
@@ -245,8 +239,7 @@ namespace ReLive
             this.mapLinkLabel.Show();
             //enable changing of map browser url temporarily
             mapWindow.albumMap.AllowNavigation = true;
-            mapWindow.albumMap.Url = new Uri("http://picasaweb.google.com/" + 
-               this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
+            mapWindow.albumMap.Navigate("http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
         }
 
         private void mapLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -326,6 +319,56 @@ namespace ReLive
                 MessageBox.Show("No SD Card in Drive");
             else
                 MessageBox.Show("Card Drive detected to be " + memCardPath);
+        }
+
+        private void distanceBox_TextChanged(object sender, EventArgs e)
+        {
+            minFeetLabel.Text = ft_to_mi(distanceBox);
+            
+        }
+        private String ft_to_mi(TextBox box)
+        {
+            int value = box.Text != "" ? Int32.Parse(box.Text) : 0;
+            double miles = (double)value / 5280;
+            
+            return "Feet (" + Math.Round(miles, 2) + " Miles)";
+        }
+
+        private void geoCode_Click(object sender, EventArgs e)
+        {
+            //c# geocoding example
+            string lat = "";
+            string lng = "";
+            string address = streetBox.Text + ", " + cityBox.Text + ", " + stateBox.Text + ", " + zipBox.Text;
+ 
+            try
+            {
+                System.Net.WebClient client = new System.Net.WebClient();
+                string page = client.DownloadString("http://maps.google.com/maps?q=" + address);
+                int begin = page.IndexOf("markers:");
+                string str = page.Substring(begin);
+                int end = str.IndexOf(",image:");
+                str = str.Substring(0, end);
+
+                //Parse out Latitude
+                lat = str.Substring(str.IndexOf(",lat:") + 5);
+                lat = lat.Substring(0, lat.IndexOf(",lng:"));
+                //Parse out Longitude
+                lng = str.Substring(str.IndexOf(",lng:") + 6);
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("An Error Occured Loading Geocode!\nCheck that a valid address has been entered.", "An Error Occured Loading Geocode!");
+            }
+
+            latBox.Text = lat;
+            lngBox.Text = lng;
+        }
+
+        private void haloDistanceBox_TextChanged(object sender, EventArgs e)
+        {
+            haloFeetLabel.Text = ft_to_mi(haloDistanceBox);
         }
     }
 }
