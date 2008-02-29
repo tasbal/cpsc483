@@ -48,14 +48,32 @@ namespace ReLive
             this.imageTab = new System.Windows.Forms.TabPage();
             this.uploadProgress = new System.Windows.Forms.ProgressBar();
             this.settingsTab = new System.Windows.Forms.TabPage();
-            this.delayLabel = new System.Windows.Forms.Label();
-            this.delayBox = new System.Windows.Forms.ComboBox();
-            this.faceLabel = new System.Windows.Forms.Label();
-            this.faceEnabled = new System.Windows.Forms.RadioButton();
-            this.faceDisabled = new System.Windows.Forms.RadioButton();
+            this.stateBox = new System.Windows.Forms.ComboBox();
+            this.cityBox = new System.Windows.Forms.TextBox();
+            this.streetBox = new System.Windows.Forms.TextBox();
+            this.zipLabel = new System.Windows.Forms.Label();
+            this.stateLabel = new System.Windows.Forms.Label();
+            this.cityLabel = new System.Windows.Forms.Label();
+            this.streetLabel = new System.Windows.Forms.Label();
+            this.geoCode = new System.Windows.Forms.Button();
+            this.distanceBox = new System.Windows.Forms.TextBox();
+            this.minFeetLabel = new System.Windows.Forms.Label();
             this.minDistance = new System.Windows.Forms.Label();
-            this.distanceBox = new System.Windows.Forms.MaskedTextBox();
-            this.feetLabel = new System.Windows.Forms.Label();
+            this.faceDisabled = new System.Windows.Forms.RadioButton();
+            this.faceEnabled = new System.Windows.Forms.RadioButton();
+            this.faceLabel = new System.Windows.Forms.Label();
+            this.delayBox = new System.Windows.Forms.ComboBox();
+            this.delayLabel = new System.Windows.Forms.Label();
+            this.zipBox = new System.Windows.Forms.TextBox();
+            this.latBox = new System.Windows.Forms.TextBox();
+            this.latLabel = new System.Windows.Forms.Label();
+            this.lngLabel = new System.Windows.Forms.Label();
+            this.lngBox = new System.Windows.Forms.TextBox();
+            this.haloDistanceBox = new System.Windows.Forms.TextBox();
+            this.haloFeetLabel = new System.Windows.Forms.Label();
+            this.haloDistanceLabel = new System.Windows.Forms.Label();
+            this.haloSearchGroup = new System.Windows.Forms.GroupBox();
+            this.gpsGroup = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.rightPanel.SuspendLayout();
             this.previewPanel.SuspendLayout();
@@ -63,6 +81,8 @@ namespace ReLive
             this.tabViewer.SuspendLayout();
             this.imageTab.SuspendLayout();
             this.settingsTab.SuspendLayout();
+            this.haloSearchGroup.SuspendLayout();
+            this.gpsGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // directoryBrowse
@@ -201,10 +221,8 @@ namespace ReLive
             // 
             // albumCalendar
             // 
-            this.albumCalendar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.albumCalendar.Location = new System.Drawing.Point(31, 43);
+            this.albumCalendar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.albumCalendar.Location = new System.Drawing.Point(9, 36);
             this.albumCalendar.MaxSelectionCount = 1;
             this.albumCalendar.Name = "albumCalendar";
             this.albumCalendar.TabIndex = 10;
@@ -273,8 +291,10 @@ namespace ReLive
             // settingsTab
             // 
             this.settingsTab.BackColor = System.Drawing.SystemColors.Control;
-            this.settingsTab.Controls.Add(this.feetLabel);
+            this.settingsTab.Controls.Add(this.gpsGroup);
+            this.settingsTab.Controls.Add(this.haloSearchGroup);
             this.settingsTab.Controls.Add(this.distanceBox);
+            this.settingsTab.Controls.Add(this.minFeetLabel);
             this.settingsTab.Controls.Add(this.minDistance);
             this.settingsTab.Controls.Add(this.faceDisabled);
             this.settingsTab.Controls.Add(this.faceEnabled);
@@ -288,18 +308,242 @@ namespace ReLive
             this.settingsTab.TabIndex = 1;
             this.settingsTab.Text = "Camera Settings";
             // 
-            // delayLabel
+            // stateBox
             // 
-            this.delayLabel.AutoSize = true;
-            this.delayLabel.Location = new System.Drawing.Point(19, 32);
-            this.delayLabel.Name = "delayLabel";
-            this.delayLabel.Size = new System.Drawing.Size(109, 13);
-            this.delayLabel.TabIndex = 0;
-            this.delayLabel.Text = "Time Delay (Minutes):";
+            this.stateBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "AL",
+            "AK",
+            "NZ",
+            "AR",
+            "CA",
+            "CO",
+            "CT",
+            "DE",
+            "FL",
+            "GA",
+            "HI",
+            "ID",
+            "IL",
+            "IN",
+            "IA",
+            "KS",
+            "KY",
+            "LA",
+            "ME",
+            "MD",
+            "MA",
+            "MI",
+            "MN",
+            "MS",
+            "MO",
+            "MT",
+            "NE",
+            "NV",
+            "NH",
+            "NJ",
+            "NM",
+            "NY",
+            "NC",
+            "ND",
+            "OH",
+            "OK",
+            "OR",
+            "PA",
+            "RI",
+            "SC",
+            "SD",
+            "TN",
+            "TX",
+            "UT",
+            "VT",
+            "VA",
+            "WA",
+            "WA-DC",
+            "WV",
+            "WI",
+            "WY"});
+            this.stateBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.stateBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.stateBox.FormattingEnabled = true;
+            this.stateBox.Items.AddRange(new object[] {
+            "AL",
+            "AK",
+            "NZ",
+            "AR",
+            "CA",
+            "CO",
+            "CT",
+            "DE",
+            "FL",
+            "GA",
+            "HI",
+            "ID",
+            "IL",
+            "IN",
+            "IA",
+            "KS",
+            "KY",
+            "LA",
+            "ME",
+            "MD",
+            "MA",
+            "MI",
+            "MN",
+            "MS",
+            "MO",
+            "MT",
+            "NE",
+            "NV",
+            "NH",
+            "NJ",
+            "NM",
+            "NY",
+            "NC",
+            "ND",
+            "OH",
+            "OK",
+            "OR",
+            "PA",
+            "RI",
+            "SC",
+            "SD",
+            "TN",
+            "TX",
+            "UT",
+            "VT",
+            "VA",
+            "WA",
+            "WA-DC",
+            "WV",
+            "WI",
+            "WY"});
+            this.stateBox.Location = new System.Drawing.Point(65, 92);
+            this.stateBox.Name = "stateBox";
+            this.stateBox.Size = new System.Drawing.Size(66, 21);
+            this.stateBox.TabIndex = 17;
+            // 
+            // cityBox
+            // 
+            this.cityBox.Location = new System.Drawing.Point(66, 66);
+            this.cityBox.Name = "cityBox";
+            this.cityBox.Size = new System.Drawing.Size(137, 20);
+            this.cityBox.TabIndex = 16;
+            // 
+            // streetBox
+            // 
+            this.streetBox.Location = new System.Drawing.Point(65, 40);
+            this.streetBox.Name = "streetBox";
+            this.streetBox.Size = new System.Drawing.Size(138, 20);
+            this.streetBox.TabIndex = 15;
+            // 
+            // zipLabel
+            // 
+            this.zipLabel.AutoSize = true;
+            this.zipLabel.Location = new System.Drawing.Point(9, 122);
+            this.zipLabel.Name = "zipLabel";
+            this.zipLabel.Size = new System.Drawing.Size(53, 13);
+            this.zipLabel.TabIndex = 14;
+            this.zipLabel.Text = "Zip Code:";
+            // 
+            // stateLabel
+            // 
+            this.stateLabel.AutoSize = true;
+            this.stateLabel.Location = new System.Drawing.Point(9, 95);
+            this.stateLabel.Name = "stateLabel";
+            this.stateLabel.Size = new System.Drawing.Size(35, 13);
+            this.stateLabel.TabIndex = 13;
+            this.stateLabel.Text = "State:";
+            // 
+            // cityLabel
+            // 
+            this.cityLabel.AutoSize = true;
+            this.cityLabel.Location = new System.Drawing.Point(9, 69);
+            this.cityLabel.Name = "cityLabel";
+            this.cityLabel.Size = new System.Drawing.Size(27, 13);
+            this.cityLabel.TabIndex = 12;
+            this.cityLabel.Text = "City:";
+            // 
+            // streetLabel
+            // 
+            this.streetLabel.AutoSize = true;
+            this.streetLabel.Location = new System.Drawing.Point(9, 43);
+            this.streetLabel.Name = "streetLabel";
+            this.streetLabel.Size = new System.Drawing.Size(38, 13);
+            this.streetLabel.TabIndex = 11;
+            this.streetLabel.Text = "Street:";
+            // 
+            // geoCode
+            // 
+            this.geoCode.Location = new System.Drawing.Point(137, 92);
+            this.geoCode.Name = "geoCode";
+            this.geoCode.Size = new System.Drawing.Size(66, 50);
+            this.geoCode.TabIndex = 10;
+            this.geoCode.Text = "Get GPS";
+            this.geoCode.UseVisualStyleBackColor = true;
+            this.geoCode.Click += new System.EventHandler(this.geoCode_Click);
+            // 
+            // distanceBox
+            // 
+            this.distanceBox.Location = new System.Drawing.Point(134, 63);
+            this.distanceBox.MaxLength = 7;
+            this.distanceBox.Name = "distanceBox";
+            this.distanceBox.Size = new System.Drawing.Size(50, 20);
+            this.distanceBox.TabIndex = 9;
+            this.distanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.distanceBox.TextChanged += new System.EventHandler(this.distanceBox_TextChanged);
+            // 
+            // minFeetLabel
+            // 
+            this.minFeetLabel.AutoSize = true;
+            this.minFeetLabel.Location = new System.Drawing.Point(188, 65);
+            this.minFeetLabel.Name = "minFeetLabel";
+            this.minFeetLabel.Size = new System.Drawing.Size(28, 13);
+            this.minFeetLabel.TabIndex = 8;
+            this.minFeetLabel.Text = "Feet";
+            // 
+            // minDistance
+            // 
+            this.minDistance.AutoSize = true;
+            this.minDistance.Location = new System.Drawing.Point(19, 65);
+            this.minDistance.Name = "minDistance";
+            this.minDistance.Size = new System.Drawing.Size(96, 13);
+            this.minDistance.TabIndex = 6;
+            this.minDistance.Text = "Minimum Distance:";
+            // 
+            // faceDisabled
+            // 
+            this.faceDisabled.AutoSize = true;
+            this.faceDisabled.Location = new System.Drawing.Point(178, 94);
+            this.faceDisabled.Name = "faceDisabled";
+            this.faceDisabled.Size = new System.Drawing.Size(66, 17);
+            this.faceDisabled.TabIndex = 5;
+            this.faceDisabled.TabStop = true;
+            this.faceDisabled.Text = "Disabled";
+            this.faceDisabled.UseVisualStyleBackColor = true;
+            // 
+            // faceEnabled
+            // 
+            this.faceEnabled.AutoSize = true;
+            this.faceEnabled.Location = new System.Drawing.Point(108, 94);
+            this.faceEnabled.Name = "faceEnabled";
+            this.faceEnabled.Size = new System.Drawing.Size(64, 17);
+            this.faceEnabled.TabIndex = 4;
+            this.faceEnabled.TabStop = true;
+            this.faceEnabled.Text = "Enabled";
+            this.faceEnabled.UseVisualStyleBackColor = true;
+            // 
+            // faceLabel
+            // 
+            this.faceLabel.AutoSize = true;
+            this.faceLabel.Location = new System.Drawing.Point(19, 96);
+            this.faceLabel.Name = "faceLabel";
+            this.faceLabel.Size = new System.Drawing.Size(83, 13);
+            this.faceLabel.TabIndex = 3;
+            this.faceLabel.Text = "Face Detection:";
             // 
             // delayBox
             // 
-            this.delayBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.delayBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.delayBox.FormattingEnabled = true;
             this.delayBox.Items.AddRange(new object[] {
             "1",
@@ -320,64 +564,115 @@ namespace ReLive
             this.delayBox.Size = new System.Drawing.Size(50, 21);
             this.delayBox.TabIndex = 2;
             // 
-            // faceLabel
+            // delayLabel
             // 
-            this.faceLabel.AutoSize = true;
-            this.faceLabel.Location = new System.Drawing.Point(19, 96);
-            this.faceLabel.Name = "faceLabel";
-            this.faceLabel.Size = new System.Drawing.Size(83, 13);
-            this.faceLabel.TabIndex = 3;
-            this.faceLabel.Text = "Face Detection:";
+            this.delayLabel.AutoSize = true;
+            this.delayLabel.Location = new System.Drawing.Point(19, 32);
+            this.delayLabel.Name = "delayLabel";
+            this.delayLabel.Size = new System.Drawing.Size(109, 13);
+            this.delayLabel.TabIndex = 0;
+            this.delayLabel.Text = "Time Delay (Minutes):";
             // 
-            // faceEnabled
+            // zipBox
             // 
-            this.faceEnabled.AutoSize = true;
-            this.faceEnabled.Location = new System.Drawing.Point(108, 94);
-            this.faceEnabled.Name = "faceEnabled";
-            this.faceEnabled.Size = new System.Drawing.Size(64, 17);
-            this.faceEnabled.TabIndex = 4;
-            this.faceEnabled.TabStop = true;
-            this.faceEnabled.Text = "Enabled";
-            this.faceEnabled.UseVisualStyleBackColor = true;
+            this.zipBox.Location = new System.Drawing.Point(68, 122);
+            this.zipBox.Name = "zipBox";
+            this.zipBox.Size = new System.Drawing.Size(63, 20);
+            this.zipBox.TabIndex = 18;
             // 
-            // faceDisabled
+            // latBox
             // 
-            this.faceDisabled.AutoSize = true;
-            this.faceDisabled.Location = new System.Drawing.Point(178, 94);
-            this.faceDisabled.Name = "faceDisabled";
-            this.faceDisabled.Size = new System.Drawing.Size(66, 17);
-            this.faceDisabled.TabIndex = 5;
-            this.faceDisabled.TabStop = true;
-            this.faceDisabled.Text = "Disabled";
-            this.faceDisabled.UseVisualStyleBackColor = true;
+            this.latBox.Location = new System.Drawing.Point(69, 40);
+            this.latBox.Name = "latBox";
+            this.latBox.Size = new System.Drawing.Size(120, 20);
+            this.latBox.TabIndex = 21;
             // 
-            // minDistance
+            // latLabel
             // 
-            this.minDistance.AutoSize = true;
-            this.minDistance.Location = new System.Drawing.Point(19, 65);
-            this.minDistance.Name = "minDistance";
-            this.minDistance.Size = new System.Drawing.Size(96, 13);
-            this.minDistance.TabIndex = 6;
-            this.minDistance.Text = "Minimum Distance:";
+            this.latLabel.AutoSize = true;
+            this.latLabel.Location = new System.Drawing.Point(6, 43);
+            this.latLabel.Name = "latLabel";
+            this.latLabel.Size = new System.Drawing.Size(48, 13);
+            this.latLabel.TabIndex = 22;
+            this.latLabel.Text = "Latitude:";
             // 
-            // distanceBox
+            // lngLabel
             // 
-            this.distanceBox.Location = new System.Drawing.Point(134, 62);
-            this.distanceBox.Mask = "00000";
-            this.distanceBox.Name = "distanceBox";
-            this.distanceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.distanceBox.Size = new System.Drawing.Size(38, 20);
-            this.distanceBox.TabIndex = 7;
-            this.distanceBox.ValidatingType = typeof(int);
+            this.lngLabel.AutoSize = true;
+            this.lngLabel.Location = new System.Drawing.Point(6, 72);
+            this.lngLabel.Name = "lngLabel";
+            this.lngLabel.Size = new System.Drawing.Size(57, 13);
+            this.lngLabel.TabIndex = 24;
+            this.lngLabel.Text = "Longitude:";
             // 
-            // feetLabel
+            // lngBox
             // 
-            this.feetLabel.AutoSize = true;
-            this.feetLabel.Location = new System.Drawing.Point(171, 65);
-            this.feetLabel.Name = "feetLabel";
-            this.feetLabel.Size = new System.Drawing.Size(28, 13);
-            this.feetLabel.TabIndex = 8;
-            this.feetLabel.Text = "Feet";
+            this.lngBox.Location = new System.Drawing.Point(69, 71);
+            this.lngBox.Name = "lngBox";
+            this.lngBox.Size = new System.Drawing.Size(120, 20);
+            this.lngBox.TabIndex = 23;
+            // 
+            // haloDistanceBox
+            // 
+            this.haloDistanceBox.Location = new System.Drawing.Point(54, 97);
+            this.haloDistanceBox.MaxLength = 7;
+            this.haloDistanceBox.Name = "haloDistanceBox";
+            this.haloDistanceBox.Size = new System.Drawing.Size(50, 20);
+            this.haloDistanceBox.TabIndex = 27;
+            this.haloDistanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.haloDistanceBox.TextChanged += new System.EventHandler(this.haloDistanceBox_TextChanged);
+            // 
+            // haloFeetLabel
+            // 
+            this.haloFeetLabel.AutoSize = true;
+            this.haloFeetLabel.Location = new System.Drawing.Point(110, 100);
+            this.haloFeetLabel.Name = "haloFeetLabel";
+            this.haloFeetLabel.Size = new System.Drawing.Size(28, 13);
+            this.haloFeetLabel.TabIndex = 26;
+            this.haloFeetLabel.Text = "Feet";
+            // 
+            // haloDistanceLabel
+            // 
+            this.haloDistanceLabel.AutoSize = true;
+            this.haloDistanceLabel.Location = new System.Drawing.Point(6, 100);
+            this.haloDistanceLabel.Name = "haloDistanceLabel";
+            this.haloDistanceLabel.Size = new System.Drawing.Size(42, 13);
+            this.haloDistanceLabel.TabIndex = 25;
+            this.haloDistanceLabel.Text = "Range:";
+            // 
+            // haloSearchGroup
+            // 
+            this.haloSearchGroup.Controls.Add(this.zipBox);
+            this.haloSearchGroup.Controls.Add(this.stateBox);
+            this.haloSearchGroup.Controls.Add(this.cityBox);
+            this.haloSearchGroup.Controls.Add(this.streetBox);
+            this.haloSearchGroup.Controls.Add(this.zipLabel);
+            this.haloSearchGroup.Controls.Add(this.stateLabel);
+            this.haloSearchGroup.Controls.Add(this.cityLabel);
+            this.haloSearchGroup.Controls.Add(this.streetLabel);
+            this.haloSearchGroup.Controls.Add(this.geoCode);
+            this.haloSearchGroup.Location = new System.Drawing.Point(22, 142);
+            this.haloSearchGroup.Name = "haloSearchGroup";
+            this.haloSearchGroup.Size = new System.Drawing.Size(215, 175);
+            this.haloSearchGroup.TabIndex = 28;
+            this.haloSearchGroup.TabStop = false;
+            this.haloSearchGroup.Text = "Halo Location Search";
+            // 
+            // gpsGroup
+            // 
+            this.gpsGroup.Controls.Add(this.haloDistanceBox);
+            this.gpsGroup.Controls.Add(this.haloFeetLabel);
+            this.gpsGroup.Controls.Add(this.haloDistanceLabel);
+            this.gpsGroup.Controls.Add(this.lngLabel);
+            this.gpsGroup.Controls.Add(this.lngBox);
+            this.gpsGroup.Controls.Add(this.latLabel);
+            this.gpsGroup.Controls.Add(this.latBox);
+            this.gpsGroup.Location = new System.Drawing.Point(243, 142);
+            this.gpsGroup.Name = "gpsGroup";
+            this.gpsGroup.Size = new System.Drawing.Size(215, 175);
+            this.gpsGroup.TabIndex = 29;
+            this.gpsGroup.TabStop = false;
+            this.gpsGroup.Text = "Halo Settings";
             // 
             // reLiveMain
             // 
@@ -407,6 +702,10 @@ namespace ReLive
             this.imageTab.PerformLayout();
             this.settingsTab.ResumeLayout(false);
             this.settingsTab.PerformLayout();
+            this.haloSearchGroup.ResumeLayout(false);
+            this.haloSearchGroup.PerformLayout();
+            this.gpsGroup.ResumeLayout(false);
+            this.gpsGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -439,8 +738,26 @@ namespace ReLive
         private System.Windows.Forms.RadioButton faceDisabled;
         private System.Windows.Forms.RadioButton faceEnabled;
         private System.Windows.Forms.Label faceLabel;
-        private System.Windows.Forms.Label feetLabel;
-        private System.Windows.Forms.MaskedTextBox distanceBox;
+        private System.Windows.Forms.Label minFeetLabel;
+        private System.Windows.Forms.TextBox distanceBox;
+        private System.Windows.Forms.Button geoCode;
+        private System.Windows.Forms.ComboBox stateBox;
+        private System.Windows.Forms.TextBox cityBox;
+        private System.Windows.Forms.TextBox streetBox;
+        private System.Windows.Forms.Label zipLabel;
+        private System.Windows.Forms.Label stateLabel;
+        private System.Windows.Forms.Label cityLabel;
+        private System.Windows.Forms.Label streetLabel;
+        private System.Windows.Forms.TextBox zipBox;
+        private System.Windows.Forms.Label latLabel;
+        private System.Windows.Forms.TextBox latBox;
+        private System.Windows.Forms.Label lngLabel;
+        private System.Windows.Forms.TextBox lngBox;
+        private System.Windows.Forms.TextBox haloDistanceBox;
+        private System.Windows.Forms.Label haloFeetLabel;
+        private System.Windows.Forms.Label haloDistanceLabel;
+        private System.Windows.Forms.GroupBox gpsGroup;
+        private System.Windows.Forms.GroupBox haloSearchGroup;
     }
 }
 
