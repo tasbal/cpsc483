@@ -16,14 +16,13 @@ namespace ReLive
     public partial class reLiveMain : Form
     {
         private String googleAuthToken = null;
-        public String user = null;
-        public PicasaService picasaService = new PicasaService("ReLive");
-        public PicasaFeed picasaFeed = null;
+        private String user = null;
+        private PicasaService picasaService = new PicasaService("ReLive");
+        private PicasaFeed picasaFeed = null;
         private List<PicasaEntry> albumList = new List<PicasaEntry>();
         private String dirPath;
         MapBrowser mapWindow = new MapBrowser();
         String userPictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
-        public bool viewSet = false;
 
         //file browser view settings
         private const int LV_VIEW_ICON = 0x0000;
@@ -179,7 +178,7 @@ namespace ReLive
         private void reLiveMain_Load(object sender, EventArgs e)
         {
             login();
-            System.IO.Directory.CreateDirectory(@userPictures + "\\reLive");
+            Directory.CreateDirectory(@userPictures + "\\reLive");
             fileBrowser.Navigate(userPictures + "\\reLive");
             //set file browser to view large icons
             FindListViewHandle();
@@ -420,12 +419,11 @@ namespace ReLive
             if (memCardPath == "")
                 MessageBox.Show("No SD Card in Drive");
             else
-                MessageBox.Show("Card Drive detected to be " + memCardPath);
-
-            MessageBox.Show("Copying contents to " + defPath);
-            copySubDirs(memCardPath, defPath);
+            {
+                MessageBox.Show("Card Drive detected to be: " + memCardPath + "\nCopying contents to: " + defPath);
+                copySubDirs(memCardPath, defPath);
+            }
         }
-
 
         private void distanceBox_TextChanged(object sender, EventArgs e)
         {
@@ -475,6 +473,13 @@ namespace ReLive
         private void haloDistanceBox_TextChanged(object sender, EventArgs e)
         {
             haloFeetLabel.Text = ft_to_mi(haloDistanceBox);
+        }
+
+        private void writeConfig_Click(object sender, EventArgs e) //not finished
+        {
+            String userDesktop = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
+            TextWriter config = new StreamWriter(userDesktop, false);
+
         }
     }
 }
