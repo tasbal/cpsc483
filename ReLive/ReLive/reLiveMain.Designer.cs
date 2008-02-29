@@ -74,6 +74,7 @@ namespace ReLive
             this.faceLabel = new System.Windows.Forms.Label();
             this.delayBox = new System.Windows.Forms.ComboBox();
             this.delayLabel = new System.Windows.Forms.Label();
+            this.writeConfig = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.rightPanel.SuspendLayout();
             this.previewPanel.SuspendLayout();
@@ -291,6 +292,7 @@ namespace ReLive
             // settingsTab
             // 
             this.settingsTab.BackColor = System.Drawing.SystemColors.Control;
+            this.settingsTab.Controls.Add(this.writeConfig);
             this.settingsTab.Controls.Add(this.gpsGroup);
             this.settingsTab.Controls.Add(this.haloSearchGroup);
             this.settingsTab.Controls.Add(this.distanceBox);
@@ -317,7 +319,7 @@ namespace ReLive
             this.gpsGroup.Controls.Add(this.lngBox);
             this.gpsGroup.Controls.Add(this.latLabel);
             this.gpsGroup.Controls.Add(this.latBox);
-            this.gpsGroup.Location = new System.Drawing.Point(243, 142);
+            this.gpsGroup.Location = new System.Drawing.Point(229, 117);
             this.gpsGroup.Name = "gpsGroup";
             this.gpsGroup.Size = new System.Drawing.Size(215, 175);
             this.gpsGroup.TabIndex = 29;
@@ -395,7 +397,7 @@ namespace ReLive
             this.haloSearchGroup.Controls.Add(this.cityLabel);
             this.haloSearchGroup.Controls.Add(this.streetLabel);
             this.haloSearchGroup.Controls.Add(this.geoCode);
-            this.haloSearchGroup.Location = new System.Drawing.Point(22, 142);
+            this.haloSearchGroup.Location = new System.Drawing.Point(8, 117);
             this.haloSearchGroup.Name = "haloSearchGroup";
             this.haloSearchGroup.Size = new System.Drawing.Size(215, 175);
             this.haloSearchGroup.TabIndex = 28;
@@ -404,9 +406,9 @@ namespace ReLive
             // 
             // zipBox
             // 
-            this.zipBox.Location = new System.Drawing.Point(68, 122);
+            this.zipBox.Location = new System.Drawing.Point(65, 122);
             this.zipBox.Name = "zipBox";
-            this.zipBox.Size = new System.Drawing.Size(63, 20);
+            this.zipBox.Size = new System.Drawing.Size(66, 20);
             this.zipBox.TabIndex = 18;
             // 
             // stateBox
@@ -674,6 +676,16 @@ namespace ReLive
             this.delayLabel.TabIndex = 0;
             this.delayLabel.Text = "Time Delay (Minutes):";
             // 
+            // writeConfig
+            // 
+            this.writeConfig.Location = new System.Drawing.Point(479, 426);
+            this.writeConfig.Name = "writeConfig";
+            this.writeConfig.Size = new System.Drawing.Size(97, 32);
+            this.writeConfig.TabIndex = 30;
+            this.writeConfig.Text = "Save Config";
+            this.writeConfig.UseVisualStyleBackColor = true;
+            this.writeConfig.Click += new System.EventHandler(this.writeConfig_Click);
+            // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -758,6 +770,7 @@ namespace ReLive
         private System.Windows.Forms.Label haloDistanceLabel;
         private System.Windows.Forms.GroupBox gpsGroup;
         private System.Windows.Forms.GroupBox haloSearchGroup;
+        private System.Windows.Forms.Button writeConfig;
     }
 }
 
