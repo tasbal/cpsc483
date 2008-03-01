@@ -20,7 +20,6 @@ namespace ReLive
         private PicasaService picasaService = new PicasaService("ReLive");
         private PicasaFeed picasaFeed = null;
         private List<PicasaEntry> albumList = new List<PicasaEntry>();
-        private String dirPath;
         MapBrowser mapWindow = new MapBrowser();
         String userPictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
 
@@ -49,8 +48,8 @@ namespace ReLive
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                dirPath = fbd.SelectedPath;
-                fileBrowser.Url = new Uri(dirPath);
+                explorerText.Text = fbd.SelectedPath;
+                fileBrowser.Url = new Uri(explorerText.Text);
             }
         }
           
@@ -90,7 +89,7 @@ namespace ReLive
                 AlbumEntry newEntry = new AlbumEntry();
                 newEntry.Title.Text = albumName;
                 newEntry.Summary.Text = desc;
-//                newEntry.Published = ???
+                //newEntry.Published = ???
 
                 PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
             }
@@ -98,16 +97,14 @@ namespace ReLive
         
         private void uploadDir_Click(object sender, EventArgs e)
         {
-            dirPath = explorerText.Text;
-
             if(this.googleAuthToken == null)
                 login();
             if (this.googleAuthToken == null) //if service check fails, token set to null so need to check again
                 return;
                 
-            if (dirPath != null)
+            if (explorerText.Text != null)
             {
-                DirectoryInfo dir = new DirectoryInfo(dirPath);
+                DirectoryInfo dir = new DirectoryInfo(explorerText.Text);
                 FileInfo[] jpgFiles = dir.GetFiles("*.jpg");
                 DateTime currTime = DateTime.Now;
                 string currDate = currTime.ToString("yyyyMMdd");
@@ -134,9 +131,11 @@ namespace ReLive
                     }
                 }
                 MessageBox.Show("Uploaded Album: " + currDate + " Successfully!");
+
                 uploadDir.Visible = true;
                 uploadProgress.Visible = false;
                 uploadProgress.SendToBack();
+                uploadProgress.Value = 0;
                 UpdateAlbumFeed();
             }
             else
@@ -278,7 +277,7 @@ namespace ReLive
         {
             if (e.KeyChar == (char)13)
             {
-                dirPath = explorerText.Text;
+                explorerText.Text = explorerText.Text;
                 fileBrowser.Url = new Uri(this.explorerText.Text);
             }
         }
@@ -305,7 +304,6 @@ namespace ReLive
                 if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady)
                 {
                     memCardPath = di.FullName;
-
                 }
                 rootNum++;
             }
@@ -314,6 +312,7 @@ namespace ReLive
 
         private void fileCopy(string srcdir, string destdir, bool recursive)
         {
+            MessageBox.Show("filecopy");
             DirectoryInfo dir;
             DirectoryInfo ddir;
             FileInfo[] files;
@@ -390,10 +389,8 @@ namespace ReLive
 
             //cleanup
             dirs = null;
-
             dir = null;
         }
-
 
         private void copySubDirs(string flashRoot, string path)
         {
@@ -412,9 +409,8 @@ namespace ReLive
         private void retrieveSD_Click(object sender, EventArgs e)
         {
             string memCardPath = findSDPath();
-            DirectoryInfo dirPath = new DirectoryInfo(@userPictures + "\\reLive");
+            //DirectoryInfo dirPath = new DirectoryInfo(@userPictures + "\\reLive");
             string defPath = @userPictures + "\\reLive";
-
 
             if (memCardPath == "")
                 MessageBox.Show("No SD Card in Drive");
@@ -475,11 +471,33 @@ namespace ReLive
             haloFeetLabel.Text = ft_to_mi(haloDistanceBox);
         }
 
-        private void writeConfig_Click(object sender, EventArgs e) //not finished
+        private void writeConfig_Click(object sender, EventArgs e)
         {
-            String userDesktop = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
-            TextWriter config = new StreamWriter(userDesktop, false);
+            String userDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
+            TextWriter config = new StreamWriter(findSDPath() + "\\config.txt", false); //needs to be modified to sd card at some point
+            config.WriteLine("Delay: " + delayBox.Text);
+            config.WriteLine("Distance: " + distanceBox.Text);
+            config.WriteLine("FaceDetection: " + faceCheck.Checked);
+            config.WriteLine("Halo: " + haloCheck.Checked);
+            config.WriteLine("Lat: " + latBox.Text);
+            config.WriteLine("Lng: -" + lngBox.Text);
+            config.WriteLine("Range: " + haloDistanceBox.Text);
+            config.Close();
+        }
+
+        private void haloCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            haloSearchGroup.Visible = !haloSearchGroup.Visible;
+            gpsGroup.Visible = !gpsGroup.Visible;
+        }
+
+        private void viewHalo_Click(object sender, EventArgs e)
+        {
+            if ((latBox.Text != "") && (lngBox.Text != ""))
+                System.Diagnostics.Process.Start("http://maps.google.com/maps?q=" + latBox.Text + ",-" + lngBox.Text + "&t=h");
+            else
+                MessageBox.Show("Search for a location first!");
         }
     }
 }
