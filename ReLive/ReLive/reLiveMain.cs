@@ -312,7 +312,6 @@ namespace ReLive
 
         private void fileCopy(string srcdir, string destdir, bool recursive)
         {
-            MessageBox.Show("filecopy");
             DirectoryInfo dir;
             DirectoryInfo ddir;
             FileInfo[] files;
@@ -343,14 +342,16 @@ namespace ReLive
             //loop through each file
             foreach (FileInfo file in files)
             {
+                
                 foreach (FileInfo destFile in destFiles)
                 {
                     if (file.Name.Equals(destFile.Name))
                     {
-                        MessageBox.Show(destFile.Name + " exists..skipping.. Please delete to upload.");
+                        //MessageBox.Show(destFile.Name + " exists..skipping.. Please delete to upload.");
                         fileExists = true;
                     }
                 }
+                
                 if (!fileExists)
                 {
                     //create the path to where this file should be in destdir
@@ -394,16 +395,16 @@ namespace ReLive
 
         private void copySubDirs(string flashRoot, string path)
         {
-            String msg = "Copying Subdirectories: ";
+            //String msg = "Copying Subdirectories: ";
             string[] subDirs = Directory.GetDirectories(flashRoot);
-
+            /*
             foreach (string subDir in subDirs)
             {
                 msg = msg + subDir + "\n";
             }
             MessageBox.Show(msg);
-            fileCopy(flashRoot, path, false);  //make third parameter false for recursive copy
-
+             */
+            fileCopy(flashRoot, path, true);  //make third parameter true for recursive copy
         }
 
         private void retrieveSD_Click(object sender, EventArgs e)
@@ -473,16 +474,19 @@ namespace ReLive
 
         private void writeConfig_Click(object sender, EventArgs e)
         {
-            String userDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            double distance = Math.Round(Int32.Parse(distanceBox.Text) / 3.2808399, 3);
+            double range = Math.Round(Int32.Parse(haloDistanceBox.Text) / 3.2808399, 3);
 
+            String userDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             TextWriter config = new StreamWriter(findSDPath() + "\\config.txt", false); //needs to be modified to sd card at some point
+            
             config.WriteLine("Delay: " + delayBox.Text);
-            config.WriteLine("Distance: " + distanceBox.Text);
+            config.WriteLine("Distance: " + distance);
             config.WriteLine("FaceDetection: " + faceCheck.Checked);
             config.WriteLine("Halo: " + haloCheck.Checked);
             config.WriteLine("Lat: " + latBox.Text);
             config.WriteLine("Lng: -" + lngBox.Text);
-            config.WriteLine("Range: " + haloDistanceBox.Text);
+            config.WriteLine("Range: " + range);
             config.Close();
         }
 
