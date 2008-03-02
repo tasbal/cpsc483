@@ -8,7 +8,7 @@ CSOURCES=relive.c parser.c main.c
 INCLUDES=relive.h parser.h
 
 # header files
-LIBS=cc3-ilp
+LIBS=cc3-ilp jpeg-6b
 
 # the name of this project
 PROJECT=relive
