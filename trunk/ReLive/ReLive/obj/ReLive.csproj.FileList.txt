@@ -5,11 +5,6 @@ obj\Debug\ReLive.Properties.Resources.resources
 obj\Debug\ReLive.csproj.GenerateResource.Cache
 obj\Debug\ReLive.exe
 obj\Debug\ReLive.pdb
-bin\Debug\Google.GData.AccessControl.dll
-bin\Debug\Google.GData.Calendar.dll
-bin\Debug\Google.GData.Client.DLL
-bin\Debug\Google.GData.Extensions.DLL
-bin\Debug\Google.GData.Photos.dll
 obj\Debug\ReLive.reLiveMain.resources
 obj\Debug\ReLive.GoogleLogin.resources
 obj\Debug\ReLive.MapBrowser.resources

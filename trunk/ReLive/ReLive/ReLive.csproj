@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ReLive</RootNamespace>
     <AssemblyName>ReLive</AssemblyName>
-    <ApplicationIcon>reLive.ico</ApplicationIcon>
+    <ApplicationIcon>reLiveDesktop.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -112,7 +112,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="reLive.ico" />
+    <Content Include="reLiveDesktop.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
