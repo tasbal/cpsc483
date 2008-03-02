@@ -92,9 +92,12 @@ int main (void)
 #endif
 			
 			memory = fopen(filename, "r");
-			printf( "%s already exists...\n",filename ); 
-			i++; 
-			fclose(memory);
+			if ( memory != NULL )
+			{
+				printf( "%s already exists...\n",filename ); 
+				i++; 
+				fclose(memory);
+			}
 		}while( memory!=NULL );
 		
 		// print file that you are going to write to stderr
