@@ -252,7 +252,7 @@ namespace ReLive
             this.retrieveSD.Name = "retrieveSD";
             this.retrieveSD.Size = new System.Drawing.Size(154, 37);
             this.retrieveSD.TabIndex = 9;
-            this.retrieveSD.Text = "Upload Pictures From SD Card";
+            this.retrieveSD.Text = "Sync Pictures From SD Card";
             this.retrieveSD.UseVisualStyleBackColor = true;
             this.retrieveSD.Click += new System.EventHandler(this.retrieveSD_Click);
             // 
@@ -315,7 +315,7 @@ namespace ReLive
             // 
             // distanceBox
             // 
-            this.distanceBox.Location = new System.Drawing.Point(134, 65);
+            this.distanceBox.Location = new System.Drawing.Point(134, 62);
             this.distanceBox.MaxLength = 7;
             this.distanceBox.Name = "distanceBox";
             this.distanceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -376,7 +376,7 @@ namespace ReLive
             this.gpsGroup.Controls.Add(this.latBox);
             this.gpsGroup.Location = new System.Drawing.Point(227, 180);
             this.gpsGroup.Name = "gpsGroup";
-            this.gpsGroup.Size = new System.Drawing.Size(232, 175);
+            this.gpsGroup.Size = new System.Drawing.Size(215, 175);
             this.gpsGroup.TabIndex = 29;
             this.gpsGroup.TabStop = false;
             this.gpsGroup.Text = "Halo Settings";
@@ -395,7 +395,7 @@ namespace ReLive
             // 
             // viewHalo
             // 
-            this.viewHalo.Location = new System.Drawing.Point(54, 125);
+            this.viewHalo.Location = new System.Drawing.Point(69, 123);
             this.viewHalo.Name = "viewHalo";
             this.viewHalo.Size = new System.Drawing.Size(50, 24);
             this.viewHalo.TabIndex = 28;
@@ -408,9 +408,9 @@ namespace ReLive
             this.haloFeetLabel.AutoSize = true;
             this.haloFeetLabel.Location = new System.Drawing.Point(125, 100);
             this.haloFeetLabel.Name = "haloFeetLabel";
-            this.haloFeetLabel.Size = new System.Drawing.Size(28, 13);
+            this.haloFeetLabel.Size = new System.Drawing.Size(39, 13);
             this.haloFeetLabel.TabIndex = 26;
-            this.haloFeetLabel.Text = "Feet";
+            this.haloFeetLabel.Text = "Meters";
             // 
             // haloDistanceLabel
             // 
@@ -478,6 +478,7 @@ namespace ReLive
             this.zipBox.Name = "zipBox";
             this.zipBox.Size = new System.Drawing.Size(66, 20);
             this.zipBox.TabIndex = 18;
+            this.zipBox.TextChanged += new System.EventHandler(this.zipBox_TextChanged);
             // 
             // stateBox
             // 
@@ -656,11 +657,11 @@ namespace ReLive
             // minFeetLabel
             // 
             this.minFeetLabel.AutoSize = true;
-            this.minFeetLabel.Location = new System.Drawing.Point(188, 65);
+            this.minFeetLabel.Location = new System.Drawing.Point(190, 65);
             this.minFeetLabel.Name = "minFeetLabel";
-            this.minFeetLabel.Size = new System.Drawing.Size(28, 13);
+            this.minFeetLabel.Size = new System.Drawing.Size(39, 13);
             this.minFeetLabel.TabIndex = 8;
-            this.minFeetLabel.Text = "Feet";
+            this.minFeetLabel.Text = "Meters";
             // 
             // minDistance
             // 
@@ -702,7 +703,6 @@ namespace ReLive
             this.delayBox.Name = "delayBox";
             this.delayBox.Size = new System.Drawing.Size(50, 21);
             this.delayBox.TabIndex = 2;
-            this.delayBox.Text = "15";
             // 
             // delayLabel
             // 
