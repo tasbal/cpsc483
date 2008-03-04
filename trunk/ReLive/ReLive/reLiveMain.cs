@@ -424,8 +424,14 @@ namespace ReLive
 
         private void distanceBox_TextChanged(object sender, EventArgs e)
         {
-            minFeetLabel.Text = ft_to_mi(distanceBox);
-            
+            try
+            {
+                minFeetLabel.Text = ft_to_mi(distanceBox);
+            }
+            catch (FormatException)
+            {
+                distanceBox.Text = "";
+            }
         }
         private String ft_to_mi(TextBox box)
         {
@@ -469,17 +475,30 @@ namespace ReLive
 
         private void haloDistanceBox_TextChanged(object sender, EventArgs e)
         {
-            haloFeetLabel.Text = ft_to_mi(haloDistanceBox);
+            try
+            {
+                haloFeetLabel.Text = ft_to_mi(haloDistanceBox);
+            }
+            catch (FormatException)
+            {
+                haloDistanceBox.Text = "";
+            }
         }
 
         private void writeConfig_Click(object sender, EventArgs e)
         {
-            double distance = Math.Round(Int32.Parse(distanceBox.Text) / 3.2808399, 3);
-            double range = Math.Round(Int32.Parse(haloDistanceBox.Text) / 3.2808399, 3);
+            double distance = 0;
+            double range = 0;
+
+            if (distanceBox.Text != "")
+                distance = Math.Round(Int32.Parse(distanceBox.Text) / 3.2808399, 3);
+            if(haloDistanceBox.Text != "")
+                range = Math.Round(Int32.Parse(haloDistanceBox.Text) / 3.2808399, 3);
 
             String userDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             TextWriter config = new StreamWriter(findSDPath() + "\\config.txt", false); //needs to be modified to sd card at some point
             
+            /*
             config.WriteLine("Delay: " + delayBox.Text);
             config.WriteLine("Distance: " + distance);
             config.WriteLine("FaceDetection: " + faceCheck.Checked);
@@ -487,7 +506,11 @@ namespace ReLive
             config.WriteLine("Lat: " + latBox.Text);
             config.WriteLine("Lng: -" + lngBox.Text);
             config.WriteLine("Range: " + range);
+            */
+            config.WriteLine(delayBox.Text + "," + distance + "," + faceCheck.Checked + "," +
+                haloCheck.Checked + "," + latBox.Text + ",-" + lngBox.Text + "," + range);
             config.Close();
+            MessageBox.Show("Config written to " + findSDPath() + "config.txt");
         }
 
         private void haloCheck_CheckedChanged(object sender, EventArgs e)

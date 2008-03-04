@@ -48,13 +48,14 @@ namespace ReLive
             this.imageTab = new System.Windows.Forms.TabPage();
             this.uploadProgress = new System.Windows.Forms.ProgressBar();
             this.settingsTab = new System.Windows.Forms.TabPage();
+            this.distanceBox = new System.Windows.Forms.TextBox();
             this.haloCheck = new System.Windows.Forms.CheckBox();
             this.haloEnable = new System.Windows.Forms.Label();
             this.faceCheck = new System.Windows.Forms.CheckBox();
             this.writeConfig = new System.Windows.Forms.Button();
             this.gpsGroup = new System.Windows.Forms.GroupBox();
-            this.viewHalo = new System.Windows.Forms.Button();
             this.haloDistanceBox = new System.Windows.Forms.TextBox();
+            this.viewHalo = new System.Windows.Forms.Button();
             this.haloFeetLabel = new System.Windows.Forms.Label();
             this.haloDistanceLabel = new System.Windows.Forms.Label();
             this.lngLabel = new System.Windows.Forms.Label();
@@ -71,7 +72,6 @@ namespace ReLive
             this.cityLabel = new System.Windows.Forms.Label();
             this.streetLabel = new System.Windows.Forms.Label();
             this.geoCode = new System.Windows.Forms.Button();
-            this.distanceBox = new System.Windows.Forms.TextBox();
             this.minFeetLabel = new System.Windows.Forms.Label();
             this.minDistance = new System.Windows.Forms.Label();
             this.faceLabel = new System.Windows.Forms.Label();
@@ -294,13 +294,13 @@ namespace ReLive
             // settingsTab
             // 
             this.settingsTab.BackColor = System.Drawing.SystemColors.Control;
+            this.settingsTab.Controls.Add(this.distanceBox);
             this.settingsTab.Controls.Add(this.haloCheck);
             this.settingsTab.Controls.Add(this.haloEnable);
             this.settingsTab.Controls.Add(this.faceCheck);
             this.settingsTab.Controls.Add(this.writeConfig);
             this.settingsTab.Controls.Add(this.gpsGroup);
             this.settingsTab.Controls.Add(this.haloSearchGroup);
-            this.settingsTab.Controls.Add(this.distanceBox);
             this.settingsTab.Controls.Add(this.minFeetLabel);
             this.settingsTab.Controls.Add(this.minDistance);
             this.settingsTab.Controls.Add(this.faceLabel);
@@ -312,6 +312,17 @@ namespace ReLive
             this.settingsTab.Size = new System.Drawing.Size(582, 464);
             this.settingsTab.TabIndex = 1;
             this.settingsTab.Text = "Camera Settings";
+            // 
+            // distanceBox
+            // 
+            this.distanceBox.Location = new System.Drawing.Point(134, 65);
+            this.distanceBox.MaxLength = 7;
+            this.distanceBox.Name = "distanceBox";
+            this.distanceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.distanceBox.Size = new System.Drawing.Size(50, 20);
+            this.distanceBox.TabIndex = 34;
+            this.distanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.distanceBox.TextChanged += new System.EventHandler(this.distanceBox_TextChanged);
             // 
             // haloCheck
             // 
@@ -355,8 +366,8 @@ namespace ReLive
             // 
             // gpsGroup
             // 
-            this.gpsGroup.Controls.Add(this.viewHalo);
             this.gpsGroup.Controls.Add(this.haloDistanceBox);
+            this.gpsGroup.Controls.Add(this.viewHalo);
             this.gpsGroup.Controls.Add(this.haloFeetLabel);
             this.gpsGroup.Controls.Add(this.haloDistanceLabel);
             this.gpsGroup.Controls.Add(this.lngLabel);
@@ -365,11 +376,22 @@ namespace ReLive
             this.gpsGroup.Controls.Add(this.latBox);
             this.gpsGroup.Location = new System.Drawing.Point(227, 180);
             this.gpsGroup.Name = "gpsGroup";
-            this.gpsGroup.Size = new System.Drawing.Size(215, 175);
+            this.gpsGroup.Size = new System.Drawing.Size(232, 175);
             this.gpsGroup.TabIndex = 29;
             this.gpsGroup.TabStop = false;
             this.gpsGroup.Text = "Halo Settings";
             this.gpsGroup.Visible = false;
+            // 
+            // haloDistanceBox
+            // 
+            this.haloDistanceBox.Location = new System.Drawing.Point(69, 97);
+            this.haloDistanceBox.MaxLength = 7;
+            this.haloDistanceBox.Name = "haloDistanceBox";
+            this.haloDistanceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.haloDistanceBox.Size = new System.Drawing.Size(50, 20);
+            this.haloDistanceBox.TabIndex = 35;
+            this.haloDistanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.haloDistanceBox.TextChanged += new System.EventHandler(this.haloDistanceBox_TextChanged);
             // 
             // viewHalo
             // 
@@ -381,20 +403,10 @@ namespace ReLive
             this.viewHalo.UseVisualStyleBackColor = true;
             this.viewHalo.Click += new System.EventHandler(this.viewHalo_Click);
             // 
-            // haloDistanceBox
-            // 
-            this.haloDistanceBox.Location = new System.Drawing.Point(54, 97);
-            this.haloDistanceBox.MaxLength = 7;
-            this.haloDistanceBox.Name = "haloDistanceBox";
-            this.haloDistanceBox.Size = new System.Drawing.Size(50, 20);
-            this.haloDistanceBox.TabIndex = 27;
-            this.haloDistanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.haloDistanceBox.TextChanged += new System.EventHandler(this.haloDistanceBox_TextChanged);
-            // 
             // haloFeetLabel
             // 
             this.haloFeetLabel.AutoSize = true;
-            this.haloFeetLabel.Location = new System.Drawing.Point(110, 100);
+            this.haloFeetLabel.Location = new System.Drawing.Point(125, 100);
             this.haloFeetLabel.Name = "haloFeetLabel";
             this.haloFeetLabel.Size = new System.Drawing.Size(28, 13);
             this.haloFeetLabel.TabIndex = 26;
@@ -641,16 +653,6 @@ namespace ReLive
             this.geoCode.UseVisualStyleBackColor = true;
             this.geoCode.Click += new System.EventHandler(this.geoCode_Click);
             // 
-            // distanceBox
-            // 
-            this.distanceBox.Location = new System.Drawing.Point(134, 63);
-            this.distanceBox.MaxLength = 7;
-            this.distanceBox.Name = "distanceBox";
-            this.distanceBox.Size = new System.Drawing.Size(50, 20);
-            this.distanceBox.TabIndex = 9;
-            this.distanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.distanceBox.TextChanged += new System.EventHandler(this.distanceBox_TextChanged);
-            // 
             // minFeetLabel
             // 
             this.minFeetLabel.AutoSize = true;
@@ -700,6 +702,7 @@ namespace ReLive
             this.delayBox.Name = "delayBox";
             this.delayBox.Size = new System.Drawing.Size(50, 21);
             this.delayBox.TabIndex = 2;
+            this.delayBox.Text = "15";
             // 
             // delayLabel
             // 
@@ -773,7 +776,6 @@ namespace ReLive
         private System.Windows.Forms.Label minDistance;
         private System.Windows.Forms.Label faceLabel;
         private System.Windows.Forms.Label minFeetLabel;
-        private System.Windows.Forms.TextBox distanceBox;
         private System.Windows.Forms.Button geoCode;
         private System.Windows.Forms.ComboBox stateBox;
         private System.Windows.Forms.TextBox cityBox;
@@ -787,7 +789,6 @@ namespace ReLive
         private System.Windows.Forms.TextBox latBox;
         private System.Windows.Forms.Label lngLabel;
         private System.Windows.Forms.TextBox lngBox;
-        private System.Windows.Forms.TextBox haloDistanceBox;
         private System.Windows.Forms.Label haloFeetLabel;
         private System.Windows.Forms.Label haloDistanceLabel;
         private System.Windows.Forms.GroupBox gpsGroup;
@@ -797,6 +798,8 @@ namespace ReLive
         private System.Windows.Forms.CheckBox haloCheck;
         private System.Windows.Forms.Label haloEnable;
         private System.Windows.Forms.Button viewHalo;
+        private System.Windows.Forms.TextBox distanceBox;
+        private System.Windows.Forms.TextBox haloDistanceBox;
     }
 }
 
