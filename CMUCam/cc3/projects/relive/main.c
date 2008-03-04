@@ -128,7 +128,6 @@ int main (void)
 		capture_current_jpeg(memory);
 		fclose(memory);
 		i++;
-		destroy_jpeg();
 		
 /*		if(on)
 		{
@@ -158,6 +157,7 @@ int main (void)
 */
 	}
 	
+	destroy_jpeg();
 	return 0;
 }
 
