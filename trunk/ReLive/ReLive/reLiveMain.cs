@@ -182,6 +182,30 @@ namespace ReLive
             //set file browser to view large icons
             FindListViewHandle();
             SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
+
+            //load previous config from SD card
+            loadCurrentConfig();
+        }
+        public void loadCurrentConfig()
+        {
+            string memCardPath = findSDPath();
+            if (memCardPath == "")
+                return;
+
+            Control[] configArray = { delayBox, distanceBox, faceCheck, haloCheck, latBox, lngBox, haloDistanceBox };
+            StreamReader sr = File.OpenText(memCardPath + "\\config.txt");
+            string input = sr.ReadLine();
+            string[] inputArray = input.Split(',');
+            for (int value = 0; value < inputArray.Length; value++ )
+            {
+                if (value == 2 || value == 3) //special cases for checkboxes
+                {
+                    ((CheckBox)configArray[value]).Checked = inputArray[value] == "True";
+                    if (value == 3 && inputArray[value] == "False")
+                        return;
+                }
+                configArray[value].Text = inputArray[value];
+            }
         }
 
         public void UpdateAlbumFeed()
@@ -410,11 +434,10 @@ namespace ReLive
         private void retrieveSD_Click(object sender, EventArgs e)
         {
             string memCardPath = findSDPath();
-            //DirectoryInfo dirPath = new DirectoryInfo(@userPictures + "\\reLive");
             string defPath = @userPictures + "\\reLive";
 
             if (memCardPath == "")
-                MessageBox.Show("No SD Card in Drive");
+                MessageBox.Show("Sorry, but no SD card was detected in the drive.\nPlease insert your memory card and try again.");
             else
             {
                 MessageBox.Show("Card Drive detected to be: " + memCardPath + "\nCopying contents to: " + defPath);
@@ -426,19 +449,36 @@ namespace ReLive
         {
             try
             {
-                minFeetLabel.Text = ft_to_mi(distanceBox);
+                Double.Parse(distanceBox.Text + "0");
             }
             catch (FormatException)
             {
                 distanceBox.Text = "";
             }
         }
-        private String ft_to_mi(TextBox box)
+
+        private void haloDistanceBox_TextChanged(object sender, EventArgs e)
         {
-            int value = box.Text != "" ? Int32.Parse(box.Text) : 0;
-            double miles = (double)value / 5280;
-            
-            return "Feet (" + Math.Round(miles, 2) + " Miles)";
+            try
+            {
+                Double.Parse(haloDistanceBox.Text + "0");
+            }
+            catch (FormatException)
+            {
+                haloDistanceBox.Text = "";
+            }
+        }
+
+        private void zipBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Int32.Parse(zipBox.Text);
+            }
+            catch (FormatException)
+            {
+                zipBox.Text = "";
+            }
         }
 
         private void geoCode_Click(object sender, EventArgs e)
@@ -461,7 +501,7 @@ namespace ReLive
                 lat = str.Substring(str.IndexOf(",lat:") + 5);
                 lat = lat.Substring(0, lat.IndexOf(",lng:"));
                 //Parse out Longitude
-                lng = str.Substring(str.IndexOf(",lng:") + 6);
+                lng = str.Substring(str.IndexOf(",lng:") + 5);
             }
 
             catch (Exception ex)
@@ -473,44 +513,53 @@ namespace ReLive
             lngBox.Text = lng;
         }
 
-        private void haloDistanceBox_TextChanged(object sender, EventArgs e)
+        //validate that all camera settings have been set
+        private bool validateSettings()
         {
-            try
-            {
-                haloFeetLabel.Text = ft_to_mi(haloDistanceBox);
-            }
-            catch (FormatException)
-            {
-                haloDistanceBox.Text = "";
-            }
-        }
+            string memCardPath = findSDPath();
+            string message = "";
 
+            if (memCardPath == "")
+            {
+                MessageBox.Show("Sorry, but no SD card was detected in the drive.\nPlease insert your memory card and try again.");
+                return false;
+            }
+            if(delayBox.Text == "")
+            {
+                message += "Please specify a minimum time between pictures!\n";
+            }
+            if(distanceBox.Text == "")
+            {
+                message += "Please specify a minimum distance!\n";
+            }
+            if ((latBox.Text == "" || lngBox.Text == "") && haloCheck.Checked)
+            {
+                message += "Search for a GPS location, or disable the location halo.";
+            }
+            if (message == "")
+                return true;
+
+            MessageBox.Show(message);
+            return false;
+        }
         private void writeConfig_Click(object sender, EventArgs e)
         {
+            if (!validateSettings())
+                return;
+
+            string memCardPath = findSDPath();
+
             double distance = 0;
             double range = 0;
 
-            if (distanceBox.Text != "")
-                distance = Math.Round(Int32.Parse(distanceBox.Text) / 3.2808399, 3);
-            if(haloDistanceBox.Text != "")
-                range = Math.Round(Int32.Parse(haloDistanceBox.Text) / 3.2808399, 3);
-
             String userDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            TextWriter config = new StreamWriter(findSDPath() + "\\config.txt", false); //needs to be modified to sd card at some point
+            TextWriter config = new StreamWriter(findSDPath() + "\\config.txt", false);
             
-            /*
-            config.WriteLine("Delay: " + delayBox.Text);
-            config.WriteLine("Distance: " + distance);
-            config.WriteLine("FaceDetection: " + faceCheck.Checked);
-            config.WriteLine("Halo: " + haloCheck.Checked);
-            config.WriteLine("Lat: " + latBox.Text);
-            config.WriteLine("Lng: -" + lngBox.Text);
-            config.WriteLine("Range: " + range);
-            */
             config.WriteLine(delayBox.Text + "," + distance + "," + faceCheck.Checked + "," +
                 haloCheck.Checked + "," + latBox.Text + ",-" + lngBox.Text + "," + range);
             config.Close();
-            MessageBox.Show("Config written to " + findSDPath() + "config.txt");
+
+            MessageBox.Show("Config written to " + memCardPath + "config.txt");
         }
 
         private void haloCheck_CheckedChanged(object sender, EventArgs e)
@@ -526,5 +575,7 @@ namespace ReLive
             else
                 MessageBox.Show("Search for a location first!");
         }
+
+        
     }
 }
