@@ -8,7 +8,7 @@
 #define DEGTORAD 0.017453293
 #define _CRT_SECURE_NO_WARNINGS
 
-GPSData* parse(char* gps_string)
+GPSData* parseGPS(char* gps_string)
 {
 	char* str1;
 	int num_comma;	
@@ -67,7 +67,7 @@ GPSData* parse(char* gps_string)
 			{
 				date = (char*)malloc(10*sizeof(char));
 				strcpy(date,str1);	
-				g = convert(time,lat,lon,date);
+				g = convertGPS(time,lat,lon,date);
 				free(time);
 				free(lat);
 				free(lon);
@@ -83,8 +83,16 @@ GPSData* parse(char* gps_string)
 	return NULL;
 }
 
+/************************************************************************/
 
-GPSData* convert(char* time,char* lat,char* lon,char* date)
+configData* parseConfig(char* config_data)
+{
+	
+}
+
+/************************************************************************/
+
+GPSData* convertGPS(char* time,char* lat,char* lon,char* date)
 {
 	GPSData* g;
 
@@ -128,6 +136,14 @@ GPSData* convert(char* time,char* lat,char* lon,char* date)
 	return g;
 }
 
+/************************************************************************/
+
+configData* convertConfig(char* res)
+{
+	
+}
+
+/************************************************************************/
 
 double toDeg(char* DDMM,int latorlon)
 {
@@ -183,13 +199,14 @@ double toDeg(char* DDMM,int latorlon)
 	return deg_d + (min_d*MINTODEG);
 }
 
-
+/************************************************************************/
 
 double toRad(double degrees)
 {
 	return degrees*DEGTORAD;
 }
 
+/************************************************************************/
 
 double calcDist( GPSData* gps1, GPSData* gps2 )
 {
@@ -226,15 +243,4 @@ double calcDist( GPSData* gps1, GPSData* gps2 )
 
 	nD = nRadius * nC;
 	return nD; // Return our calculated distance
-}
-
-
-void test(char* gps)
-{
-	GPSData* g= parse(gps);
-
-	if(g!=NULL)
-		printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\n",g->lat,g->lon,g->month,g->day,g->year,g->hour,g->minute,g->second);
-	else
-		printf("INVALID\n");
 }
