@@ -11,8 +11,8 @@
 #include "jpeglib.h"
 #include "relive.h"
 
-static struct jpeg_compress_struct cinfo;
-static struct jpeg_error_mgr jerr;
+struct jpeg_compress_struct cinfo;
+struct jpeg_error_mgr jerr;
 uint8_t *row;
 
 /************************************************************************/

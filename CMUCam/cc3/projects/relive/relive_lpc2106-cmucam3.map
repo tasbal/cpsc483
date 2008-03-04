@@ -302,12 +302,14 @@ Archive member included because of file (symbol)
 Allocating common symbols
 Common symbol       size              file
 
+jerr                0x84              lpc2106-cmucam3_buildfiles/relive.o
 _cc3_button_trigger
                     0x1               ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
 _cc3_uart1_binmode  0x1               ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
 errno               0x4               /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reent.o)
 _cc3_uart0_binmode  0x1               ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
 cc3_g_pixbuf_frame  0x18              ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+cinfo               0x178             lpc2106-cmucam3_buildfiles/relive.o
 DriveDesc           0x24              ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
 cc3_g_current_pixel
                     0x3               ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
@@ -2107,7 +2109,7 @@ END GROUP
                 0x40002c7c                _edata = .
                 0x40002c7c                PROVIDE (edata, .)
 
-.bss            0x40002c80      0x2b8
+.bss            0x40002c80      0x2bc
                 0x40002c80                __bss_start = .
                 0x40002c80                __bss_start__ = .
  *(.bss)
@@ -2120,46 +2122,46 @@ END GROUP
                 0x40002cb4                _daylight
                 0x40002cb8                _timezone
  *(.bss.*)
- *fill*         0x40002cbc        0x4 00
- .bss.cinfo     0x40002cc0      0x178 lpc2106-cmucam3_buildfiles/relive.o
- .bss.jerr      0x40002e38       0x84 lpc2106-cmucam3_buildfiles/relive.o
  .bss._cc3_g_current_camera_state
-                0x40002ebc        0xa ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x40002cbc        0xa ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
  .bss._cc3_second_green
-                0x40002ec6        0x1 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x40002cc6        0x1 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
  .bss._cc3_second_green_valid
-                0x40002ec7        0x1 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
- .bss.heap_ptr  0x40002ec8        0x4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x40002cc7        0x1 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+ .bss.heap_ptr  0x40002cc8        0x4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
  .bss.started.1877
-                0x40002ecc        0x1 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x40002ccc        0x1 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
  .bss.servo_tmp
-                0x40002ecd        0x4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- *fill*         0x40002ed1        0x3 00
+                0x40002ccd        0x4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ *fill*         0x40002cd1        0x3 00
  .bss.servo_mask
-                0x40002ed4        0x4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- .bss.fcbs      0x40002ed8       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x40002cd4        0x4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ .bss.fcbs      0x40002cd8       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  *(.gnu.linkonce.b*)
  *(COMMON)
- COMMON         0x40002eec        0x4 lpc2106-cmucam3_buildfiles/relive.o
-                0x40002eec                row
- COMMON         0x40002ef0        0x1 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
-                0x40002ef0                _cc3_button_trigger
- *fill*         0x40002ef1        0x1 00
- COMMON         0x40002ef2       0x1b ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
-                0x40002ef2                cc3_g_pixbuf_frame
-                0x40002f0a                cc3_g_current_pixel
- COMMON         0x40002f0d        0x2 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
-                0x40002f0d                _cc3_uart1_binmode
-                0x40002f0e                _cc3_uart0_binmode
- *fill*         0x40002f0f        0x1 00
- COMMON         0x40002f10       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
-                0x40002f10                DriveDesc
- COMMON         0x40002f34        0x4 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reent.o)
-                0x40002f34                errno
-                0x40002f38                __bss_end__ = .
-                0x40002f38                PROVIDE (__bss_end, .)
-                0x40002f38                _end = .
-                0x40002f38                PROVIDE (end, .)
+ *fill*         0x40002cec        0x4 00
+ COMMON         0x40002cf0      0x204 lpc2106-cmucam3_buildfiles/relive.o
+                0x40002cf0                jerr
+                0x40002d78                cinfo
+                0x40002ef0                row
+ COMMON         0x40002ef4        0x1 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x40002ef4                _cc3_button_trigger
+ *fill*         0x40002ef5        0x1 00
+ COMMON         0x40002ef6       0x1b ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x40002ef6                cc3_g_pixbuf_frame
+                0x40002f0e                cc3_g_current_pixel
+ COMMON         0x40002f11        0x2 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x40002f11                _cc3_uart1_binmode
+                0x40002f12                _cc3_uart0_binmode
+ *fill*         0x40002f13        0x1 00
+ COMMON         0x40002f14       0x24 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x40002f14                DriveDesc
+ COMMON         0x40002f38        0x4 /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reent.o)
+                0x40002f38                errno
+                0x40002f3c                __bss_end__ = .
+                0x40002f3c                PROVIDE (__bss_end, .)
+                0x40002f3c                _end = .
+                0x40002f3c                PROVIDE (end, .)
                 0x40010000                _heap_end = 0x40010000
                 0x40010000                PROVIDE (heap_end, 0x40010000)
 
@@ -2307,156 +2309,156 @@ END GROUP
                 0x00000d68       0x20 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
 
 .debug_pubnames
-                0x00000000     0x10b2
+                0x00000000     0x10c5
  *(.debug_pubnames)
  .debug_pubnames
-                0x00000000       0x67 lpc2106-cmucam3_buildfiles/relive.o
+                0x00000000       0x7a lpc2106-cmucam3_buildfiles/relive.o
  .debug_pubnames
-                0x00000067       0x71 lpc2106-cmucam3_buildfiles/parser.o
+                0x0000007a       0x71 lpc2106-cmucam3_buildfiles/parser.o
  .debug_pubnames
-                0x000000d8       0x1b lpc2106-cmucam3_buildfiles/main.o
+                0x000000eb       0x1b lpc2106-cmucam3_buildfiles/main.o
  .debug_pubnames
-                0x000000f3       0xe8 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapimin.o)
+                0x00000106       0xe8 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapimin.o)
  .debug_pubnames
-                0x000001db       0x5b ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapistd.o)
+                0x000001ee       0x5b ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapistd.o)
  .debug_pubnames
-                0x00000236       0x2c ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcinit.o)
+                0x00000249       0x2c ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcinit.o)
  .debug_pubnames
-                0x00000262       0x2e ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmainct.o)
+                0x00000275       0x2e ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmainct.o)
  .debug_pubnames
-                0x00000290       0x2a ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmarker.o)
+                0x000002a3       0x2a ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmarker.o)
  .debug_pubnames
-                0x000002ba       0x2d ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmaster.o)
+                0x000002cd       0x2d ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmaster.o)
  .debug_pubnames
-                0x000002e7       0x67 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcomapi.o)
+                0x000002fa       0x67 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcomapi.o)
  .debug_pubnames
-                0x0000034e       0xbf ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcparam.o)
+                0x00000361       0xbf ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcparam.o)
  .debug_pubnames
-                0x0000040d       0x2e ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcprepct.o)
+                0x00000420       0x2e ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcprepct.o)
  .debug_pubnames
-                0x0000043b       0x28 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcsample.o)
+                0x0000044e       0x28 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcsample.o)
  .debug_pubnames
-                0x00000463       0x26 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jdatadst.o)
+                0x00000476       0x26 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jdatadst.o)
  .debug_pubnames
-                0x00000489       0x40 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jerror.o)
+                0x0000049c       0x40 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jerror.o)
  .debug_pubnames
-                0x000004c9       0x81 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jutils.o)
+                0x000004dc       0x81 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jutils.o)
  .debug_pubnames
-                0x0000054a       0x27 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemmgr.o)
+                0x0000055d       0x27 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemmgr.o)
  .debug_pubnames
-                0x00000571       0xb7 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemnobs.o)
+                0x00000584       0xb7 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemnobs.o)
  .debug_pubnames
-                0x00000628       0x2e ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccoefct.o)
+                0x0000063b       0x2e ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccoefct.o)
  .debug_pubnames
-                0x00000656       0x2c ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccolor.o)
+                0x00000669       0x2c ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccolor.o)
  .debug_pubnames
-                0x00000682       0x28 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcdctmgr.o)
+                0x00000695       0x28 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcdctmgr.o)
  .debug_pubnames
-                0x000006aa       0x45 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jchuff.o)
+                0x000006bd       0x45 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jchuff.o)
  .debug_pubnames
-                0x000006ef       0x26 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jfdctint.o)
+                0x00000702       0x26 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jfdctint.o)
  .debug_pubnames
-                0x00000715      0x113 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+                0x00000728      0x113 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
  .debug_pubnames
-                0x00000828      0x2cc ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+                0x0000083b      0x2cc ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
  .debug_pubnames
-                0x00000af4       0x97 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+                0x00000b07       0x97 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
  .debug_pubnames
-                0x00000b8b       0xf0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+                0x00000b9e       0xf0 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
  .debug_pubnames
-                0x00000c7b      0x140 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+                0x00000c8e      0x140 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
  .debug_pubnames
-                0x00000dbb       0x8e ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+                0x00000dce       0x8e ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
  .debug_pubnames
-                0x00000e49       0x93 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+                0x00000e5c       0x93 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
  .debug_pubnames
-                0x00000edc       0x75 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+                0x00000eef       0x75 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
  .debug_pubnames
-                0x00000f51       0x26 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+                0x00000f64       0x26 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
  .debug_pubnames
-                0x00000f77       0x6d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
+                0x00000f8a       0x6d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
  .debug_pubnames
-                0x00000fe4       0xa7 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+                0x00000ff7       0xa7 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
  .debug_pubnames
-                0x0000108b       0x27 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+                0x0000109e       0x27 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
 
-.debug_info     0x00000000    0x1f9f6
+.debug_info     0x00000000    0x1f9f8
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000     0x188c lpc2106-cmucam3_buildfiles/relive.o
- .debug_info    0x0000188c      0x41b lpc2106-cmucam3_buildfiles/parser.o
- .debug_info    0x00001ca7      0xa9d lpc2106-cmucam3_buildfiles/main.o
- .debug_info    0x00002744     0x13c3 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapimin.o)
- .debug_info    0x00003b07     0x1241 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapistd.o)
- .debug_info    0x00004d48     0x1173 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcinit.o)
- .debug_info    0x00005ebb     0x12db ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmainct.o)
- .debug_info    0x00007196     0x1865 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmarker.o)
- .debug_info    0x000089fb     0x13f0 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmaster.o)
- .debug_info    0x00009deb      0x710 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcomapi.o)
- .debug_info    0x0000a4fb     0x153f ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcparam.o)
- .debug_info    0x0000ba3a     0x138f ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcprepct.o)
- .debug_info    0x0000cdc9     0x1656 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcsample.o)
- .debug_info    0x0000e41f     0x178b ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jdatadst.o)
- .debug_info    0x0000fbaa      0xfaa ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jerror.o)
- .debug_info    0x00010b54      0x2b5 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jutils.o)
- .debug_info    0x00010e09     0x1ae9 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemmgr.o)
- .debug_info    0x000128f2     0x1094 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemnobs.o)
- .debug_info    0x00013986     0x13ba ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccoefct.o)
- .debug_info    0x00014d40     0x167f ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccolor.o)
- .debug_info    0x000163bf     0x13f7 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcdctmgr.o)
- .debug_info    0x000177b6     0x19f4 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jchuff.o)
- .debug_info    0x000191aa      0x1d5 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jfdctint.o)
- .debug_info    0x0001937f      0x1e5 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
- .debug_info    0x00019564     0x1508 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
- .debug_info    0x0001aa6c      0x137 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
- .debug_info    0x0001aba3      0xa82 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
- .debug_info    0x0001b625      0xd03 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
- .debug_info    0x0001c328      0x273 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- .debug_info    0x0001c59b     0x1205 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
- .debug_info    0x0001d7a0      0x7b9 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
- .debug_info    0x0001df59      0xbf4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
- .debug_info    0x0001eb4d      0x18d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
- .debug_info    0x0001ecda      0x547 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
- .debug_info    0x0001f221      0x759 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
- .debug_info    0x0001f97a       0x7c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
+ .debug_info    0x00000000     0x188e lpc2106-cmucam3_buildfiles/relive.o
+ .debug_info    0x0000188e      0x41b lpc2106-cmucam3_buildfiles/parser.o
+ .debug_info    0x00001ca9      0xa9d lpc2106-cmucam3_buildfiles/main.o
+ .debug_info    0x00002746     0x13c3 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapimin.o)
+ .debug_info    0x00003b09     0x1241 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapistd.o)
+ .debug_info    0x00004d4a     0x1173 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcinit.o)
+ .debug_info    0x00005ebd     0x12db ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmainct.o)
+ .debug_info    0x00007198     0x1865 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmarker.o)
+ .debug_info    0x000089fd     0x13f0 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmaster.o)
+ .debug_info    0x00009ded      0x710 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcomapi.o)
+ .debug_info    0x0000a4fd     0x153f ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcparam.o)
+ .debug_info    0x0000ba3c     0x138f ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcprepct.o)
+ .debug_info    0x0000cdcb     0x1656 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcsample.o)
+ .debug_info    0x0000e421     0x178b ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jdatadst.o)
+ .debug_info    0x0000fbac      0xfaa ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jerror.o)
+ .debug_info    0x00010b56      0x2b5 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jutils.o)
+ .debug_info    0x00010e0b     0x1ae9 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemmgr.o)
+ .debug_info    0x000128f4     0x1094 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemnobs.o)
+ .debug_info    0x00013988     0x13ba ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccoefct.o)
+ .debug_info    0x00014d42     0x167f ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccolor.o)
+ .debug_info    0x000163c1     0x13f7 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcdctmgr.o)
+ .debug_info    0x000177b8     0x19f4 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jchuff.o)
+ .debug_info    0x000191ac      0x1d5 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jfdctint.o)
+ .debug_info    0x00019381      0x1e5 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+ .debug_info    0x00019566     0x1508 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+ .debug_info    0x0001aa6e      0x137 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+ .debug_info    0x0001aba5      0xa82 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+ .debug_info    0x0001b627      0xd03 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+ .debug_info    0x0001c32a      0x273 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ .debug_info    0x0001c59d     0x1205 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+ .debug_info    0x0001d7a2      0x7b9 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+ .debug_info    0x0001df5b      0xbf4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+ .debug_info    0x0001eb4f      0x18d ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
+ .debug_info    0x0001ecdc      0x547 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+ .debug_info    0x0001f223      0x759 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+ .debug_info    0x0001f97c       0x7c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
 
-.debug_abbrev   0x00000000     0x448c
+.debug_abbrev   0x00000000     0x449d
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x1f6 lpc2106-cmucam3_buildfiles/relive.o
- .debug_abbrev  0x000001f6      0x124 lpc2106-cmucam3_buildfiles/parser.o
- .debug_abbrev  0x0000031a      0x1ad lpc2106-cmucam3_buildfiles/main.o
- .debug_abbrev  0x000004c7      0x1f5 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapimin.o)
- .debug_abbrev  0x000006bc      0x199 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapistd.o)
- .debug_abbrev  0x00000855      0x164 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcinit.o)
- .debug_abbrev  0x000009b9      0x1b3 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmainct.o)
- .debug_abbrev  0x00000b6c      0x302 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmarker.o)
- .debug_abbrev  0x00000e6e      0x221 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmaster.o)
- .debug_abbrev  0x0000108f      0x16d ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcomapi.o)
- .debug_abbrev  0x000011fc      0x262 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcparam.o)
- .debug_abbrev  0x0000145e      0x1f5 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcprepct.o)
- .debug_abbrev  0x00001653      0x244 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcsample.o)
- .debug_abbrev  0x00001897      0x21a ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jdatadst.o)
- .debug_abbrev  0x00001ab1      0x224 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jerror.o)
- .debug_abbrev  0x00001cd5       0xe6 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jutils.o)
- .debug_abbrev  0x00001dbb      0x274 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemmgr.o)
- .debug_abbrev  0x0000202f      0x1de ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemnobs.o)
- .debug_abbrev  0x0000220d      0x22f ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccoefct.o)
- .debug_abbrev  0x0000243c      0x244 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccolor.o)
- .debug_abbrev  0x00002680      0x1ff ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcdctmgr.o)
- .debug_abbrev  0x0000287f      0x2dc ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jchuff.o)
- .debug_abbrev  0x00002b5b       0x8b ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jfdctint.o)
- .debug_abbrev  0x00002be6       0xea ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
- .debug_abbrev  0x00002cd0      0x3e4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
- .debug_abbrev  0x000030b4       0x77 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
- .debug_abbrev  0x0000312b      0x2c8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
- .debug_abbrev  0x000033f3      0x280 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
- .debug_abbrev  0x00003673      0x157 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
- .debug_abbrev  0x000037ca      0x31c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
- .debug_abbrev  0x00003ae6      0x312 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
- .debug_abbrev  0x00003df8      0x259 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
- .debug_abbrev  0x00004051      0x101 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
- .debug_abbrev  0x00004152      0x17c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
- .debug_abbrev  0x000042ce      0x1aa ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
- .debug_abbrev  0x00004478       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
+ .debug_abbrev  0x00000000      0x207 lpc2106-cmucam3_buildfiles/relive.o
+ .debug_abbrev  0x00000207      0x124 lpc2106-cmucam3_buildfiles/parser.o
+ .debug_abbrev  0x0000032b      0x1ad lpc2106-cmucam3_buildfiles/main.o
+ .debug_abbrev  0x000004d8      0x1f5 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapimin.o)
+ .debug_abbrev  0x000006cd      0x199 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcapistd.o)
+ .debug_abbrev  0x00000866      0x164 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcinit.o)
+ .debug_abbrev  0x000009ca      0x1b3 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmainct.o)
+ .debug_abbrev  0x00000b7d      0x302 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmarker.o)
+ .debug_abbrev  0x00000e7f      0x221 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmaster.o)
+ .debug_abbrev  0x000010a0      0x16d ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcomapi.o)
+ .debug_abbrev  0x0000120d      0x262 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcparam.o)
+ .debug_abbrev  0x0000146f      0x1f5 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcprepct.o)
+ .debug_abbrev  0x00001664      0x244 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcsample.o)
+ .debug_abbrev  0x000018a8      0x21a ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jdatadst.o)
+ .debug_abbrev  0x00001ac2      0x224 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jerror.o)
+ .debug_abbrev  0x00001ce6       0xe6 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jutils.o)
+ .debug_abbrev  0x00001dcc      0x274 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemmgr.o)
+ .debug_abbrev  0x00002040      0x1de ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jmemnobs.o)
+ .debug_abbrev  0x0000221e      0x22f ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccoefct.o)
+ .debug_abbrev  0x0000244d      0x244 ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccolor.o)
+ .debug_abbrev  0x00002691      0x1ff ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcdctmgr.o)
+ .debug_abbrev  0x00002890      0x2dc ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jchuff.o)
+ .debug_abbrev  0x00002b6c       0x8b ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jfdctint.o)
+ .debug_abbrev  0x00002bf7       0xea ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(interrupt.o)
+ .debug_abbrev  0x00002ce1      0x3e4 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3.o)
+ .debug_abbrev  0x000030c5       0x77 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(cc3_hal.o)
+ .debug_abbrev  0x0000313c      0x2c8 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(syscalls.o)
+ .debug_abbrev  0x00003404      0x280 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
+ .debug_abbrev  0x00003684      0x157 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(servo.o)
+ .debug_abbrev  0x000037db      0x31c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(rdcf2.o)
+ .debug_abbrev  0x00003af7      0x312 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_hardware.o)
+ .debug_abbrev  0x00003e09      0x259 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(mmc_driver.o)
+ .debug_abbrev  0x00004062      0x101 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(gpio.o)
+ .debug_abbrev  0x00004163      0x17c ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(devices.o)
+ .debug_abbrev  0x000042df      0x1aa ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(uart_driver.o)
+ .debug_abbrev  0x00004489       0x14 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(startup.o)
 
 .debug_line     0x00000000     0x5b48
  *(.debug_line)
@@ -3790,6 +3792,7 @@ cc3_uart_get_count                                ../../hal/lpc2106-cmucam3/libh
 cc3_uart_has_data                                 ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
 cc3_uart_init                                     ../../hal/lpc2106-cmucam3/libhal-lpc2106-cmucam3.a(serial.o)
                                                   lpc2106-cmucam3_buildfiles/main.o
+cinfo                                             lpc2106-cmucam3_buildfiles/relive.o
 cleanup_glue                                      /media/sda4/Documents/Visual Studio 2005/483/CMUCam/arm-2006q3/bin/../lib/gcc/arm-none-eabi/4.1.1/../../../../arm-none-eabi/lib/libc.a(reent.o)
 convertConfig                                     lpc2106-cmucam3_buildfiles/parser.o
 convertGPS                                        lpc2106-cmucam3_buildfiles/parser.o
@@ -3888,6 +3891,7 @@ jcopy_sample_rows                                 ../../lib/jpeg-6b/libjpeg-6b_l
                                                   ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcprepct.o)
 jdiv_round_up                                     ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jutils.o)
                                                   ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmaster.o)
+jerr                                              lpc2106-cmucam3_buildfiles/relive.o
 jinit_c_coef_controller                           ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jccoefct.o)
                                                   ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcinit.o)
 jinit_c_main_controller                           ../../lib/jpeg-6b/libjpeg-6b_lpc2106-cmucam3.a(jcmainct.o)
