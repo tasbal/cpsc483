@@ -44,10 +44,6 @@ int main (void)
 
 	cc3_camera_init ();
 	cc3_filesystem_init();
-	// init pixbuf with width and height
-	cc3_pixbuf_load();
-	// init jpeg
-	init_jpeg();
 
 #ifndef VIRTUAL_CAM
 	// read config file from MMC
@@ -82,11 +78,16 @@ int main (void)
 	cc3_camera_set_auto_exposure (true);
 #endif
 
+	printf("Hello, Camera initialized");
+	// init pixbuf with width and height
+	cc3_pixbuf_load();
+	// init jpeg
+	init_jpeg();
+	cc3_timer_wait_ms(1000);
+	
 	cc3_led_set_state (0,true);
 	cc3_led_set_state (1, true);
 	cc3_led_set_state (2, true);
-	
-	printf("Hello, Camera initialized");
 
 	bool on = true;
 	while (1)
@@ -127,8 +128,9 @@ int main (void)
 		capture_current_jpeg(memory);
 		fclose(memory);
 		i++;
+		destroy_jpeg();
 		
-		if(on)
+/*		if(on)
 		{
 			cc3_led_set_state (1, false);
 			cc3_led_set_state (2, false);
@@ -141,17 +143,16 @@ int main (void)
 			on = true;
 		}
 		
-/*		if (!cc3_uart_has_data (0))
+		if (!cc3_uart_has_data (0))
 		{
 			printf("\n\n");
 			scanf("%s",gps_buff);
 			printf("\n\n");
 			g= parse(gps);
-
-	if(g!=NULL)
-		printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\n",g->lat,g->lon,g->month,g->day,g->year,g->hour,g->minute,g->second);
-	else
-		printf("INVALID\n");
+			if(g!=NULL)
+				printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\n",g->lat,g->lon,g->month,g->day,g->year,g->hour,g->minute,g->second);
+			else
+				printf("INVALID\n");
 		}
 		cc3_timer_wait_ms (1000);
 */
