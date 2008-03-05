@@ -37,7 +37,7 @@ int main (void)
 	cc3_uart_init (0, CC3_UART_RATE_115200, CC3_UART_MODE_8N1,
 		CC3_UART_BINMODE_BINARY);
 	cc3_uart_init (1, CC3_UART_RATE_4800, CC3_UART_MODE_8N1,
-		CC3_UART_BINMODE_TEXT);
+		CC3_UART_BINMODE_BINARY);
 	// Make it so that stdout and stdin are not buffered
 	val = setvbuf (stdout, NULL, _IONBF, 0);
 	val = setvbuf (stdin, NULL, _IONBF, 0);
@@ -163,7 +163,7 @@ int main (void)
 			//c = fgetc(serial_2);
 			//printf("%c",c);
 		        fscanf(serial_2,"%s",gps_buff);
-			printf("%s",gps_buff);
+			printf("%s\n\n\r\n",gps_buff);
 			//gps = parse_GPS(gps_buff);
 			//if(gps!=NULL)
 			//	printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
