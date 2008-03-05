@@ -160,10 +160,10 @@ int main (void)
 		//if (!cc3_uart_has_data (1))
 		//{
 			printf("Getting GPS Data\r\n\n");
-			c = fgetc(serial_2);
-			printf("%c",c);
-		        //fscanf(serial_2,"%s",gps_buff);
-			//printf("%s",gps_buff);
+			//c = fgetc(serial_2);
+			//printf("%c",c);
+		        fscanf(serial_2,"%s",gps_buff);
+			printf("%s",gps_buff);
 			//gps = parse_GPS(gps_buff);
 			//if(gps!=NULL)
 			//	printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
