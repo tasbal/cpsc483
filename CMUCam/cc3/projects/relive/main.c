@@ -36,7 +36,7 @@ int main (void)
 	// configure uarts
 	cc3_uart_init (0, CC3_UART_RATE_115200, CC3_UART_MODE_8N1,
 		CC3_UART_BINMODE_BINARY);
-	cc3_uart_init (1, CC3_UART_RATE_115200, CC3_UART_MODE_8N1,
+	cc3_uart_init (1, CC3_UART_RATE_4800, CC3_UART_MODE_8N1,
 		CC3_UART_BINMODE_BINARY);
 	// Make it so that stdout and stdin are not buffered
 	val = setvbuf (stdout, NULL, _IONBF, 0);
@@ -89,7 +89,8 @@ int main (void)
 	cc3_camera_set_auto_exposure (true);
 #endif
 	
-	//setup_copernicus(serial_2);
+	serial_2 = cc3_uart_fopen(1,"r+");
+	setup_copernicus(serial_2);
 
 	printf("\r\nHello, Camera initialized\r\n");
 	// init pixbuf with width and height
