@@ -29,7 +29,7 @@ int main (void)
 	char* gps_buff = (char*)malloc(sizeof(char)*100);
 	char* config_buff = (char*)malloc(sizeof(char)*100);
 	GPSData* gps;
-	configData* config;
+	ConfigInfo* config;
 
 	cc3_filesystem_init();
 
@@ -55,9 +55,20 @@ int main (void)
 	}
 	
 	// get config file
-//	fscanf(memory, "%s", config_buff);
+	fscanf(memory, "%s", config_buff);
 	// parse config file
-//	parseConfig(config_buff);
+	parse_Config(config_buff);
+	
+	if(config!=NULL)
+	{		
+		printf("Delay - %.2lf\tMin Dist - %.2lf\tFace - %d\tHalo - %d\n",config->delay,config->min_dist,config->face_detect,config->halo);
+		if(config->halo == true)
+		{
+			printf("\tLat - %.2lf\tLon - %.2lf\tRange - %.2lf\n\n",config->halo_info->lat,config->halo_info->lon,config->halo_info->range);
+		}
+	}
+	else
+		printf("config.txt INVALID\n");
 	
 	//configure camera
 	cc3_camera_set_colorspace (CC3_COLORSPACE_RGB);
@@ -147,7 +158,7 @@ int main (void)
 			printf("\n\n");
 			scanf("%s",gps_buff);
 			printf("\n\n");
-			g= parse(gps);
+			g = parse_GPS(gps_buff);
 			if(g!=NULL)
 				printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\n",g->lat,g->lon,g->month,g->day,g->year,g->hour,g->minute,g->second);
 			else

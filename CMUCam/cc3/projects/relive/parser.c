@@ -2,13 +2,119 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
 #include "parser.h"
 
 #define MINTODEG .01667
 #define DEGTORAD 0.017453293
 #define _CRT_SECURE_NO_WARNINGS
 
-GPSData* parseGPS(char* gps_string)
+ConfigInfo* parse_Config(char* config_string)
+{
+	ConfigInfo* c;
+	int numComma;
+	char* str1;
+	
+	numComma = 0;
+	if(config_string == NULL)
+		return NULL;
+
+	c =  (ConfigInfo*)malloc(sizeof(ConfigInfo));
+
+	str1 = strtok(config_string,",");
+	while(1)
+	{
+		if(str1 == NULL)
+			break;
+		switch(numComma)
+		{
+		case 0:
+			{
+				//delay
+				c->delay  = atof(str1);
+			}
+			break;
+		case 1:
+			{
+				//min distance
+				c->min_dist  = atof(str1);
+			}
+			break;
+		case 2:
+			{
+				//face detection
+				if(strcmp(str1,"True")==0)
+					c->face_detect = true;
+				else
+					c->face_detect = false;
+			}
+			break;
+		case 3:
+			{
+				//halo enabled
+				if(strcmp(str1,"True")==0)
+					c->halo = true;
+				else
+					c->halo = false;
+			}
+			break;
+		case 4:
+			{
+				//lat
+				if(c->halo == true)
+				{
+					c->halo_info = (HaloInfo*)malloc(sizeof(HaloInfo));
+					c->halo_info->lat = atof(str1);
+				}
+				else
+				{
+					c->halo_info = NULL;
+				}
+				
+			}
+			break;
+		case 5:
+			{
+				//lon
+				if(c->halo == true)
+				{
+					c->halo_info->lon = atof(str1);
+				}
+				else
+				{
+					c->halo_info = NULL;
+				}
+			}
+			break;
+		case 6:
+			{
+				//range
+				if(c->halo == true)
+				{
+					c->halo_info->range = atof(str1);
+				}
+				else
+				{
+					c->halo_info = NULL;
+				}
+				return c;
+			}
+			break;
+		default:
+			{
+			}
+			break;
+		}
+		str1 = strtok(NULL,",");
+		numComma++;
+	}
+
+	return c;
+}
+
+/************************************************************************/
+
+GPSData* parse_GPS(char* gps_string)
 {
 	char* str1;
 	int num_comma;	
@@ -67,7 +173,7 @@ GPSData* parseGPS(char* gps_string)
 			{
 				date = (char*)malloc(10*sizeof(char));
 				strcpy(date,str1);	
-				g = convertGPS(time,lat,lon,date);
+				g = convert(time,lat,lon,date);
 				free(time);
 				free(lat);
 				free(lon);
@@ -85,14 +191,7 @@ GPSData* parseGPS(char* gps_string)
 
 /************************************************************************/
 
-configData* parseConfig(char* config_data)
-{
-	
-}
-
-/************************************************************************/
-
-GPSData* convertGPS(char* time,char* lat,char* lon,char* date)
+GPSData* convert(char* time,char* lat,char* lon,char* date)
 {
 	GPSData* g;
 
@@ -134,13 +233,6 @@ GPSData* convertGPS(char* time,char* lat,char* lon,char* date)
 	free(tmp);
 
 	return g;
-}
-
-/************************************************************************/
-
-configData* convertConfig(char* res)
-{
-	
 }
 
 /************************************************************************/
