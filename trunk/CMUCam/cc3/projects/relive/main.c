@@ -155,8 +155,8 @@ int main (void)
 			on = true;
 		}
 		
-		if (!cc3_uart_has_data (1))
-		{
+		//if (!cc3_uart_has_data (1))
+		//{
 			printf("Getting GPS Data\r\n\n");
 			fscanf(serial_2,"%s",gps_buff);
 			printf("%s",gps_buff);
@@ -165,7 +165,7 @@ int main (void)
 				printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
 			else
 				printf("INVALID\n");
-		}
+		//}
 
 		//cc3_timer_wait_ms(10000);
 	}
