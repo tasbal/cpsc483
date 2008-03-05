@@ -160,7 +160,7 @@ int main (void)
 		//if (!cc3_uart_has_data (1))
 		//{
 			printf("Getting GPS Data\r\n\n");
-			fscanf(serial_2,"%c",c);
+			c = fgetc(serial_2);
 			printf("%c",c);
 		        //fscanf(serial_2,"%s",gps_buff);
 			//printf("%s",gps_buff);
