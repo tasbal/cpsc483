@@ -47,10 +47,10 @@ int main (void)
 
 #ifndef VIRTUAL_CAM
 	// read config file from MMC
-	printf ("\n\n\nReading config file\n");
+	printf ("\r\n\n\nReading config file\r\n");
 	memory = fopen ("c:/config.txt", "r");
 	if (memory == NULL) {
-		perror ("fopen failed\n");
+		perror ("fopen failed\r\n");
 		while(1);
 	}
 	
@@ -61,14 +61,14 @@ int main (void)
 	
 	if(config!=NULL)
 	{		
-		printf("Delay - %.2lf\tMin Dist - %.2lf\tFace - %d\tHalo - %d\n",config->delay,config->min_dist,config->face_detect,config->halo);
+		printf("Delay - %.2lf\tMin Dist - %.2lf\tFace - %d\tHalo - %d\r\n",config->delay,config->min_dist,config->face_detect,config->halo);
 		if(config->halo == true)
 		{
-			printf("\tLat - %.2lf\tLon - %.2lf\tRange - %.2lf\n\n",config->halo_info->lat,config->halo_info->lon,config->halo_info->range);
+			printf("\tLat - %.2lf\tLon - %.2lf\tRange - %.2lf\n\r\n",config->halo_info->lat,config->halo_info->lon,config->halo_info->range);
 		}
 	}
 	else
-		printf("config.txt INVALID\n");
+		printf("config.txt INVALID\r\n");
 	
 	//configure camera
 	cc3_camera_set_colorspace (CC3_COLORSPACE_RGB);
@@ -78,10 +78,10 @@ int main (void)
 
 	result = fclose (memory);
 	if (result == EOF) {
-		perror ("fclose failed\n");
+		perror ("fclose failed\r\n");
 		while(1);
 	}
-	printf("\n");
+	printf("\r\n");
 #else
 	cc3_camera_set_colorspace (CC3_COLORSPACE_RGB);
 	cc3_camera_set_resolution (CC3_CAMERA_RESOLUTION_LOW);
@@ -89,12 +89,12 @@ int main (void)
 	cc3_camera_set_auto_exposure (true);
 #endif
 
-	printf("\nHello, Camera initialized\n");
+	printf("\r\nHello, Camera initialized\r\n");
 	// init pixbuf with width and height
 	cc3_pixbuf_load();
 	// init jpeg
 	init_jpeg();
-	cc3_timer_wait_ms(1000);
+	cc3_timer_wait_ms(10000);
 	
 	cc3_led_set_state (0,true);
 	cc3_led_set_state (1, true);
@@ -118,7 +118,7 @@ int main (void)
 			memory = fopen(filename, "r");
 			if ( memory != NULL )
 			{
-				printf( "%s already exists...\n",filename ); 
+				printf( "%s already exists...\r\n",filename ); 
 				i++; 
 				fclose(memory);
 			}
@@ -134,7 +134,7 @@ int main (void)
 			printf( "Error: Can't open file\r\n" );
 			while(1);
 		}
-		printf("Taking Picture\n");
+		printf("Taking Picture\r\n");
 		capture_current_jpeg(memory);
 		fclose(memory);
 		i++;
