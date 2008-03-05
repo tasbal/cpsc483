@@ -57,7 +57,7 @@ int main (void)
 	// get config file
 	fscanf(memory, "%s", config_buff);
 	// parse config file
-	parse_Config(config_buff);
+	config = parse_Config(config_buff);
 	
 	if(config!=NULL)
 	{		
