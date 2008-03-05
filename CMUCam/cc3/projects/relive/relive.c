@@ -12,6 +12,7 @@
 
 void setup_copernicus(FILE* gps)
 {
+	char* gps_buff = (char*)malloc(sizeof(char)*100);
 	printf("Cofinguring GPS\r\n");
 	
 	
@@ -21,6 +22,11 @@ void setup_copernicus(FILE* gps)
 	
 	cc3_timer_wait_ms(1000);
 	fprintf(gps, "$PTNLSNM,0100,01*56%c%c",13,10);
+	
+	fprintf(gps, "$PTNLQNM*54%c%c",13,10);
+	fscanf(gps,"%s",gps_buff);
+	printf("%s\n\n\r\n",gps_buff);
+	
 	
 	printf("Cofingured GPS\r\n");
 }
