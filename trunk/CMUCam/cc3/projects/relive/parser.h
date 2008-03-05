@@ -1,7 +1,7 @@
 #ifndef _PARSER_h_
 #define _PAESER_h_
 
-typedef struct 
+typedef struct _GPSData
 {
 	double lat;
 	double lon;
@@ -13,15 +13,25 @@ typedef struct
 	int year;
 }GPSData;
 
-typedef struct 
+typedef struct _HaloInfo
 {
-	int highRes;
-}configData;
+	double lat;
+	double lon;
+	double range;
+}HaloInfo;
 
-GPSData* parseGPS(char* gps_data);
-configData* parseConfig(char* config_data);
-GPSData* convertGPS(char* time,char* lat,char* lon,char* date);
-configData* convertConfig(char* res);
+typedef struct _ConfigInfo
+{
+	double delay;
+	double min_dist;
+	bool face_detect;
+	bool halo;
+	HaloInfo* halo_info;
+}ConfigInfo;
+
+GPSData* parse_GPS(char* gps_data);
+ConfigInfo* parse_Config(char* config_string);
+GPSData* convert(char* time,char* lat,char* lon,char* date);
 double toDeg(char* data,int lat_or_lon);
 double toRad(double degrees);
 double calcDist(GPSData* gps1, GPSData *gps2);

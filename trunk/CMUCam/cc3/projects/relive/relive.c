@@ -10,8 +10,6 @@
 #include <cc3_img_writer.h>
 #include "relive.h"
 
-/************************************************************************/
-
 void setup_copernicus(FILE* gps)
 {
 	printf("Cofinguring GPS");
@@ -19,3 +17,5 @@ void setup_copernicus(FILE* gps)
 	// set gps to send RMC data every second
 	fprintf(gps, "$PTNLSNM,0100,01*FF");
 }
+
+/************************************************************************/
