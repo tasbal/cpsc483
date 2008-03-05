@@ -47,7 +47,7 @@ int main (void)
 
 #ifndef VIRTUAL_CAM
 	// read config file from MMC
-	printf ("\nReading config file\n");
+	printf ("\n\n\nReading config file\n");
 	memory = fopen ("c:/config.txt", "r");
 	if (memory == NULL) {
 		perror ("fopen failed\n");
@@ -89,7 +89,7 @@ int main (void)
 	cc3_camera_set_auto_exposure (true);
 #endif
 
-	printf("Hello, Camera initialized");
+	printf("\nHello, Camera initialized\n");
 	// init pixbuf with width and height
 	cc3_pixbuf_load();
 	// init jpeg
