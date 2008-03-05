@@ -105,7 +105,6 @@ int main (void)
 	{
 		char filename[16];
 		cc3_led_set_state(0, false);
-		while(!cc3_button_get_state());
 		cc3_led_set_state(0, true);
 		
 		do
@@ -165,7 +164,7 @@ int main (void)
 				printf("INVALID\n");
 		}
 */
-		cc3_timer_wait_ms (1000);
+		cc3_timer_wait_ms(10000);
 	}
 	
 	destroy_jpeg();
