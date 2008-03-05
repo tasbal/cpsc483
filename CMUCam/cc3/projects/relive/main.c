@@ -164,8 +164,8 @@ int main (void)
 			else
 				printf("INVALID\n");
 		}
-		cc3_timer_wait_ms (1000);
 */
+		cc3_timer_wait_ms (1000);
 	}
 	
 	destroy_jpeg();
