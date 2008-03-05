@@ -9,7 +9,9 @@
 #define MINTODEG .01667
 #define DEGTORAD 0.017453293
 
-typedef struct 
+typedef enum _bool { false, true } bool;
+
+typedef struct _GPSData
 {
 	double lat;
 	double lon;
@@ -21,8 +23,25 @@ typedef struct
 	int year;
 }GPSData;
 
-GPSData* parse(char* gps_data);
-void readFile();
+typedef struct _HaloInfo
+{
+	double lat;
+	double lon;
+	double range;
+}HaloInfo;
+
+typedef struct _ConfigInfo
+{
+	double delay;
+	double min_dist;
+	bool face_detect;
+	bool halo;
+	HaloInfo* halo_info;
+}ConfigInfo;
+
+GPSData* parse_GPS(char* gps_data);
+void readFile_GPS();
+void readFile_Config();
 GPSData* convert(char* time,char* lat,char* lon,char* date);
 double toDeg(char* data,int lat_or_lon);
 double toRad(double degrees);
