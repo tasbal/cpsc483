@@ -88,6 +88,8 @@ int main (void)
 	cc3_camera_set_auto_white_balance (true);
 	cc3_camera_set_auto_exposure (true);
 #endif
+	
+	setup_copernicus(serial_2);
 
 	printf("\r\nHello, Camera initialized\r\n");
 	// init pixbuf with width and height
@@ -164,7 +166,7 @@ int main (void)
 				printf("INVALID\n");
 		}
 
-		cc3_timer_wait_ms(10000);
+		//cc3_timer_wait_ms(10000);
 	}
 	
 	destroy_jpeg();
