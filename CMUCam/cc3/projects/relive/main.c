@@ -90,7 +90,7 @@ int main (void)
 #endif
 	
 	serial_2 = cc3_uart_fopen(1,"r+");
-	//setup_copernicus(serial_2);
+	setup_copernicus(serial_2);
 
 	printf("\r\nHello, Camera initialized\r\n");
 	// init pixbuf with width and height
