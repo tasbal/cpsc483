@@ -17,10 +17,10 @@ void setup_copernicus(FILE* gps)
 	
 	cc3_timer_wait_ms(100);
 	// set gps to send RMC data every second
-	fprintf(gps, "$PTNLSNM,0100,01*56\n\r");
+	fprintf(gps, "$PTNLSNM,0100,01*56%c%c",13,10);
 	
 	cc3_timer_wait_ms(1000);
-	fprintf(gps, "$PTNLSNM,0100,01*56\n\r");
+	fprintf(gps, "$PTNLSNM,0100,01*56%c%c",13,10);
 	
 	printf("Cofingured GPS\r\n");
 }
