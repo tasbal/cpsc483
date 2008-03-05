@@ -89,7 +89,7 @@ int main (void)
 	cc3_camera_set_auto_exposure (true);
 #endif
 	
-	setup_copernicus(serial_2);
+	//setup_copernicus(serial_2);
 
 	printf("\r\nHello, Camera initialized\r\n");
 	// init pixbuf with width and height
