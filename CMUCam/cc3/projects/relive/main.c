@@ -103,7 +103,7 @@ int main (void)
 	bool on = true;
 	while (1)
 	{
-		char filename[16];
+/*		char filename[16];
 		cc3_led_set_state(0, false);
 		cc3_led_set_state(0, true);
 		
@@ -138,8 +138,8 @@ int main (void)
 		capture_current_jpeg(memory);
 		fclose(memory);
 		i++;
-		
-/*		if(on)
+*/		
+		if(on)
 		{
 			cc3_led_set_state (1, false);
 			cc3_led_set_state (2, false);
@@ -152,18 +152,18 @@ int main (void)
 			on = true;
 		}
 		
-		if (!cc3_uart_has_data (0))
+		if (!cc3_uart_has_data (1))
 		{
-			printf("\n\n");
-			scanf("%s",gps_buff);
-			printf("\n\n");
-			g = parse_GPS(gps_buff);
-			if(g!=NULL)
-				printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\n",g->lat,g->lon,g->month,g->day,g->year,g->hour,g->minute,g->second);
+			printf("Getting GPS Data\r\n\n");
+			fscanf(serial_2,"%s",gps_buff);
+			printf("%s",gps_buff);
+			gps = parse_GPS(gps_buff);
+			if(gps!=NULL)
+				printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
 			else
 				printf("INVALID\n");
 		}
-*/
+
 		cc3_timer_wait_ms(10000);
 	}
 	
