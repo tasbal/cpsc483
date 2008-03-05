@@ -29,6 +29,7 @@ void setup_copernicus(FILE* gps)
 	
 	
 	printf("Cofingured GPS\r\n");
+	cc3_timer_wait_ms(10000);
 }
 
 /************************************************************************/
