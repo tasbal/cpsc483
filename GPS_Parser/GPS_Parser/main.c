@@ -2,6 +2,6 @@
 
 int main()
 {
-	readFile();
+	readFile_Config();
 	return 0;
 }

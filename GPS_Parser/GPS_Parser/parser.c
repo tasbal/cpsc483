@@ -1,8 +1,109 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "parser.h"
+ConfigInfo* parse_Config(char* config_string)
+{
+	ConfigInfo* c;
+	int numComma;
+	char* str1;
+	
+	numComma = 0;
+	if(config_string == NULL)
+		return NULL;
 
-GPSData* parse(char* gps_string)
+	c =  (ConfigInfo*)malloc(sizeof(ConfigInfo));
+
+	str1 = strtok(config_string,",");
+	while(1)
+	{
+		if(str1 == NULL)
+			break;
+		switch(numComma)
+		{
+		case 0:
+			{
+				//delay
+				c->delay  = atof(str1);
+			}
+			break;
+		case 1:
+			{
+				//min distance
+				c->min_dist  = atof(str1);
+			}
+			break;
+		case 2:
+			{
+				//face detection
+				if(strcmp(str1,"True")==0)
+					c->face_detect = true;
+				else
+					c->face_detect = false;
+			}
+			break;
+		case 3:
+			{
+				//halo enabled
+				if(strcmp(str1,"True")==0)
+					c->halo = true;
+				else
+					c->halo = false;
+			}
+			break;
+		case 4:
+			{
+				//lat
+				if(c->halo == true)
+				{
+					c->halo_info = (HaloInfo*)malloc(sizeof(HaloInfo));
+					c->halo_info->lat = atof(str1);
+				}
+				else
+				{
+					c->halo_info = NULL;
+				}
+				
+			}
+			break;
+		case 5:
+			{
+				//lon
+				if(c->halo == true)
+				{
+					c->halo_info->lon = atof(str1);
+				}
+				else
+				{
+					c->halo_info = NULL;
+				}
+			}
+			break;
+		case 6:
+			{
+				//range
+				if(c->halo == true)
+				{
+					c->halo_info->range = atof(str1);
+				}
+				else
+				{
+					c->halo_info = NULL;
+				}
+				return c;
+			}
+			break;
+		default:
+			{
+			}
+			break;
+		}
+		str1 = strtok(NULL,",");
+		numComma++;
+	}
+
+	return c;
+}
+GPSData* parse_GPS(char* gps_string)
 {
 	char* str1;
 	int num_comma;	
@@ -221,7 +322,7 @@ double calcDist( GPSData* gps1, GPSData* gps2 )
 
 
 
-void readFile()
+void readFile_GPS()
 {
 	FILE* fptr;
 	char* gps;
@@ -243,7 +344,7 @@ void readFile()
 
 	while(fscanf_s(fptr,"%s",gps,100) != EOF)
 	{
-		g = parse(gps);
+		g = parse_GPS(gps);
 		
 		if(g!=NULL)
 		{		
@@ -259,4 +360,40 @@ void readFile()
 		i++;
 	}
 	printf("\n\nTotal Distance Travelled - %lf meters\n",totDist);
+
+	free(gps);
+}
+
+void readFile_Config()
+{
+	FILE* fptr;
+	char* config_line;
+	ConfigInfo* c;
+	int i;
+	i = 0;
+	
+	config_line = (char*)malloc(sizeof(char)*100);
+
+	if( fopen_s(&fptr,"Config.txt","r") != 0 )
+	{
+		printf("Cannot open file\n");
+		return;
+	}
+
+	while(fscanf_s(fptr,"%s",config_line,100) != EOF)
+	{
+		c = parse_Config(config_line);
+		
+		if(c!=NULL)
+		{		
+			printf("Delay - %.2lf\tMin Dist - %.2lf\tFace - %d\tHalo - %d\n",c->delay,c->min_dist,c->face_detect,c->halo);
+			if(c->halo == true)
+			{
+				printf("\tLat - %.2lf\tLon - %.2lf\tRange - %.2lf\n\n",c->halo_info->lat,c->halo_info->lon,c->halo_info->range);
+			}
+		}
+		else
+			printf("%02d\tINVALID\n",i);
+	}
+	free(config_line);
 }
