@@ -184,7 +184,7 @@ namespace ReLive
             SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
 
             //load previous config from SD card
-            loadCurrentConfig();
+ //           loadCurrentConfig();
         }
         public void loadCurrentConfig()
         {
@@ -445,6 +445,41 @@ namespace ReLive
             }
         }
 
+        private void formatSD_Click(object sender, EventArgs e)
+        {
+            string memCardPath = findSDPath();
+            //take off the '\'
+            memCardPath = memCardPath.Substring(0, 2);
+            if (MessageBox.Show("Are you sure you want to format your SD Card?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                //set dos process/command
+                System.Diagnostics.ProcessStartInfo sinf = new System.Diagnostics.ProcessStartInfo("cmd", @"/c format " + memCardPath + " /FS:FAT /V:RELIVE /X");
+                sinf.RedirectStandardInput = true;
+                sinf.RedirectStandardOutput = true;
+
+                //don't popup with a dos window
+                sinf.UseShellExecute = false;
+                sinf.CreateNoWindow = true;
+
+                //create and start process
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo = sinf;
+                p.Start();
+
+                //press enter in the cmd process (it says press enter when ready)
+                StreamWriter myStreamWriter = p.StandardInput;
+                myStreamWriter.WriteLine();
+
+                myStreamWriter.Close();
+
+                string output = p.StandardOutput.ReadToEnd();
+                string output1 = output.Substring(0, 115);
+                int nextStart = output.IndexOf("nitializ");
+                string output2 = output.Substring(2030, 2050);
+                MessageBox.Show(output1 + "\n Format Completed");
+            }
+        }
+
         private void distanceBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -575,6 +610,9 @@ namespace ReLive
             else
                 MessageBox.Show("Search for a location first!");
         }
+
+
+
 
         
     }

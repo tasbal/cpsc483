@@ -39,6 +39,7 @@ namespace ReLive
             this.loginLink = new System.Windows.Forms.LinkLabel();
             this.picasaLink = new System.Windows.Forms.LinkLabel();
             this.rightPanel = new System.Windows.Forms.Panel();
+            this.formatSD = new System.Windows.Forms.Button();
             this.previewPanel = new System.Windows.Forms.Panel();
             this.calendarPanel = new System.Windows.Forms.Panel();
             this.albumCalendar = new System.Windows.Forms.MonthCalendar();
@@ -192,6 +193,7 @@ namespace ReLive
             // 
             // rightPanel
             // 
+            this.rightPanel.Controls.Add(this.formatSD);
             this.rightPanel.Controls.Add(this.previewPanel);
             this.rightPanel.Controls.Add(this.calendarPanel);
             this.rightPanel.Controls.Add(this.retrieveSD);
@@ -200,6 +202,16 @@ namespace ReLive
             this.rightPanel.Name = "rightPanel";
             this.rightPanel.Size = new System.Drawing.Size(240, 511);
             this.rightPanel.TabIndex = 13;
+            // 
+            // formatSD
+            // 
+            this.formatSD.Location = new System.Drawing.Point(49, 474);
+            this.formatSD.Name = "formatSD";
+            this.formatSD.Size = new System.Drawing.Size(156, 28);
+            this.formatSD.TabIndex = 14;
+            this.formatSD.Text = "Format SD Card";
+            this.formatSD.UseVisualStyleBackColor = true;
+            this.formatSD.Click += new System.EventHandler(this.formatSD_Click);
             // 
             // previewPanel
             // 
@@ -248,7 +260,7 @@ namespace ReLive
             this.retrieveSD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.retrieveSD.Location = new System.Drawing.Point(49, 462);
+            this.retrieveSD.Location = new System.Drawing.Point(49, 431);
             this.retrieveSD.Name = "retrieveSD";
             this.retrieveSD.Size = new System.Drawing.Size(154, 37);
             this.retrieveSD.TabIndex = 9;
@@ -800,6 +812,7 @@ namespace ReLive
         private System.Windows.Forms.Button viewHalo;
         private System.Windows.Forms.TextBox distanceBox;
         private System.Windows.Forms.TextBox haloDistanceBox;
+        private System.Windows.Forms.Button formatSD;
     }
 }
 
