@@ -89,7 +89,7 @@ int main (void)
 	cc3_camera_set_auto_exposure (true);
 #endif
 	
-	serial_2 = cc3_uart_fopen(1,"r+");
+	serial_2 = cc3_uart_fopen(1,"rw");
 	setup_copernicus(serial_2);
 
 	printf("\r\nHello, Camera initialized\r\n");
