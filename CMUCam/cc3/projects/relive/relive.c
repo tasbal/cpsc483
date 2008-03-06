@@ -15,14 +15,15 @@ void setup_copernicus(FILE* gps)
 	char* gps_buff = (char*)malloc(sizeof(char)*100);
 	printf("Cofinguring GPS\r\n");
 	
-	fflush(gps);
+	fprintf(gps,"\0\0\0\0\0\0\0\0\0\0");
 	cc3_timer_wait_ms(100);
 	// set gps to send RMC data every second
 	fprintf(gps, "$PTNLSNM,0101,01*FF%c%c",13,10);
-	
 	cc3_timer_wait_ms(1000);
 	fprintf(gps, "$PTNLSNM,0101,01*FF%c%c",13,10);
 	
+	fprintf(gps,"\0\0\0\0\0\0\0\0\0\0");
+	cc3_timer_wait_ms(100);
 	fprintf(gps, "$PTNLQNM*FF%c%c",13,10);
 	fscanf(gps,"%s",gps_buff);
 	printf("%s\n\n\r\n",gps_buff);
