@@ -8,3 +8,8 @@ obj\Debug\ReLive.pdb
 obj\Debug\ReLive.reLiveMain.resources
 obj\Debug\ReLive.GoogleLogin.resources
 obj\Debug\ReLive.MapBrowser.resources
+bin\Debug\Google.GData.AccessControl.dll
+bin\Debug\Google.GData.Calendar.dll
+bin\Debug\Google.GData.Client.DLL
+bin\Debug\Google.GData.Extensions.DLL
+bin\Debug\Google.GData.Photos.dll
