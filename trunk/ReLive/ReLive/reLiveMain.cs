@@ -89,9 +89,11 @@ namespace ReLive
                 AlbumEntry newEntry = new AlbumEntry();
                 newEntry.Title.Text = albumName;
                 newEntry.Summary.Text = desc;
-                //newEntry.Published = ???
+                newEntry.Published = new DateTime(2007, 03, 27);
 
                 PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
+
+               
             }
         }
         
@@ -184,17 +186,18 @@ namespace ReLive
             SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
 
             //load previous config from SD card
- //           loadCurrentConfig();
+            loadCurrentConfig();
         }
         public void loadCurrentConfig()
         {
             string memCardPath = findSDPath();
             if (memCardPath == "")
                 return;
-
+            //array for iteratign through form controls
             Control[] configArray = { delayBox, distanceBox, faceCheck, haloCheck, latBox, lngBox, haloDistanceBox };
             StreamReader sr = File.OpenText(memCardPath + "\\config.txt");
             string input = sr.ReadLine();
+            //parse file for details and load into form
             string[] inputArray = input.Split(',');
             for (int value = 0; value < inputArray.Length; value++ )
             {
@@ -299,6 +302,7 @@ namespace ReLive
 
         private void explorerText_Enter(object sender, KeyPressEventArgs e)
         {
+            //hitting enter loads new address
             if (e.KeyChar == (char)13)
             {
                 explorerText.Text = explorerText.Text;
@@ -448,6 +452,12 @@ namespace ReLive
         private void formatSD_Click(object sender, EventArgs e)
         {
             string memCardPath = findSDPath();
+            if (memCardPath == "")
+            {
+                MessageBox.Show("No memory card found, please insert one and try again!");
+                return;
+            }
+                
             //take off the '\'
             memCardPath = memCardPath.Substring(0, 2);
             if (MessageBox.Show("Are you sure you want to format your SD Card?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -577,6 +587,7 @@ namespace ReLive
             MessageBox.Show(message);
             return false;
         }
+
         private void writeConfig_Click(object sender, EventArgs e)
         {
             if (!validateSettings())
@@ -587,7 +598,6 @@ namespace ReLive
             double distance = 0;
             double range = 0;
 
-            String userDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             TextWriter config = new StreamWriter(findSDPath() + "\\config.txt", false);
             
             config.WriteLine(delayBox.Text + "," + distance + "," + faceCheck.Checked + "," +
@@ -606,14 +616,9 @@ namespace ReLive
         private void viewHalo_Click(object sender, EventArgs e)
         {
             if ((latBox.Text != "") && (lngBox.Text != ""))
-                System.Diagnostics.Process.Start("http://maps.google.com/maps?q=" + latBox.Text + ",-" + lngBox.Text + "&t=h");
+                System.Diagnostics.Process.Start("http://maps.google.com/maps?q=" + latBox.Text + "," + lngBox.Text + "&t=h");
             else
                 MessageBox.Show("Search for a location first!");
         }
-
-
-
-
-        
     }
 }
