@@ -2,6 +2,6 @@
 
 int main()
 {
-	readFile_Config();
+	readFile_GPS();
 	return 0;
 }

@@ -39,7 +39,10 @@ typedef struct _ConfigInfo
 	HaloInfo* halo_info;
 }ConfigInfo;
 
-GPSData* parse_GPS(char* gps_data);
+GPSData* parse_GPS(char* gps_string);  //call this function with any supported GPS string and it will return parsed
+GPSData* parse_GPRMC(char* gps_string);
+GPSData* parse_GPGGA(char* gps_string);
+GPSData* parse_GPVTG(char* gps_string);
 void readFile_GPS();
 void readFile_Config();
 GPSData* convert(char* time,char* lat,char* lon,char* date);

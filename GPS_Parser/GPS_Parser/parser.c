@@ -1,6 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
+//disable warnings about strcpy and strtok (depreciated)
+#pragma warning(disable : 4996)
 
 #include "parser.h"
+
 ConfigInfo* parse_Config(char* config_string)
 {
 	ConfigInfo* c;
@@ -103,7 +106,27 @@ ConfigInfo* parse_Config(char* config_string)
 
 	return c;
 }
+
 GPSData* parse_GPS(char* gps_string)
+{
+	if(gps_string == NULL || gps_string[0] != '$' || gps_string[1] != 'G' || gps_string[2] != 'P')
+		return NULL;
+	if(gps_string[3] == 'R' && gps_string[4] == 'M' && gps_string[5] == 'C')
+	{
+		return parse_GPRMC(gps_string);
+	}
+	if(gps_string[3] == 'G' && gps_string[4] == 'G' && gps_string[5] == 'A')
+	{
+		return parse_GPGGA(gps_string);
+	}
+	if(gps_string[3] == 'V' && gps_string[4] == 'T' && gps_string[5] == 'G')
+	{
+		return parse_GPVTG(gps_string);
+	}
+
+	return NULL;
+}
+GPSData* parse_GPRMC(char* gps_string)
 {
 	char* str1;
 	int num_comma;	
@@ -126,7 +149,7 @@ GPSData* parse_GPS(char* gps_string)
 		//don't want to try to convert this data until the fix quality has been checked
 		switch(num_comma)
 		{
-		case 0:  //gpgga
+		case 0:  //gprmc
 			{
 				if(strcmp(str1,"$GPRMC") != 0 )
 					return NULL;
@@ -142,6 +165,7 @@ GPSData* parse_GPS(char* gps_string)
 			{
 				if(strcmp(str1,"A") != 0 )
 				{
+					free(time);
 					return NULL;
 				}
 			}
@@ -178,6 +202,86 @@ GPSData* parse_GPS(char* gps_string)
 	return NULL;
 }
 
+GPSData* parse_GPVTG(char* gps_string)
+{
+	//nothing useful out of GPVTG right now, maybe later
+	return NULL;
+}
+
+
+GPSData* parse_GPGGA(char* gps_string)
+{
+	char* str1;
+	int num_comma;	
+	char* time;
+	char* lat;
+	char* lon;
+	GPSData* g;
+	if(gps_string == NULL || gps_string[0]!='$')
+		return NULL;
+
+	num_comma = 0;
+
+	str1 = strtok(gps_string, ",");
+	while(1)
+	{
+		if(str1 == NULL)
+			break;
+
+		//don't want to try to convert this data until the fix quality has been checked
+		switch(num_comma)
+		{
+		case 0:  //gpgga
+			{
+				if(strcmp(str1,"$GPGGA") != 0 )
+					return NULL;
+			}
+			break;
+		case 1:  //time
+			{
+				time = (char*)malloc(15*sizeof(char));
+				strcpy(time,str1);
+			}
+			break;
+		case 2:  //lat (in DDMM.MMMM)
+			{
+				lat = (char*)malloc(20*sizeof(char));
+				strcpy(lat,str1);
+			}
+			break;
+		case 4:  //lon (in DDDMM.MMMMM)
+			{
+				lon = (char*)malloc(20*sizeof(char));
+				strcpy(lon,str1);	
+			}
+			break;
+		case 6:  //quality indicator
+			{
+				if(strcmp(str1,"0")==0 || strcmp(str1,"") ==0)
+				{
+					free(time);
+					free(lat);
+					free(lon);
+					return NULL;
+				}
+				else
+				{
+					g = convert(time,lat,lon,NULL);
+					free(time);
+					free(lat);
+					free(lon);
+					return g;
+				}
+			}
+			break;
+		}
+		str1 = strtok(NULL,",");
+		num_comma++;
+	}
+	return NULL;
+}
+
+
 GPSData* convert(char* time,char* lat,char* lon,char* date)
 {
 	GPSData* g;
@@ -187,40 +291,72 @@ GPSData* convert(char* time,char* lat,char* lon,char* date)
 	tmp = (char*)malloc(sizeof(char)*3);
 
 	g = (GPSData*)malloc(sizeof(GPSData));
-
-	g->lat = toDeg(lat,0);
-	g->lon = toDeg(lon,1)*-1;
-
-	tmp[0] = date[0];
-	tmp[1] = date[1];
-	tmp[2] = '\0';
-	g->day = atoi(tmp);
+	if(lat!=NULL)
+	{
+		g->lat = toDeg(lat,0);
+	}
+	else
+	{
+		g->lat = -9999;
+	}
 	
-	tmp[0] = date[2];
-	tmp[1] = date[3];
-	g->month = atoi(tmp);
-
-	tmp[0] = date[4];
-	tmp[1] = date[5];
-	g->year = atoi(tmp)+2000;
-
-	tmp[0] = time[0];
-	tmp[1] = time[1];
-
-	g->hour = atoi(tmp);
-
-	tmp[0] = time[2];
-	tmp[1] = time[3];
-	g->minute = atoi(tmp);
+	if(lon!=NULL)
+	{
+		g->lon = toDeg(lon,1)*-1;
+	}
+	else
+	{
+		g->lon = -9999;
+	}
 	
-	tmp[0] = time[4];
-	tmp[1] = time[5];
-	g->second = atoi(tmp);
+	if(date!=NULL)
+	{
+		tmp[0] = date[0];
+		tmp[1] = date[1];
+		tmp[2] = '\0';
+		g->day = atoi(tmp);
 	
+		tmp[0] = date[2];
+		tmp[1] = date[3];
+		g->month = atoi(tmp);
+
+		tmp[0] = date[4];	
+		tmp[1] = date[5];
+		g->year = atoi(tmp)+2000;
+	}
+	else
+	{
+		g->day = -9999;
+		g->month = -9999;
+		g->year = -9999;
+	}
+
+	if(time!=NULL)
+	{
+		tmp[0] = time[0];
+		tmp[1] = time[1];
+
+		g->hour = atoi(tmp);
+
+		tmp[0] = time[2];
+		tmp[1] = time[3];
+		g->minute = atoi(tmp);
+	
+		tmp[0] = time[4];
+		tmp[1] = time[5];
+		g->second = atoi(tmp);
+	}
+	else
+	{
+		g->hour = -9999;
+		g->minute = -9999;
+		g->second = -9999;
+	}
 	free(tmp);
 
 	return g;
 }
+
 
 double toDeg(char* DDMM,int latorlon)
 {
@@ -342,7 +478,7 @@ void readFile_GPS()
 		return;
 	}
 
-	while(fscanf_s(fptr,"%s",gps,100) != EOF)
+	while(fgets(gps,100,fptr)!= NULL)
 	{
 		g = parse_GPS(gps);
 		
