@@ -104,6 +104,17 @@ namespace ReLive
                 
             if (explorerText.Text != null)
             {
+                StreamReader sr = null;
+                try
+                {
+                     sr = File.OpenText(explorerText.Text + "\\metadata.txt");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem reading your metadata file.\nVerify it exists and not currently in use and try again.");
+                    return;
+                }
+
                 DirectoryInfo dir = new DirectoryInfo(explorerText.Text);
                 FileInfo[] jpgFiles = dir.GetFiles("*.jpg");
                 DateTime currTime = DateTime.Now;
@@ -128,7 +139,7 @@ namespace ReLive
 
                 createNewAlbum(albumNameFull, desc);
 
-                StreamReader sr = File.OpenText(explorerText.Text + "\\metadata.txt");
+                
                 foreach (FileInfo file in jpgFiles)
                 {
                     string fileStr = file.FullName;
@@ -441,12 +452,6 @@ namespace ReLive
             //cleanup
             dirs = null;
             dir = null;
-        }
-
-        private void tagPhotos(DirectoryInfo dir)
-        {
-
-           
         }
 
         private void copySubDirs(string flashRoot, string path)
