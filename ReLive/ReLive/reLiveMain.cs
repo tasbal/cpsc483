@@ -9,6 +9,7 @@ using System.IO;
 using System.Reflection;
 using Google.GData.Photos;
 using Google.GData.Extensions.MediaRss;
+using Google.GData.Extensions.Location;
 using System.Runtime.InteropServices;
 
 namespace ReLive
@@ -70,7 +71,7 @@ namespace ReLive
         public bool checkFileExists(string fileName, string albumName)
         {
             bool fileExists = false;
-
+            
             PhotoQuery query = new PhotoQuery(PicasaQuery.CreatePicasaUri(this.user, albumName));
             PicasaFeed feed = picasaService.Query(query);
 
@@ -89,11 +90,8 @@ namespace ReLive
                 AlbumEntry newEntry = new AlbumEntry();
                 newEntry.Title.Text = albumName;
                 newEntry.Summary.Text = desc;
-                newEntry.Published = new DateTime(2007, 03, 27);
 
                 PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
-
-               
             }
         }
         
@@ -109,9 +107,18 @@ namespace ReLive
                 DirectoryInfo dir = new DirectoryInfo(explorerText.Text);
                 FileInfo[] jpgFiles = dir.GetFiles("*.jpg");
                 DateTime currTime = DateTime.Now;
+                string albumNameFull = dir.Name.ToString();
                 string currDate = currTime.ToString("yyyyMMdd");
-                string desc = "Album Created " + currDate;
-                Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, currDate));
+                string desc = "Album Added: " + currDate;
+
+                string[] dateArray = albumNameFull.Split('-');
+                String albumName = "";
+                foreach (string tempString in dateArray)
+                {
+                    albumName += tempString;
+                }
+
+                Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, albumName));
 
                 uploadProgress.BringToFront();
                 uploadProgress.Visible = true;
@@ -119,20 +126,34 @@ namespace ReLive
                 uploadProgress.Step = 100 / (jpgFiles.Length + 1); //set size of progress
                 uploadProgress.PerformStep();
 
-                createNewAlbum(currDate, desc);        
-                
+                createNewAlbum(albumNameFull, desc);
+
+                StreamReader sr = File.OpenText(explorerText.Text + "\\metadata.txt");
                 foreach (FileInfo file in jpgFiles)
                 {
                     string fileStr = file.FullName;
-
+                    string line = null;
+                    string[] data = null;
+     
                     uploadProgress.PerformStep();
-                    if (!checkFileExists(file.Name, currDate))
+
+                    if (!checkFileExists(file.Name, albumName))
                     {
                         FileStream fileStream = file.OpenRead();
                         PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+                        //parse and add metadata
+                        line = sr.ReadLine();
+                        data = line.Split(',');
+                        entry.Location = new GeoRssWhere();
+                        entry.Location.Latitude = Double.Parse(data[0]);
+                        entry.Location.Longitude = Double.Parse(data[1]);
+                        entry.Summary.Text = data[2];
+                        entry.Media.Keywords.Value = data[3];
+                        
+                        entry.Update();
                     }
                 }
-                MessageBox.Show("Uploaded Album: " + currDate + " Successfully!");
+                MessageBox.Show("Uploaded Album: " + albumNameFull + " Successfully!");
 
                 uploadDir.Visible = true;
                 uploadProgress.Visible = false;
@@ -188,6 +209,7 @@ namespace ReLive
             //load previous config from SD card
             loadCurrentConfig();
         }
+
         public void loadCurrentConfig()
         {
             string memCardPath = findSDPath();
@@ -419,6 +441,12 @@ namespace ReLive
             //cleanup
             dirs = null;
             dir = null;
+        }
+
+        private void tagPhotos(DirectoryInfo dir)
+        {
+
+           
         }
 
         private void copySubDirs(string flashRoot, string path)
