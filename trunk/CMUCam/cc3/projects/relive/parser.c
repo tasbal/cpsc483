@@ -116,17 +116,15 @@ ConfigInfo* parse_Config(char* config_string)
 
 GPSData* parse_GPS(char* gps_string)
 {
-	char* str1;
-	int num_comma;	
-	char* time;
-	char* lat;
-	char* date;
-	char* lon;
+	char* str1 = NULL;
+	int num_comma = 0;	
+	char* time = NULL;
+	char* lat = NULL;
+	char* date = NULL;
+	char* lon = NULL;
 	GPSData* g;
 	if(gps_string == NULL || gps_string[0]!='$')
 		return NULL;
-
-	num_comma = 0;
 
 	str1 = strtok(gps_string, ",");
 	while(1)
