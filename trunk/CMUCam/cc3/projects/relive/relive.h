@@ -3,15 +3,29 @@
 
 #include "jpeglib.h"
 
+#define DLE	0x10
+#define ETX	0x03
+
+#define DONE			1
+#define ERROR		2
+#define IN_PROGRESS	3
+#define STATE_DLE		4
+#define START			5
+int state;
+
 FILE *memory;
 FILE *gps_com;
 GPSData *gps;
 ConfigInfo *config;
 
-void setup_copernicus(void);
+//void setup_copernicus(void);
+//int compute_checksum(char* msg, int len);
+//char digit_to_char_hex(int digit);
 void initialize(void);
 int takePict(int picNum);
+void write_to_file(char data, int opt);
 void get_gps_data(void);
+int receive_byte( char byte, char* data, int dLen );
 
 static void capture_current_jpeg(FILE *f);
 static void init_jpeg(void);
@@ -22,7 +36,6 @@ static void destroy_jpeg(void);
 static struct jpeg_compress_struct cinfo;
 static struct jpeg_error_mgr jerr;
 uint8_t *row;
-
 
 /************************************************************************/
 

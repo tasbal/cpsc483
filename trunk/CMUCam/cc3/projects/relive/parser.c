@@ -5,9 +5,60 @@
 #include <stdbool.h>
 #include "parser.h"
 
-#define MINTODEG .01667
-#define DEGTORAD 0.017453293
-#define _CRT_SECURE_NO_WARNINGS
+GPSData* parse_GPS_tsip(char* gps_data, int dLen)
+{
+	switch(gps_data[1])
+	{
+	// GPS TIME:
+	//
+	case 0x41:
+		printf("gps time\r\n");
+		break;
+	case 0x42:
+		printf("pos\r\n");
+		break;
+	case 0x43:
+		printf("velocity\r\n");
+		break;
+	case 0x45:
+		printf("software Ver\r\n");
+		break;
+	case 0x46:
+		printf("health\r\n");
+		break;
+	case 0x4A:
+		printf("lla pos\r\n");
+		break;
+	case 0x4B:
+		printf("status\r\n");
+		break;
+	case 0x55:
+		printf("options\r\n");
+		break;
+	case 0x56:
+		printf("velocity\r\n");
+		break;
+	case 0x6D:
+		printf("satelites\r\n");
+		break;
+	case 0x82:
+		printf("sbas\r\n");
+		break;
+	case 0x83:
+		printf("opsition and blas\r\n");
+		break;
+	case 0x84:
+		printf("lla pos and blas\r\n");
+		break;
+	case 0x8F:
+		printf("last fix\r\n");
+		break;
+	}
+	
+	return NULL;
+}
+
+/************************************************************************/
 
 ConfigInfo* parse_Config(char* config_string)
 {

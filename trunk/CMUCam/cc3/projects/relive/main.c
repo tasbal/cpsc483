@@ -11,17 +11,6 @@
 int main (void)
 {
 	initialize();
-		
-	if(config!=NULL)
-	{		
-		printf("Delay - %.2lf\tMin Dist - %.2lf\tFace - %d\tHalo - %d\r\n",config->delay,config->min_dist,config->face_detect,config->halo);
-		if(config->halo == true)
-		{
-			printf("\tLat - %.2lf\tLon - %.2lf\tRange - %.2lf\n\r\n",config->halo_info->lat,config->halo_info->lon,config->halo_info->range);
-		}
-	}
-	else
-		printf("config.txt INVALID\r\n");
 	
 	printf("\r\nHello, Camera initialized\r\n");
 
@@ -29,8 +18,10 @@ int main (void)
 	int picNum = 0;
 	while (1)
 	{
-		picNum=takePict(picNum);
-//		get_gps_data();
+		if (!cc3_uart_has_data (1))
+			get_gps_data();
+		
+//		picNum=takePict(picNum);
 	
 		if(on)
 		{
