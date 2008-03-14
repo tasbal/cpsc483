@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 #include <ctype.h>
 #include <cc3.h>
 #include <cc3_ilp.h>
@@ -14,12 +15,16 @@
 
 void initialize()
 {
+	state = START;
+	
 	cc3_led_set_state (1, true);
 	cc3_led_set_state (2, true);
 	
 	// configure uarts
 	cc3_uart_init (0, CC3_UART_RATE_115200, CC3_UART_MODE_8N1,
 		CC3_UART_BINMODE_BINARY);
+//	cc3_uart_init (1, CC3_UART_RATE_4800, CC3_UART_MODE_8N1,
+//		CC3_UART_BINMODE_BINARY);
 	cc3_uart_init (1, CC3_UART_RATE_38400, CC3_UART_MODE_8N1,
 		CC3_UART_BINMODE_BINARY);
 	// Make it so that stdout and stdin are not buffered
@@ -43,6 +48,16 @@ void initialize()
 	// parse config file
 	config = parse_Config(config_buff);
 
+	if(config!=NULL)
+	{		
+		printf("Delay - %.2lf\tMin Dist - %.2lf\tFace - %d\tHalo - %d\r\n",config->delay,config->min_dist,config->face_detect,config->halo);
+		if(config->halo == true)
+		{
+			printf("\tLat - %.2lf\tLon - %.2lf\tRange - %.2lf\n\r\n",config->halo_info->lat,config->halo_info->lon,config->halo_info->range);
+		}
+	}
+	else
+		printf("config.txt INVALID\r\n");
 	
 	//configure camera
 	cc3_camera_set_colorspace (CC3_COLORSPACE_RGB);
@@ -109,27 +124,66 @@ int takePict(int picNum)
 	return picNum;
 }
 
-/************************************************************************/
+/************************************************************************
 
 void setup_copernicus()
 {
 	char* gps_buff = (char*)malloc(sizeof(char)*100);
-	printf("Cofinguring GPS\r\n");
+	printf("Cofinguring GPS\r\n\n");
 	
+	int msgLen = 0;
+	int chsum = 0;
+	
+	char msg[100];
+	msg[msgLen++] = '$';
+	msg[msgLen++] = 'P';
+	msg[msgLen++] = 'T';
+	msg[msgLen++] = 'N';
+	msg[msgLen++] = 'L';
 	bool correct = false;
 	while(!correct)
 	{
-		cc3_timer_wait_ms(100);
-		// set gps to send RMC data every second
-		fprintf(gps_com, "$PTNLSNM,0101,01*FF%c%c",13,10);
-		cc3_timer_wait_ms(1000);
-		fprintf(gps_com, "$PTNLSNM,0101,01*FF%c%c",13,10);
+		msgLen = 5;
+		msg[msgLen++] = 'S';
+		msg[msgLen++] = 'N';
+		msg[msgLen++] = 'M';
+		msg[msgLen++] = ',';
+		msg[msgLen++] = '0';
+		msg[msgLen++] = '1'; 
+		msg[msgLen++] = '0';
+		msg[msgLen++] = '0';
+		msg[msgLen++] = ','; 
+		msg[msgLen++] = '0';
+		msg[msgLen++] = '1'; 
+		msg[msgLen++] = '*';
+		chsum = compute_checksum(msg, msgLen);
+		msg[msgLen++] = digit_to_char_hex(chsum>>4);
+		msg[msgLen++] = digit_to_char_hex(chsum);
+		msg[msgLen++] = 0x0D;	// cr
+		msg[msgLen++] = 0x0A;		// lf
 		
-		cc3_timer_wait_ms(1000);
-		// query and see if it got changes
-		fprintf(gps_com, "$PTNLQNM*FF%c%c",13,10);
-		cc3_timer_wait_ms(1000);
-		fprintf(gps_com, "$PTNLQNM*FF%c%c",13,10);
+		for(int i = 0; i < msgLen; i++)
+		{
+			putchar(fputc(msg[i], gps_com));
+		}
+		
+		printf("\r\nChecking Configuration\r\n\n");
+		
+		msgLen = 5;
+		msg[msgLen++] = 'Q';
+		msg[msgLen++] = 'N';
+		msg[msgLen++] = 'M';
+		msg[msgLen++] = '*';
+		chsum = compute_checksum(msg, msgLen);
+		msg[msgLen++] = digit_to_char_hex(chsum>>4);
+		msg[msgLen++] = digit_to_char_hex(chsum);
+		msg[msgLen++] = 0x0D;	// cr
+		msg[msgLen++] = 0x0A;		// lf
+		
+		for(int i = 0; i < msgLen; i++)
+		{
+			putchar(fputc(msg[i], gps_com));
+		}
 		
 		fscanf(gps_com,"%s",gps_buff);
 		printf("%s\r\n",gps_buff);
@@ -137,14 +191,48 @@ void setup_copernicus()
 		if(strcmp(strtok(gps_buff,'*'),"$PTNLaNM,0100,01*")==0)
 			correct = true;
 		else
+		{
+			printf("\r\nNot Correct\r\n\n");
 			cc3_timer_wait_ms(1000);
+		}
 	}
 	
 	free(gps_buff);
-	printf("Cofingured GPS\r\n");
+	printf("\r\nCofingured GPS\r\n");
 }
 
-/************************************************************************/
+/************************************************************************
+
+int compute_checksum(char* msg, int len)
+{
+	int chsum = 0;
+	int i;
+	
+	for( i = 1; i < len; i++)
+	{
+		if(msg[i] == '*')
+			break;
+		chsum ^= msg[i];
+	}
+	
+	if(i < len && msg[i] =='*')
+		return chsum;
+	else
+		return -1;
+}
+
+/************************************************************************
+
+char digit_to_char_hex(int digit)
+{
+	digit &= 0x0f;
+	if(digit < 10)
+		return digit + '0';
+	else
+		return digit + 'A' - 10;
+}
+
+/************************************************************************
 
 void get_gps_data()
 {
@@ -155,14 +243,158 @@ void get_gps_data()
 		printf("Getting GPS Data\r\n");
 		fscanf(gps_com,"%s",gps_buff);
 		printf("%s\r\n",gps_buff);
-//		gps = parse_GPS(gps_buff);
-//		if(gps!=NULL)
-//			printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
-//		else
-//			printf("INVALID\r\n");
+		gps = parse_GPS(gps_buff);
+		if(gps!=NULL)
+			printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
+		else
+			printf("INVALID\r\n");
 	}
 	
 	free(gps_buff);
+}
+
+/************************************************************************/
+
+void get_gps_data()
+{
+	char *data= (char*)malloc(sizeof(char)*300);
+	int dLen = 0;
+	
+	printf("\r\n\nGetting GPS Data\r\n");
+//printf("States are:\r\n");
+//printf(" - DONE (%d)\r\n", DONE);
+//printf(" - ERROR (%d)\r\n", ERROR);
+//printf(" - IN_PROGRESS (%d)\r\n", IN_PROGRESS);
+//printf(" - STATE_DLE (%d)\r\n", STATE_DLE);
+//printf(" - START (%d)\r\n\n", START);
+	
+	while( state != DONE && state != ERROR)
+	{
+//printf("Current State: %d\r\n", state);
+//printf("Current data length: %d\r\n\n", dLen);
+		dLen = receive_byte( fgetc(gps_com), data, dLen );
+	}
+	
+	if(state == DONE) //everything went ok
+	{
+		printf("\r\nComplete TSIP Packet\r\n");
+		for(int i = 0; i < dLen; i++)
+		{
+			printf(" %x",data[i]);
+			write_to_file(data[i], 0);
+		}
+		write_to_file('\r ', 1);
+		write_to_file('\n ', 1);
+		printf("\r\n");
+		
+		gps = parse_GPS_tsip(data, dLen);
+		if(gps!=NULL)
+			printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
+		else
+			printf("INVALID\r\n");
+		
+	}
+	else
+		printf("Error in getting GPS Data\r\n");
+	
+	state = START;
+	free(data);
+}
+
+/************************************************************************/
+
+int receive_byte( char byte, char* data, int dLen )
+{
+//printf("Recieving byte %x\r\n", byte);
+	
+	switch ( state )
+	{
+	case START:
+//printf("In START\r\n");
+		if( byte == DLE )
+		{
+//printf("Its a DLE\r\n");
+			state = STATE_DLE;
+			data[dLen++] = byte;
+		}
+		break;
+	case STATE_DLE:
+//printf("In STATE_DLE\r\n");
+		if( byte == ETX )
+		{
+//printf("Its an ETX\r\n");
+			// dLen:	   0         1                     >1
+			// pkt:	<DLE><id><string><DLE><ETX>
+			
+			if( dLen > 1 )
+			{
+//printf("data Length = %d and > 1\r\n", dLen);
+				state = DONE;
+				data[dLen++] = DLE;
+				data[dLen++] = ETX;
+			}
+			else
+			{
+printf("In STATE_DLE, byte == ETX, and dLen < 1");
+				state = ERROR;
+			}
+		}
+		else
+		{
+//printf("Its not an ETX\r\n");
+			state = IN_PROGRESS;
+			data[dLen++] = byte;
+		}
+		break;
+	case IN_PROGRESS:
+//printf("In IN_PROGRESS\r\n");
+		// Dont add because may be stuffing DLE
+		if( byte == DLE )
+		{
+//printf("Its a DLE\r\n");
+			state = STATE_DLE;
+		}
+		else
+		{
+//printf("Its not a DLE\r\n");
+			data[dLen++] = byte;
+		}
+		break;
+	default:
+printf("Should not have gotten here. State = %d\r\n", state);
+		state = ERROR;
+		break;
+	}
+	
+	// we got too many bytes
+	if( dLen >= 300 )
+	{
+printf("dLen >= 300");
+		state = ERROR;
+	}
+	
+	return dLen;
+}
+
+/************************************************************************/
+
+void write_to_file(char data, int opt)
+{
+	// sample showing how to write to the MMC card
+	memory = fopen ("c:/gpsData.txt", "a");
+	if (memory == NULL) {
+	perror ("fopen failed");
+	}
+	
+	if ( opt == 0 )
+		fprintf(memory, "%x", data);
+	else
+		fprintf(memory, "%c", data);
+
+	int result = fclose (memory);
+	if (result == EOF) {
+	perror ("fclose failed");
+	}
 }
 
 /************************************************************************/
