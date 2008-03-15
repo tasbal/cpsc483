@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdbool.h>
+
 #include "parser.h"
 
 GPSData* parse_GPS_tsip(char* gps_data, int dLen)
@@ -83,6 +84,7 @@ ConfigInfo* parse_Config(char* config_string)
 			{
 				//delay
 				c->delay  = atof(str1);
+				c->delay *= 1000;
 			}
 			break;
 		case 1:

@@ -11,6 +11,7 @@
 #define IN_PROGRESS	3
 #define STATE_DLE		4
 #define START			5
+
 int state;
 
 FILE *memory;

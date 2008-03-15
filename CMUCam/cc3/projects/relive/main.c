@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <cc3.h>
 #include <cc3_ilp.h>
 #include "parser.h"
@@ -11,6 +10,10 @@
 int main (void)
 {
 	initialize();
+	
+	// set time to equal delay so it takes picture right away
+	uint32_t prevTime = 0;
+	uint32_t deltaTime = config->delay;
 	
 	printf("\r\nHello, Camera initialized\r\n");
 
@@ -21,8 +24,21 @@ int main (void)
 		if (!cc3_uart_has_data (1))
 			get_gps_data();
 		
-//		picNum=takePict(picNum);
+		// if its been delay millisecons take picture
+		if ( deltaTime >= config->delay )
+		{
+			picNum=takePict(picNum);
+			deltaTime = 0;
+		}
+		// else update change in time by subtracting previous time off current time
+		// then updating previous time to current time
+		else
+		{
+			deltaTime += cc3_timer_get_current_ms() - prevTime;
+			prevTime =  cc3_timer_get_current_ms();
+		}
 	
+		// blinking LED to make sure camera is working
 		if(on)
 		{
 			cc3_led_set_state (2, false);

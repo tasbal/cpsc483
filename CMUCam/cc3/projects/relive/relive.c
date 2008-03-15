@@ -22,7 +22,7 @@ void initialize()
 	
 	// configure uarts
 	cc3_uart_init (0, CC3_UART_RATE_115200, CC3_UART_MODE_8N1,
-		CC3_UART_BINMODE_BINARY);
+		CC3_UART_BINMODE_TEXT);
 //	cc3_uart_init (1, CC3_UART_RATE_4800, CC3_UART_MODE_8N1,
 //		CC3_UART_BINMODE_BINARY);
 	cc3_uart_init (1, CC3_UART_RATE_38400, CC3_UART_MODE_8N1,
