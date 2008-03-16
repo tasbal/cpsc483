@@ -228,19 +228,34 @@ namespace ReLive
                 return;
             //array for iteratign through form controls
             Control[] configArray = { delayBox, distanceBox, faceCheck, haloCheck, latBox, lngBox, haloDistanceBox };
-            StreamReader sr = File.OpenText(memCardPath + "\\config.txt");
-            string input = sr.ReadLine();
-            //parse file for details and load into form
-            string[] inputArray = input.Split(',');
-            for (int value = 0; value < inputArray.Length; value++ )
+            StreamReader sr;
+            if (File.Exists(memCardPath + "\\config.txt"))
             {
-                if (value == 2 || value == 3) //special cases for checkboxes
+                sr = File.OpenText(memCardPath + "\\config.txt");
+            }
+            else
+            {
+                MessageBox.Show("No config.txt file detected on SD card.");
+                return;
+            }
+
+            string input = sr.ReadLine();
+            string[] inputArray;
+            //parse file for details and load into form
+            if (input != null)
+            {
+                inputArray = input.Split(',');
+
+                for (int value = 0; value < inputArray.Length; value++)
                 {
-                    ((CheckBox)configArray[value]).Checked = inputArray[value] == "True";
-                    if (value == 3 && inputArray[value] == "False")
-                        return;
+                    if (value == 2 || value == 3) //special cases for checkboxes
+                    {
+                        ((CheckBox)configArray[value]).Checked = inputArray[value] == "True";
+                        if (value == 3 && inputArray[value] == "False")
+                            return;
+                    }
+                    configArray[value].Text = inputArray[value];
                 }
-                configArray[value].Text = inputArray[value];
             }
         }
 
