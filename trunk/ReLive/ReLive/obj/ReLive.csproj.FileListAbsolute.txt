@@ -67,3 +67,18 @@ F:\senior design\ReLive\ReLive\obj\Release\ReLive.Properties.Resources.resources
 F:\senior design\ReLive\ReLive\obj\Release\ReLive.csproj.GenerateResource.Cache
 F:\senior design\ReLive\ReLive\obj\Release\ReLive.exe
 F:\senior design\ReLive\ReLive\obj\Release\ReLive.pdb
+F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.exe
+F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.pdb
+F:\cpsc483\ReLive\ReLive\bin\Debug\ReLive.exe
+F:\cpsc483\ReLive\ReLive\bin\Debug\ReLive.pdb
+F:\cpsc483\ReLive\ReLive\bin\Debug\Google.GData.AccessControl.dll
+F:\cpsc483\ReLive\ReLive\bin\Debug\Google.GData.Calendar.dll
+F:\cpsc483\ReLive\ReLive\bin\Debug\Google.GData.Client.DLL
+F:\cpsc483\ReLive\ReLive\bin\Debug\Google.GData.Extensions.DLL
+F:\cpsc483\ReLive\ReLive\bin\Debug\Google.GData.Photos.dll
+F:\cpsc483\ReLive\ReLive\obj\Debug\ResolveAssemblyReference.cache
+F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.MapBrowser.resources
+F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.reLiveMain.resources
+F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
+F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.Properties.Resources.resources
+F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache

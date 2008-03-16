@@ -39,6 +39,11 @@ namespace ReLive
         private delegate bool EnumChildrenCallback(IntPtr hwnd, IntPtr lParam);
         private HandleRef listViewHandle;
 
+        //removable drive information
+        private int driveSelected;
+        private string[] allRemovables = new string[10];
+        private string[] allRemNames = new string[10];
+
         public reLiveMain()
         {
             InitializeComponent();
@@ -374,16 +379,37 @@ namespace ReLive
         {
             string memCardPath = "";
             int rootNum = 0;
+            int reliveCnt = 0;
             DriveInfo[] allDrives = DriveInfo.GetDrives();  //get a list of all drives
             foreach (DriveInfo drvInfo in allDrives)        //loop through all drives
             {
+
                 DirectoryInfo di = drvInfo.RootDirectory;
-                if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady)
+                if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady && drvInfo.Name.Equals("RELIVE"))
                 {
                     memCardPath = di.FullName;
+                    reliveCnt++;
                 }
-                rootNum++;
+                if (drvInfo.DriveType.Equals(DriveType.Removable))
+                {
+                    allRemovables[rootNum] = di.FullName;
+                    allRemNames[rootNum] = drvInfo.VolumeLabel;
+                    rootNum++;
+                }
             }
+            string msg = "Please choose from the list below, the removable to be used. \n";
+            for (int i = 0; i < rootNum; i++)
+            {
+                msg = msg + "Drive #" + (int)(i+1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
+            }
+/*
+            ComboBox combo = new ComboBox();
+            combo.DropDownStyle = ComboBoxStyle.DropDownList;
+            combo.DropDownWidth = 280;
+            combo.Location = Point(280, 21);
+            combo.Size(280, 21);
+            combo.Items.AddRange(New Object() {"*/
+                MessageBox.Show(msg);
             return memCardPath;
         }
 
