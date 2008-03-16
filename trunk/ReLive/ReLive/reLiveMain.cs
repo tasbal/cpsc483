@@ -256,6 +256,7 @@ namespace ReLive
                     }
                     configArray[value].Text = inputArray[value];
                 }
+                sr.Close();
             }
         }
 
