@@ -41,6 +41,7 @@ namespace ReLive
 
         //removable drive information
         private bool driveSelected = false;
+        private string memCardPath = "";
         private string[] allRemovables = new string[10];
         private string[] allRemNames = new string[10];
 
@@ -377,40 +378,43 @@ namespace ReLive
 
         private string findSDPath()
         {
-            string memCardPath = "";
-            int rootNum = 0;
-            int reliveCnt = 0;
-            DriveInfo[] allDrives = DriveInfo.GetDrives();  //get a list of all drives
-            foreach (DriveInfo drvInfo in allDrives)        //loop through all drives
+            if (!driveSelected)
             {
-
-                DirectoryInfo di = drvInfo.RootDirectory;
-                if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady && drvInfo.Name.Equals("RELIVE"))
+                memCardPath = "";
+                int rootNum = 0;
+                int reliveCnt = 0;
+                DriveInfo[] allDrives = DriveInfo.GetDrives();  //get a list of all drives
+                foreach (DriveInfo drvInfo in allDrives)        //loop through all drives
                 {
-                    memCardPath = di.FullName;
-                    reliveCnt++;
+
+                    DirectoryInfo di = drvInfo.RootDirectory;
+                    if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady && drvInfo.Name.Equals("RELIVE"))
+                    {
+                        memCardPath = di.FullName;
+                        reliveCnt++;
+                    }
+                    if (drvInfo.DriveType.Equals(DriveType.Removable))
+                    {
+                        allRemovables[rootNum] = di.FullName;
+                        allRemNames[rootNum] = drvInfo.VolumeLabel;
+                        rootNum++;
+                    }
                 }
-                if (drvInfo.DriveType.Equals(DriveType.Removable))
+
+
+                string msg = "Please choose from the list below, the removable to be used. \n";
+                SelectDrive selectWin = new SelectDrive();
+
+                for (int i = 0; i < rootNum; i++)
                 {
-                    allRemovables[rootNum] = di.FullName;
-                    allRemNames[rootNum] = drvInfo.VolumeLabel;
-                    rootNum++;
+                    string nextMsg = "Drive #" + (int)(i + 1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
+                    selectWin.comboBox1.Items.Add(nextMsg);
                 }
-            }
-
-
-            string msg = "Please choose from the list below, the removable to be used. \n";
-            SelectDrive selectWin = new SelectDrive();
-
-            for (int i = 0; i < rootNum; i++)
-            {
-                string nextMsg = "Drive #" + (int)(i+1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
-                selectWin.comboBox1.Items.Add(nextMsg);
-            }
                 selectWin.ShowDialog(this);
                 memCardPath = allRemovables[selectWin.choice];
                 MessageBox.Show(memCardPath + " was chosen to be the used drive.");
                 driveSelected = true;
+            }
             return memCardPath;
         }
 
