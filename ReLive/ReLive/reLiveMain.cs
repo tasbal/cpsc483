@@ -397,19 +397,20 @@ namespace ReLive
                     rootNum++;
                 }
             }
+
+
             string msg = "Please choose from the list below, the removable to be used. \n";
+            SelectDrive selectWin = new SelectDrive();
+
             for (int i = 0; i < rootNum; i++)
             {
-                msg = msg + "Drive #" + (int)(i+1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
+                string nextMsg = "Drive #" + (int)(i+1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
+                msg = msg + nextMsg;
+                selectWin.comboBox1.Items.Add(nextMsg);
             }
-/*
-            ComboBox combo = new ComboBox();
-            combo.DropDownStyle = ComboBoxStyle.DropDownList;
-            combo.DropDownWidth = 280;
-            combo.Location = Point(280, 21);
-            combo.Size(280, 21);
-            combo.Items.AddRange(New Object() {"*/
                 MessageBox.Show(msg);
+                selectWin.ShowDialog(this);
+
             return memCardPath;
         }
 
@@ -694,6 +695,11 @@ namespace ReLive
                 System.Diagnostics.Process.Start("http://maps.google.com/maps?q=" + latBox.Text + "," + lngBox.Text + "&t=h");
             else
                 MessageBox.Show("Search for a location first!");
+        }
+
+        private void imageTab_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -82,3 +82,4 @@ F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.reLiveMain.resources
 F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
 F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.Properties.Resources.resources
 F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
+F:\cpsc483\ReLive\ReLive\obj\Debug\ReLive.SelectDrive.resources
