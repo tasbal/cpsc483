@@ -40,7 +40,7 @@ namespace ReLive
         private HandleRef listViewHandle;
 
         //removable drive information
-        private int driveSelected;
+        private bool driveSelected = false;
         private string[] allRemovables = new string[10];
         private string[] allRemNames = new string[10];
 
@@ -405,12 +405,12 @@ namespace ReLive
             for (int i = 0; i < rootNum; i++)
             {
                 string nextMsg = "Drive #" + (int)(i+1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
-                msg = msg + nextMsg;
                 selectWin.comboBox1.Items.Add(nextMsg);
             }
-                MessageBox.Show(msg);
                 selectWin.ShowDialog(this);
-
+                memCardPath = allRemovables[selectWin.choice];
+                MessageBox.Show(memCardPath + " was chosen to be the used drive.");
+                driveSelected = true;
             return memCardPath;
         }
 
