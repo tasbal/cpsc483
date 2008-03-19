@@ -386,14 +386,14 @@ namespace ReLive
                 DriveInfo[] allDrives = DriveInfo.GetDrives();  //get a list of all drives
                 foreach (DriveInfo drvInfo in allDrives)        //loop through all drives
                 {
-
+                    
                     DirectoryInfo di = drvInfo.RootDirectory;
                     if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady && drvInfo.Name.Equals("RELIVE"))
                     {
                         memCardPath = di.FullName;
                         reliveCnt++;
                     }
-                    if (drvInfo.DriveType.Equals(DriveType.Removable))
+                    if (drvInfo.DriveType.Equals(DriveType.Removable) && !di.FullName.Equals("A:\\"))
                     {
                         allRemovables[rootNum] = di.FullName;
                         allRemNames[rootNum] = drvInfo.VolumeLabel;
