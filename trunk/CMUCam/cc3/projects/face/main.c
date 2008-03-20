@@ -56,242 +56,8 @@ FILE* fout;
 #endif
 
 int face_detect(void);
-
-/*
- * function to get the current segment from the actual image and simultaneously 
- * compute imtegral image for the new segment added 
- */
-void cc3_get_curr_segment()
-{
-  cc3_pixel_t pix_temp;
-  
-
-  if (cc3_row_counter_cropped_img == 0)  /* first time */
-    {
-      // load the upper "CC3_INTEGRAL_IMG_HEIGHT" rows
-      for (uint8_t i = 0; i < CC3_INTEGRAL_IMG_HEIGHT; i++)
-	{
-	  /* get a row from the fifo */
-	  cc3_pixbuf_read_rows(cc3_img_tmp.pix, cc3_img_tmp.height);
-	  
-	  /* copy the first pixel */
-	  cc3_get_pixel(&cc3_img_tmp, 0, 0, &pix_temp);
-	  cc3_integral_image[i][0] = pix_temp.channel[1]; // only green channel
-
-	  
-	  #ifdef SAVE_IMAGES
-	  fprintf(fp, "%d ", cc3_integral_image[i][0]);
-	  #endif
-
-	  // start copying from the next pixel and calculate cumulative sum at the same time
-	  for (uint16_t j = 1; j < cc3_img_tmp.width; j++)
-	    {
-	      cc3_get_pixel(&cc3_img_tmp, j, 0, &pix_temp);
-	      cc3_integral_image[i][j] = pix_temp.channel[1]; // only green channel
-
-	      #ifdef SAVE_IMAGES
-	      fprintf( fp,"%d ",cc3_integral_image[i][j] );
-	      #endif 
-	      
-	      // compute cumulative sum across the row
-	      cc3_integral_image[i][j] += cc3_integral_image[i][j-1];
-	    }
-
-          #ifdef SAVE_IMAGES
-	  fprintf( fp, "\n" );
-	  #endif
-	}
-      
-      // find cumulative sum along columns to complete the integral image computation
-      for (uint16_t j = 0; j < CC3_INTEGRAL_IMG_WIDTH; j++)
-	 {
-	   for (uint16_t i = 1; i < CC3_INTEGRAL_IMG_HEIGHT; i++)  // start from second row
-	     {
-	       cc3_integral_image[i][j]+=cc3_integral_image[i-1][j];
-	     }
-	 }       
-    }
-  
-  else 
-    { 
-      // get a new row
-      cc3_pixbuf_read_rows(cc3_img_tmp.pix, cc3_img_tmp.height);
-	  
-      uint8_t newly_added_row = cc3_row_counter_calc_ii % CC3_INTEGRAL_IMG_HEIGHT;
-      uint8_t prev_row = (cc3_row_counter_calc_ii - 1 + CC3_INTEGRAL_IMG_HEIGHT) % CC3_INTEGRAL_IMG_HEIGHT; 
-       
-      // copy the first pixel
-      cc3_get_pixel(&cc3_img_tmp, 0, 0, &pix_temp);
-      cc3_integral_image[newly_added_row][0] = pix_temp.channel[1];
-
-      #ifdef SAVE_IMAGES
-      fprintf( fp,"%d ",cc3_integral_image[newly_added_row][0] );
-      #endif
-      
-      // read the row, from next pixel onward and compute cum sum across the row
-      for (uint16_t j = 1; j < cc3_img_tmp.width; j++)
-	{
-	  cc3_get_pixel(&cc3_img_tmp, j, 0, &pix_temp);
-	  cc3_integral_image[newly_added_row][j] = pix_temp.channel[1];
-
-	  #ifdef SAVE_IMAGES
-	  fprintf( fp,"%d ",cc3_integral_image[newly_added_row][j] );
-          #endif
-
-	  // compute cumulative sum across the row
-	  cc3_integral_image[newly_added_row][j] += cc3_integral_image[newly_added_row][j-1];
-	}
-     
-       #ifdef SAVE_IMAGES
-       fprintf( fp, "\n" );
-       #endif 
-
-       // find cumulative sum along columns to complete the integral image computation
-       for (uint16_t j = 0; j < CC3_INTEGRAL_IMG_WIDTH; j++)
-	 {
-	   cc3_integral_image[newly_added_row][j]+=cc3_integral_image[prev_row][j];
-	 }
-      
-    }
-}
-
-
-/* 
- * function to get the feature value for a particular sub-window
- *
- */
-int16_t cc3_get_feat_val(uint8_t feat_num, uint8_t curr_scale, uint16_t x, uint16_t y)
-{
-  int32_t fval = 0;
-  uint16_t x_in_ii, y_in_ii;
-
-  /* for stage1 cascade */
-  if (curr_cascade == 0)
-    {
-      // evaluate the subwindow for this feature
-      for (uint8_t pt=0; pt < 9 ; pt++)
-	{
-	  x_in_ii = x + CC3_FACE_FEATURES0[feat_num][curr_scale].x[pt];
-	  y_in_ii = (y + CC3_FACE_FEATURES0[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
-	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES0[feat_num][curr_scale].val_at_corners[pt];
-	}
-
-      // mult by scaling factor
-      fval = fval * CC3_SCALING_FACTOR;
-      
-      // taking into account the effect of normalization
-      fval = fval/((int32_t)std);
-      
-      // check if fval < threshold
-      if (fval*CC3_FACE_FEATURES0[feat_num][curr_scale].parity < CC3_FACE_FEATURES0[feat_num][curr_scale].thresh*CC3_FACE_FEATURES0[feat_num][curr_scale].parity)
-	return CC3_FACE_FEATURES0[feat_num][curr_scale].alpha;
-      else 
-	return 0;
-    }
-
-  /* for stage2 cascade */
-  else if (curr_cascade == 1)
-    {
-       // evaluate the subwindow for this feature
-      for (uint8_t pt=0; pt < 9 ; pt++)
-	{
-	  x_in_ii = x + CC3_FACE_FEATURES1[feat_num][curr_scale].x[pt];
-	  y_in_ii = (y + CC3_FACE_FEATURES1[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
-	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES1[feat_num][curr_scale].val_at_corners[pt];
-	}
-      
-      // mult by scaling factor
-      fval = fval * CC3_SCALING_FACTOR;
-
-      // taking into account the effect of normalization
-      fval = fval/((int32_t)std);
-      
-      // check if fval < threshold
-      if (fval*CC3_FACE_FEATURES1[feat_num][curr_scale].parity < CC3_FACE_FEATURES1[feat_num][curr_scale].thresh*CC3_FACE_FEATURES1[feat_num][curr_scale].parity)
-	return CC3_FACE_FEATURES1[feat_num][curr_scale].alpha;
-      else 
-	return 0;
-    }
-
-  /* for stage3 cascade */
-  else if (curr_cascade == 2)
-    {
-       // evaluate the subwindow for this feature
-      for (uint8_t pt=0; pt < 9 ; pt++)
-	{
-	  x_in_ii = x + CC3_FACE_FEATURES2[feat_num][curr_scale].x[pt];
-	  y_in_ii = (y + CC3_FACE_FEATURES2[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
-	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES2[feat_num][curr_scale].val_at_corners[pt];
-	}
-      
-      // mult by scaling factor
-      fval = fval * CC3_SCALING_FACTOR;
-
-      // taking into account the effect of normalization
-      fval = fval/((int32_t)std);
-      
-      // check if fval < threshold
-      if (fval*CC3_FACE_FEATURES2[feat_num][curr_scale].parity < CC3_FACE_FEATURES2[feat_num][curr_scale].thresh*CC3_FACE_FEATURES2[feat_num][curr_scale].parity)
-	return CC3_FACE_FEATURES2[feat_num][curr_scale].alpha;
-      else 
-	return 0;
-     
-    }
-
-  /* for stage4 cascade */
-  else if (curr_cascade == 3)
-    {
-       // evaluate the subwindow for this feature
-      for (uint8_t pt=0; pt < 9 ; pt++)
-	{
-	  x_in_ii = x + CC3_FACE_FEATURES3[feat_num][curr_scale].x[pt];
-	  y_in_ii = (y + CC3_FACE_FEATURES3[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
-	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES3[feat_num][curr_scale].val_at_corners[pt];
-	}
-      
-      // mult by scaling factor
-      fval = fval * CC3_SCALING_FACTOR;
-
-      // taking into account the effect of normalization
-      fval = fval/((int32_t)std);
-      
-      // check if fval < threshold
-      if (fval*CC3_FACE_FEATURES3[feat_num][curr_scale].parity < CC3_FACE_FEATURES3[feat_num][curr_scale].thresh*CC3_FACE_FEATURES3[feat_num][curr_scale].parity)
-	return CC3_FACE_FEATURES3[feat_num][curr_scale].alpha;
-      else 
-	return 0;
-    }
-
-  /* for stage5 cascade */
-  else if (curr_cascade == 4)
-    {
-       // evaluate the subwindow for this feature
-      for (uint8_t pt=0; pt < 9 ; pt++)
-	{
-	  x_in_ii = x + CC3_FACE_FEATURES4[feat_num][curr_scale].x[pt];
-	  y_in_ii = (y + CC3_FACE_FEATURES4[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
-	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES4[feat_num][curr_scale].val_at_corners[pt];
-	}
-      
-      // mult by scaling factor
-      fval = fval * CC3_SCALING_FACTOR;
-
-      // taking into account the effect of normalization
-      fval = fval/((int32_t)std);
-      
-      // check if fval < threshold
-      if (fval*CC3_FACE_FEATURES4[feat_num][curr_scale].parity < CC3_FACE_FEATURES4[feat_num][curr_scale].thresh*CC3_FACE_FEATURES4[feat_num][curr_scale].parity)
-	return CC3_FACE_FEATURES4[feat_num][curr_scale].alpha;
-      else 
-	return 0;
-    }
-
-  else 
-    return 0;
-}
-
-
-/*-------------- main starts from here---------------*/
+void cc3_get_curr_segment(void);
+int16_t cc3_get_feat_val(uint8_t feat_num, uint8_t curr_scale, uint16_t x, uint16_t y);
 
 
 int main (void)
@@ -684,13 +450,14 @@ int face_detect ()
 			   
 			    if (face)
 			      {
-                                #ifdef SAVE_IMAGES
-				fprintf(fout, "%d %d %d \n",curr_pos_x+1, cc3_row_counter_cropped_img+1, CC3_SCALES[curr_scale_idx]-1);
-				#endif
+					#ifdef SAVE_IMAGES
+					fprintf(fout, "%d %d %d \n",curr_pos_x+1, cc3_row_counter_cropped_img+1, CC3_SCALES[curr_scale_idx]-1);
+					#endif
 		
-				printf("Face Detected at: %d %d, Size: %d \n\r",curr_pos_x+1, cc3_row_counter_cropped_img+1, CC3_SCALES[curr_scale_idx]-1);
-				cc3_num_detected_faces++;
-				return 1;
+					printf("Face Detected at: %d %d, Size: %d \n\r",curr_pos_x+1, cc3_row_counter_cropped_img+1, CC3_SCALES[curr_scale_idx]-1);
+					cc3_num_detected_faces++;
+					
+					return 1;
 				
 			      }
 			    
@@ -749,4 +516,237 @@ int face_detect ()
     free(cc3_img_tmp.pix);  // don't forget to free!
 
     while(1);
+}
+
+/*
+ * function to get the current segment from the actual image and simultaneously 
+ * compute imtegral image for the new segment added 
+ */
+
+void cc3_get_curr_segment()
+{
+  cc3_pixel_t pix_temp;
+  
+
+  if (cc3_row_counter_cropped_img == 0)  /* first time */
+    {
+      // load the upper "CC3_INTEGRAL_IMG_HEIGHT" rows
+      for (uint8_t i = 0; i < CC3_INTEGRAL_IMG_HEIGHT; i++)
+	{
+	  /* get a row from the fifo */
+	  cc3_pixbuf_read_rows(cc3_img_tmp.pix, cc3_img_tmp.height);
+	  
+	  /* copy the first pixel */
+	  cc3_get_pixel(&cc3_img_tmp, 0, 0, &pix_temp);
+	  cc3_integral_image[i][0] = pix_temp.channel[1]; // only green channel
+
+	  
+	  #ifdef SAVE_IMAGES
+	  fprintf(fp, "%d ", cc3_integral_image[i][0]);
+	  #endif
+
+	  // start copying from the next pixel and calculate cumulative sum at the same time
+	  for (uint16_t j = 1; j < cc3_img_tmp.width; j++)
+	    {
+	      cc3_get_pixel(&cc3_img_tmp, j, 0, &pix_temp);
+	      cc3_integral_image[i][j] = pix_temp.channel[1]; // only green channel
+
+	      #ifdef SAVE_IMAGES
+	      fprintf( fp,"%d ",cc3_integral_image[i][j] );
+	      #endif 
+	      
+	      // compute cumulative sum across the row
+	      cc3_integral_image[i][j] += cc3_integral_image[i][j-1];
+	    }
+
+          #ifdef SAVE_IMAGES
+	  fprintf( fp, "\n" );
+	  #endif
+	}
+      
+      // find cumulative sum along columns to complete the integral image computation
+      for (uint16_t j = 0; j < CC3_INTEGRAL_IMG_WIDTH; j++)
+	 {
+	   for (uint16_t i = 1; i < CC3_INTEGRAL_IMG_HEIGHT; i++)  // start from second row
+	     {
+	       cc3_integral_image[i][j]+=cc3_integral_image[i-1][j];
+	     }
+	 }       
+    }
+  
+  else 
+    { 
+      // get a new row
+      cc3_pixbuf_read_rows(cc3_img_tmp.pix, cc3_img_tmp.height);
+	  
+      uint8_t newly_added_row = cc3_row_counter_calc_ii % CC3_INTEGRAL_IMG_HEIGHT;
+      uint8_t prev_row = (cc3_row_counter_calc_ii - 1 + CC3_INTEGRAL_IMG_HEIGHT) % CC3_INTEGRAL_IMG_HEIGHT; 
+       
+      // copy the first pixel
+      cc3_get_pixel(&cc3_img_tmp, 0, 0, &pix_temp);
+      cc3_integral_image[newly_added_row][0] = pix_temp.channel[1];
+
+      #ifdef SAVE_IMAGES
+      fprintf( fp,"%d ",cc3_integral_image[newly_added_row][0] );
+      #endif
+      
+      // read the row, from next pixel onward and compute cum sum across the row
+      for (uint16_t j = 1; j < cc3_img_tmp.width; j++)
+	{
+	  cc3_get_pixel(&cc3_img_tmp, j, 0, &pix_temp);
+	  cc3_integral_image[newly_added_row][j] = pix_temp.channel[1];
+
+	  #ifdef SAVE_IMAGES
+	  fprintf( fp,"%d ",cc3_integral_image[newly_added_row][j] );
+          #endif
+
+	  // compute cumulative sum across the row
+	  cc3_integral_image[newly_added_row][j] += cc3_integral_image[newly_added_row][j-1];
+	}
+     
+       #ifdef SAVE_IMAGES
+       fprintf( fp, "\n" );
+       #endif 
+
+       // find cumulative sum along columns to complete the integral image computation
+       for (uint16_t j = 0; j < CC3_INTEGRAL_IMG_WIDTH; j++)
+	 {
+	   cc3_integral_image[newly_added_row][j]+=cc3_integral_image[prev_row][j];
+	 }
+      
+    }
+}
+
+/* 
+ * function to get the feature value for a particular sub-window
+ *
+ */
+int16_t cc3_get_feat_val(uint8_t feat_num, uint8_t curr_scale, uint16_t x, uint16_t y)
+{
+  int32_t fval = 0;
+  uint16_t x_in_ii, y_in_ii;
+
+  /* for stage1 cascade */
+  if (curr_cascade == 0)
+    {
+      // evaluate the subwindow for this feature
+      for (uint8_t pt=0; pt < 9 ; pt++)
+	{
+	  x_in_ii = x + CC3_FACE_FEATURES0[feat_num][curr_scale].x[pt];
+	  y_in_ii = (y + CC3_FACE_FEATURES0[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
+	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES0[feat_num][curr_scale].val_at_corners[pt];
+	}
+
+      // mult by scaling factor
+      fval = fval * CC3_SCALING_FACTOR;
+      
+      // taking into account the effect of normalization
+      fval = fval/((int32_t)std);
+      
+      // check if fval < threshold
+      if (fval*CC3_FACE_FEATURES0[feat_num][curr_scale].parity < CC3_FACE_FEATURES0[feat_num][curr_scale].thresh*CC3_FACE_FEATURES0[feat_num][curr_scale].parity)
+	return CC3_FACE_FEATURES0[feat_num][curr_scale].alpha;
+      else 
+	return 0;
+    }
+
+  /* for stage2 cascade */
+  else if (curr_cascade == 1)
+    {
+       // evaluate the subwindow for this feature
+      for (uint8_t pt=0; pt < 9 ; pt++)
+	{
+	  x_in_ii = x + CC3_FACE_FEATURES1[feat_num][curr_scale].x[pt];
+	  y_in_ii = (y + CC3_FACE_FEATURES1[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
+	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES1[feat_num][curr_scale].val_at_corners[pt];
+	}
+      
+      // mult by scaling factor
+      fval = fval * CC3_SCALING_FACTOR;
+
+      // taking into account the effect of normalization
+      fval = fval/((int32_t)std);
+      
+      // check if fval < threshold
+      if (fval*CC3_FACE_FEATURES1[feat_num][curr_scale].parity < CC3_FACE_FEATURES1[feat_num][curr_scale].thresh*CC3_FACE_FEATURES1[feat_num][curr_scale].parity)
+	return CC3_FACE_FEATURES1[feat_num][curr_scale].alpha;
+      else 
+	return 0;
+    }
+
+  /* for stage3 cascade */
+  else if (curr_cascade == 2)
+    {
+       // evaluate the subwindow for this feature
+      for (uint8_t pt=0; pt < 9 ; pt++)
+	{
+	  x_in_ii = x + CC3_FACE_FEATURES2[feat_num][curr_scale].x[pt];
+	  y_in_ii = (y + CC3_FACE_FEATURES2[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
+	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES2[feat_num][curr_scale].val_at_corners[pt];
+	}
+      
+      // mult by scaling factor
+      fval = fval * CC3_SCALING_FACTOR;
+
+      // taking into account the effect of normalization
+      fval = fval/((int32_t)std);
+      
+      // check if fval < threshold
+      if (fval*CC3_FACE_FEATURES2[feat_num][curr_scale].parity < CC3_FACE_FEATURES2[feat_num][curr_scale].thresh*CC3_FACE_FEATURES2[feat_num][curr_scale].parity)
+	return CC3_FACE_FEATURES2[feat_num][curr_scale].alpha;
+      else 
+	return 0;
+     
+    }
+
+  /* for stage4 cascade */
+  else if (curr_cascade == 3)
+    {
+       // evaluate the subwindow for this feature
+      for (uint8_t pt=0; pt < 9 ; pt++)
+	{
+	  x_in_ii = x + CC3_FACE_FEATURES3[feat_num][curr_scale].x[pt];
+	  y_in_ii = (y + CC3_FACE_FEATURES3[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
+	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES3[feat_num][curr_scale].val_at_corners[pt];
+	}
+      
+      // mult by scaling factor
+      fval = fval * CC3_SCALING_FACTOR;
+
+      // taking into account the effect of normalization
+      fval = fval/((int32_t)std);
+      
+      // check if fval < threshold
+      if (fval*CC3_FACE_FEATURES3[feat_num][curr_scale].parity < CC3_FACE_FEATURES3[feat_num][curr_scale].thresh*CC3_FACE_FEATURES3[feat_num][curr_scale].parity)
+	return CC3_FACE_FEATURES3[feat_num][curr_scale].alpha;
+      else 
+	return 0;
+    }
+
+  /* for stage5 cascade */
+  else if (curr_cascade == 4)
+    {
+       // evaluate the subwindow for this feature
+      for (uint8_t pt=0; pt < 9 ; pt++)
+	{
+	  x_in_ii = x + CC3_FACE_FEATURES4[feat_num][curr_scale].x[pt];
+	  y_in_ii = (y + CC3_FACE_FEATURES4[feat_num][curr_scale].y[pt]) % CC3_INTEGRAL_IMG_HEIGHT; // circular warping
+	  fval+=cc3_integral_image[y_in_ii][x_in_ii]*CC3_FACE_FEATURES4[feat_num][curr_scale].val_at_corners[pt];
+	}
+      
+      // mult by scaling factor
+      fval = fval * CC3_SCALING_FACTOR;
+
+      // taking into account the effect of normalization
+      fval = fval/((int32_t)std);
+      
+      // check if fval < threshold
+      if (fval*CC3_FACE_FEATURES4[feat_num][curr_scale].parity < CC3_FACE_FEATURES4[feat_num][curr_scale].thresh*CC3_FACE_FEATURES4[feat_num][curr_scale].parity)
+	return CC3_FACE_FEATURES4[feat_num][curr_scale].alpha;
+      else 
+	return 0;
+    }
+
+  else 
+    return 0;
 }
