@@ -503,7 +503,7 @@ int face_detect ()
 
 	// sample non-blocking serial routine
 //	if(!cc3_uart_has_data(0) ) break; 
-		free(cc3_img_tmp.pix);  // don't forget to free!
+//		free(cc3_img_tmp.pix);  // don't forget to free!
 		if(cc3_num_detected_faces > 0)
 			return 1;
 		else
