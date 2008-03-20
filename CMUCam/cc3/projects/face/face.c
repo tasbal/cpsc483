@@ -58,24 +58,7 @@ FILE* fout;
 int face_detect(void);
 void cc3_get_curr_segment(void);
 int16_t cc3_get_feat_val(uint8_t feat_num, uint8_t curr_scale, uint16_t x, uint16_t y);
-/*-------------- main starts from here---------------*/
 
-
-/*int main (void)
-{
-	if(face_detect() == 1)
-	{
-		printf("Face Found\r\n");
-	}
-	else
-	{
-		printf("Face Not Found\r\n");
-	}
-	printf("Done\r\n");
-	while(1);
-	return 0;
-}
-*/
 
 int face_detect ()
 {
