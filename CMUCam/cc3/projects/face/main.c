@@ -490,7 +490,7 @@ int face_detect ()
        /* end of frame */
 	  
        printf ("Frame Done..\n\r");
-       return 0;
+       
 	#ifdef SAVE_IMAGES
 
        fprintf( fout, "%d %d %d \n",0,0,0);
@@ -514,7 +514,7 @@ int face_detect ()
      } // end of while 
    
     free(cc3_img_tmp.pix);  // don't forget to free!
-
+	return 0;
     while(1);
 }
 
