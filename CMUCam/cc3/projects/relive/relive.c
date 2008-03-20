@@ -138,6 +138,22 @@ int takePict(int picNum)
 
 /************************************************************************/
 
+bool check_triggers( int deltaTime )
+{
+	bool takePic = false;
+	
+	// timer whent off
+	if( deltaTime >= config->delay )
+	{
+		if( gps->good )
+			takePic = true;
+	}
+	
+	return takePic;
+}
+
+/************************************************************************/
+
 void write_metadata()
 {
 	memory = fopen ("c:/metadata.txt", "a");
@@ -145,11 +161,8 @@ void write_metadata()
 	perror ("fopen failed");
 	}
 	
-	fprintf(memory, "%lf, %lf, %2d:%2d:%2d, ", gps->lat, gps->lon, gps->hour, gps->minute, gps->second);
-	if( gps->good )
-		fprintf(memory, "good");
-	else
-		fprintf(memory, "no good");
+	fprintf(memory, "%lf, %lf, %2d:%2d:%2d", gps->lat, gps->lon, gps->hour, gps->minute, gps->second);
+
 	if( face )
 		fprintf(memory, ", face");
 	if(config->halo)

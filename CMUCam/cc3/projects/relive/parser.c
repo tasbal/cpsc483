@@ -146,12 +146,14 @@ void parse_Config(char* config_string)
 	// end of while loop to get basic stuff with success
 	config->good = true;
 	
-	printf("config good");
+printf("config good\r\n");
 		
 	// if no halos then we are done with configuration from sd card
 	if( !config->halo )
 		return;
 		
+printf("It has halo info\r\n");
+	
 	str1 = strtok(NULL,",");
 	if(str1 == NULL)
 		return;
@@ -162,6 +164,8 @@ void parse_Config(char* config_string)
 		config->numHalo = 0;
 		return;
 	}
+	
+printf("%d halos", config->numHalo);
 	
 	config->halo_info =  (HaloInfo*)malloc(sizeof(HaloInfo));
 	HaloInfo* tmpHalo = config->halo_info;
@@ -174,6 +178,7 @@ void parse_Config(char* config_string)
 		
 		while(cont)
 		{
+printf("Halo num %d\n\r",i);
 			str1 = strtok(config_string,",");
 			
 			if(str1 == NULL)	// we cant get all info so disregard this halo and rest of info
@@ -200,21 +205,25 @@ void parse_Config(char* config_string)
 			case 0:
 				{
 					strcpy(tmpHalo->name, str1);
+printf("Name: %s\r\n", tmpHalo->name);
 				}
 				break;
 			case 1:
 				{
 					tmpHalo->lat = atof(str1);
+printf("Latitude: %f\r\n", tmpHalo->lat);
 				}
 				break;
 			case 2:
 				{
 					tmpHalo->lon = atof(str1);
+printf("Longitude: %f\r\n", tmpHalo->lon);
 				}
 				break;
 			case 3:
 				{
 					tmpHalo->range = atof(str1);
+printf("Range: %f\r\n", tmpHalo->range);
 					cont = false;
 				}
 				break;
@@ -234,6 +243,8 @@ void parse_Config(char* config_string)
 		HaloInfo* t = tmpHalo;
 		tmpHalo = tmpHalo->next;
 		tmpHalo->prev = t;
+		
+printf("\n\r");
 	}
 	// end of getting all the halos successfully but we had allocated
 	// space for one more so we need to free it
@@ -241,6 +252,8 @@ void parse_Config(char* config_string)
 	tmpHalo = tmpHalo->prev;
 	free(tmpHalo->next);
 	tmpHalo->next = NULL;
+	
+printf("\n\r");
 }
 
 /************************************************************************/

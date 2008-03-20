@@ -31,7 +31,7 @@ int main (void)
 			get_gps_data();
 		
 		// if its been delay millisecons take picture
-		if ( deltaTime >= config->delay )
+		if ( check_triggers(deltaTime)  )
 		{
 			picNum=takePict(picNum);
 //			face = face_detect();
