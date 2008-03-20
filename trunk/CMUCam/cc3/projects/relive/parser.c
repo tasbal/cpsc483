@@ -145,6 +145,8 @@ void parse_Config(char* config_string)
 	}
 	// end of while loop to get basic stuff with success
 	config->good = true;
+	
+	printf("config good");
 		
 	// if no halos then we are done with configuration from sd card
 	if( !config->halo )
