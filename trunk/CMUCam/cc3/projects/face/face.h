@@ -58,7 +58,7 @@ FILE* fout;
 int face_detect(void);
 void cc3_get_curr_segment(void);
 int16_t cc3_get_feat_val(uint8_t feat_num, uint8_t curr_scale, uint16_t x, uint16_t y);
-
+int face_detect();
 
 int face_detect ()
 {
