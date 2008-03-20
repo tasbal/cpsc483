@@ -9,7 +9,7 @@
 #include "vj.h"
 
 /* define for saving the images to mmc */
-//#define SAVE_IMAGES
+#define SAVE_IMAGES
 
 /* ---global variables----*/
 
