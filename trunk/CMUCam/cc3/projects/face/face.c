@@ -9,7 +9,7 @@
 #include "vj.h"
 
 /* define for saving the images to mmc */
-#define SAVE_IMAGES
+//#define SAVE_IMAGES
 
 /* ---global variables----*/
 
@@ -61,7 +61,7 @@ int16_t cc3_get_feat_val(uint8_t feat_num, uint8_t curr_scale, uint16_t x, uint1
 /*-------------- main starts from here---------------*/
 
 
-int main (void)
+/*int main (void)
 {
 	if(face_detect() == 1)
 	{
@@ -75,6 +75,7 @@ int main (void)
 	while(1);
 	return 0;
 }
+*/
 
 int face_detect ()
 {
