@@ -14,8 +14,11 @@
 #include "relive.h"
 
 void initialize()
-{
+{	
+	parse_init();
+
 	state = START;
+	face = false;
 	
 	cc3_led_set_state (1, true);
 	cc3_led_set_state (2, true);
@@ -39,22 +42,37 @@ void initialize()
 	memory = fopen ("c:/config.txt", "r");
 	if (memory == NULL) {
 		perror ("fopen failed\r\n");
-		while(1);
+		return;
 	}
-	
 	// get config file
 	char* config_buff = (char*)malloc(sizeof(char)*100);
 	fscanf(memory, "%s", config_buff);
+	if (fclose (memory) == EOF) {
+		perror ("fclose failed\r\n");
+		while(1);
+	}
+	
 	// parse config file
-	config = parse_Config(config_buff);
-
-	if(config!=NULL)
+	parse_Config(config_buff);
+	if(config->good)
 	{		
-		printf("Delay - %.2lf\tMin Dist - %.2lf\tFace - %d\tHalo - %d\r\n",config->delay,config->min_dist,config->face_detect,config->halo);
-		if(config->halo == true)
+		printf("Delay - %.2lf\tMin Dist - %.2lf",config->delay,config->min_dist);
+		if(config->face_detect)
+			printf("\tFace - true");
+		else
+			printf("\tFace - false");
+		if(config->halo)
 		{
-			printf("\tLat - %.2lf\tLon - %.2lf\tRange - %.2lf\n\r\n",config->halo_info->lat,config->halo_info->lon,config->halo_info->range);
+			printf("\tHalo - true\tNumber of Halos - %d\r\n", config->numHalo);
+			HaloInfo* tmpHalo = config->halo_info;
+			for( int i = 0; i < config->numHalo; i++ )
+			{
+				printf("\tHalo %s: Lat - %.2lf\tLon - %.2lf\tRange - %.2lf\n\r\n",tmpHalo->name,tmpHalo->lat,tmpHalo->lon,tmpHalo->range);
+				tmpHalo = tmpHalo->next;
+			}
 		}
+		else
+			printf("\tHalo - false\r\n");
 	}
 	else
 		printf("config.txt INVALID\r\n");
@@ -64,12 +82,6 @@ void initialize()
 	cc3_camera_set_resolution (CC3_CAMERA_RESOLUTION_HIGH);
 	cc3_camera_set_auto_white_balance (true);
 	cc3_camera_set_auto_exposure (true);
-
-	int result = fclose (memory);
-	if (result == EOF) {
-		perror ("fclose failed\r\n");
-		while(1);
-	}
 	
 	gps_com = cc3_uart_fopen(1,"r+");
 	
@@ -122,6 +134,38 @@ int takePict(int picNum)
 	
 	picNum++;
 	return picNum;
+}
+
+/************************************************************************/
+
+void write_metadata()
+{
+	memory = fopen ("c:/metadata.txt", "a");
+	if (memory == NULL) {
+	perror ("fopen failed");
+	}
+	
+	fprintf(memory, "%lf, %lf, %2d:%2d:%2d, ", gps->lat, gps->lon, gps->hour, gps->minute, gps->second);
+	if( gps->good )
+		fprintf(memory, "good");
+	else
+		fprintf(memory, "no good");
+	if( face )
+		fprintf(memory, ", face");
+	if(config->halo)
+	{
+		HaloInfo* tmpHalo = config->halo_info;
+		for(int i = 0; i < which_halo; i++)
+		{
+			tmpHalo = tmpHalo->next;
+		}
+		fprintf(memory, ", %s", tmpHalo->name);
+	}
+	fprintf(memory, "\r\n");
+
+	if ( fclose (memory) == EOF) {
+	perror ("fclose failed");
+	}
 }
 
 /************************************************************************
@@ -261,12 +305,6 @@ void get_gps_data()
 	int dLen = 0;
 	
 	printf("\r\n\nGetting GPS Data\r\n");
-//printf("States are:\r\n");
-//printf(" - DONE (%d)\r\n", DONE);
-//printf(" - ERROR (%d)\r\n", ERROR);
-//printf(" - IN_PROGRESS (%d)\r\n", IN_PROGRESS);
-//printf(" - STATE_DLE (%d)\r\n", STATE_DLE);
-//printf(" - START (%d)\r\n\n", START);
 	
 	while( state != DONE && state != ERROR)
 	{
@@ -281,14 +319,14 @@ void get_gps_data()
 		for(int i = 0; i < dLen; i++)
 		{
 			printf(" %x",data[i]);
-			write_to_file(data[i], 0);
+			write_gpsdata(data[i], 0);
 		}
-		write_to_file('\r ', 1);
-		write_to_file('\n ', 1);
+		write_gpsdata(0, 1);
+		write_gpsdata(0, 1);
 		printf("\r\n");
 		
-		gps = parse_GPS_tsip(data, dLen);
-		if(gps!=NULL)
+		parse_GPS_tsip(data, dLen);
+		if(gps->good)
 			printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
 		else
 			printf("INVALID\r\n");
@@ -341,9 +379,17 @@ printf("In STATE_DLE, byte == ETX, and dLen < 1");
 		}
 		else
 		{
-//printf("Its not an ETX\r\n");
-			state = IN_PROGRESS;
-			data[dLen++] = byte;
+			if( dLen == 1 && byte == DLE )
+			{
+				state = ERROR;
+printf("DLE in id byte!");
+			}
+			else
+			{
+//printf("Its not an ETX and its not the id byte\r\n");
+				state = IN_PROGRESS;
+				data[dLen++] = byte;
+			}
 		}
 		break;
 	case IN_PROGRESS:
@@ -378,22 +424,22 @@ printf("dLen >= 300");
 
 /************************************************************************/
 
-void write_to_file(char data, int opt)
+void write_gpsdata(char data, int opt)
 {
-	// sample showing how to write to the MMC card
 	memory = fopen ("c:/gpsData.txt", "a");
 	if (memory == NULL) {
 	perror ("fopen failed");
+	return;
 	}
 	
 	if ( opt == 0 )
 		fprintf(memory, "%x", data);
 	else
-		fprintf(memory, "%c", data);
+		fprintf(memory, "\r\n");
 
-	int result = fclose (memory);
-	if (result == EOF) {
+	if ( fclose (memory) == EOF) {
 	perror ("fclose failed");
+	while(1);
 	}
 }
 

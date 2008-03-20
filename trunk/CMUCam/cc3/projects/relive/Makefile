@@ -2,10 +2,10 @@
 
 
 # C files to compile
-CSOURCES=relive.c parser.c main.c
+CSOURCES=parser.c relive.c main.c
 
 # header files
-INCLUDES=relive.h parser.h
+INCLUDES=parser.h relive.h
 
 # header files
 LIBS=cc3-ilp jpeg-6b
