@@ -119,8 +119,7 @@ int face_detect ()
    cc3_img_tmp.width=cc3_g_pixbuf_frame.width;  // equal to Int_Img_Width
    cc3_img_tmp.height = 1;  // image will hold just 1 row for scanline processing
    cc3_img_tmp.pix = &image_row;
-
-#pragma region FACE_DETECT   
+ 
    if (cc3_img_tmp.width != CC3_INTEGRAL_IMG_WIDTH)
      {
        printf("Error...image width and integral image width different \n\r");
@@ -128,8 +127,6 @@ int face_detect ()
    
    num_frames = 0;
    
-   while(1) 
-     {
        cc3_num_detected_faces = 0;
        /* initliaze the past records of sum_sq_pix to zero */
        for (uint8_t i = 0; i < CC3_NUM_SCALES; i++)
@@ -457,9 +454,8 @@ int face_detect ()
 		
 				printf("Face Detected at: %d %d, Size: %d \n\r",curr_pos_x+1, cc3_row_counter_cropped_img+1, CC3_SCALES[curr_scale_idx]-1);
 				cc3_num_detected_faces++;
-				return 1;
 				
-			      }
+			    }
 			    
 			    
 			  } /* end of if (std > lower_bound) and ( lower_bound < mean < upper_bound) */
@@ -481,10 +477,6 @@ int face_detect ()
 	  } /* end of iterating over all the rows in the actual image (upto bottom_offset) */
 
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//END OF FACE DETECTION STUFF
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#pragma endregion FACE_DETECT
        //	printf("No. of faces : %d \n\r", cc3_num_detected_faces);     
        
        /* end of frame */
@@ -501,22 +493,21 @@ int face_detect ()
 	num_frames++;
 
        	
-   	cc3_led_set_state(0,0);
-   	cc3_led_set_state(2,1);
-	while(!cc3_button_get_state());
-   	cc3_led_set_state(0,1);
-   	cc3_led_set_state(2,0);
+//  	cc3_led_set_state(0,0);
+//   	cc3_led_set_state(2,1);
+//	while(!cc3_button_get_state());
+//   	cc3_led_set_state(0,1);
+//   	cc3_led_set_state(2,0);
 	// wait for the button to be pressed for the next frame
 	
 
 	// sample non-blocking serial routine
 //	if(!cc3_uart_has_data(0) ) break; 
-	free(cc3_img_tmp.pix);  // don't forget to free!
-	return 0;    free(cc3_img_tmp.pix);  // don't forget to free!
-     } // end of while 
-   
-
-    while(1);
+		free(cc3_img_tmp.pix);  // don't forget to free!
+		if(cc3_num_detected_faces > 0)
+			return 1;
+		else
+			return 0;    
 }
 
 /*
