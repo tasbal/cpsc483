@@ -298,7 +298,7 @@ int main (void)
 {
 	if(face_detect())
 	{
-		printf("Face Found\r\n");
+		printf("The Face is Found\r\n");
 	}
 	else
 	{
