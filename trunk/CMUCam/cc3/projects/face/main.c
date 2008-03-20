@@ -55,6 +55,8 @@ FILE* fp;
 FILE* fout;
 #endif
 
+int face_detect(void);
+
 /*
  * function to get the current segment from the actual image and simultaneously 
  * compute imtegral image for the new segment added 
@@ -291,7 +293,6 @@ int16_t cc3_get_feat_val(uint8_t feat_num, uint8_t curr_scale, uint16_t x, uint1
 
 /*-------------- main starts from here---------------*/
 
-int face_detect();
 
 int main (void)
 {
@@ -304,6 +305,7 @@ int main (void)
 		printf("Face Not Found\n");
 	}
 	printf("Done");
+	while(1);
 	return 0;
 }
 
@@ -721,8 +723,8 @@ int face_detect ()
        /* end of frame */
 	  
        printf ("Frame Done..\n\r");
-	   return 0;
-/*	#ifdef SAVE_IMAGES
+       return 0;
+	#ifdef SAVE_IMAGES
 
        fprintf( fout, "%d %d %d \n",0,0,0);
        fclose(fout);
@@ -747,6 +749,4 @@ int face_detect ()
     free(cc3_img_tmp.pix);  // don't forget to free!
 
     while(1);
-  */  
-    return 0;
 }
