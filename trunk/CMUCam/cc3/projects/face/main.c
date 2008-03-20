@@ -9,7 +9,7 @@
 #include "vj.h"
 
 /* define for saving the images to mmc */
-#define SAVE_IMAGES
+//#define SAVE_IMAGES
 
 /* ---global variables----*/
 
@@ -290,7 +290,24 @@ int16_t cc3_get_feat_val(uint8_t feat_num, uint8_t curr_scale, uint16_t x, uint1
 
 
 /*-------------- main starts from here---------------*/
+
+int face_detect();
+
 int main (void)
+{
+	if(face_detect())
+	{
+		printf("Face Found\n");
+	}
+	else
+	{
+		printf("Face Not Found\n");
+	}
+	printf("Done");
+	return 0;
+}
+
+int face_detect ()
 {
 
   // name of the curr image
@@ -313,7 +330,7 @@ int main (void)
    cc3_camera_set_auto_white_balance(true);
    cc3_camera_set_auto_exposure(true);
    
-   printf("Face Detector...\n\r");
+//   printf("Face Detector...\n\r");
    
    cc3_led_set_state(0,0);
    cc3_led_set_state(1,0);
@@ -671,6 +688,7 @@ int main (void)
 		
 				printf("Face Detected at: %d %d, Size: %d \n\r",curr_pos_x+1, cc3_row_counter_cropped_img+1, CC3_SCALES[curr_scale_idx]-1);
 				cc3_num_detected_faces++;
+				return 1;
 				
 			      }
 			    
@@ -701,8 +719,10 @@ int main (void)
        //	printf("No. of faces : %d \n\r", cc3_num_detected_faces);     
        
        /* end of frame */
+	  
        printf ("Frame Done..\n\r");
-	#ifdef SAVE_IMAGES
+	   return 0;
+/*	#ifdef SAVE_IMAGES
 
        fprintf( fout, "%d %d %d \n",0,0,0);
        fclose(fout);
@@ -727,6 +747,6 @@ int main (void)
     free(cc3_img_tmp.pix);  // don't forget to free!
 
     while(1);
-    
+  */  
     return 0;
 }
