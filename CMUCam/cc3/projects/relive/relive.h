@@ -13,18 +13,20 @@
 #define START			5
 
 int state;
-
+bool face;
+int which_halo;
 FILE *memory;
 FILE *gps_com;
-GPSData *gps;
-ConfigInfo *config;
+
+/************************************************************************/
 
 //void setup_copernicus(void);
 //int compute_checksum(char* msg, int len);
 //char digit_to_char_hex(int digit);
 void initialize(void);
 int takePict(int picNum);
-void write_to_file(char data, int opt);
+void write_gpsdata(char data, int opt);
+void write_metadata(void);
 void get_gps_data(void);
 int receive_byte( char byte, char* data, int dLen );
 

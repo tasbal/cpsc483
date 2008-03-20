@@ -10,6 +10,12 @@
 int main (void)
 {
 	initialize();
+	// if we could not get a good config file then quit
+	if( !config->good )
+	{
+		destroy_jpeg();
+		return 0;
+	}
 	
 	// set time to equal delay so it takes picture right away
 	uint32_t prevTime = 0;
@@ -28,6 +34,8 @@ int main (void)
 		if ( deltaTime >= config->delay )
 		{
 			picNum=takePict(picNum);
+//			face = face_detect();
+			write_metadata();
 			deltaTime = 0;
 		}
 		// else update change in time by subtracting previous time off current time
