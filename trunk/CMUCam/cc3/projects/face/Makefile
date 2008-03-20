@@ -2,10 +2,10 @@
 
 
 # C files to compile
-CSOURCES=face.c face_test.c
+CSOURCES=face_test.c
 
 # header files
-INCLUDES=vj.h
+INCLUDES=vj.h face.h
 
 # header files
 LIBS=cc3-ilp
