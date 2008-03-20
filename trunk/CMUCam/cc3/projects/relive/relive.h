@@ -25,6 +25,7 @@ FILE *gps_com;
 //char digit_to_char_hex(int digit);
 void initialize(void);
 int takePict(int picNum);
+bool check_triggers( int delta_time );
 void write_gpsdata(char data, int opt);
 void write_metadata(void);
 void get_gps_data(void);
