@@ -74,7 +74,7 @@ namespace ReLive
             return albumExists;
         }
         
-        public bool checkFileExists(string fileName, string albumName)
+        private bool checkFileExists(string fileName, string albumName)
         {
             bool fileExists = false;
             
@@ -88,7 +88,16 @@ namespace ReLive
             return fileExists;
         }
 
-        public void createNewAlbum(string albumName, string desc)
+        //google date workaround
+        static double ConvertToUnixTimestamp(DateTime date)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            TimeSpan diff = date - origin;
+            return Math.Floor(diff.TotalMilliseconds);
+
+        } 
+
+        private void createNewAlbum(string albumName, string desc)
         {
             if(!checkAlbumExists(albumName))
             {
@@ -96,8 +105,14 @@ namespace ReLive
                 AlbumEntry newEntry = new AlbumEntry();
                 newEntry.Title.Text = albumName;
                 newEntry.Summary.Text = desc;
-
                 PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
+
+                DateTime photoDate = new DateTime(2007, 10, 10);
+                MessageBox.Show(photoDate.ToUniversalTime().ToString());
+                double timestamp = ConvertToUnixTimestamp(photoDate.ToUniversalTime());
+                MessageBox.Show(timestamp.ToString());
+                createdEntry.setPhotoExtension("timestamp", timestamp.ToString());
+                createdEntry.Update();
             }
         }
         
@@ -145,7 +160,8 @@ namespace ReLive
 
                 createNewAlbum(albumNameFull, desc);
 
-                
+                bool validMeta = true;
+
                 foreach (FileInfo file in jpgFiles)
                 {
                     string fileStr = file.FullName;
@@ -159,16 +175,36 @@ namespace ReLive
                         FileStream fileStream = file.OpenRead();
                         PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
                         //parse and add metadata
-                        line = sr.ReadLine();
-                        data = line.Split(',');
-                        entry.Location = new GeoRssWhere();
-                        entry.Location.Latitude = Double.Parse(data[0]);
-                        entry.Location.Longitude = Double.Parse(data[1]);
-                        entry.Summary.Text = data[2];
-                        entry.Media.Keywords.Value = data[3];
-                        
-                        entry.Update();
+                        if (validMeta)
+                        {
+                            try
+                            {
+                                line = sr.ReadLine();
+                                data = line.Split(',');
+                                entry.Location = new GeoRssWhere();
+                                entry.Location.Latitude = Double.Parse(data[0]);
+                                entry.Location.Longitude = Double.Parse(data[1]);
+                                entry.Summary.Text = data[2]; //time caption below image
+                                entry.Media.Keywords.Value = data[3]; //tags for face, halo
+                                /*
+                                DateTime photoDate = new DateTime(2007, 10, 10);
+                                double timestamp = ConvertToUnixTimestamp(photoDate.ToUniversalTime());
+                                entry.setPhotoExtension("timestamp", timestamp.ToString()); 
+                                */
+                                entry.Update();
+                            }
+                            catch (NullReferenceException)
+                            {
+                                MessageBox.Show("Metadata file may not have been complete!");
+                                validMeta = false;
+                            }
+                        }
                     }
+                    else
+                    {
+                        line = sr.ReadLine(); //move line forward if image already uploaded
+                    }
+
                 }
                 MessageBox.Show("Uploaded Album: " + albumNameFull + " Successfully!");
 
@@ -227,7 +263,7 @@ namespace ReLive
             loadCurrentConfig();
         }
 
-        public void loadCurrentConfig()
+        private void loadCurrentConfig()
         {
             string memCardPath = findSDPath();
             if (memCardPath == "")
@@ -266,7 +302,7 @@ namespace ReLive
             }
         }
 
-        public void UpdateAlbumFeed()
+        private void UpdateAlbumFeed()
         {
             AlbumQuery query = new AlbumQuery();
 
@@ -386,14 +422,15 @@ namespace ReLive
                 DriveInfo[] allDrives = DriveInfo.GetDrives();  //get a list of all drives
                 foreach (DriveInfo drvInfo in allDrives)        //loop through all drives
                 {
-                    
+                   
                     DirectoryInfo di = drvInfo.RootDirectory;
-                    if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady && drvInfo.Name.Equals("RELIVE"))
+                    if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady && drvInfo.VolumeLabel.Equals("RELIVE"))
                     {
                         memCardPath = di.FullName;
                         reliveCnt++;
                     }
-                    if (drvInfo.DriveType.Equals(DriveType.Removable) && !di.FullName.Equals("A:\\"))
+
+                    else if (drvInfo.DriveType.Equals(DriveType.Removable) && !di.FullName.Equals("A:\\") && drvInfo.IsReady)
                     {
                         allRemovables[rootNum] = di.FullName;
                         allRemNames[rootNum] = drvInfo.VolumeLabel;
@@ -401,18 +438,21 @@ namespace ReLive
                     }
                 }
 
-
-                string msg = "Please choose from the list below, the removable to be used. \n";
-                SelectDrive selectWin = new SelectDrive();
-
-                for (int i = 0; i < rootNum; i++)
+                if (reliveCnt != 1)
                 {
-                    string nextMsg = "Drive #" + (int)(i + 1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
-                    selectWin.comboBox1.Items.Add(nextMsg);
+                    MessageBox.Show(reliveCnt.ToString());
+                    string msg = "Please choose from the list below, the removable to be used. \n";
+                    SelectDrive selectWin = new SelectDrive();
+
+                    for (int i = 0; i < rootNum; i++)
+                    {
+                        string nextMsg = "Drive #" + (int)(i + 1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
+                        selectWin.comboBox1.Items.Add(nextMsg);
+                    }
+                    selectWin.ShowDialog(this);
+                    memCardPath = allRemovables[selectWin.choice];
+                    MessageBox.Show(memCardPath + " was chosen to be the used drive.");
                 }
-                selectWin.ShowDialog(this);
-                memCardPath = allRemovables[selectWin.choice];
-                MessageBox.Show(memCardPath + " was chosen to be the used drive.");
                 driveSelected = true;
             }
             return memCardPath;
@@ -699,11 +739,6 @@ namespace ReLive
                 System.Diagnostics.Process.Start("http://maps.google.com/maps?q=" + latBox.Text + "," + lngBox.Text + "&t=h");
             else
                 MessageBox.Show("Search for a location first!");
-        }
-
-        private void imageTab_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
