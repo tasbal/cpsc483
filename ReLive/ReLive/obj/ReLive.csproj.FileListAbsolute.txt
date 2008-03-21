@@ -99,3 +99,4 @@ C:\temp\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
 C:\temp\ReLive\ReLive\obj\Debug\ReLive.Properties.Resources.resources
 C:\temp\ReLive\ReLive\obj\Debug\ReLive.SelectDrive.resources
 C:\temp\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
+C:\Documents and Settings\raushel\Desktop\cs483\ReLive\ReLive\obj\Debug\ReLive.SelectDrive.resources

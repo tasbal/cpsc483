@@ -293,7 +293,6 @@ namespace ReLive
             this.imageTab.Size = new System.Drawing.Size(582, 464);
             this.imageTab.TabIndex = 0;
             this.imageTab.Text = "Image Browser";
-            this.imageTab.Click += new System.EventHandler(this.imageTab_Click);
             // 
             // uploadProgress
             // 
