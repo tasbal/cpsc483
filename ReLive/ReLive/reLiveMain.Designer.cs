@@ -48,6 +48,7 @@ namespace ReLive
             this.tabViewer = new System.Windows.Forms.TabControl();
             this.imageTab = new System.Windows.Forms.TabPage();
             this.uploadProgress = new System.Windows.Forms.ProgressBar();
+            this.backButton = new System.Windows.Forms.Button();
             this.settingsTab = new System.Windows.Forms.TabPage();
             this.distanceBox = new System.Windows.Forms.TextBox();
             this.haloCheck = new System.Windows.Forms.CheckBox();
@@ -64,6 +65,8 @@ namespace ReLive
             this.latLabel = new System.Windows.Forms.Label();
             this.latBox = new System.Windows.Forms.TextBox();
             this.haloSearchGroup = new System.Windows.Forms.GroupBox();
+            this.haloDescriptionLabel = new System.Windows.Forms.Label();
+            this.haloDescription = new System.Windows.Forms.TextBox();
             this.zipBox = new System.Windows.Forms.TextBox();
             this.stateBox = new System.Windows.Forms.ComboBox();
             this.cityBox = new System.Windows.Forms.TextBox();
@@ -91,9 +94,9 @@ namespace ReLive
             // 
             // directoryBrowse
             // 
-            this.directoryBrowse.Location = new System.Drawing.Point(390, 12);
+            this.directoryBrowse.Location = new System.Drawing.Point(475, 9);
             this.directoryBrowse.Name = "directoryBrowse";
-            this.directoryBrowse.Size = new System.Drawing.Size(50, 20);
+            this.directoryBrowse.Size = new System.Drawing.Size(50, 25);
             this.directoryBrowse.TabIndex = 2;
             this.directoryBrowse.Text = "Browse";
             this.directoryBrowse.UseVisualStyleBackColor = true;
@@ -101,11 +104,11 @@ namespace ReLive
             // 
             // uploadDir
             // 
-            this.uploadDir.Location = new System.Drawing.Point(446, 12);
+            this.uploadDir.Location = new System.Drawing.Point(531, 9);
             this.uploadDir.Name = "uploadDir";
-            this.uploadDir.Size = new System.Drawing.Size(130, 20);
+            this.uploadDir.Size = new System.Drawing.Size(51, 25);
             this.uploadDir.TabIndex = 2;
-            this.uploadDir.Text = "Upload Image Directory";
+            this.uploadDir.Text = "Upload";
             this.uploadDir.UseVisualStyleBackColor = true;
             this.uploadDir.Click += new System.EventHandler(this.uploadDir_Click);
             // 
@@ -153,9 +156,11 @@ namespace ReLive
             // fileBrowser
             // 
             this.fileBrowser.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.fileBrowser.IsWebBrowserContextMenuEnabled = false;
             this.fileBrowser.Location = new System.Drawing.Point(3, 35);
             this.fileBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.fileBrowser.Name = "fileBrowser";
+            this.fileBrowser.ScriptErrorsSuppressed = true;
             this.fileBrowser.Size = new System.Drawing.Size(576, 426);
             this.fileBrowser.TabIndex = 9;
             this.fileBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.fileBrowser_DocumentCompleted);
@@ -164,7 +169,7 @@ namespace ReLive
             // 
             this.explorerText.Location = new System.Drawing.Point(8, 12);
             this.explorerText.Name = "explorerText";
-            this.explorerText.Size = new System.Drawing.Size(376, 20);
+            this.explorerText.Size = new System.Drawing.Size(412, 20);
             this.explorerText.TabIndex = 10;
             this.explorerText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.explorerText_Enter);
             // 
@@ -283,6 +288,7 @@ namespace ReLive
             // 
             this.imageTab.BackColor = System.Drawing.SystemColors.Control;
             this.imageTab.Controls.Add(this.uploadProgress);
+            this.imageTab.Controls.Add(this.backButton);
             this.imageTab.Controls.Add(this.fileBrowser);
             this.imageTab.Controls.Add(this.uploadDir);
             this.imageTab.Controls.Add(this.directoryBrowse);
@@ -296,12 +302,22 @@ namespace ReLive
             // 
             // uploadProgress
             // 
-            this.uploadProgress.Location = new System.Drawing.Point(446, 12);
+            this.uploadProgress.Location = new System.Drawing.Point(426, 9);
             this.uploadProgress.Name = "uploadProgress";
-            this.uploadProgress.Size = new System.Drawing.Size(130, 20);
+            this.uploadProgress.Size = new System.Drawing.Size(156, 25);
             this.uploadProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.uploadProgress.TabIndex = 11;
             this.uploadProgress.Visible = false;
+            // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(426, 9);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(43, 25);
+            this.backButton.TabIndex = 11;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // settingsTab
             // 
@@ -467,6 +483,8 @@ namespace ReLive
             // 
             // haloSearchGroup
             // 
+            this.haloSearchGroup.Controls.Add(this.haloDescriptionLabel);
+            this.haloSearchGroup.Controls.Add(this.haloDescription);
             this.haloSearchGroup.Controls.Add(this.zipBox);
             this.haloSearchGroup.Controls.Add(this.stateBox);
             this.haloSearchGroup.Controls.Add(this.cityBox);
@@ -478,15 +496,31 @@ namespace ReLive
             this.haloSearchGroup.Controls.Add(this.geoCode);
             this.haloSearchGroup.Location = new System.Drawing.Point(6, 180);
             this.haloSearchGroup.Name = "haloSearchGroup";
-            this.haloSearchGroup.Size = new System.Drawing.Size(215, 175);
+            this.haloSearchGroup.Size = new System.Drawing.Size(215, 176);
             this.haloSearchGroup.TabIndex = 28;
             this.haloSearchGroup.TabStop = false;
             this.haloSearchGroup.Text = "Halo Location Search";
             this.haloSearchGroup.Visible = false;
             // 
+            // haloDescriptionLabel
+            // 
+            this.haloDescriptionLabel.AutoSize = true;
+            this.haloDescriptionLabel.Location = new System.Drawing.Point(8, 43);
+            this.haloDescriptionLabel.Name = "haloDescriptionLabel";
+            this.haloDescriptionLabel.Size = new System.Drawing.Size(63, 13);
+            this.haloDescriptionLabel.TabIndex = 22;
+            this.haloDescriptionLabel.Text = "Description:";
+            // 
+            // haloDescription
+            // 
+            this.haloDescription.Location = new System.Drawing.Point(72, 40);
+            this.haloDescription.Name = "haloDescription";
+            this.haloDescription.Size = new System.Drawing.Size(137, 20);
+            this.haloDescription.TabIndex = 21;
+            // 
             // zipBox
             // 
-            this.zipBox.Location = new System.Drawing.Point(65, 122);
+            this.zipBox.Location = new System.Drawing.Point(74, 147);
             this.zipBox.Name = "zipBox";
             this.zipBox.Size = new System.Drawing.Size(66, 20);
             this.zipBox.TabIndex = 18;
@@ -601,21 +635,21 @@ namespace ReLive
             "WV",
             "WI",
             "WY"});
-            this.stateBox.Location = new System.Drawing.Point(65, 92);
+            this.stateBox.Location = new System.Drawing.Point(74, 120);
             this.stateBox.Name = "stateBox";
             this.stateBox.Size = new System.Drawing.Size(66, 21);
             this.stateBox.TabIndex = 17;
             // 
             // cityBox
             // 
-            this.cityBox.Location = new System.Drawing.Point(66, 66);
+            this.cityBox.Location = new System.Drawing.Point(75, 94);
             this.cityBox.Name = "cityBox";
             this.cityBox.Size = new System.Drawing.Size(137, 20);
             this.cityBox.TabIndex = 16;
             // 
             // streetBox
             // 
-            this.streetBox.Location = new System.Drawing.Point(65, 40);
+            this.streetBox.Location = new System.Drawing.Point(74, 68);
             this.streetBox.Name = "streetBox";
             this.streetBox.Size = new System.Drawing.Size(138, 20);
             this.streetBox.TabIndex = 15;
@@ -623,7 +657,7 @@ namespace ReLive
             // zipLabel
             // 
             this.zipLabel.AutoSize = true;
-            this.zipLabel.Location = new System.Drawing.Point(9, 122);
+            this.zipLabel.Location = new System.Drawing.Point(15, 150);
             this.zipLabel.Name = "zipLabel";
             this.zipLabel.Size = new System.Drawing.Size(53, 13);
             this.zipLabel.TabIndex = 14;
@@ -632,7 +666,7 @@ namespace ReLive
             // stateLabel
             // 
             this.stateLabel.AutoSize = true;
-            this.stateLabel.Location = new System.Drawing.Point(9, 95);
+            this.stateLabel.Location = new System.Drawing.Point(33, 123);
             this.stateLabel.Name = "stateLabel";
             this.stateLabel.Size = new System.Drawing.Size(35, 13);
             this.stateLabel.TabIndex = 13;
@@ -641,7 +675,7 @@ namespace ReLive
             // cityLabel
             // 
             this.cityLabel.AutoSize = true;
-            this.cityLabel.Location = new System.Drawing.Point(9, 69);
+            this.cityLabel.Location = new System.Drawing.Point(41, 97);
             this.cityLabel.Name = "cityLabel";
             this.cityLabel.Size = new System.Drawing.Size(27, 13);
             this.cityLabel.TabIndex = 12;
@@ -650,7 +684,7 @@ namespace ReLive
             // streetLabel
             // 
             this.streetLabel.AutoSize = true;
-            this.streetLabel.Location = new System.Drawing.Point(9, 43);
+            this.streetLabel.Location = new System.Drawing.Point(30, 71);
             this.streetLabel.Name = "streetLabel";
             this.streetLabel.Size = new System.Drawing.Size(38, 13);
             this.streetLabel.TabIndex = 11;
@@ -658,7 +692,7 @@ namespace ReLive
             // 
             // geoCode
             // 
-            this.geoCode.Location = new System.Drawing.Point(137, 92);
+            this.geoCode.Location = new System.Drawing.Point(146, 120);
             this.geoCode.Name = "geoCode";
             this.geoCode.Size = new System.Drawing.Size(66, 50);
             this.geoCode.TabIndex = 10;
@@ -813,6 +847,9 @@ namespace ReLive
         private System.Windows.Forms.TextBox distanceBox;
         private System.Windows.Forms.TextBox haloDistanceBox;
         private System.Windows.Forms.Button formatSD;
+        private System.Windows.Forms.Label haloDescriptionLabel;
+        private System.Windows.Forms.TextBox haloDescription;
+        private System.Windows.Forms.Button backButton;
     }
 }
 

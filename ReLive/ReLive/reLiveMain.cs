@@ -94,10 +94,9 @@ namespace ReLive
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             TimeSpan diff = date - origin;
             return Math.Floor(diff.TotalMilliseconds);
-
         } 
 
-        private void createNewAlbum(string albumName, string desc)
+        private void createNewAlbum(string albumName, string desc, DateTime albumDate)
         {
             if(!checkAlbumExists(albumName))
             {
@@ -107,10 +106,7 @@ namespace ReLive
                 newEntry.Summary.Text = desc;
                 PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
 
-                DateTime photoDate = new DateTime(2007, 10, 10);
-                MessageBox.Show(photoDate.ToUniversalTime().ToString());
-                double timestamp = ConvertToUnixTimestamp(photoDate.ToUniversalTime());
-                MessageBox.Show(timestamp.ToString());
+                double timestamp = ConvertToUnixTimestamp(albumDate.ToUniversalTime());
                 createdEntry.setPhotoExtension("timestamp", timestamp.ToString());
                 createdEntry.Update();
             }
@@ -140,7 +136,7 @@ namespace ReLive
                 FileInfo[] jpgFiles = dir.GetFiles("*.jpg");
                 DateTime currTime = DateTime.Now;
                 string albumNameFull = dir.Name.ToString();
-                string currDate = currTime.ToString("yyyyMMdd");
+                string currDate = currTime.ToString("yyyy-MM-dd");
                 string desc = "Album Added: " + currDate;
 
                 string[] dateArray = albumNameFull.Split('-');
@@ -149,16 +145,17 @@ namespace ReLive
                 {
                     albumName += tempString;
                 }
+                DateTime albumDate = new DateTime(Int32.Parse(dateArray[0]), Int32.Parse(dateArray[1]), Int32.Parse(dateArray[2]));
 
                 Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, albumName));
 
                 uploadProgress.BringToFront();
                 uploadProgress.Visible = true;
                 uploadDir.Visible = false;
-                uploadProgress.Step = 100 / (jpgFiles.Length + 1); //set size of progress
+                uploadProgress.Step = uploadProgress.Width / (jpgFiles.Length + 1); //set size of progress
                 uploadProgress.PerformStep();
 
-                createNewAlbum(albumNameFull, desc);
+                createNewAlbum(albumNameFull, desc, albumDate);
 
                 bool validMeta = true;
 
@@ -185,9 +182,11 @@ namespace ReLive
                                 entry.Location.Latitude = Double.Parse(data[0]);
                                 entry.Location.Longitude = Double.Parse(data[1]);
                                 entry.Summary.Text = data[2]; //time caption below image
-                                entry.Media.Keywords.Value = data[3]; //tags for face, halo
+                                entry.Media.Keywords.Value = data[3] + "," + data[4]; //tags for face, halo
+                                
                                 /*
                                 DateTime photoDate = new DateTime(2007, 10, 10);
+                                photoDate.AddHours(5).AddMinutes(5);
                                 double timestamp = ConvertToUnixTimestamp(photoDate.ToUniversalTime());
                                 entry.setPhotoExtension("timestamp", timestamp.ToString()); 
                                 */
@@ -256,6 +255,7 @@ namespace ReLive
             Directory.CreateDirectory(@userPictures + "\\reLive");
             fileBrowser.Navigate(userPictures + "\\reLive");
             //set file browser to view large icons
+            
             FindListViewHandle();
             SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
 
@@ -269,7 +269,7 @@ namespace ReLive
             if (memCardPath == "")
                 return;
             //array for iteratign through form controls
-            Control[] configArray = { delayBox, distanceBox, faceCheck, haloCheck, latBox, lngBox, haloDistanceBox };
+            Control[] configArray = { delayBox, distanceBox, faceCheck, haloCheck, haloDescription, latBox, lngBox, haloDistanceBox };
             StreamReader sr;
             if (File.Exists(memCardPath + "\\config.txt"))
             {
@@ -490,10 +490,9 @@ namespace ReLive
             //loop through each file
             foreach (FileInfo file in files)
             {
-                
                 foreach (FileInfo destFile in destFiles)
                 {
-                    if (file.Name.Equals(destFile.Name))
+                    if (file.Name.Equals(destFile.Name) && !file.Extension.Equals(".txt"))
                     {
                         //MessageBox.Show(destFile.Name + " exists..skipping.. Please delete to upload.");
                         fileExists = true;
@@ -505,9 +504,9 @@ namespace ReLive
                     //create the path to where this file should be in destdir
                     tmppath = Path.Combine(destdir, file.Name);
 
-                    MessageBox.Show("Copying " + tmppath);
+                    //MessageBox.Show("Copying " + tmppath);
                     //copy file to dest dir
-                    file.CopyTo(tmppath, false);
+                    file.CopyTo(tmppath, true);
                 }
                 else fileExists = false;
             }
@@ -683,6 +682,12 @@ namespace ReLive
         {
             string memCardPath = findSDPath();
             string message = "";
+            string[] description = haloDescription.Text.Split(',');
+            haloDescription.Text = "";
+            foreach(string word in description)
+            {
+                haloDescription.Text += word;
+            }
 
             if (memCardPath == "")
             {
@@ -715,13 +720,19 @@ namespace ReLive
 
             string memCardPath = findSDPath();
 
-            double distance = 0;
-            double range = 0;
+            TextWriter config;
+            try
+            {
+                config = new StreamWriter(findSDPath() + "\\config.txt", false);
+            }
+            catch(IOException)
+            {
+                MessageBox.Show("Problem accessing config file, make sure it is not open and try again!");
+                return;
+            }
 
-            TextWriter config = new StreamWriter(findSDPath() + "\\config.txt", false);
-            
-            config.WriteLine(delayBox.Text + "," + distance + "," + faceCheck.Checked + "," +
-                haloCheck.Checked + "," + latBox.Text + ",-" + lngBox.Text + "," + range);
+            config.WriteLine(delayBox.Text + "," + distanceBox.Text + "," + faceCheck.Checked + "," +
+                haloCheck.Checked + "," + haloDescription.Text + "," + latBox.Text + "," + lngBox.Text + "," + haloDistanceBox.Text);
             config.Close();
 
             MessageBox.Show("Config written to " + memCardPath + "config.txt");
@@ -739,6 +750,11 @@ namespace ReLive
                 System.Diagnostics.Process.Start("http://maps.google.com/maps?q=" + latBox.Text + "," + lngBox.Text + "&t=h");
             else
                 MessageBox.Show("Search for a location first!");
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            fileBrowser.GoBack();
         }
     }
 }
