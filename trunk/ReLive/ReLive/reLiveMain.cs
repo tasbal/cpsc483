@@ -441,7 +441,7 @@ namespace ReLive
                 if (reliveCnt != 1)
                 {
                     MessageBox.Show(reliveCnt.ToString());
-                    string msg = "Please choose from the list below, the removable to be used. \n";
+//                    string msg = "Please choose from the list below, the removable to be used. \n";
                     SelectDrive selectWin = new SelectDrive();
 
                     for (int i = 0; i < rootNum; i++)
@@ -451,7 +451,7 @@ namespace ReLive
                     }
                     selectWin.ShowDialog(this);
                     memCardPath = allRemovables[selectWin.choice];
-                    MessageBox.Show(memCardPath + " was chosen to be the used drive.");
+                    MessageBox.Show(memCardPath + " was chosen to be the used drive.  \nPlease wait for directories to be set up");
                 }
                 driveSelected = true;
             }
@@ -556,7 +556,6 @@ namespace ReLive
 
         private void retrieveSD_Click(object sender, EventArgs e)
         {
-            string memCardPath = findSDPath();
             string defPath = @userPictures + "\\reLive";
 
             if (memCardPath == "")
@@ -570,19 +569,18 @@ namespace ReLive
 
         private void formatSD_Click(object sender, EventArgs e)
         {
-            string memCardPath = findSDPath();
             if (memCardPath == "")
             {
                 MessageBox.Show("No memory card found, please insert one and try again!");
                 return;
             }
-                
+
             //take off the '\'
-            memCardPath = memCardPath.Substring(0, 2);
+            string pathNoSlash = memCardPath.Substring(0, 2);
             if (MessageBox.Show("Are you sure you want to format your SD Card?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 //set dos process/command
-                System.Diagnostics.ProcessStartInfo sinf = new System.Diagnostics.ProcessStartInfo("cmd", @"/c format " + memCardPath + " /FS:FAT /V:RELIVE /X");
+                System.Diagnostics.ProcessStartInfo sinf = new System.Diagnostics.ProcessStartInfo("cmd", @"/c format " + pathNoSlash + " /FS:FAT /V:RELIVE /X");
                 sinf.RedirectStandardInput = true;
                 sinf.RedirectStandardOutput = true;
 
@@ -605,9 +603,49 @@ namespace ReLive
                 string output1 = output.Substring(0, 115);
                 int nextStart = output.IndexOf("nitializ");
                 string output2 = output.Substring(2030, 2050);
-                MessageBox.Show(output1 + "\n Format Completed");
+
+                p.Close();
+
+                MessageBox.Show(pathNoSlash + " formatted to Fat16. \n Format Completed. \n Please wait for directories to be set up.");
+                memCardDirSetup();
             }
         }
+
+
+        private void memCardDirSetup()
+        {
+            string[] day = new string[31];
+            DateTime currTime = DateTime.Now;
+            string msg = "";
+            day[0] = currTime.ToString("yyyyMMdd");
+            for (int i = 0; i < 31; i++)
+            {
+                day[i] = memCardPath + day[i];
+                if (i != 30)
+                {
+                    day[i + 1] = currTime.AddDays(i).ToString("yyyyMMdd");
+                }
+                msg = msg + day[i] + "\n";
+            }
+            //            MessageBox.Show(msg);
+
+            for (int i = 0; i < 31; i++)
+            {
+
+                Directory.CreateDirectory(day[i]);
+                //                MessageBox.Show(day[i] + " directory created");
+                for (int j = 0; j < 24; j++)
+                {
+                    int k = j + 1;
+                    Directory.CreateDirectory(day[i] + "\\" + "hour" + k);
+                    //                    MessageBox.Show(day[i] + "\\" + "hour" + j + 1 + " created");
+
+                }
+            }
+            MessageBox.Show("Directories Created");
+            //need to catch unauthorizedaccessexception
+        }
+
 
         private void distanceBox_TextChanged(object sender, EventArgs e)
         {
