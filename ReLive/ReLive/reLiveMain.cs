@@ -580,7 +580,7 @@ namespace ReLive
             if (MessageBox.Show("Are you sure you want to format your SD Card?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 //set dos process/command
-                System.Diagnostics.ProcessStartInfo sinf = new System.Diagnostics.ProcessStartInfo("cmd", @"/c format " + pathNoSlash + " /FS:FAT /V:RELIVE /X");
+                System.Diagnostics.ProcessStartInfo sinf = new System.Diagnostics.ProcessStartInfo("cmd", @"/c format " + pathNoSlash + " /FS:FAT /V:RELIVE /X /Q");
                 sinf.RedirectStandardInput = true;
                 sinf.RedirectStandardOutput = true;
 
@@ -599,10 +599,10 @@ namespace ReLive
 
                 myStreamWriter.Close();
 
-                string output = p.StandardOutput.ReadToEnd();
-                string output1 = output.Substring(0, 115);
-                int nextStart = output.IndexOf("nitializ");
-                string output2 = output.Substring(2030, 2050);
+                //string output = p.StandardOutput.ReadToEnd();
+                //string output1 = output.Substring(0, 115);
+                //int nextStart = output.IndexOf("nitializ");
+                //string output2 = output.Substring(2030, 2050);
 
                 p.Close();
 
@@ -617,13 +617,13 @@ namespace ReLive
             string[] day = new string[31];
             DateTime currTime = DateTime.Now;
             string msg = "";
-            day[0] = currTime.ToString("yyyyMMdd");
+            day[0] = currTime.ToString("yyyy-MM-dd");
             for (int i = 0; i < 31; i++)
             {
                 day[i] = memCardPath + day[i];
                 if (i != 30)
                 {
-                    day[i + 1] = currTime.AddDays(i).ToString("yyyyMMdd");
+                    day[i + 1] = currTime.AddDays(i).ToString("yyyy-MM-dd");
                 }
                 msg = msg + day[i] + "\n";
             }
@@ -636,8 +636,7 @@ namespace ReLive
                 //                MessageBox.Show(day[i] + " directory created");
                 for (int j = 0; j < 24; j++)
                 {
-                    int k = j + 1;
-                    Directory.CreateDirectory(day[i] + "\\" + "hour" + k);
+                    Directory.CreateDirectory(day[i] + "\\" + j);
                     //                    MessageBox.Show(day[i] + "\\" + "hour" + j + 1 + " created");
 
                 }
