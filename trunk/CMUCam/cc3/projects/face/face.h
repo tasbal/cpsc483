@@ -8,9 +8,6 @@
 #include <cc3_ilp.h>
 #include "vj.h"
 
-/* define for saving the images to mmc */
-//#define SAVE_IMAGES
-
 /* ---global variables----*/
 
 /* buffer to get the image rows from fifo to compute integral image */
@@ -49,11 +46,6 @@ uint32_t horz_past_sum_sq_pix[4];
 
 /* array to store rows while transfering b/w fifo and ii */
 static uint8_t image_row[CC3_LO_RES_WIDTH*3];
-
-#ifdef SAVE_IMAGES
-FILE* fp;
-FILE* fout;
-#endif
 
 int face_detect(void);
 void cc3_get_curr_segment(void);
@@ -124,27 +116,7 @@ int face_detect ()
        printf( "START\r" ); 
        /* new image  */
        
-       #ifdef SAVE_IMAGES
-
-       sprintf(img_name, "%s%04d%s","c:/img",num_frames, ".pgm");
-       fp=fopen(img_name,"w" );
-       if (fp == NULL)
-	 {
-	   printf("%s %s\n\r", "Error Opening: ",img_name);
-	  
-	 }
-       
-
-       fprintf( fp, "P2\n%d %d\n255\n", cc3_g_pixbuf_frame.width, cc3_g_pixbuf_frame.height-top_offset-bottom_offset );
-       sprintf(img_name, "%s%04d%s","c:/img",num_frames,".txt");
-       fout = fopen(img_name, "w");
-       if (fout == NULL)
-	 {
-	   printf("%s %s\n\r", "Error Opening  ",img_name);
-	 }
-
-       #endif 
-
+    
        /* This tells the camera to grab a new frame into the fifo and reset
 	  any internal location information */
        cc3_pixbuf_load();
@@ -432,10 +404,6 @@ int face_detect ()
 			   
 			    if (face)
 			      {
-                                #ifdef SAVE_IMAGES
-				fprintf(fout, "%d %d %d \n",curr_pos_x+1, cc3_row_counter_cropped_img+1, CC3_SCALES[curr_scale_idx]-1);
-				#endif
-		
 				printf("Face Detected at: %d %d, Size: %d \n\r",curr_pos_x+1, cc3_row_counter_cropped_img+1, CC3_SCALES[curr_scale_idx]-1);
 				cc3_num_detected_faces++;
 				
@@ -466,13 +434,6 @@ int face_detect ()
        /* end of frame */
 	  
        printf ("Frame Done..\n\r");
-       
-	#ifdef SAVE_IMAGES
-
-       fprintf( fout, "%d %d %d \n",0,0,0);
-       fclose(fout);
-       fclose(fp);
-       #endif
 	
 	num_frames++;
 
@@ -515,28 +476,15 @@ void cc3_get_curr_segment()
 	  cc3_get_pixel(&cc3_img_tmp, 0, 0, &pix_temp);
 	  cc3_integral_image[i][0] = pix_temp.channel[1]; // only green channel
 
-	  
-	  #ifdef SAVE_IMAGES
-	  fprintf(fp, "%d \r\n", cc3_integral_image[i][0]);
-	  #endif
-
 	  // start copying from the next pixel and calculate cumulative sum at the same time
 	  for (uint16_t j = 1; j < cc3_img_tmp.width; j++)
 	    {
 	      cc3_get_pixel(&cc3_img_tmp, j, 0, &pix_temp);
 	      cc3_integral_image[i][j] = pix_temp.channel[1]; // only green channel
-
-	      #ifdef SAVE_IMAGES
-	      fprintf( fp,"%d \r\n",cc3_integral_image[i][j] );
-	      #endif 
 	      
 	      // compute cumulative sum across the row
 	      cc3_integral_image[i][j] += cc3_integral_image[i][j-1];
 	    }
-
-          #ifdef SAVE_IMAGES
-	  fprintf( fp, "\r\n" );
-	  #endif
 	}
       
       // find cumulative sum along columns to complete the integral image computation
@@ -561,9 +509,6 @@ void cc3_get_curr_segment()
       cc3_get_pixel(&cc3_img_tmp, 0, 0, &pix_temp);
       cc3_integral_image[newly_added_row][0] = pix_temp.channel[1];
 
-      #ifdef SAVE_IMAGES
-      fprintf( fp,"%d\r\n ",cc3_integral_image[newly_added_row][0] );
-      #endif
       
       // read the row, from next pixel onward and compute cum sum across the row
       for (uint16_t j = 1; j < cc3_img_tmp.width; j++)
@@ -571,17 +516,9 @@ void cc3_get_curr_segment()
 	  cc3_get_pixel(&cc3_img_tmp, j, 0, &pix_temp);
 	  cc3_integral_image[newly_added_row][j] = pix_temp.channel[1];
 
-	  #ifdef SAVE_IMAGES
-	  fprintf( fp,"%d\r\n ",cc3_integral_image[newly_added_row][j] );
-          #endif
-
 	  // compute cumulative sum across the row
 	  cc3_integral_image[newly_added_row][j] += cc3_integral_image[newly_added_row][j-1];
 	}
-     
-       #ifdef SAVE_IMAGES
-       fprintf( fp, "\n\r\n" );
-       #endif 
 
        // find cumulative sum along columns to complete the integral image computation
        for (uint16_t j = 0; j < CC3_INTEGRAL_IMG_WIDTH; j++)
