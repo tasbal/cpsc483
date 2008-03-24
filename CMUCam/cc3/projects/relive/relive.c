@@ -56,7 +56,7 @@ void initialize()
 	parse_Config(config_buff);
 	if(config->good)
 	{		
-		printf("Delay - %.2lf\tMin Dist - %.2lf",config->delay,config->min_dist);
+		printf("Delay - %d\tMin Dist - %.2lf",(int)config->delay,config->min_dist);
 		if(config->face_detect)
 			printf("\tFace - true");
 		else
@@ -145,7 +145,7 @@ bool check_triggers( int deltaTime )
 	// timer whent off
 	if( deltaTime >= config->delay )
 	{
-		if( gps->good )
+//		if( gps->good )
 			takePic = true;
 	}
 	

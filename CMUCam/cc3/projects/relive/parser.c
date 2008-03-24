@@ -154,12 +154,15 @@ printf("config good\r\n");
 		
 printf("It has halo info\r\n");
 	
-	str1 = strtok(NULL,",");
 	if(str1 == NULL)
+	{
+printf("NULL\r\n");
 		return;
+	}
 	config->numHalo = atoi(str1);
 	if(config->numHalo < 1)
 	{
+printf("%s: %d<1\r\n",str1,config->numHalo);
 		config->halo = false;
 		config->numHalo = 0;
 		return;
@@ -171,6 +174,8 @@ printf("%d halos", config->numHalo);
 	HaloInfo* tmpHalo = config->halo_info;
 	tmpHalo->prev = NULL;
 	
+	
+	str1 = strtok(NULL,",");
 	for(int i = 0; i < config->numHalo; i ++)
 	{
 		cont = true;
@@ -179,7 +184,6 @@ printf("%d halos", config->numHalo);
 		while(cont)
 		{
 printf("Halo num %d\n\r",i);
-			str1 = strtok(config_string,",");
 			
 			if(str1 == NULL)	// we cant get all info so disregard this halo and rest of info
 			{

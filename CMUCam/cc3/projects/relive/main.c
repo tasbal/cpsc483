@@ -19,7 +19,8 @@ int main (void)
 	
 	// set time to equal delay so it takes picture right away
 	uint32_t prevTime = 0;
-	uint32_t deltaTime = config->delay;
+	uint32_t deltaTime = 0;
+	int second = 0;
 	
 	printf("\r\nHello, Camera initialized\r\n");
 
@@ -27,8 +28,8 @@ int main (void)
 	int picNum = 0;
 	while (1)
 	{
-		if (!cc3_uart_has_data (1))
-			get_gps_data();
+//		if (!cc3_uart_has_data (1))
+//			get_gps_data();
 		
 		// if its been delay millisecons take picture
 		if ( check_triggers(deltaTime)  )
@@ -37,6 +38,7 @@ int main (void)
 //			face = face_detect();
 			write_metadata();
 			deltaTime = 0;
+			second = 0;
 		}
 		// else update change in time by subtracting previous time off current time
 		// then updating previous time to current time
@@ -44,6 +46,12 @@ int main (void)
 		{
 			deltaTime += cc3_timer_get_current_ms() - prevTime;
 			prevTime =  cc3_timer_get_current_ms();
+			
+			if(deltaTime > second*1000)
+			{
+				printf("Second: %d\n\r",second);
+				second++;
+			}
 		}
 	
 		// blinking LED to make sure camera is working
