@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -606,8 +607,11 @@ namespace ReLive
 
                 p.Close();
 
-                MessageBox.Show(pathNoSlash + " formatted to Fat16. \n Format Completed. \n Please wait for directories to be set up.");
-                memCardDirSetup();
+                MessageBox.Show(pathNoSlash + " formatted to Fat16. \n Format Completed. \n Please wait a few minutes for directories to be set up.");
+//                memCardDirSetup();
+                ThreadStart job = new ThreadStart(memCardDirSetup);
+                Thread thread = new Thread(job);
+                thread.Start();
             }
         }
 

@@ -15,3 +15,4 @@ bin\Debug\Google.GData.Extensions.DLL
 bin\Debug\Google.GData.Photos.dll
 obj\Release\ReLive.exe
 obj\Release\ReLive.pdb
+obj\Debug\ReLive.SelectDrive.resources
