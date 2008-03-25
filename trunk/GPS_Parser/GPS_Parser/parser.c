@@ -533,3 +533,88 @@ void readFile_Config()
 	}
 	free(config_line);
 }
+
+double sin(double x)
+{
+	double numerator = x;
+	double denominator = 1.0;
+	double sign = 1.0;
+	double sin = 0;
+	int i;
+	// terms below define the number of terms you want
+	int terms = 10; 
+	for (i = 1 ; i <= terms ; i++ )
+	{
+		sin += numerator / denominator * sign;
+		numerator *= x * x;
+		denominator *= i*2 * (i*2+1);
+		sign *= -1;
+	}
+	return sin;
+}
+
+double cos(double x)
+{
+	//taylor series implementation
+	double numerator = 1.0;
+	double denominator = 1.0;
+	double sign = 1.0;
+	double cos = 0;
+	int i;
+	int terms = 10;
+	for ( i = 1; i<= terms; i++)
+	{
+		cos += numerator/denominator * sign;
+		numerator *= x * x;
+		denominator *= i*2 * (i*2-1);
+		sign *= -1;
+	}
+	return cos;
+}
+
+double atan2(double num,double den)
+{
+	double x = num/den;
+	double numerator = x;
+	double denominator = 1.0;
+	double sign = 1.0;
+	double arctan = 0;
+	int i;
+	int terms = 20;
+	for ( i = 1; i <= terms; i++)
+	{
+		arctan += numerator / denominator * sign;
+		numerator *= x * x;
+		denominator = 2 * i + 1;
+		sign *= -1;
+	}
+	return arctan;
+}
+
+double pow(double base,double pow)
+{
+	double toRet = 1;
+	int i;
+	for( i = 0; i < pow; i++)
+	{
+		toRet*=base;
+	}
+	return toRet;
+}
+
+double sqrt (double y) 
+{
+	double x, z, tempf;
+	unsigned long *tfptr;
+	tfptr = ((unsigned long *)&tempf) + 1;
+	tempf = y;
+	*tfptr = (0xbfcdd90a - *tfptr)>>1; 
+	x =  tempf;
+	z =  y*0.5;                        
+	x = (1.5*x) - (x*x)*(x*z);         
+	x = (1.5*x) - (x*x)*(x*z);
+	x = (1.5*x) - (x*x)*(x*z);
+	x = (1.5*x) - (x*x)*(x*z);
+	x = (1.5*x) - (x*x)*(x*z);
+	return x*y;
+}

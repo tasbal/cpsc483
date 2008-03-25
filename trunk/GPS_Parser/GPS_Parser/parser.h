@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
+#include "newmath.h"
 
 #define MINTODEG .01667
 #define DEGTORAD 0.017453293
