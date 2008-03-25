@@ -35,8 +35,7 @@ int main (void)
 		if ( check_triggers(deltaTime)  )
 		{
 			picNum=takePict(picNum);
-//			face = face_detect();
-			write_metadata();
+			write_to_memory(NULL, 0);
 			deltaTime = 0;
 			second = 0;
 		}
@@ -70,3 +69,5 @@ int main (void)
 	destroy_jpeg();
 	return 0;
 }
+
+/************************************************************************/

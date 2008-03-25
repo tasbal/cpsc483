@@ -12,24 +12,16 @@
 #define STATE_DLE		4
 #define START			5
 
-int state;
-bool face;
-int which_halo;
 FILE *memory;
 FILE *gps_com;
 
 /************************************************************************/
 
-void setup_copernicus(void);
-int compute_checksum(char* msg, int len);
-char digit_to_char_hex(int digit);
 void initialize(void);
 int takePict(int picNum);
 bool check_triggers( int delta_time );
-void write_gpsdata(char data, int opt);
-void write_metadata(void);
+void write_to_memory(char* data, int opt);
 void get_gps_data(void);
-//int receive_byte( char byte, char* data, int dLen );
 
 static void capture_current_jpeg(FILE *f);
 static void init_jpeg(void);
@@ -98,5 +90,7 @@ static void destroy_jpeg()
 	jpeg_destroy_compress(&cinfo);
 	free(row);
 }
+
+/************************************************************************/
 
 #endif

@@ -13,7 +13,11 @@ void parse_init()
 	config->min_dist = 0;
 	config->face_detect = 0;
 	config->halo = 0;
-	config->halo_info = NULL;
+	config->halo_info = (HaloInfo*)malloc(sizeof(HaloInfo));
+	config->halo_info->name =(char*)malloc(sizeof(char)*50);
+	config->halo_info->lat = 0;
+	config->halo_info->lon = 0;
+	config->halo_info->range = 0;
 	config->good = false;
 	
 	gps = (GPSData*)malloc(sizeof(GPSData));
@@ -26,59 +30,9 @@ void parse_init()
 	gps->day = 0;
 	gps->year = 0;
 	gps->good = false;
-}
-
-/************************************************************************/
-
-void parse_GPS_tsip(char* gps_data, int dLen)
-{
-	switch(gps_data[1])
-	{
-	// GPS TIME:
-	//
-	case 0x41:
-		printf("gps time\r\n");
-		break;
-	case 0x42:
-		printf("pos\r\n");
-		break;
-	case 0x43:
-		printf("velocity\r\n");
-		break;
-	case 0x45:
-		printf("software Ver\r\n");
-		break;
-	case 0x46:
-		printf("health\r\n");
-		break;
-	case 0x4A:
-		printf("lla pos\r\n");
-		break;
-	case 0x4B:
-		printf("status\r\n");
-		break;
-	case 0x55:
-		printf("options\r\n");
-		break;
-	case 0x56:
-		printf("velocity\r\n");
-		break;
-	case 0x6D:
-		printf("satelites\r\n");
-		break;
-	case 0x82:
-		printf("sbas\r\n");
-		break;
-	case 0x83:
-		printf("opsition and blas\r\n");
-		break;
-	case 0x84:
-		printf("lla pos and blas\r\n");
-		break;
-	case 0x8F:
-		printf("last fix\r\n");
-		break;
-	}
+	
+	prev_gps = (GPSData*)malloc(sizeof(GPSData));
+	copy_gps();
 }
 
 /************************************************************************/
@@ -96,8 +50,11 @@ void parse_Config(char* config_string)
 	str1 = strtok(config_string,",");
 	while(cont)
 	{
-		if(str1 == NULL)	// couldn't get all necessary just return
+		if(str1 == NULL)
+		{
+			// an error ocurred return without making config good
 			return;
+		}
 		switch(numComma)
 		{
 		case 0:
@@ -107,157 +64,75 @@ void parse_Config(char* config_string)
 				config->delay *= 60000;
 					// times 60000 because we need millisec
 					// but config file is in minutes
+printf("Delay - %d\n\r", (int)config->delay);
 			}
 			break;
 		case 1:
 			{
 				//min distance
 				config->min_dist  = atof(str1);
+printf("Min Dist - %d\n\r", (int)config->min_dist);
 			}
 			break;
 		case 2:
 			{
-				//face detection
+				//halo enabled
 				if(strcmp(str1,"True")==0)
-					config->face_detect = true;
+				{
+					config->halo = true;
+printf("Halo - true\n\r");
+				}
 				else
-					config->face_detect = false;
+				{
+					config->halo = false;
+					cont = false;
+printf("Halo - false\n\r");
+				}
 			}
 			break;
 		case 3:
 			{
-				//halo enabled
-				if(strcmp(str1,"True")==0)
-					config->halo = true;
-				else
-					config->halo = false;
-				
+				//halo name
+				strcpy(config->halo_info->name, str1);
+printf("Halo Name - %s\n\r", config->halo_info->name);
+			}
+			break;
+		case 4:
+			{
+				//lat
+				config->halo_info->lat = atof(str1);
+printf("Halo Lat - %d\n\r", (int)config->halo_info->lat);
+			}
+			break;
+		case 5:
+			{
+				//lon
+				config->halo_info->lon = atof(str1);
+printf("Halo Lon - %d\n\r", (int)config->halo_info->lon);
+			}
+			break;
+		case 6:
+			{
+				//range
+				config->halo_info->range = atof(str1);
+printf("Halo Range - %d\n\r", (int)config->halo_info->range);
 				cont = false;
 			}
 			break;
 		default:
 			{
+				//an error occured return dont set config as good
+				return;
 			}
 			break;
 		}
 		str1 = strtok(NULL,",");
 		numComma++;
+printf("%d - %s\r\n", numComma++, str1);
 	}
 	// end of while loop to get basic stuff with success
+printf("Config good\n\r");
 	config->good = true;
-	
-printf("config good\r\n");
-		
-	// if no halos then we are done with configuration from sd card
-	if( !config->halo )
-		return;
-		
-printf("It has halo info\r\n");
-	
-	if(str1 == NULL)
-	{
-printf("NULL\r\n");
-		return;
-	}
-	config->numHalo = atoi(str1);
-	if(config->numHalo < 1)
-	{
-printf("%s: %d<1\r\n",str1,config->numHalo);
-		config->halo = false;
-		config->numHalo = 0;
-		return;
-	}
-	
-printf("%d halos", config->numHalo);
-	
-	config->halo_info =  (HaloInfo*)malloc(sizeof(HaloInfo));
-	HaloInfo* tmpHalo = config->halo_info;
-	tmpHalo->prev = NULL;
-	
-	
-	str1 = strtok(NULL,",");
-	for(int i = 0; i < config->numHalo; i ++)
-	{
-		cont = true;
-		numComma = 0;
-		
-		while(cont)
-		{
-printf("Halo num %d\n\r",i);
-			
-			if(str1 == NULL)	// we cant get all info so disregard this halo and rest of info
-			{
-				if( tmpHalo->prev == NULL)	// then its head
-				{
-					free(config->halo_info);
-					config->halo_info  = NULL;
-					config->halo = false;
-					config->numHalo = 0;
-				}
-				else
-				{
-					tmpHalo = tmpHalo->prev;
-					free(tmpHalo->next);
-					tmpHalo->next = NULL;
-					config->numHalo = i;
-				}
-				return;
-			}
-			
-			switch(numComma)
-			{
-			case 0:
-				{
-					strcpy(tmpHalo->name, str1);
-printf("Name: %s\r\n", tmpHalo->name);
-				}
-				break;
-			case 1:
-				{
-					tmpHalo->lat = atof(str1);
-printf("Latitude: %f\r\n", tmpHalo->lat);
-				}
-				break;
-			case 2:
-				{
-					tmpHalo->lon = atof(str1);
-printf("Longitude: %f\r\n", tmpHalo->lon);
-				}
-				break;
-			case 3:
-				{
-					tmpHalo->range = atof(str1);
-printf("Range: %f\r\n", tmpHalo->range);
-					cont = false;
-				}
-				break;
-			default:
-				{
-				}
-				break;
-			}
-			str1 = strtok(NULL,",");
-			numComma++;
-		}
-		// end of while that will get all the info of a single halo
-		// if at any point it does not get all the info it will disregard
-		// that halo and return because cant trust rest of info
-		
-		tmpHalo->next = (HaloInfo*)malloc(sizeof(HaloInfo));
-		HaloInfo* t = tmpHalo;
-		tmpHalo = tmpHalo->next;
-		tmpHalo->prev = t;
-		
-printf("\n\r");
-	}
-	// end of getting all the halos successfully but we had allocated
-	// space for one more so we need to free it
-	
-	tmpHalo = tmpHalo->prev;
-	free(tmpHalo->next);
-	tmpHalo->next = NULL;
-	
-printf("\n\r");
 }
 
 /************************************************************************/
@@ -319,8 +194,20 @@ void parse_GPS(char* gps_string)
 			{
 				date = (char*)malloc(10*sizeof(char));
 				strcpy(date,str1);	
+				
 				gps = convert(time,lat,lon,date);
-				gps->good = true;
+				
+				// first time to aquire signal
+				// will also save data into prev_gps
+				// for calculating travel distance
+				if (!gps->good)
+				{
+					gps->good = true;
+					copy_gps();
+				}
+				else
+					gps->good = true;
+				
 				free(time);
 				free(lat);
 				free(lon);
@@ -445,16 +332,10 @@ double toRad(double degrees)
 
 /************************************************************************/
 
-double calcDist( GPSData* gps1, GPSData* gps2 )
+double calcDist( double nLat1, double nLon1, double nLat2, double nLon2 )
 {
-	double nLat1, nLon1, nLat2, nLon2;
 	double nDLat, nDLon, nA, nC, nD;
 	double nRadius = 6378140; // Earths radius in Kilometers
-
-	nLat1 = gps1->lat;
-	nLon1 = gps1->lon;
-	nLat2 = gps2->lat;
-	nLon2 = gps2->lon;
 
 	// Get the difference between our two points 
 
@@ -481,3 +362,20 @@ double calcDist( GPSData* gps1, GPSData* gps2 )
 	nD = nRadius * nC;
 	return nD; // Return our calculated distance
 }
+
+/************************************************************************/
+
+void copy_gps(void)
+{	
+	prev_gps->lat = gps->lat;
+	prev_gps->lon = gps->lon;
+	prev_gps->hour = gps->hour;
+	prev_gps->minute = gps->minute;
+	prev_gps->second = gps->second;
+	prev_gps->month = gps->month;
+	prev_gps->day = gps->day;
+	prev_gps->year = gps->year;
+	prev_gps->good = gps->good;
+}
+
+/************************************************************************/
