@@ -26,10 +26,10 @@ void initialize()
 	// configure uarts
 	cc3_uart_init (0, CC3_UART_RATE_115200, CC3_UART_MODE_8N1,
 		CC3_UART_BINMODE_TEXT);
-//	cc3_uart_init (1, CC3_UART_RATE_4800, CC3_UART_MODE_8N1,
-//		CC3_UART_BINMODE_BINARY);
-	cc3_uart_init (1, CC3_UART_RATE_38400, CC3_UART_MODE_8N1,
+	cc3_uart_init (1, CC3_UART_RATE_4800, CC3_UART_MODE_8N1,
 		CC3_UART_BINMODE_BINARY);
+//	cc3_uart_init (1, CC3_UART_RATE_38400, CC3_UART_MODE_8N1,
+//		CC3_UART_BINMODE_BINARY);
 	// Make it so that stdout and stdin are not buffered
 	uint32_t val = setvbuf (stdout, NULL, _IONBF, 0);
 	val = setvbuf (stdin, NULL, _IONBF, 0);
@@ -181,7 +181,7 @@ void write_metadata()
 	}
 }
 
-/************************************************************************
+/************************************************************************/
 
 void setup_copernicus()
 {
@@ -258,7 +258,7 @@ void setup_copernicus()
 	printf("\r\nCofingured GPS\r\n");
 }
 
-/************************************************************************
+/************************************************************************/
 
 int compute_checksum(char* msg, int len)
 {
@@ -278,7 +278,7 @@ int compute_checksum(char* msg, int len)
 		return -1;
 }
 
-/************************************************************************
+/************************************************************************/
 
 char digit_to_char_hex(int digit)
 {
@@ -289,7 +289,7 @@ char digit_to_char_hex(int digit)
 		return digit + 'A' - 10;
 }
 
-/************************************************************************
+/************************************************************************/
 
 void get_gps_data()
 {
@@ -300,7 +300,7 @@ void get_gps_data()
 		printf("Getting GPS Data\r\n");
 		fscanf(gps_com,"%s",gps_buff);
 		printf("%s\r\n",gps_buff);
-		gps = parse_GPS(gps_buff);
+		parse_GPS(gps_buff);
 		if(gps!=NULL)
 			printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
 		else
@@ -310,7 +310,7 @@ void get_gps_data()
 	free(gps_buff);
 }
 
-/************************************************************************/
+/************************************************************************
 
 void get_gps_data()
 {
@@ -352,7 +352,7 @@ void get_gps_data()
 	free(data);
 }
 
-/************************************************************************/
+/************************************************************************
 
 int receive_byte( char byte, char* data, int dLen )
 {
