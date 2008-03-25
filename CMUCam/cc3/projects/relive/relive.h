@@ -20,16 +20,16 @@ FILE *gps_com;
 
 /************************************************************************/
 
-//void setup_copernicus(void);
-//int compute_checksum(char* msg, int len);
-//char digit_to_char_hex(int digit);
+void setup_copernicus(void);
+int compute_checksum(char* msg, int len);
+char digit_to_char_hex(int digit);
 void initialize(void);
 int takePict(int picNum);
 bool check_triggers( int delta_time );
 void write_gpsdata(char data, int opt);
 void write_metadata(void);
 void get_gps_data(void);
-int receive_byte( char byte, char* data, int dLen );
+//int receive_byte( char byte, char* data, int dLen );
 
 static void capture_current_jpeg(FILE *f);
 static void init_jpeg(void);

@@ -28,8 +28,8 @@ int main (void)
 	int picNum = 0;
 	while (1)
 	{
-//		if (!cc3_uart_has_data (1))
-//			get_gps_data();
+		if (!cc3_uart_has_data (1))
+			get_gps_data();
 		
 		// if its been delay millisecons take picture
 		if ( check_triggers(deltaTime)  )
