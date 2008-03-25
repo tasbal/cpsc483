@@ -18,14 +18,12 @@ typedef struct _GPSData
 	bool good;
 }GPSData;
 
-typedef struct HaloInfo
+typedef struct _HaloInfo
 {
 	char* name;
 	double lat;
 	double lon;
 	double range;
-	struct HaloInfo* next;
-	struct HaloInfo* prev;
 }HaloInfo;
 
 typedef struct _ConfigInfo
@@ -34,7 +32,6 @@ typedef struct _ConfigInfo
 	double min_dist;
 	bool face_detect;
 	bool halo;
-	int numHalo;
 	HaloInfo* halo_info;
 	bool good;
 }ConfigInfo;
@@ -42,18 +39,18 @@ typedef struct _ConfigInfo
 /************************************************************************/
 
 GPSData *gps;
+GPSData *prev_gps;
 ConfigInfo *config;
 
 /************************************************************************/
 
 void parse_init(void);
 void parse_GPS(char* gps_data);
-void parse_GPS_tsip(char* gps_data, int dLen);
 void parse_Config(char* config_string);
 GPSData* convert(char* time,char* lat,char* lon,char* date);
 double toDeg(char* data,int lat_or_lon);
-double toRad(double degrees);
-double calcDist(GPSData* gps1, GPSData *gps2);
+double calcDist( double nLat1, double nLon1, double nLat2, double nLon2 );
+void copy_gps(void);
 
 /************************************************************************/
 
