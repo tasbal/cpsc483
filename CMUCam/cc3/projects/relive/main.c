@@ -21,8 +21,9 @@ int main (void)
 	uint32_t prevTime = 0;
 	uint32_t deltaTime = 0;
 	int second = 0;
+	double deltaDist = 0;
 	
-	printf("\r\nHello, Camera initialized\r\n");
+printf("\r\nHello, Camera initialized\r\n");
 
 	bool on = true;
 	int picNum = 0;
@@ -32,7 +33,7 @@ int main (void)
 			get_gps_data();
 		
 		// if its been delay millisecons take picture
-		if ( check_triggers(deltaTime)  )
+		if ( check_triggers(deltaTime, deltaDist, second)  )
 		{
 			picNum=takePict(picNum);
 			write_to_memory(NULL, 0);
@@ -43,12 +44,18 @@ int main (void)
 		// then updating previous time to current time
 		else
 		{
+			// update change in parameters
 			deltaTime += cc3_timer_get_current_ms() - prevTime;
-			prevTime =  cc3_timer_get_current_ms();
+			deltaDist += calcDist( prev_gps->lat, prev_gps->lon, gps->lat, gps->lon );
 			
+			// update previous state
+			prevTime =  cc3_timer_get_current_ms();
+			copy_gps();
+			
+			// for debugin outputs state every second
 			if(deltaTime > second*1000)
 			{
-				printf("Second: %d\n\r",second);
+				printf("\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
 				second++;
 			}
 		}
