@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #include <stdbool.h>
 
 #include "parser.h"
@@ -64,14 +63,12 @@ void parse_Config(char* config_string)
 				config->delay *= 60000;
 					// times 60000 because we need millisec
 					// but config file is in minutes
-printf("Delay - %d\n\r", (int)config->delay);
 			}
 			break;
 		case 1:
 			{
 				//min distance
 				config->min_dist  = atof(str1);
-printf("Min Dist - %d\n\r", (int)config->min_dist);
 			}
 			break;
 		case 2:
@@ -80,13 +77,11 @@ printf("Min Dist - %d\n\r", (int)config->min_dist);
 				if(strcmp(str1,"True")==0)
 				{
 					config->halo = true;
-printf("Halo - true\n\r");
 				}
 				else
 				{
 					config->halo = false;
 					cont = false;
-printf("Halo - false\n\r");
 				}
 			}
 			break;
@@ -94,28 +89,24 @@ printf("Halo - false\n\r");
 			{
 				//halo name
 				strcpy(config->halo_info->name, str1);
-printf("Halo Name - %s\n\r", config->halo_info->name);
 			}
 			break;
 		case 4:
 			{
 				//lat
 				config->halo_info->lat = atof(str1);
-printf("Halo Lat - %d\n\r", (int)config->halo_info->lat);
 			}
 			break;
 		case 5:
 			{
 				//lon
 				config->halo_info->lon = atof(str1);
-printf("Halo Lon - %d\n\r", (int)config->halo_info->lon);
 			}
 			break;
 		case 6:
 			{
 				//range
 				config->halo_info->range = atof(str1);
-printf("Halo Range - %d\n\r", (int)config->halo_info->range);
 				cont = false;
 			}
 			break;
@@ -128,28 +119,51 @@ printf("Halo Range - %d\n\r", (int)config->halo_info->range);
 		}
 		str1 = strtok(NULL,",");
 		numComma++;
-printf("%d - %s\r\n", numComma++, str1);
 	}
 	// end of while loop to get basic stuff with success
-printf("Config good\n\r");
 	config->good = true;
 }
 
 /************************************************************************/
 
-void parse_GPS(char* gps_string)
+bool parse_GPS(char* gps_string)
 {
-	if(gps_string == NULL || gps_string[0]!='$')
-		return;
-	
+	if(gps_string == NULL || gps_string[0] != '$' || gps_string[1] != 'G' || gps_string[2] != 'P')
+		return false;
+	if(gps_string[3] == 'G' && gps_string[4] == 'G' && gps_string[5] == 'A')
+	{
+		return parse_GPGGA(gps_string);
+	}
+	if(gps_string[3] == 'V' && gps_string[4] == 'T' && gps_string[5] == 'G')
+	{
+		return parse_GPVTG(gps_string);
+	}
+	return false;
+}
+
+/************************************************************************/
+
+bool parse_GPVTG(char* gps_string)
+{
+	//nothing useful out of GPVTG right now, maybe later
+	return false;
+}
+
+/************************************************************************/
+
+bool parse_GPGGA(char* gps_string)
+{
 	char* str1 = NULL;
-	int num_comma = 0;	
+	int num_comma;	
 	char* time = NULL;
 	char* lat = NULL;
-	char* date = NULL;
-	char* lon = NULL;
+	char* lon= NULL;
+	if(gps_string == NULL || gps_string[0]!='$')
+		return NULL;
 
-	str1 = strtok(gps_string, ",");
+	num_comma = 0;
+
+	str1 = strsep(&gps_string, ",");
 	while(1)
 	{
 		if(str1 == NULL)
@@ -160,8 +174,8 @@ void parse_GPS(char* gps_string)
 		{
 		case 0:  //gpgga
 			{
-				if(strcmp(str1,"$GPRMC") != 0 )
-					return;
+				if(strcmp(str1,"$GPGGA") != 0 )
+					return false;
 			}
 			break;
 		case 1:  //time
@@ -170,101 +184,93 @@ void parse_GPS(char* gps_string)
 				strcpy(time,str1);
 			}
 			break;
-		case 2:  //active or void
-			{
-				if(strcmp(str1,"A") != 0 )
-				{
-					return;
-				}
-			}
-			break;
-		case 3:  //lat (in DDDMM.MMMMM)
+		case 2:  //lat (in DDMM.MMMM)
 			{
 				lat = (char*)malloc(20*sizeof(char));
 				strcpy(lat,str1);
 			}
 			break;
-		case 5:  //lon (in DDDMM.MMMMM)
+		case 4:  //lon (in DDDMM.MMMMM)
 			{
 				lon = (char*)malloc(20*sizeof(char));
-				strcpy(lon,str1);
+				strcpy(lon,str1);	
 			}
 			break;
-		case 9:
+		case 6:  //quality indicator
 			{
-				date = (char*)malloc(10*sizeof(char));
-				strcpy(date,str1);	
-				
-				gps = convert(time,lat,lon,date);
-				
-				// first time to aquire signal
-				// will also save data into prev_gps
-				// for calculating travel distance
-				if (!gps->good)
+				if(strcmp(str1,"0")==0 || strcmp(str1,"") ==0)
 				{
-					gps->good = true;
-					copy_gps();
+					free(time);
+					free(lat);
+					free(lon);
+					return false;
 				}
 				else
+				{
+					
+					convert(time,lat,lon,NULL);
+					
+					// first time to aquire signal
+					// will also save data into prev_gps
+					// for calculating travel distance
+					if (!gps->good)
+					{
+						copy_gps();
+						prev_gps->good = true;
+					}
+					
 					gps->good = true;
-				
-				free(time);
-				free(lat);
-				free(lon);
-				free(date);
-				return;
+					
+					free(time);
+					free(lat);
+					free(lon);
+					return true;
+				}
 			}
 			break;
 		}
-		str1 = strtok(NULL,",");
+		str1 = strsep(&gps_string,",");
 		num_comma++;
 	}
+	return false;
 }
 
 /************************************************************************/
 
-GPSData* convert(char* time,char* lat,char* lon,char* date)
+void convert(char* time,char* lat,char* lon,char* date)
 {
-	GPSData* g;
+	char* tmp = (char*)malloc(sizeof(char)*3);
 
-	char* tmp;
-
-	tmp = (char*)malloc(sizeof(char)*3);
-
-	g = (GPSData*)malloc(sizeof(GPSData));
-
-	g->lat = toDeg(lat,0);
-	g->lon = toDeg(lon,1)*-1;
+	gps->lat = toDeg(lat,0);
+	gps->lon = toDeg(lon,1)*-1;
 
 	tmp[0] = date[0];
 	tmp[1] = date[1];
 	tmp[2] = '\0';
-	g->day = atoi(tmp);
+	gps->day = atoi(tmp);
 	
 	tmp[0] = date[2];
 	tmp[1] = date[3];
-	g->month = atoi(tmp);
+	gps->month = atoi(tmp);
 
 	tmp[0] = date[4];
 	tmp[1] = date[5];
-	g->year = atoi(tmp)+2000;
+	gps->year = atoi(tmp)+2000;
 
 	tmp[0] = time[0];
 	tmp[1] = time[1];
 
-	g->hour = atoi(tmp);
+	gps->hour = atoi(tmp);
 
 	tmp[0] = time[2];
 	tmp[1] = time[3];
-	g->minute = atoi(tmp);
+	gps->minute = atoi(tmp);
 	
 	tmp[0] = time[4];
 	tmp[1] = time[5];
-	g->second = atoi(tmp);
+	gps->second = atoi(tmp);
 	
 	free(tmp);
-
-	return g;
 }
 
 /************************************************************************/
@@ -274,9 +280,9 @@ double toDeg(char* DDMM,int latorlon)
 	//converts from DDDMM.MMMMMM to DDDD.DDDDD
 	//use a 0 for lattitude and a 1 for longitude
 
-	char* deg;
-	char* min;
-	char* ptr;
+	char* deg = NULL;
+	char* min = NULL;
+	char* ptr = NULL;
 	double deg_d;
 	double min_d;
 	int i;
@@ -376,6 +382,102 @@ void copy_gps(void)
 	prev_gps->day = gps->day;
 	prev_gps->year = gps->year;
 	prev_gps->good = gps->good;
+}
+
+/************************************************************************/
+
+double sin(double x)
+{
+	double numerator = x;
+	double denominator = 1.0;
+	double sign = 1.0;
+	double sin2 = 0;
+	int i;
+	// terms below define the number of terms you want
+	int terms = 10; 
+	for (i = 1 ; i <= terms ; i++ )
+	{
+		sin2 += numerator / denominator * sign;
+		numerator *= x * x;
+		denominator *= i*2 * (i*2+1);
+		sign *= -1;
+	}
+	return sin2;
+}
+
+
+/************************************************************************/
+
+double cos(double x)
+{
+	//taylor series implementation
+	double numerator = 1.0;
+	double denominator = 1.0;
+	double sign = 1.0;
+	double cos2 = 0;
+	int i;
+	int terms = 10;
+	for ( i = 1; i<= terms; i++)
+	{
+		cos2 += numerator/denominator * sign;
+		numerator *= x * x;
+		denominator *= i*2 * (i*2-1);
+		sign *= -1;
+	}
+	return cos2;
+}
+
+/************************************************************************/
+
+double atan2(double num,double den)
+{
+	double x = num/den;
+	double numerator = x;
+	double denominator = 1.0;
+	double sign = 1.0;
+	double arctan = 0;
+	int i;
+	int terms = 20;
+	for ( i = 1; i <= terms; i++)
+	{
+		arctan += numerator / denominator * sign;
+		numerator *= x * x;
+		denominator = 2 * i + 1;
+		sign *= -1;
+	}
+	return arctan;
+}
+
+/************************************************************************/
+
+double pow(double base,double pow2)
+{
+	double toRet = 1;
+	int i;
+	for( i = 0; i < pow2; i++)
+	{
+		toRet*=base;
+	}
+	return toRet;
+}
+
+/************************************************************************/
+
+double sqrt (double y) 
+{
+	double x, z, tempf;
+	unsigned long *tfptr;
+	tfptr = ((unsigned long *)&tempf) + 1;
+	tempf = y;
+	*tfptr = (0xbfcdd90a - *tfptr)>>1; 
+	x =  tempf;
+	z =  y*0.5;                        
+	x = (1.5*x) - (x*x)*(x*z);         
+	x = (1.5*x) - (x*x)*(x*z);
+	x = (1.5*x) - (x*x)*(x*z);
+	x = (1.5*x) - (x*x)*(x*z);
+	x = (1.5*x) - (x*x)*(x*z);
+	return x*y;
 }
 
 /************************************************************************/

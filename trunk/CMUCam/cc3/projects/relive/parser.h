@@ -45,13 +45,22 @@ ConfigInfo *config;
 /************************************************************************/
 
 void parse_init(void);
-void parse_GPS(char* gps_data);
+bool parse_GPS(char* gps_data);
+bool parse_GPGGA(char* gps_string);
+bool parse_GPVTG(char* gps_string);
 void parse_Config(char* config_string);
-GPSData* convert(char* time,char* lat,char* lon,char* date);
+void convert(char* time,char* lat,char* lon,char* date);
+double toRad(double degrees);
 double toDeg(char* data,int lat_or_lon);
 double calcDist( double nLat1, double nLon1, double nLat2, double nLon2 );
 void copy_gps(void);
 
 /************************************************************************/
+
+double sin(double x);
+double cos(double x);
+double atan2(double num,double den);
+double pow(double base,double pow2);
+double sqrt (double y);
 
 #endif

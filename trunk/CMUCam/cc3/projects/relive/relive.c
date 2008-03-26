@@ -1,4 +1,3 @@
-#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <time.h>
@@ -33,7 +32,7 @@ void initialize()
 	cc3_filesystem_init();
 
 	// read config file from MMC
-	printf ("Reading config file\r\n");
+	printf ("\n\rReading config file\r\n");
 	memory = fopen ("c:/config.txt", "r");
 	if (memory == NULL) {
 		perror ("fopen failed\r\n");
@@ -49,13 +48,19 @@ void initialize()
 	
 	// parse config file
 	parse_Config(config_buff);
+	
+	// for debugin outputs the info from config file
 	if(config->good)
-	{		
-		printf("Delay - %d\tMin Dist - %.2lf",(int)config->delay,config->min_dist);
+	{
+		printf("\r\nConfig File:\n\rDelay(ms) - %d\tMin Dist(mm) - %d",(int)config->delay,(int)(config->min_dist*1000));
 		if(config->halo)
 		{
 			printf("\tHalo - true\r\n");
-			printf("\tHalo %s: Lat - %.2lf\tLon - %.2lf\tRange - %.2lf\n\r\n",config->halo_info->name,config->halo_info->lat,config->halo_info->lon,config->halo_info->range);
+			printf("\tHalo %s:\t Lat*10000 - %d\tLon*10000 - %d\tRange(mm) - %d\r\n",
+				config->halo_info->name,
+				(int)(config->halo_info->lat*10000),
+				(int)(config->halo_info->lon*10000),
+				(int)(config->halo_info->range*1000) );
 		}
 		else
 			printf("\tHalo - false\r\n");
@@ -75,14 +80,13 @@ void initialize()
 	cc3_pixbuf_load();
 	
 	// init jpeg
+printf("\r\nInitialize JPEG:\r\n");
 	init_jpeg();
-	printf("\r\n");
 
 	cc3_timer_wait_ms(1000);	
 	cc3_led_set_state (1, false);
 	cc3_led_set_state (2, false);
 	free(config_buff);
-	printf("\r\n");
 }
 
 /************************************************************************/
@@ -91,13 +95,14 @@ int takePict(int picNum)
 {
 	char filename[16];
 	
+printf("\r\nTaking Picture:\n\r");
 	do
 	{
 		snprintf(filename, 16, "c:/img%.5d.jpg", picNum);
 		memory = fopen(filename, "r");
 		if ( memory != NULL )
 		{
-			printf( "%s already exists...\r\n",filename); 
+//			printf( "%s already exists...\r\n",filename); 
 			picNum++; 
 			fclose(memory);
 		}
@@ -113,7 +118,6 @@ int takePict(int picNum)
 		printf( "Error: Can't open file\r\n" );
 		while(1);
 	}
-	printf("Taking Picture\r\n");
 	capture_current_jpeg(memory);
 	fclose(memory);
 	
@@ -123,29 +127,26 @@ int takePict(int picNum)
 
 /************************************************************************/
 
-bool check_triggers( int deltaTime )
+bool check_triggers( int deltaTime, double deltaDist, int second )
 {
 	bool takePic = false;
-	int distance = 0;
 	
-//	if( gps->good )
+	if( gps->good )
 	{
 		// it has halo so must check if within halo
-/*		if ( config->halo )
+		if ( config->halo )
 		{
 			// if distance is greater than range then return with false
 			// else check rest of triggers
-			distance = calcDist( config->halo_info->lon, config->halo_info->lat, gps->lat, gps->lon );
+			double distance = calcDist( config->halo_info->lon, config->halo_info->lat, gps->lat, gps->lon );
 			if ( distance >= config->halo_info->range)
 				return takePic;
-				
 		}
 		
 		// see if covered min distance
-		distance = calcDist( prev_gps->lat, prev_gps->lon, gps->lat, gps->lon );
-		if ( distance >= config->min_dist)
+		if ( deltaDist >= config->min_dist)
 			takePic = true;
-*/		
+		
 		// timer went off
 		if( deltaTime >= config->delay )
 			takePic = true;
@@ -159,9 +160,9 @@ bool check_triggers( int deltaTime )
 void write_to_memory(char* data, int opt)
 {
 	if(opt == 0)
-		memory = fopen ("c:/gpsData.txt", "a");
-	else
 		memory = fopen ("c:/metadata.txt", "a");
+	else
+		memory = fopen ("c:/gpsData.txt", "a");
 	
 	if (memory == NULL) {
 	perror ("fopen failed");
@@ -170,7 +171,10 @@ void write_to_memory(char* data, int opt)
 	
 	if ( opt == 0 )
 	{
-		fprintf(memory, "%lf, %lf, %2d:%2d:%2d", gps->lat, gps->lon, gps->hour, gps->minute, gps->second);
+		fprintf(memory, "%d, %d, %2d:%2d:%2d",
+			(int)(gps->lat*10000),
+			(int)(gps->lon*10000),
+			gps->hour, gps->minute, gps->second);
 		
 		if(config->halo)
 			fprintf(memory, ", %s", config->halo_info->name);
@@ -194,17 +198,19 @@ void write_to_memory(char* data, int opt)
 void get_gps_data()
 {
 	char* gps_buff = (char*)malloc(sizeof(char)*100);
-
-	printf("\r\nGetting GPS Data\r\n");
+	
 	fscanf(gps_com,"%s",gps_buff);
-	printf("%s\r\n",gps_buff);
+	printf("\r\nGetting GPS Data: %s\r\n",gps_buff);
 	
 	write_to_memory(gps_buff,1);
 	write_to_memory(NULL,2);
 	
-	parse_GPS(gps_buff);
-	if(gps->good)
-		printf("Lat - %.2lf\tLon - %.2lf\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",gps->lat,gps->lon,gps->month,gps->day,gps->year,gps->hour,gps->minute,gps->second);
+	if(parse_GPS(gps_buff))
+		printf("Lat - %d\tLon - %d\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",
+			(int)(gps->lat*10000),
+			(int)(gps->lon*10000),
+			gps->month,gps->day,gps->year,
+			gps->hour,gps->minute,gps->second);
 	else
 		printf("INVALID\r\n");
 	
