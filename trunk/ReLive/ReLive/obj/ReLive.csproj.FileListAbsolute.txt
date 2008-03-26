@@ -100,22 +100,6 @@ C:\temp\ReLive\ReLive\obj\Debug\ReLive.Properties.Resources.resources
 C:\temp\ReLive\ReLive\obj\Debug\ReLive.SelectDrive.resources
 C:\temp\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
 C:\Documents and Settings\raushel\Desktop\cs483\ReLive\ReLive\obj\Debug\ReLive.SelectDrive.resources
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.exe
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.pdb
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\ReLive.exe
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\ReLive.pdb
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.AccessControl.dll
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.Calendar.dll
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.Client.DLL
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.Extensions.DLL
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.Photos.dll
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.MapBrowser.resources
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.reLiveMain.resources
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.Properties.Resources.resources
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.SelectDrive.resources
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
 F:\cpsc483-2\ReLive\ReLive\obj\Debug\reLive.exe
 F:\cpsc483-2\ReLive\ReLive\obj\Debug\reLive.pdb
 F:\cpsc483-2\ReLive\ReLive\bin\Debug\reLive.exe
@@ -132,3 +116,19 @@ F:\cpsc483-2\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
 F:\cpsc483-2\ReLive\ReLive\obj\Debug\reLive.Properties.Resources.resources
 F:\cpsc483-2\ReLive\ReLive\obj\Debug\ReLive.SelectDrive.resources
 F:\cpsc483-2\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\reLive.exe
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\reLive.pdb
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.AccessControl.dll
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.Calendar.dll
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.Client.DLL
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.Extensions.DLL
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\bin\Debug\Google.GData.Photos.dll
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.MapBrowser.resources
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.reLiveMain.resources
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\reLive.Properties.Resources.resources
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.SelectDrive.resources
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\reLive.exe
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\reLive.pdb

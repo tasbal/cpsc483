@@ -24,6 +24,9 @@ namespace ReLive
         private List<PicasaEntry> albumList = new List<PicasaEntry>();
         MapBrowser mapWindow = new MapBrowser();
         String userPictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
+        private bool disableSync = false;
+        private bool disableUpload = false;
+        private bool calendarChanged = false;
 
         //file browser view settings
         private const int LV_VIEW_ICON = 0x0000;
@@ -112,20 +115,20 @@ namespace ReLive
                 createdEntry.Update();
             }
         }
-        
-        private void uploadDir_Click(object sender, EventArgs e)
+
+        private void upload()
         {
-            if(this.googleAuthToken == null)
+            if (this.googleAuthToken == null)
                 login();
             if (this.googleAuthToken == null) //if service check fails, token set to null so need to check again
                 return;
-                
+
             if (explorerText.Text != null)
             {
                 StreamReader sr = null;
                 try
                 {
-                     sr = File.OpenText(explorerText.Text + "\\metadata.txt");
+                    sr = File.OpenText(explorerText.Text + "\\metadata.txt");
                 }
                 catch (Exception ex)
                 {
@@ -149,13 +152,14 @@ namespace ReLive
                 DateTime albumDate = new DateTime(Int32.Parse(dateArray[0]), Int32.Parse(dateArray[1]), Int32.Parse(dateArray[2]));
 
                 Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, albumName));
-
+                /*
                 uploadProgress.BringToFront();
                 uploadProgress.Visible = true;
                 uploadDir.Visible = false;
                 uploadProgress.Step = uploadProgress.Width / (jpgFiles.Length + 1); //set size of progress
                 uploadProgress.PerformStep();
-
+                */
+                
                 createNewAlbum(albumNameFull, desc, albumDate);
 
                 bool validMeta = true;
@@ -165,7 +169,7 @@ namespace ReLive
                     string fileStr = file.FullName;
                     string line = null;
                     string[] data = null;
-     
+
                     uploadProgress.PerformStep();
 
                     if (!checkFileExists(file.Name, albumName))
@@ -184,13 +188,7 @@ namespace ReLive
                                 entry.Location.Longitude = Double.Parse(data[1]);
                                 entry.Summary.Text = data[2]; //time caption below image
                                 entry.Media.Keywords.Value = data[3] + "," + data[4]; //tags for face, halo
-                                
-                                /*
-                                DateTime photoDate = new DateTime(2007, 10, 10);
-                                photoDate.AddHours(5).AddMinutes(5);
-                                double timestamp = ConvertToUnixTimestamp(photoDate.ToUniversalTime());
-                                entry.setPhotoExtension("timestamp", timestamp.ToString()); 
-                                */
+
                                 entry.Update();
                             }
                             catch (NullReferenceException)
@@ -207,17 +205,34 @@ namespace ReLive
 
                 }
                 MessageBox.Show("Uploaded Album: " + albumNameFull + " Successfully!");
-
+                /*
                 uploadDir.Visible = true;
                 uploadProgress.Visible = false;
                 uploadProgress.SendToBack();
                 uploadProgress.Value = 0;
-                UpdateAlbumFeed();
+                */
+                //UpdateAlbumFeed();
+                calendarChanged = true;
+                disableUpload = false;
             }
             else
             {
                 MessageBox.Show("Please select a directory");
             }
+        }
+        
+        private void uploadDir_Click(object sender, EventArgs e)
+        {
+            if (!disableUpload)
+            {
+                disableUpload = true;
+                ThreadStart job = new ThreadStart(upload);
+                Thread thread = new Thread(job);
+                thread.Start();
+                MessageBox.Show("Images will be uploaded in the background, feel free to continue using the program!");
+            }
+            else
+                MessageBox.Show("Upload already in progress!");
         }
 
         private void login()
@@ -342,7 +357,13 @@ namespace ReLive
 
         private void albumCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
-            calendarUpdate();
+            if (calendarChanged)
+            {
+                UpdateAlbumFeed();
+                calendarChanged = false;
+            }
+            else
+                calendarUpdate();
         }
 
         private void setSelection(PicasaEntry entry)
@@ -441,8 +462,7 @@ namespace ReLive
 
                 if (reliveCnt != 1)
                 {
-                    MessageBox.Show(reliveCnt.ToString());
-//                    string msg = "Please choose from the list below, the removable to be used. \n";
+                    //string msg = "Please choose from the list below, the removable to be used. \n";
                     SelectDrive selectWin = new SelectDrive();
 
                     for (int i = 0; i < rootNum; i++)
@@ -452,7 +472,7 @@ namespace ReLive
                     }
                     selectWin.ShowDialog(this);
                     memCardPath = allRemovables[selectWin.choice];
-                    MessageBox.Show(memCardPath + " was chosen to be the used drive.  \nPlease wait for directories to be set up");
+                    //MessageBox.Show(memCardPath + " was chosen to be the used drive.  \nPlease wait for directories to be set up");
                 }
                 driveSelected = true;
             }
@@ -538,13 +558,14 @@ namespace ReLive
 
             //cleanup
             dirs = null;
-            dir = null;
+            dir = null; 
         }
 
-        private void copySubDirs(string flashRoot, string path)
+        private void copySubDirs()
         {
+            string path = @userPictures + "\\reLive";
             //String msg = "Copying Subdirectories: ";
-            string[] subDirs = Directory.GetDirectories(flashRoot);
+            string[] subDirs = Directory.GetDirectories(memCardPath);
             /*
             foreach (string subDir in subDirs)
             {
@@ -552,20 +573,31 @@ namespace ReLive
             }
             MessageBox.Show(msg);
              */
-            fileCopy(flashRoot, path, true);  //make third parameter true for recursive copy
+            fileCopy(memCardPath, path, true);  //make third parameter true for recursive copy
+            disableSync = false;
+            MessageBox.Show("Sync complete!");
         }
 
         private void retrieveSD_Click(object sender, EventArgs e)
         {
-            string defPath = @userPictures + "\\reLive";
-
-            if (memCardPath == "")
-                MessageBox.Show("Sorry, but no SD card was detected in the drive.\nPlease insert your memory card and try again.");
-            else
+            if (!disableSync)
             {
-                MessageBox.Show("Card Drive detected to be: " + memCardPath + "\nCopying contents to: " + defPath);
-                copySubDirs(memCardPath, defPath);
+                string defPath = @userPictures + "\\reLive";
+
+                if (memCardPath == "")
+                    MessageBox.Show("Sorry, but no SD card was detected in the drive.\nPlease insert your memory card and try again.");
+                else
+                {
+                    MessageBox.Show("Card Drive detected to be: " + memCardPath + "\nCopying contents to: " + defPath);
+                    disableSync = true;
+                    ThreadStart job = new ThreadStart(copySubDirs);
+                    Thread thread = new Thread(job);
+                    thread.Start();
+                    //copySubDirs(memCardPath, defPath);
+                }
             }
+            else
+                MessageBox.Show("Sync already in progress!");
         }
 
         private void formatSD_Click(object sender, EventArgs e)
@@ -607,14 +639,13 @@ namespace ReLive
 
                 p.Close();
 
-                MessageBox.Show(pathNoSlash + " formatted to Fat16. \n Format Completed. \n Please wait a few minutes for directories to be set up.");
-//                memCardDirSetup();
+                MessageBox.Show(pathNoSlash + " formatted to Fat16. \n Format Completed. \n Please wait awhile for directories to be set up.");
+
                 ThreadStart job = new ThreadStart(memCardDirSetup);
                 Thread thread = new Thread(job);
                 thread.Start();
             }
         }
-
 
         private void memCardDirSetup()
         {
@@ -648,7 +679,6 @@ namespace ReLive
             MessageBox.Show("Directories Created");
             //need to catch unauthorizedaccessexception
         }
-
 
         private void distanceBox_TextChanged(object sender, EventArgs e)
         {
