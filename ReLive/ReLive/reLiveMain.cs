@@ -133,6 +133,7 @@ namespace ReLive
                 catch (Exception ex)
                 {
                     MessageBox.Show("There was a problem reading your metadata file.\nVerify it exists and not currently in use and try again.");
+                    disableUpload = false;
                     return;
                 }
 
@@ -161,10 +162,9 @@ namespace ReLive
                 */
 
                 ProgPopup pBar = new ProgPopup();
-               
+                pBar.ShowDialog();
                 pBar.fileLength = (jpgFiles.Length + 1);
 
-                pBar.ShowDialog(this);
                 pBar.progressBar1.PerformStep();
 
                 createNewAlbum(albumNameFull, desc, albumDate);

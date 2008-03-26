@@ -132,3 +132,4 @@ C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\reLive.exe
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\reLive.pdb
+C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC 483-500\SVN\ReLive\ReLive\obj\Debug\ReLive.ProgPopup.resources
