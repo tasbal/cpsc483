@@ -24,8 +24,6 @@ namespace ReLive
         private List<PicasaEntry> albumList = new List<PicasaEntry>();
         MapBrowser mapWindow = new MapBrowser();
         String userPictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
-        private bool disableSync = false;
-        private bool disableUpload = false;
         private bool calendarChanged = false;
 
         //file browser view settings
@@ -48,6 +46,10 @@ namespace ReLive
         private string memCardPath = "";
         private string[] allRemovables = new string[10];
         private string[] allRemNames = new string[10];
+
+        //threading ui stuff
+        delegate void StringParameterDelegate(int step, int value);
+        readonly object stateLock = new object();
 
         public reLiveMain()
         {
@@ -116,6 +118,22 @@ namespace ReLive
             }
         }
 
+        void UpdateStatus(int step, int value)
+        {
+            if (InvokeRequired)
+            {
+                // We're not in the UI thread, so we need to call BeginInvoke
+                BeginInvoke(new StringParameterDelegate(UpdateStatus), new object[] { step, value });
+                return;
+            }
+            // Must be on the UI thread if we've got this far
+            uploadProgress.Step = (uploadProgress.Maximum / value);
+            uploadProgress.Visible = true;
+            progressLabel.Visible = true;
+            uploadProgress.PerformStep();
+            progressLabel.Text = "Progress: " + step.ToString() + "/" + value.ToString();
+        }
+
         private void upload()
         {
             if (this.googleAuthToken == null)
@@ -130,10 +148,10 @@ namespace ReLive
                 {
                     sr = File.OpenText(explorerText.Text + "\\metadata.txt");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("There was a problem reading your metadata file.\nVerify it exists and not currently in use and try again.");
-                    disableUpload = false;
+                    Invoke(new MethodInvoker(resetUpload));
                     return;
                 }
 
@@ -143,9 +161,10 @@ namespace ReLive
                 string albumNameFull = dir.Name.ToString();
                 string currDate = currTime.ToString("yyyy-MM-dd");
                 string desc = "Album Added: " + currDate;
-
                 string[] dateArray = albumNameFull.Split('-');
                 String albumName = "";
+                int currentStep = 0;
+
                 foreach (string tempString in dateArray)
                 {
                     albumName += tempString;
@@ -153,21 +172,9 @@ namespace ReLive
                 DateTime albumDate = new DateTime(Int32.Parse(dateArray[0]), Int32.Parse(dateArray[1]), Int32.Parse(dateArray[2]));
 
                 Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, albumName));
-                /*
-                uploadProgress.BringToFront();
-                uploadProgress.Visible = true;
-                uploadDir.Visible = false;
-                uploadProgress.Step = uploadProgress.Width / (jpgFiles.Length + 1); //set size of progress
-                uploadProgress.PerformStep();
-                */
-
-                ProgPopup pBar = new ProgPopup();
-                pBar.ShowDialog();
-                pBar.fileLength = (jpgFiles.Length + 1);
-
-                pBar.progressBar1.PerformStep();
 
                 createNewAlbum(albumNameFull, desc, albumDate);
+                //UpdateStatus(jpgFiles.Length + 1);
 
                 bool validMeta = true;
 
@@ -176,13 +183,15 @@ namespace ReLive
                     string fileStr = file.FullName;
                     string line = null;
                     string[] data = null;
+                    currentStep++;
 
-                    pBar.progressBar1.PerformStep();
+                    UpdateStatus(currentStep, jpgFiles.Length);
 
                     if (!checkFileExists(file.Name, albumName))
                     {
                         FileStream fileStream = file.OpenRead();
                         PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+
                         //parse and add metadata
                         if (validMeta)
                         {
@@ -209,38 +218,37 @@ namespace ReLive
                     {
                         line = sr.ReadLine(); //move line forward if image already uploaded
                     }
-
                 }
+                Invoke(new MethodInvoker(resetUpload));
+
                 MessageBox.Show("Uploaded Album: " + albumNameFull + " Successfully!");
-                /*
-                uploadDir.Visible = true;
-                uploadProgress.Visible = false;
-                uploadProgress.SendToBack();
-                uploadProgress.Value = 0;
-                */
-                pBar.Close();
-                //UpdateAlbumFeed();
                 calendarChanged = true;
-                disableUpload = false;
             }
             else
             {
                 MessageBox.Show("Please select a directory");
             }
         }
-        
+
+        void resetUpload()
+        {
+            uploadDir.Enabled = true;
+            uploadProgress.Visible = false;
+            progressLabel.Visible = false;
+            uploadProgress.Value = 0;
+        }
+        void resetSync()
+        {
+            retrieveSD.Enabled = true;
+            formatSD.Enabled = true;
+        }
+
         private void uploadDir_Click(object sender, EventArgs e)
         {
-            if (!disableUpload)
-            {
-                disableUpload = true;
-                ThreadStart job = new ThreadStart(upload);
-                Thread thread = new Thread(job);
-                thread.Start();
-                MessageBox.Show("Images will be uploaded in the background, feel free to continue using the program!");
-            }
-            else
-                MessageBox.Show("Upload already in progress!");
+            uploadDir.Enabled = false;
+            Thread thread = new Thread(new ThreadStart(upload));
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         private void login()
@@ -260,7 +268,8 @@ namespace ReLive
                     picasaService.SetAuthenticationToken(loginDialog.AuthenticationToken);
                     try
                     {
-                        UpdateAlbumFeed();
+                        Invoke(new MethodInvoker(UpdateAlbumFeed));
+                        //UpdateAlbumFeed();
                     }
                     catch (Google.GData.Client.GDataRequestException)
                     {
@@ -452,7 +461,6 @@ namespace ReLive
                 DriveInfo[] allDrives = DriveInfo.GetDrives();  //get a list of all drives
                 foreach (DriveInfo drvInfo in allDrives)        //loop through all drives
                 {
-                   
                     DirectoryInfo di = drvInfo.RootDirectory;
                     if (drvInfo.DriveType.Equals(DriveType.Removable) && drvInfo.IsReady && drvInfo.VolumeLabel.Equals("RELIVE"))
                     {
@@ -582,30 +590,25 @@ namespace ReLive
             MessageBox.Show(msg);
              */
             fileCopy(memCardPath, path, true);  //make third parameter true for recursive copy
-            disableSync = false;
+            Invoke(new MethodInvoker(resetSync));
             MessageBox.Show("Sync complete!");
         }
 
         private void retrieveSD_Click(object sender, EventArgs e)
         {
-            if (!disableSync)
-            {
-                string defPath = @userPictures + "\\reLive";
+            string defPath = @userPictures + "\\reLive";
 
-                if (memCardPath == "")
-                    MessageBox.Show("Sorry, but no SD card was detected in the drive.\nPlease insert your memory card and try again.");
-                else
-                {
-                    MessageBox.Show("Card Drive detected to be: " + memCardPath + "\nCopying contents to: " + defPath);
-                    disableSync = true;
-                    ThreadStart job = new ThreadStart(copySubDirs);
-                    Thread thread = new Thread(job);
-                    thread.Start();
-                    //copySubDirs(memCardPath, defPath);
-                }
-            }
+            if (memCardPath == "")
+                MessageBox.Show("Sorry, but no SD card was detected in the drive.\nPlease insert your memory card and try again.");
             else
-                MessageBox.Show("Sync already in progress!");
+            {
+                MessageBox.Show("Card Drive detected to be: " + memCardPath + "\nCopying contents to: " + defPath);
+                retrieveSD.Enabled = false;
+                formatSD.Enabled = false;
+                Thread thread = new Thread(new ThreadStart(copySubDirs));
+                thread.IsBackground = true;
+                thread.Start();
+            }
         }
 
         private void formatSD_Click(object sender, EventArgs e)
@@ -747,7 +750,7 @@ namespace ReLive
                 lng = str.Substring(str.IndexOf(",lng:") + 5);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("An Error Occured Loading Geocode!\nCheck that a valid address has been entered.", "An Error Occured Loading Geocode!");
             }
@@ -834,11 +837,6 @@ namespace ReLive
         private void backButton_Click(object sender, EventArgs e)
         {
             fileBrowser.GoBack();
-        }
-
-        private void uploadProgress_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
