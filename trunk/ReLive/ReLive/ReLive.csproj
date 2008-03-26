@@ -64,6 +64,12 @@
     <Compile Include="MapBrowser.Designer.cs">
       <DependentUpon>MapBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProgPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgPopup.Designer.cs">
+      <DependentUpon>ProgPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="reLiveMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,10 @@
     <EmbeddedResource Include="MapBrowser.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MapBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgPopup.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProgPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="reLiveMain.resx">
       <SubType>Designer</SubType>
