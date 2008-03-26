@@ -47,7 +47,6 @@ namespace ReLive
             this.retrieveSD = new System.Windows.Forms.Button();
             this.tabViewer = new System.Windows.Forms.TabControl();
             this.imageTab = new System.Windows.Forms.TabPage();
-            this.uploadProgress = new System.Windows.Forms.ProgressBar();
             this.backButton = new System.Windows.Forms.Button();
             this.settingsTab = new System.Windows.Forms.TabPage();
             this.distanceBox = new System.Windows.Forms.TextBox();
@@ -81,6 +80,8 @@ namespace ReLive
             this.faceLabel = new System.Windows.Forms.Label();
             this.delayBox = new System.Windows.Forms.ComboBox();
             this.delayLabel = new System.Windows.Forms.Label();
+            this.uploadProgress = new System.Windows.Forms.ProgressBar();
+            this.progressLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.rightPanel.SuspendLayout();
             this.previewPanel.SuspendLayout();
@@ -287,7 +288,6 @@ namespace ReLive
             // imageTab
             // 
             this.imageTab.BackColor = System.Drawing.SystemColors.Control;
-            this.imageTab.Controls.Add(this.uploadProgress);
             this.imageTab.Controls.Add(this.backButton);
             this.imageTab.Controls.Add(this.fileBrowser);
             this.imageTab.Controls.Add(this.uploadDir);
@@ -299,16 +299,6 @@ namespace ReLive
             this.imageTab.Size = new System.Drawing.Size(582, 464);
             this.imageTab.TabIndex = 0;
             this.imageTab.Text = "Image Browser";
-            // 
-            // uploadProgress
-            // 
-            this.uploadProgress.Location = new System.Drawing.Point(426, 9);
-            this.uploadProgress.Name = "uploadProgress";
-            this.uploadProgress.Size = new System.Drawing.Size(156, 25);
-            this.uploadProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.uploadProgress.TabIndex = 11;
-            this.uploadProgress.Visible = false;
-            this.uploadProgress.Click += new System.EventHandler(this.uploadProgress_Click);
             // 
             // backButton
             // 
@@ -760,11 +750,34 @@ namespace ReLive
             this.delayLabel.TabIndex = 0;
             this.delayLabel.Text = "Time Delay (Minutes):";
             // 
+            // uploadProgress
+            // 
+            this.uploadProgress.Location = new System.Drawing.Point(175, 30);
+            this.uploadProgress.Name = "uploadProgress";
+            this.uploadProgress.Size = new System.Drawing.Size(410, 20);
+            this.uploadProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.uploadProgress.TabIndex = 11;
+            this.uploadProgress.Visible = false;
+            // 
+            // progressLabel
+            // 
+            this.progressLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.progressLabel.AutoSize = true;
+            this.progressLabel.Location = new System.Drawing.Point(380, 10);
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(12, 13);
+            this.progressLabel.TabIndex = 15;
+            this.progressLabel.Text = "/";
+            this.progressLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.progressLabel.Visible = false;
+            // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 524);
+            this.Controls.Add(this.progressLabel);
+            this.Controls.Add(this.uploadProgress);
             this.Controls.Add(this.tabViewer);
             this.Controls.Add(this.rightPanel);
             this.Controls.Add(this.picasaLink);
@@ -851,6 +864,7 @@ namespace ReLive
         private System.Windows.Forms.Label haloDescriptionLabel;
         private System.Windows.Forms.TextBox haloDescription;
         private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Label progressLabel;
     }
 }
 
