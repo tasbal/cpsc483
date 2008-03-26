@@ -159,7 +159,14 @@ namespace ReLive
                 uploadProgress.Step = uploadProgress.Width / (jpgFiles.Length + 1); //set size of progress
                 uploadProgress.PerformStep();
                 */
-                
+
+                ProgPopup pBar = new ProgPopup();
+               
+                pBar.fileLength = (jpgFiles.Length + 1);
+
+                pBar.ShowDialog(this);
+                pBar.progressBar1.PerformStep();
+
                 createNewAlbum(albumNameFull, desc, albumDate);
 
                 bool validMeta = true;
@@ -170,7 +177,7 @@ namespace ReLive
                     string line = null;
                     string[] data = null;
 
-                    uploadProgress.PerformStep();
+                    pBar.progressBar1.PerformStep();
 
                     if (!checkFileExists(file.Name, albumName))
                     {
@@ -211,6 +218,7 @@ namespace ReLive
                 uploadProgress.SendToBack();
                 uploadProgress.Value = 0;
                 */
+                pBar.Close();
                 //UpdateAlbumFeed();
                 calendarChanged = true;
                 disableUpload = false;
@@ -470,7 +478,7 @@ namespace ReLive
                         string nextMsg = "Drive #" + (int)(i + 1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
                         selectWin.comboBox1.Items.Add(nextMsg);
                     }
-                    selectWin.ShowDialog(this);
+                    selectWin.ShowDialog(this); //show selectDrive window with this as parent
                     memCardPath = allRemovables[selectWin.choice];
                     //MessageBox.Show(memCardPath + " was chosen to be the used drive.  \nPlease wait for directories to be set up");
                 }
@@ -826,6 +834,11 @@ namespace ReLive
         private void backButton_Click(object sender, EventArgs e)
         {
             fileBrowser.GoBack();
+        }
+
+        private void uploadProgress_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

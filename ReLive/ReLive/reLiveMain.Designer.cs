@@ -308,6 +308,7 @@ namespace ReLive
             this.uploadProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.uploadProgress.TabIndex = 11;
             this.uploadProgress.Visible = false;
+            this.uploadProgress.Click += new System.EventHandler(this.uploadProgress_Click);
             // 
             // backButton
             // 
