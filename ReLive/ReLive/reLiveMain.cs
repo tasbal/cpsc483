@@ -486,11 +486,17 @@ namespace ReLive
                         string nextMsg = "Drive #" + (int)(i + 1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
                         selectWin.comboBox1.Items.Add(nextMsg);
                     }
+                    
                     selectWin.ShowDialog(this); //show selectDrive window with this as parent
-                    memCardPath = allRemovables[selectWin.choice];
+                    if (!selectWin.noChoice)
+                    {
+                        memCardPath = allRemovables[selectWin.choice];
+                        driveSelected = true;
+                    }
+                    else driveSelected = false;
                     //MessageBox.Show(memCardPath + " was chosen to be the used drive.  \nPlease wait for directories to be set up");
                 }
-                driveSelected = true;
+                
             }
             return memCardPath;
         }
@@ -599,24 +605,27 @@ namespace ReLive
             string defPath = @userPictures + "\\reLive";
 
             if (memCardPath == "")
-                MessageBox.Show("Sorry, but no SD card was detected in the drive.\nPlease insert your memory card and try again.");
-            else
             {
-                MessageBox.Show("Card Drive detected to be: " + memCardPath + "\nCopying contents to: " + defPath);
-                retrieveSD.Enabled = false;
-                formatSD.Enabled = false;
-                Thread thread = new Thread(new ThreadStart(copySubDirs));
-                thread.IsBackground = true;
-                thread.Start();
+                MessageBox.Show("Sorry, but no SD card was detected in the drive.\nPlease select the memory card's drive.");
+                memCardPath = findSDPath();
+                if (memCardPath == "") return;
             }
+
+            MessageBox.Show("Card Drive detected to be: " + memCardPath + "\nCopying contents to: " + defPath);
+            retrieveSD.Enabled = false;
+            formatSD.Enabled = false;
+            Thread thread = new Thread(new ThreadStart(copySubDirs));
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         private void formatSD_Click(object sender, EventArgs e)
         {
             if (memCardPath == "")
             {
-                MessageBox.Show("No memory card found, please insert one and try again!");
-                return;
+                MessageBox.Show("No memory card found, please select a card to be formatted.");
+                memCardPath = findSDPath(); //reprompt for SD card
+                if (memCardPath == "") return;
             }
 
             //take off the '\'
@@ -763,6 +772,7 @@ namespace ReLive
         private bool validateSettings()
         {
             string memCardPath = findSDPath();
+            if (memCardPath.Equals("")) return false;
             string message = "";
             string[] description = haloDescription.Text.Split(',');
             haloDescription.Text = "";
@@ -801,11 +811,12 @@ namespace ReLive
                 return;
 
             string memCardPath = findSDPath();
+            if (memCardPath.Equals("")) return;
 
             TextWriter config;
             try
             {
-                config = new StreamWriter(findSDPath() + "\\config.txt", false);
+                config = new StreamWriter(memCardPath + "\\config.txt", false);
             }
             catch(IOException)
             {

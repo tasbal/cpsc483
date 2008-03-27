@@ -11,6 +11,7 @@ namespace ReLive
     public partial class SelectDrive : Form
     {
         public int choice;
+        public bool noChoice = true;
         public SelectDrive()
         {
             InitializeComponent();
@@ -24,12 +25,19 @@ namespace ReLive
         private void button1_Click(object sender, EventArgs e)
         {
             choice = comboBox1.SelectedIndex;
+            noChoice = false;
             this.Close();
         }
 
         private void SelectDrive_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("No drive was selected.  One will need to be selected in order to sync or format a drive.");
+            this.Close();
         }
     }
 }
