@@ -52,7 +52,6 @@ namespace ReLive
             this.distanceBox = new System.Windows.Forms.TextBox();
             this.haloCheck = new System.Windows.Forms.CheckBox();
             this.haloEnable = new System.Windows.Forms.Label();
-            this.faceCheck = new System.Windows.Forms.CheckBox();
             this.writeConfig = new System.Windows.Forms.Button();
             this.gpsGroup = new System.Windows.Forms.GroupBox();
             this.haloDistanceBox = new System.Windows.Forms.TextBox();
@@ -77,7 +76,6 @@ namespace ReLive
             this.geoCode = new System.Windows.Forms.Button();
             this.minFeetLabel = new System.Windows.Forms.Label();
             this.minDistance = new System.Windows.Forms.Label();
-            this.faceLabel = new System.Windows.Forms.Label();
             this.delayBox = new System.Windows.Forms.ComboBox();
             this.delayLabel = new System.Windows.Forms.Label();
             this.uploadProgress = new System.Windows.Forms.ProgressBar();
@@ -242,8 +240,10 @@ namespace ReLive
             // 
             // albumCalendar
             // 
-            this.albumCalendar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.albumCalendar.Location = new System.Drawing.Point(9, 36);
+            this.albumCalendar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.albumCalendar.Location = new System.Drawing.Point(27, 43);
             this.albumCalendar.MaxSelectionCount = 1;
             this.albumCalendar.Name = "albumCalendar";
             this.albumCalendar.TabIndex = 10;
@@ -316,13 +316,11 @@ namespace ReLive
             this.settingsTab.Controls.Add(this.distanceBox);
             this.settingsTab.Controls.Add(this.haloCheck);
             this.settingsTab.Controls.Add(this.haloEnable);
-            this.settingsTab.Controls.Add(this.faceCheck);
             this.settingsTab.Controls.Add(this.writeConfig);
             this.settingsTab.Controls.Add(this.gpsGroup);
             this.settingsTab.Controls.Add(this.haloSearchGroup);
             this.settingsTab.Controls.Add(this.minFeetLabel);
             this.settingsTab.Controls.Add(this.minDistance);
-            this.settingsTab.Controls.Add(this.faceLabel);
             this.settingsTab.Controls.Add(this.delayBox);
             this.settingsTab.Controls.Add(this.delayLabel);
             this.settingsTab.Location = new System.Drawing.Point(4, 22);
@@ -334,7 +332,7 @@ namespace ReLive
             // 
             // distanceBox
             // 
-            this.distanceBox.Location = new System.Drawing.Point(134, 62);
+            this.distanceBox.Location = new System.Drawing.Point(135, 60);
             this.distanceBox.MaxLength = 7;
             this.distanceBox.Name = "distanceBox";
             this.distanceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -346,7 +344,7 @@ namespace ReLive
             // haloCheck
             // 
             this.haloCheck.AutoSize = true;
-            this.haloCheck.Location = new System.Drawing.Point(134, 128);
+            this.haloCheck.Location = new System.Drawing.Point(135, 90);
             this.haloCheck.Name = "haloCheck";
             this.haloCheck.Size = new System.Drawing.Size(65, 17);
             this.haloCheck.TabIndex = 33;
@@ -357,21 +355,11 @@ namespace ReLive
             // haloEnable
             // 
             this.haloEnable.AutoSize = true;
-            this.haloEnable.Location = new System.Drawing.Point(19, 129);
+            this.haloEnable.Location = new System.Drawing.Point(20, 95);
             this.haloEnable.Name = "haloEnable";
             this.haloEnable.Size = new System.Drawing.Size(76, 13);
             this.haloEnable.TabIndex = 32;
             this.haloEnable.Text = "Location Halo:";
-            // 
-            // faceCheck
-            // 
-            this.faceCheck.AutoSize = true;
-            this.faceCheck.Location = new System.Drawing.Point(134, 96);
-            this.faceCheck.Name = "faceCheck";
-            this.faceCheck.Size = new System.Drawing.Size(65, 17);
-            this.faceCheck.TabIndex = 31;
-            this.faceCheck.Text = "Enabled";
-            this.faceCheck.UseVisualStyleBackColor = true;
             // 
             // writeConfig
             // 
@@ -694,7 +682,7 @@ namespace ReLive
             // minFeetLabel
             // 
             this.minFeetLabel.AutoSize = true;
-            this.minFeetLabel.Location = new System.Drawing.Point(190, 65);
+            this.minFeetLabel.Location = new System.Drawing.Point(190, 69);
             this.minFeetLabel.Name = "minFeetLabel";
             this.minFeetLabel.Size = new System.Drawing.Size(39, 13);
             this.minFeetLabel.TabIndex = 8;
@@ -703,20 +691,11 @@ namespace ReLive
             // minDistance
             // 
             this.minDistance.AutoSize = true;
-            this.minDistance.Location = new System.Drawing.Point(19, 65);
+            this.minDistance.Location = new System.Drawing.Point(20, 65);
             this.minDistance.Name = "minDistance";
             this.minDistance.Size = new System.Drawing.Size(96, 13);
             this.minDistance.TabIndex = 6;
             this.minDistance.Text = "Minimum Distance:";
-            // 
-            // faceLabel
-            // 
-            this.faceLabel.AutoSize = true;
-            this.faceLabel.Location = new System.Drawing.Point(19, 96);
-            this.faceLabel.Name = "faceLabel";
-            this.faceLabel.Size = new System.Drawing.Size(83, 13);
-            this.faceLabel.TabIndex = 3;
-            this.faceLabel.Text = "Face Detection:";
             // 
             // delayBox
             // 
@@ -736,7 +715,7 @@ namespace ReLive
             "50",
             "55",
             "60"});
-            this.delayBox.Location = new System.Drawing.Point(134, 29);
+            this.delayBox.Location = new System.Drawing.Point(135, 30);
             this.delayBox.Name = "delayBox";
             this.delayBox.Size = new System.Drawing.Size(50, 21);
             this.delayBox.TabIndex = 2;
@@ -744,7 +723,7 @@ namespace ReLive
             // delayLabel
             // 
             this.delayLabel.AutoSize = true;
-            this.delayLabel.Location = new System.Drawing.Point(19, 32);
+            this.delayLabel.Location = new System.Drawing.Point(20, 35);
             this.delayLabel.Name = "delayLabel";
             this.delayLabel.Size = new System.Drawing.Size(109, 13);
             this.delayLabel.TabIndex = 0;
@@ -834,7 +813,6 @@ namespace ReLive
         private System.Windows.Forms.Label delayLabel;
         private System.Windows.Forms.ComboBox delayBox;
         private System.Windows.Forms.Label minDistance;
-        private System.Windows.Forms.Label faceLabel;
         private System.Windows.Forms.Label minFeetLabel;
         private System.Windows.Forms.Button geoCode;
         private System.Windows.Forms.ComboBox stateBox;
@@ -854,7 +832,6 @@ namespace ReLive
         private System.Windows.Forms.GroupBox gpsGroup;
         private System.Windows.Forms.GroupBox haloSearchGroup;
         private System.Windows.Forms.Button writeConfig;
-        private System.Windows.Forms.CheckBox faceCheck;
         private System.Windows.Forms.CheckBox haloCheck;
         private System.Windows.Forms.Label haloEnable;
         private System.Windows.Forms.Button viewHalo;

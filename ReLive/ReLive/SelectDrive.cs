@@ -17,21 +17,11 @@ namespace ReLive
             InitializeComponent();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             choice = comboBox1.SelectedIndex;
             noChoice = false;
             this.Close();
-        }
-
-        private void SelectDrive_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -200,10 +200,10 @@ namespace ReLive
                                 line = sr.ReadLine();
                                 data = line.Split(',');
                                 entry.Location = new GeoRssWhere();
-                                entry.Location.Latitude = Double.Parse(data[0]);
-                                entry.Location.Longitude = Double.Parse(data[1]);
+                                entry.Location.Latitude = Double.Parse(data[0]) / 10000;
+                                entry.Location.Longitude = Double.Parse(data[1]) / 10000;
                                 entry.Summary.Text = data[2]; //time caption below image
-                                entry.Media.Keywords.Value = data[3] + "," + data[4]; //tags for face, halo
+                                entry.Media.Keywords.Value = data[3]; //tags for halo description
 
                                 entry.Update();
                             }
@@ -292,6 +292,10 @@ namespace ReLive
             FindListViewHandle();
             SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
 
+            int x = (calendarPanel.Width - albumCalendar.Width) / 2;
+            int y = albumCalendar.Location.Y;
+            albumCalendar.Location = new Point(x, y);
+
             //load previous config from SD card
             loadCurrentConfig();
         }
@@ -302,7 +306,7 @@ namespace ReLive
             if (memCardPath == "")
                 return;
             //array for iteratign through form controls
-            Control[] configArray = { delayBox, distanceBox, faceCheck, haloCheck, haloDescription, latBox, lngBox, haloDistanceBox };
+            Control[] configArray = { delayBox, distanceBox, haloCheck, haloDescription, latBox, lngBox, haloDistanceBox };
             StreamReader sr;
             if (File.Exists(memCardPath + "\\config.txt"))
             {
@@ -323,10 +327,10 @@ namespace ReLive
 
                 for (int value = 0; value < inputArray.Length; value++)
                 {
-                    if (value == 2 || value == 3) //special cases for checkboxes
+                    if (value == 2) //special cases for halo check
                     {
                         ((CheckBox)configArray[value]).Checked = inputArray[value] == "True";
-                        if (value == 3 && inputArray[value] == "False")
+                        if (value == 2 && inputArray[value] == "False")
                             return;
                     }
                     configArray[value].Text = inputArray[value];
@@ -824,7 +828,7 @@ namespace ReLive
                 return;
             }
 
-            config.WriteLine(delayBox.Text + "," + distanceBox.Text + "," + faceCheck.Checked + "," +
+            config.WriteLine(delayBox.Text + "," + distanceBox.Text + "," +
                 haloCheck.Checked + "," + haloDescription.Text + "," + latBox.Text + "," + lngBox.Text + "," + haloDistanceBox.Text);
             config.Close();
 
