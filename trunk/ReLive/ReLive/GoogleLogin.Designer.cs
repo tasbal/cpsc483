@@ -120,7 +120,7 @@ namespace ReLive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(249, 118);
+            this.ClientSize = new System.Drawing.Size(240, 114);
             this.Controls.Add(this.linkAddPicasaweb);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.linkCreateAccount);
@@ -134,6 +134,7 @@ namespace ReLive
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "GoogleLogin";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Google Login";
             this.TopMost = true;
