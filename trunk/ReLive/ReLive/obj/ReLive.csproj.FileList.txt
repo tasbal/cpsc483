@@ -16,4 +16,3 @@ bin\Debug\Google.GData.Photos.dll
 obj\Release\ReLive.exe
 obj\Release\ReLive.pdb
 obj\Debug\ReLive.SelectDrive.resources
-obj\Debug\ReLive.ProgPopup.resources
