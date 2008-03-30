@@ -73,6 +73,64 @@ void parse_Config(char* config_string)
 			break;
 		case 2:
 			{
+				if(strcmp(str1,"True")==0)
+				{
+					config->schedule = true;
+				}
+				else
+					config->schedlue = false;
+			}
+			break;
+		case 3:
+			{
+				if(config->schedule)
+				{
+					config->start_hour = atoi(str1);
+				}
+				else
+				{
+					config->start_hour = 0;
+				}
+			}
+			break;
+		case 4:
+			{
+				if(config->schedule)
+				{
+					config->start_min = atoi(str1);
+				}
+				else
+				{
+					config->start_min = 0;
+				}
+			}
+			break;
+		case 5:
+			{
+				if(config->schedule)
+				{
+					config->stop_hour = atoi(str1);
+				}
+				else
+				{
+					config->stop_hour = 23;
+				}
+			}
+			break;
+		case 5:
+			{
+				if(config->schedule)
+				{
+					config->stop_min = atoi(str1);
+				}
+				else
+				{
+					config->stop_min = 59;
+				}
+			}
+			break;
+		case 6:
+			{
 				//halo enabled
 				if(strcmp(str1,"True")==0)
 				{
@@ -85,25 +143,25 @@ void parse_Config(char* config_string)
 				}
 			}
 			break;
-		case 3:
+		case 7:
 			{
 				//halo name
 				strcpy(config->halo_info->name, str1);
 			}
 			break;
-		case 4:
+		case 8:
 			{
 				//lat
 				config->halo_info->lat = atof(str1);
 			}
 			break;
-		case 5:
+		case 9:
 			{
 				//lon
 				config->halo_info->lon = atof(str1);
 			}
 			break;
-		case 6:
+		case 10:
 			{
 				//range
 				config->halo_info->range = atof(str1);

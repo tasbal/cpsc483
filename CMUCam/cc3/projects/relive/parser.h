@@ -32,6 +32,11 @@ typedef struct _ConfigInfo
 	double min_dist;
 	bool face_detect;
 	bool halo;
+	bool schedule;
+	int start_hour;
+	int start_minute;
+	int stop_hour;
+	int stop_minute;
 	HaloInfo* halo_info;
 	bool good;
 }ConfigInfo;
