@@ -85,6 +85,7 @@ namespace ReLive
             this.MaximizeBox = false;
             this.Name = "SelectDrive";
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Removable Devices";
             this.TopMost = true;
