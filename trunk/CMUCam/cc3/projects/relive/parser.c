@@ -198,7 +198,11 @@ bool parse_GPGGA(char* gps_string)
 			break;
 		case 6:  //quality indicator
 			{
-				if(strcmp(str1,"0")==0 || strcmp(str1,"") ==0)
+				//0 no fix
+				//1 nondifferential fix
+				//2 differential fix
+				//7 from GPS memory?
+				if(strcmp(str1,"0")==0 || strcmp(str1,"") ==0 || strcmp(str1,"7"))  
 				{
 					free(time);
 					free(lat);
