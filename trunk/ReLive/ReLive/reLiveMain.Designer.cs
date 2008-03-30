@@ -358,7 +358,7 @@ namespace ReLive
             // haloCheck
             // 
             this.haloCheck.AutoSize = true;
-            this.haloCheck.Location = new System.Drawing.Point(135, 90);
+            this.haloCheck.Location = new System.Drawing.Point(136, 95);
             this.haloCheck.Name = "haloCheck";
             this.haloCheck.Size = new System.Drawing.Size(65, 17);
             this.haloCheck.TabIndex = 33;
