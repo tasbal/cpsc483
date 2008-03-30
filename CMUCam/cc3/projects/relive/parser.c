@@ -202,34 +202,40 @@ bool parse_GPGGA(char* gps_string)
 				//1 nondifferential fix
 				//2 differential fix
 				//7 from GPS memory?
-				if(strcmp(str1,"0")==0 || strcmp(str1,"") ==0 || strcmp(str1,"7"))  
+				if(strcmp(str1,"0")==0 || strcmp(str1,"") ==0)  
 				{
-					free(time);
-					free(lat);
-					free(lon);
-					return false;
+						free(time);
+						free(lat);
+						free(lon);
+						return false;
 				}
-				else
+				if(strcmp(str1,"7") && !gps->good)
 				{
-					
-					convert(time,lat,lon,NULL);
-					
-					// first time to aquire signal
-					// will also save data into prev_gps
-					// for calculating travel distance
-					if (!gps->good)
-					{
-						copy_gps();
-						prev_gps->good = true;
-					}
-					
-					gps->good = true;
-					
-					free(time);
-					free(lat);
-					free(lon);
-					return true;
+					// if we did not lock onto the gps before
+					// then dont accept a seven
+						free(time);
+						free(lat);
+						free(lon);
+						return false;
 				}
+				
+				convert(time,lat,lon,NULL);
+				
+				// first time to aquire signal
+				// will also save data into prev_gps
+				// for calculating travel distance
+				if (!gps->good)
+				{
+					copy_gps();
+					prev_gps->good = true;
+				}
+				
+				gps->good = true;
+				
+				free(time);
+				free(lat);
+				free(lon);
+				return true;
 			}
 			break;
 		}
