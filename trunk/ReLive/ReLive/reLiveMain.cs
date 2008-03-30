@@ -99,6 +99,7 @@ namespace ReLive
         static double ConvertToUnixTimestamp(DateTime date)
         {
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            //origin.ToUniversalTime();
             TimeSpan diff = date - origin;
             return Math.Floor(diff.TotalMilliseconds);
         } 
@@ -111,11 +112,9 @@ namespace ReLive
                 AlbumEntry newEntry = new AlbumEntry();
                 newEntry.Title.Text = albumName;
                 newEntry.Summary.Text = desc;
-                PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
-
                 double timestamp = ConvertToUnixTimestamp(albumDate.ToUniversalTime());
-                createdEntry.setPhotoExtension("timestamp", timestamp.ToString());
-                createdEntry.Update();
+                newEntry.setPhotoExtension("timestamp", timestamp.ToString());
+                PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
             }
         }
 
@@ -170,8 +169,7 @@ namespace ReLive
                 {
                     albumName += tempString;
                 }
-                DateTime albumDate = new DateTime(Int32.Parse(dateArray[0]), Int32.Parse(dateArray[1]), Int32.Parse(dateArray[2]));
-
+                DateTime albumDate = new DateTime(Int32.Parse(dateArray[0]), Int32.Parse(dateArray[1]), Int32.Parse(dateArray[2]), 12, 0, 0, DateTimeKind.Utc);
                 Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, albumName));
 
                 createNewAlbum(albumNameFull, desc, albumDate);
@@ -238,6 +236,7 @@ namespace ReLive
             progressLabel.Visible = false;
             uploadProgress.Value = 0;
         }
+
         void resetSync()
         {
             retrieveSD.Enabled = true;
