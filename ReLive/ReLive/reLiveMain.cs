@@ -557,8 +557,11 @@ namespace ReLive
 
                     //MessageBox.Show("Copying " + tmppath);
                     //copy file to dest dir
+                    if(!file.Name.Equals("config.txt"))
+                    {
                     file.CopyTo(tmppath, true);
 //                    file.CopyTo(destdir, true);
+                    }
                 }
                 else fileExists = false;
             }
@@ -603,22 +606,35 @@ namespace ReLive
             string path = home + "\\" + day;
             Directory.CreateDirectory(path);
             //copy metadata.txt  
-
-            File.Copy(home + "\\metadata.txt", path + "\\metadata.txt");
-
-            //String msg = "Copying Subdirectories: ";
-            string[] subDirs = Directory.GetDirectories(memCardPath);
-            
-            /*
-            foreach (string subDir in subDirs)
+            try
             {
-                msg = msg + subDir + "\n";
+
+                File.Delete(path + "\\metadata.txt");
+                File.Copy(memCardPath + "\\metadata.txt", path + "\\metadata.txt");
+
+
+
+
+                //String msg = "Copying Subdirectories: ";
+                string[] subDirs = Directory.GetDirectories(memCardPath);
+
+                /*
+                foreach (string subDir in subDirs)
+                {
+                    msg = msg + subDir + "\n";
+                }
+                MessageBox.Show(msg);
+                 */
+                fileCopy(memCardPath, path, true);  //make third parameter true for recursive copy
+                Invoke(new MethodInvoker(resetSync));
+                MessageBox.Show("Sync complete!");
             }
-            MessageBox.Show(msg);
-             */
-            fileCopy(memCardPath, path, true);  //make third parameter true for recursive copy
-            Invoke(new MethodInvoker(resetSync));
-            MessageBox.Show("Sync complete!");
+            //If the file copy fails then catch will gain control of the method
+            catch (Exception exc)
+            {
+                MessageBox.Show("No metadata.txt file found on SD card.  Please include one before a sync.");
+                Invoke(new MethodInvoker(resetSync));
+            }
         }
 
         private void retrieveSD_Click(object sender, EventArgs e)
