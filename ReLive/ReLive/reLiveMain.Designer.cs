@@ -41,6 +41,7 @@ namespace ReLive
             this.rightPanel = new System.Windows.Forms.Panel();
             this.formatSD = new System.Windows.Forms.Button();
             this.previewPanel = new System.Windows.Forms.Panel();
+            this.albumLabel = new System.Windows.Forms.LinkLabel();
             this.calendarPanel = new System.Windows.Forms.Panel();
             this.albumCalendar = new System.Windows.Forms.MonthCalendar();
             this.calendarLabel = new System.Windows.Forms.Label();
@@ -142,7 +143,7 @@ namespace ReLive
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.mapLinkLabel.AutoSize = true;
-            this.mapLinkLabel.Location = new System.Drawing.Point(92, 182);
+            this.mapLinkLabel.Location = new System.Drawing.Point(60, 182);
             this.mapLinkLabel.Name = "mapLinkLabel";
             this.mapLinkLabel.Size = new System.Drawing.Size(54, 13);
             this.mapLinkLabel.TabIndex = 8;
@@ -219,6 +220,7 @@ namespace ReLive
             // 
             // previewPanel
             // 
+            this.previewPanel.Controls.Add(this.albumLabel);
             this.previewPanel.Controls.Add(this.mapLinkLabel);
             this.previewPanel.Controls.Add(this.albumPreviewLabel);
             this.previewPanel.Controls.Add(this.AlbumPicture);
@@ -227,6 +229,18 @@ namespace ReLive
             this.previewPanel.Name = "previewPanel";
             this.previewPanel.Size = new System.Drawing.Size(240, 221);
             this.previewPanel.TabIndex = 13;
+            // 
+            // albumLabel
+            // 
+            this.albumLabel.AutoSize = true;
+            this.albumLabel.Location = new System.Drawing.Point(120, 182);
+            this.albumLabel.Name = "albumLabel";
+            this.albumLabel.Size = new System.Drawing.Size(62, 13);
+            this.albumLabel.TabIndex = 9;
+            this.albumLabel.TabStop = true;
+            this.albumLabel.Text = "View Album";
+            this.albumLabel.Visible = false;
+            this.albumLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.albumLabel_LinkClicked);
             // 
             // calendarPanel
             // 
@@ -842,6 +856,7 @@ namespace ReLive
         private System.Windows.Forms.TextBox haloDescription;
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Label progressLabel;
+        private System.Windows.Forms.LinkLabel albumLabel;
     }
 }
 

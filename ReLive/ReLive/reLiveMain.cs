@@ -25,6 +25,7 @@ namespace ReLive
         MapBrowser mapWindow = new MapBrowser();
         String userPictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
         private bool calendarChanged = false;
+        private string curAlbum;
 
         //file browser view settings
         private const int LV_VIEW_ICON = 0x0000;
@@ -347,6 +348,7 @@ namespace ReLive
             albumCalendar.BoldedDates = null;
             this.AlbumPicture.Image = null;
             this.mapLinkLabel.Hide();
+            this.albumLabel.Hide();
 
             query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
             this.picasaFeed = this.picasaService.Query(query);
@@ -367,6 +369,7 @@ namespace ReLive
         {
             this.AlbumPicture.Image = null;
             this.mapLinkLabel.Hide();
+            this.albumLabel.Hide();
             //this.AlbumInspector.SelectedObject = null;
 
             foreach (PicasaEntry entry in this.albumList)
@@ -397,8 +400,10 @@ namespace ReLive
             this.Cursor = Cursors.Default;
             //enable map link only when date selected
             this.mapLinkLabel.Show();
+            this.albumLabel.Show();
             //enable changing of map browser url temporarily
             mapWindow.albumMap.AllowNavigation = true;
+            curAlbum = entry.getPhotoExtensionValue("name");
             mapWindow.albumMap.Navigate("http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
         }
 
@@ -852,6 +857,11 @@ namespace ReLive
         private void backButton_Click(object sender, EventArgs e)
         {
             fileBrowser.GoBack();
+        }
+
+        private void albumLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://picasaweb.google.com/" + this.user + "/" + curAlbum);
         }
     }
 }
