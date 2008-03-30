@@ -558,6 +558,7 @@ namespace ReLive
                     //MessageBox.Show("Copying " + tmppath);
                     //copy file to dest dir
                     file.CopyTo(tmppath, true);
+//                    file.CopyTo(destdir, true);
                 }
                 else fileExists = false;
             }
@@ -579,8 +580,8 @@ namespace ReLive
             foreach (DirectoryInfo subdir in dirs)
             {
                 //create the path to the directory in destdir
-                tmppath = Path.Combine(destdir, subdir.Name);
-
+//                tmppath = Path.Combine(destdir, subdir.Name);
+                tmppath = destdir;
                 //recursively call this function over and over again
                 //with each new dir.
                 fileCopy(subdir.FullName, tmppath, recursive);
@@ -593,9 +594,21 @@ namespace ReLive
 
         private void copySubDirs()
         {
-            string path = @userPictures + "\\reLive";
+            string home = @userPictures + "\\reLive";
+            
+
+            DateTime currTime = DateTime.Now;
+            string day = currTime.ToString("yyyy-MM-dd");
+            //create folder for current date
+            string path = home + "\\" + day;
+            Directory.CreateDirectory(path);
+            //copy metadata.txt  
+
+            File.Copy(home + "\\metadata.txt", path + "\\metadata.txt");
+
             //String msg = "Copying Subdirectories: ";
             string[] subDirs = Directory.GetDirectories(memCardPath);
+            
             /*
             foreach (string subDir in subDirs)
             {
@@ -677,6 +690,7 @@ namespace ReLive
 
         private void memCardDirSetup()
         {
+         /*   
             string[] day = new string[31];
             DateTime currTime = DateTime.Now;
             string msg = "";
@@ -691,19 +705,23 @@ namespace ReLive
                 msg = msg + day[i] + "\n";
             }
             //            MessageBox.Show(msg);
-
+            
             for (int i = 0; i < 31; i++)
             {
-
+          
+            
                 Directory.CreateDirectory(day[i]);
-                //                MessageBox.Show(day[i] + " directory created");
+          */
+            
+                //MessageBox.Show(day[i] + " directory created");
                 for (int j = 0; j < 24; j++)
                 {
-                    Directory.CreateDirectory(day[i] + "\\" + j);
-                    //                    MessageBox.Show(day[i] + "\\" + "hour" + j + 1 + " created");
+//                    Directory.CreateDirectory(day[i] + "\\" + j);
+                    Directory.CreateDirectory(memCardPath + j.ToString());
+                    // MessageBox.Show(day[i] + "\\" + "hour" + j + 1 + " created");
 
                 }
-            }
+//           }
             MessageBox.Show("Directories Created");
             //need to catch unauthorizedaccessexception
         }
