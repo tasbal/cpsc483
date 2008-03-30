@@ -73,6 +73,10 @@ void initialize()
 	cc3_camera_set_resolution (CC3_CAMERA_RESOLUTION_HIGH);
 	cc3_camera_set_auto_white_balance (true);
 	cc3_camera_set_auto_exposure (true);
+
+	//turn on gps
+	cc3_gpio_set_mode (0, CC3_GPIO_MODE_OUTPUT);
+	cc3_gpio_set_value (0, 1);
 	
 	gps_com = cc3_uart_fopen(1,"r+");
 	
@@ -98,7 +102,7 @@ int takePict(int picNum)
 printf("\r\nTaking Picture:\n\r");
 	do
 	{
-		snprintf(filename, 16, "c:/img%.5d.jpg", picNum);
+		snprintf(filename, 16, "c:/%d/img%.5d.jpg", gps->hour, picNum);
 		memory = fopen(filename, "r");
 		if ( memory != NULL )
 		{
@@ -130,27 +134,30 @@ printf("\r\nTaking Picture:\n\r");
 bool check_triggers( int deltaTime, double deltaDist, int second )
 {
 	bool takePic = false;
-	
-	if( gps->good )
+
+	// it has halo so must check if within halo
+	if ( config->halo )
 	{
-		// it has halo so must check if within halo
-		if ( config->halo )
-		{
-			// if distance is greater than range then return with false
-			// else check rest of triggers
-			double distance = calcDist( config->halo_info->lon, config->halo_info->lat, gps->lat, gps->lon );
-			if ( distance >= config->halo_info->range)
-				return takePic;
-		}
-		
-		// see if covered min distance
-		if ( deltaDist >= config->min_dist)
-			takePic = true;
-		
-		// timer went off
-		if( deltaTime >= config->delay )
-			takePic = true;
+		// if distance is greater than range then return with false
+		// else check rest of triggers
+		double distance = calcDist( config->halo_info->lon, config->halo_info->lat, gps->lat, gps->lon );
+		if ( distance >= config->halo_info->range)
+			return takePic;
 	}
+	
+	// it has schedule so must check if within time
+	if ( config->schedule )
+	{
+		if ( gps->hour  >= config->stop_hour )
+	}
+	
+	// see if covered min distance
+	if ( deltaDist >= config->min_dist)
+		takePic = true;
+	
+	// timer went off
+	if( deltaTime >= config->delay )
+		takePic = true;
 
 	return takePic;
 }
@@ -199,6 +206,7 @@ void get_gps_data()
 {
 	char* gps_buff = (char*)malloc(sizeof(char)*100);
 	
+	fflush(gps_com);
 	fscanf(gps_com,"%s",gps_buff);
 	printf("\r\nGetting GPS Data: %s\r\n",gps_buff);
 	
