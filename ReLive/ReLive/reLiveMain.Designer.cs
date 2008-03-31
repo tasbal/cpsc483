@@ -81,6 +81,14 @@ namespace ReLive
             this.delayLabel = new System.Windows.Forms.Label();
             this.uploadProgress = new System.Windows.Forms.ProgressBar();
             this.progressLabel = new System.Windows.Forms.Label();
+            this.schedulerLabel = new System.Windows.Forms.Label();
+            this.schedulerCheck = new System.Windows.Forms.CheckBox();
+            this.startTime = new System.Windows.Forms.DateTimePicker();
+            this.schedulerGroup = new System.Windows.Forms.GroupBox();
+            this.startLabel = new System.Windows.Forms.Label();
+            this.endLabel = new System.Windows.Forms.Label();
+            this.endTime = new System.Windows.Forms.DateTimePicker();
+            this.reLiveImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.rightPanel.SuspendLayout();
             this.previewPanel.SuspendLayout();
@@ -90,6 +98,8 @@ namespace ReLive
             this.settingsTab.SuspendLayout();
             this.gpsGroup.SuspendLayout();
             this.haloSearchGroup.SuspendLayout();
+            this.schedulerGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reLiveImage)).BeginInit();
             this.SuspendLayout();
             // 
             // directoryBrowse
@@ -327,6 +337,10 @@ namespace ReLive
             // settingsTab
             // 
             this.settingsTab.BackColor = System.Drawing.SystemColors.Control;
+            this.settingsTab.Controls.Add(this.reLiveImage);
+            this.settingsTab.Controls.Add(this.schedulerGroup);
+            this.settingsTab.Controls.Add(this.schedulerCheck);
+            this.settingsTab.Controls.Add(this.schedulerLabel);
             this.settingsTab.Controls.Add(this.distanceBox);
             this.settingsTab.Controls.Add(this.haloCheck);
             this.settingsTab.Controls.Add(this.haloEnable);
@@ -358,7 +372,7 @@ namespace ReLive
             // haloCheck
             // 
             this.haloCheck.AutoSize = true;
-            this.haloCheck.Location = new System.Drawing.Point(136, 95);
+            this.haloCheck.Location = new System.Drawing.Point(137, 207);
             this.haloCheck.Name = "haloCheck";
             this.haloCheck.Size = new System.Drawing.Size(65, 17);
             this.haloCheck.TabIndex = 33;
@@ -369,7 +383,7 @@ namespace ReLive
             // haloEnable
             // 
             this.haloEnable.AutoSize = true;
-            this.haloEnable.Location = new System.Drawing.Point(20, 95);
+            this.haloEnable.Location = new System.Drawing.Point(21, 207);
             this.haloEnable.Name = "haloEnable";
             this.haloEnable.Size = new System.Drawing.Size(76, 13);
             this.haloEnable.TabIndex = 32;
@@ -395,7 +409,7 @@ namespace ReLive
             this.gpsGroup.Controls.Add(this.lngBox);
             this.gpsGroup.Controls.Add(this.latLabel);
             this.gpsGroup.Controls.Add(this.latBox);
-            this.gpsGroup.Location = new System.Drawing.Point(227, 180);
+            this.gpsGroup.Location = new System.Drawing.Point(227, 230);
             this.gpsGroup.Name = "gpsGroup";
             this.gpsGroup.Size = new System.Drawing.Size(215, 175);
             this.gpsGroup.TabIndex = 29;
@@ -405,7 +419,7 @@ namespace ReLive
             // 
             // haloDistanceBox
             // 
-            this.haloDistanceBox.Location = new System.Drawing.Point(69, 97);
+            this.haloDistanceBox.Location = new System.Drawing.Point(70, 97);
             this.haloDistanceBox.MaxLength = 7;
             this.haloDistanceBox.Name = "haloDistanceBox";
             this.haloDistanceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -416,9 +430,9 @@ namespace ReLive
             // 
             // viewHalo
             // 
-            this.viewHalo.Location = new System.Drawing.Point(69, 123);
+            this.viewHalo.Location = new System.Drawing.Point(70, 123);
             this.viewHalo.Name = "viewHalo";
-            this.viewHalo.Size = new System.Drawing.Size(50, 24);
+            this.viewHalo.Size = new System.Drawing.Size(50, 25);
             this.viewHalo.TabIndex = 28;
             this.viewHalo.Text = "View";
             this.viewHalo.UseVisualStyleBackColor = true;
@@ -453,7 +467,7 @@ namespace ReLive
             // 
             // lngBox
             // 
-            this.lngBox.Location = new System.Drawing.Point(69, 71);
+            this.lngBox.Location = new System.Drawing.Point(70, 71);
             this.lngBox.Name = "lngBox";
             this.lngBox.Size = new System.Drawing.Size(120, 20);
             this.lngBox.TabIndex = 23;
@@ -469,7 +483,7 @@ namespace ReLive
             // 
             // latBox
             // 
-            this.latBox.Location = new System.Drawing.Point(69, 40);
+            this.latBox.Location = new System.Drawing.Point(70, 40);
             this.latBox.Name = "latBox";
             this.latBox.Size = new System.Drawing.Size(120, 20);
             this.latBox.TabIndex = 21;
@@ -487,7 +501,7 @@ namespace ReLive
             this.haloSearchGroup.Controls.Add(this.cityLabel);
             this.haloSearchGroup.Controls.Add(this.streetLabel);
             this.haloSearchGroup.Controls.Add(this.geoCode);
-            this.haloSearchGroup.Location = new System.Drawing.Point(6, 180);
+            this.haloSearchGroup.Location = new System.Drawing.Point(6, 230);
             this.haloSearchGroup.Name = "haloSearchGroup";
             this.haloSearchGroup.Size = new System.Drawing.Size(215, 176);
             this.haloSearchGroup.TabIndex = 28;
@@ -506,16 +520,16 @@ namespace ReLive
             // 
             // haloDescription
             // 
-            this.haloDescription.Location = new System.Drawing.Point(72, 40);
+            this.haloDescription.Location = new System.Drawing.Point(75, 40);
             this.haloDescription.Name = "haloDescription";
-            this.haloDescription.Size = new System.Drawing.Size(137, 20);
+            this.haloDescription.Size = new System.Drawing.Size(135, 20);
             this.haloDescription.TabIndex = 21;
             // 
             // zipBox
             // 
-            this.zipBox.Location = new System.Drawing.Point(74, 147);
+            this.zipBox.Location = new System.Drawing.Point(75, 147);
             this.zipBox.Name = "zipBox";
-            this.zipBox.Size = new System.Drawing.Size(66, 20);
+            this.zipBox.Size = new System.Drawing.Size(65, 20);
             this.zipBox.TabIndex = 18;
             this.zipBox.TextChanged += new System.EventHandler(this.zipBox_TextChanged);
             // 
@@ -628,23 +642,23 @@ namespace ReLive
             "WV",
             "WI",
             "WY"});
-            this.stateBox.Location = new System.Drawing.Point(74, 120);
+            this.stateBox.Location = new System.Drawing.Point(75, 120);
             this.stateBox.Name = "stateBox";
-            this.stateBox.Size = new System.Drawing.Size(66, 21);
+            this.stateBox.Size = new System.Drawing.Size(65, 21);
             this.stateBox.TabIndex = 17;
             // 
             // cityBox
             // 
             this.cityBox.Location = new System.Drawing.Point(75, 94);
             this.cityBox.Name = "cityBox";
-            this.cityBox.Size = new System.Drawing.Size(137, 20);
+            this.cityBox.Size = new System.Drawing.Size(135, 20);
             this.cityBox.TabIndex = 16;
             // 
             // streetBox
             // 
-            this.streetBox.Location = new System.Drawing.Point(74, 68);
+            this.streetBox.Location = new System.Drawing.Point(75, 68);
             this.streetBox.Name = "streetBox";
-            this.streetBox.Size = new System.Drawing.Size(138, 20);
+            this.streetBox.Size = new System.Drawing.Size(135, 20);
             this.streetBox.TabIndex = 15;
             // 
             // zipLabel
@@ -696,7 +710,7 @@ namespace ReLive
             // minFeetLabel
             // 
             this.minFeetLabel.AutoSize = true;
-            this.minFeetLabel.Location = new System.Drawing.Point(190, 69);
+            this.minFeetLabel.Location = new System.Drawing.Point(191, 67);
             this.minFeetLabel.Name = "minFeetLabel";
             this.minFeetLabel.Size = new System.Drawing.Size(39, 13);
             this.minFeetLabel.TabIndex = 8;
@@ -705,7 +719,7 @@ namespace ReLive
             // minDistance
             // 
             this.minDistance.AutoSize = true;
-            this.minDistance.Location = new System.Drawing.Point(20, 65);
+            this.minDistance.Location = new System.Drawing.Point(20, 67);
             this.minDistance.Name = "minDistance";
             this.minDistance.Size = new System.Drawing.Size(96, 13);
             this.minDistance.TabIndex = 6;
@@ -737,7 +751,7 @@ namespace ReLive
             // delayLabel
             // 
             this.delayLabel.AutoSize = true;
-            this.delayLabel.Location = new System.Drawing.Point(20, 35);
+            this.delayLabel.Location = new System.Drawing.Point(20, 38);
             this.delayLabel.Name = "delayLabel";
             this.delayLabel.Size = new System.Drawing.Size(109, 13);
             this.delayLabel.TabIndex = 0;
@@ -763,6 +777,88 @@ namespace ReLive
             this.progressLabel.Text = "/";
             this.progressLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.progressLabel.Visible = false;
+            // 
+            // schedulerLabel
+            // 
+            this.schedulerLabel.AutoSize = true;
+            this.schedulerLabel.Location = new System.Drawing.Point(20, 96);
+            this.schedulerLabel.Name = "schedulerLabel";
+            this.schedulerLabel.Size = new System.Drawing.Size(58, 13);
+            this.schedulerLabel.TabIndex = 35;
+            this.schedulerLabel.Text = "Scheduler:";
+            // 
+            // schedulerCheck
+            // 
+            this.schedulerCheck.AutoSize = true;
+            this.schedulerCheck.Location = new System.Drawing.Point(135, 96);
+            this.schedulerCheck.Name = "schedulerCheck";
+            this.schedulerCheck.Size = new System.Drawing.Size(65, 17);
+            this.schedulerCheck.TabIndex = 36;
+            this.schedulerCheck.Text = "Enabled";
+            this.schedulerCheck.UseVisualStyleBackColor = true;
+            this.schedulerCheck.CheckedChanged += new System.EventHandler(this.schedulerCheck_CheckedChanged);
+            // 
+            // startTime
+            // 
+            this.startTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.startTime.Location = new System.Drawing.Point(75, 18);
+            this.startTime.Name = "startTime";
+            this.startTime.ShowUpDown = true;
+            this.startTime.Size = new System.Drawing.Size(100, 20);
+            this.startTime.TabIndex = 37;
+            this.startTime.ValueChanged += new System.EventHandler(this.startTime_ValueChanged);
+            // 
+            // schedulerGroup
+            // 
+            this.schedulerGroup.Controls.Add(this.endLabel);
+            this.schedulerGroup.Controls.Add(this.endTime);
+            this.schedulerGroup.Controls.Add(this.startLabel);
+            this.schedulerGroup.Controls.Add(this.startTime);
+            this.schedulerGroup.Location = new System.Drawing.Point(6, 119);
+            this.schedulerGroup.Name = "schedulerGroup";
+            this.schedulerGroup.Size = new System.Drawing.Size(215, 85);
+            this.schedulerGroup.TabIndex = 38;
+            this.schedulerGroup.TabStop = false;
+            this.schedulerGroup.Text = "Scheduler Settings";
+            this.schedulerGroup.Visible = false;
+            // 
+            // startLabel
+            // 
+            this.startLabel.AutoSize = true;
+            this.startLabel.Location = new System.Drawing.Point(15, 25);
+            this.startLabel.Name = "startLabel";
+            this.startLabel.Size = new System.Drawing.Size(32, 13);
+            this.startLabel.TabIndex = 0;
+            this.startLabel.Text = "Start:";
+            // 
+            // endLabel
+            // 
+            this.endLabel.AutoSize = true;
+            this.endLabel.Location = new System.Drawing.Point(15, 60);
+            this.endLabel.Name = "endLabel";
+            this.endLabel.Size = new System.Drawing.Size(32, 13);
+            this.endLabel.TabIndex = 38;
+            this.endLabel.Text = "Stop:";
+            // 
+            // endTime
+            // 
+            this.endTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.endTime.Location = new System.Drawing.Point(75, 53);
+            this.endTime.Name = "endTime";
+            this.endTime.ShowUpDown = true;
+            this.endTime.Size = new System.Drawing.Size(100, 20);
+            this.endTime.TabIndex = 39;
+            this.endTime.ValueChanged += new System.EventHandler(this.endTime_ValueChanged);
+            // 
+            // reLiveImage
+            // 
+            this.reLiveImage.Image = ((System.Drawing.Image)(resources.GetObject("reLiveImage.Image")));
+            this.reLiveImage.Location = new System.Drawing.Point(236, 30);
+            this.reLiveImage.Name = "reLiveImage";
+            this.reLiveImage.Size = new System.Drawing.Size(340, 184);
+            this.reLiveImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.reLiveImage.TabIndex = 39;
+            this.reLiveImage.TabStop = false;
             // 
             // reLiveMain
             // 
@@ -798,6 +894,9 @@ namespace ReLive
             this.gpsGroup.PerformLayout();
             this.haloSearchGroup.ResumeLayout(false);
             this.haloSearchGroup.PerformLayout();
+            this.schedulerGroup.ResumeLayout(false);
+            this.schedulerGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reLiveImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -857,6 +956,14 @@ namespace ReLive
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Label progressLabel;
         private System.Windows.Forms.LinkLabel albumLabel;
+        private System.Windows.Forms.DateTimePicker startTime;
+        private System.Windows.Forms.CheckBox schedulerCheck;
+        private System.Windows.Forms.Label schedulerLabel;
+        private System.Windows.Forms.GroupBox schedulerGroup;
+        private System.Windows.Forms.Label startLabel;
+        private System.Windows.Forms.Label endLabel;
+        private System.Windows.Forms.DateTimePicker endTime;
+        private System.Windows.Forms.PictureBox reLiveImage;
     }
 }
 

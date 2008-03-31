@@ -289,6 +289,7 @@ namespace ReLive
             fileBrowser.Navigate(userPictures + "\\reLive");
             //set file browser to view large icons
             
+            
             FindListViewHandle();
             SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
 
@@ -306,7 +307,7 @@ namespace ReLive
             if (memCardPath == "")
                 return;
             //array for iteratign through form controls
-            Control[] configArray = { delayBox, distanceBox, haloCheck, haloDescription, latBox, lngBox, haloDistanceBox };
+            Control[] configArray = { delayBox, distanceBox, schedulerCheck, startTime, startTime, endTime, endTime, haloCheck, haloDescription, latBox, lngBox, haloDistanceBox };
             StreamReader sr;
             if (File.Exists(memCardPath + "\\config.txt"))
             {
@@ -327,11 +328,31 @@ namespace ReLive
 
                 for (int value = 0; value < inputArray.Length; value++)
                 {
-                    if (value == 2) //special cases for halo check
+                    if (value == 2 || value == 7) //special cases for halo check
                     {
                         ((CheckBox)configArray[value]).Checked = inputArray[value] == "True";
                         if (value == 2 && inputArray[value] == "False")
+                        {
+                            value = 6;
+                            continue;
+                        }
+                        if (value == 7 && inputArray[value] == "False")
                             return;
+                    }
+                    if (value == 3 || value == 5)
+                    {
+                        if (value == 3)
+                        {
+                            startTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Int32.Parse(inputArray[value]), Int32.Parse(inputArray[value + 1]), 0);
+                            value += 1;
+                            continue;
+                        }
+                        if (value == 5)
+                        {
+                            endTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Int32.Parse(inputArray[value]), Int32.Parse(inputArray[value + 1]), 0);
+                            value += 1;
+                            continue;
+                        }
                     }
                     configArray[value].Text = inputArray[value];
                 }
@@ -612,9 +633,6 @@ namespace ReLive
                 File.Delete(path + "\\metadata.txt");
                 File.Copy(memCardPath + "\\metadata.txt", path + "\\metadata.txt");
 
-
-
-
                 //String msg = "Copying Subdirectories: ";
                 string[] subDirs = Directory.GetDirectories(memCardPath);
 
@@ -630,7 +648,7 @@ namespace ReLive
                 MessageBox.Show("Sync complete!");
             }
             //If the file copy fails then catch will gain control of the method
-            catch (Exception exc)
+            catch (Exception)
             {
                 MessageBox.Show("No metadata.txt file found on SD card.  Please include one before a sync.");
                 Invoke(new MethodInvoker(resetSync));
@@ -728,15 +746,22 @@ namespace ReLive
             
                 Directory.CreateDirectory(day[i]);
           */
-            
-                //MessageBox.Show(day[i] + " directory created");
-                for (int j = 0; j < 24; j++)
-                {
-//                    Directory.CreateDirectory(day[i] + "\\" + j);
-                    Directory.CreateDirectory(memCardPath + j.ToString());
-                    // MessageBox.Show(day[i] + "\\" + "hour" + j + 1 + " created");
 
+             //MessageBox.Show(day[i] + " directory created");
+            for (int j = 0; j < 24; j++)
+            {
+//              Directory.CreateDirectory(day[i] + "\\" + j);
+                try
+                {
+                    Directory.CreateDirectory(memCardPath + j.ToString());
                 }
+                catch (IOException)
+                {
+                    j -= 1;
+                }
+ 
+                // MessageBox.Show(day[i] + "\\" + "hour" + j + 1 + " created");
+            }
 //           }
             MessageBox.Show("Directories Created");
             //need to catch unauthorizedaccessexception
@@ -866,8 +891,13 @@ namespace ReLive
                 return;
             }
 
-            config.WriteLine(delayBox.Text + "," + distanceBox.Text + "," +
-                haloCheck.Checked + "," + haloDescription.Text + "," + latBox.Text + "," + lngBox.Text + "," + haloDistanceBox.Text);
+            //int startHour = (startTime.Value.ToString("tt") == "AM") ? startTime.Value.Hour : startTime.Value.Hour + 12;
+            //int endHour = (endTime.Value.ToString("tt") == "AM") ? endTime.Value.Hour : endTime.Value.Hour + 12;
+
+            config.WriteLine(delayBox.Text + "," + distanceBox.Text + "," + schedulerCheck.Checked + ","
+                + startTime.Value.Hour + "," + startTime.Value.Minute + "," + endTime.Value.Hour + "," 
+                + endTime.Value.Minute + "," + haloCheck.Checked + "," + haloDescription.Text + "," 
+                + latBox.Text + "," + lngBox.Text + "," + haloDistanceBox.Text);
             config.Close();
 
             MessageBox.Show("Config written to " + memCardPath + "config.txt");
@@ -895,6 +925,32 @@ namespace ReLive
         private void albumLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://picasaweb.google.com/" + this.user + "/" + curAlbum);
+        }
+
+        private void schedulerCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            schedulerGroup.Show();
+            //set endTime an hour later than start if invalid
+            if (startTime.Value >= endTime.Value)
+                endTime.Value = startTime.Value.AddHours(1);
+            //set startTime an hour earlier than end if invalid
+            if (endTime.Value <= startTime.Value)
+                startTime.Value = endTime.Value.AddHours(-1);
+
+        }
+
+        private void startTime_ValueChanged(object sender, EventArgs e)
+        {
+            //set endTime an hour later than start if invalid
+            if (startTime.Value >= endTime.Value)
+                endTime.Value = startTime.Value.AddHours(1);
+        }
+
+        private void endTime_ValueChanged(object sender, EventArgs e)
+        {
+            //set startTime an hour earlier than end if invalid
+            if (endTime.Value <= startTime.Value)
+                startTime.Value = endTime.Value.AddHours(-1);
         }
     }
 }
