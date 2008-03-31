@@ -50,6 +50,14 @@ namespace ReLive
             this.imageTab = new System.Windows.Forms.TabPage();
             this.backButton = new System.Windows.Forms.Button();
             this.settingsTab = new System.Windows.Forms.TabPage();
+            this.reLiveImage = new System.Windows.Forms.PictureBox();
+            this.schedulerGroup = new System.Windows.Forms.GroupBox();
+            this.endLabel = new System.Windows.Forms.Label();
+            this.endTime = new System.Windows.Forms.DateTimePicker();
+            this.startLabel = new System.Windows.Forms.Label();
+            this.startTime = new System.Windows.Forms.DateTimePicker();
+            this.schedulerCheck = new System.Windows.Forms.CheckBox();
+            this.schedulerLabel = new System.Windows.Forms.Label();
             this.distanceBox = new System.Windows.Forms.TextBox();
             this.haloCheck = new System.Windows.Forms.CheckBox();
             this.haloEnable = new System.Windows.Forms.Label();
@@ -81,14 +89,6 @@ namespace ReLive
             this.delayLabel = new System.Windows.Forms.Label();
             this.uploadProgress = new System.Windows.Forms.ProgressBar();
             this.progressLabel = new System.Windows.Forms.Label();
-            this.schedulerLabel = new System.Windows.Forms.Label();
-            this.schedulerCheck = new System.Windows.Forms.CheckBox();
-            this.startTime = new System.Windows.Forms.DateTimePicker();
-            this.schedulerGroup = new System.Windows.Forms.GroupBox();
-            this.startLabel = new System.Windows.Forms.Label();
-            this.endLabel = new System.Windows.Forms.Label();
-            this.endTime = new System.Windows.Forms.DateTimePicker();
-            this.reLiveImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.rightPanel.SuspendLayout();
             this.previewPanel.SuspendLayout();
@@ -96,10 +96,10 @@ namespace ReLive
             this.tabViewer.SuspendLayout();
             this.imageTab.SuspendLayout();
             this.settingsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reLiveImage)).BeginInit();
+            this.schedulerGroup.SuspendLayout();
             this.gpsGroup.SuspendLayout();
             this.haloSearchGroup.SuspendLayout();
-            this.schedulerGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reLiveImage)).BeginInit();
             this.SuspendLayout();
             // 
             // directoryBrowse
@@ -357,6 +357,88 @@ namespace ReLive
             this.settingsTab.Size = new System.Drawing.Size(582, 464);
             this.settingsTab.TabIndex = 1;
             this.settingsTab.Text = "Camera Settings";
+            // 
+            // reLiveImage
+            // 
+            this.reLiveImage.Image = ((System.Drawing.Image)(resources.GetObject("reLiveImage.Image")));
+            this.reLiveImage.Location = new System.Drawing.Point(236, 30);
+            this.reLiveImage.Name = "reLiveImage";
+            this.reLiveImage.Size = new System.Drawing.Size(340, 184);
+            this.reLiveImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.reLiveImage.TabIndex = 39;
+            this.reLiveImage.TabStop = false;
+            // 
+            // schedulerGroup
+            // 
+            this.schedulerGroup.Controls.Add(this.endLabel);
+            this.schedulerGroup.Controls.Add(this.endTime);
+            this.schedulerGroup.Controls.Add(this.startLabel);
+            this.schedulerGroup.Controls.Add(this.startTime);
+            this.schedulerGroup.Location = new System.Drawing.Point(6, 119);
+            this.schedulerGroup.Name = "schedulerGroup";
+            this.schedulerGroup.Size = new System.Drawing.Size(215, 85);
+            this.schedulerGroup.TabIndex = 38;
+            this.schedulerGroup.TabStop = false;
+            this.schedulerGroup.Text = "Scheduler Settings";
+            this.schedulerGroup.Visible = false;
+            // 
+            // endLabel
+            // 
+            this.endLabel.AutoSize = true;
+            this.endLabel.Location = new System.Drawing.Point(15, 60);
+            this.endLabel.Name = "endLabel";
+            this.endLabel.Size = new System.Drawing.Size(32, 13);
+            this.endLabel.TabIndex = 38;
+            this.endLabel.Text = "Stop:";
+            // 
+            // endTime
+            // 
+            this.endTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.endTime.Location = new System.Drawing.Point(75, 53);
+            this.endTime.Name = "endTime";
+            this.endTime.ShowUpDown = true;
+            this.endTime.Size = new System.Drawing.Size(100, 20);
+            this.endTime.TabIndex = 39;
+            this.endTime.ValueChanged += new System.EventHandler(this.endTime_ValueChanged);
+            // 
+            // startLabel
+            // 
+            this.startLabel.AutoSize = true;
+            this.startLabel.Location = new System.Drawing.Point(15, 25);
+            this.startLabel.Name = "startLabel";
+            this.startLabel.Size = new System.Drawing.Size(32, 13);
+            this.startLabel.TabIndex = 0;
+            this.startLabel.Text = "Start:";
+            // 
+            // startTime
+            // 
+            this.startTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.startTime.Location = new System.Drawing.Point(75, 18);
+            this.startTime.Name = "startTime";
+            this.startTime.ShowUpDown = true;
+            this.startTime.Size = new System.Drawing.Size(100, 20);
+            this.startTime.TabIndex = 37;
+            this.startTime.ValueChanged += new System.EventHandler(this.startTime_ValueChanged);
+            // 
+            // schedulerCheck
+            // 
+            this.schedulerCheck.AutoSize = true;
+            this.schedulerCheck.Location = new System.Drawing.Point(135, 96);
+            this.schedulerCheck.Name = "schedulerCheck";
+            this.schedulerCheck.Size = new System.Drawing.Size(65, 17);
+            this.schedulerCheck.TabIndex = 36;
+            this.schedulerCheck.Text = "Enabled";
+            this.schedulerCheck.UseVisualStyleBackColor = true;
+            this.schedulerCheck.CheckedChanged += new System.EventHandler(this.schedulerCheck_CheckedChanged);
+            // 
+            // schedulerLabel
+            // 
+            this.schedulerLabel.AutoSize = true;
+            this.schedulerLabel.Location = new System.Drawing.Point(20, 96);
+            this.schedulerLabel.Name = "schedulerLabel";
+            this.schedulerLabel.Size = new System.Drawing.Size(58, 13);
+            this.schedulerLabel.TabIndex = 35;
+            this.schedulerLabel.Text = "Scheduler:";
             // 
             // distanceBox
             // 
@@ -778,88 +860,6 @@ namespace ReLive
             this.progressLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.progressLabel.Visible = false;
             // 
-            // schedulerLabel
-            // 
-            this.schedulerLabel.AutoSize = true;
-            this.schedulerLabel.Location = new System.Drawing.Point(20, 96);
-            this.schedulerLabel.Name = "schedulerLabel";
-            this.schedulerLabel.Size = new System.Drawing.Size(58, 13);
-            this.schedulerLabel.TabIndex = 35;
-            this.schedulerLabel.Text = "Scheduler:";
-            // 
-            // schedulerCheck
-            // 
-            this.schedulerCheck.AutoSize = true;
-            this.schedulerCheck.Location = new System.Drawing.Point(135, 96);
-            this.schedulerCheck.Name = "schedulerCheck";
-            this.schedulerCheck.Size = new System.Drawing.Size(65, 17);
-            this.schedulerCheck.TabIndex = 36;
-            this.schedulerCheck.Text = "Enabled";
-            this.schedulerCheck.UseVisualStyleBackColor = true;
-            this.schedulerCheck.CheckedChanged += new System.EventHandler(this.schedulerCheck_CheckedChanged);
-            // 
-            // startTime
-            // 
-            this.startTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.startTime.Location = new System.Drawing.Point(75, 18);
-            this.startTime.Name = "startTime";
-            this.startTime.ShowUpDown = true;
-            this.startTime.Size = new System.Drawing.Size(100, 20);
-            this.startTime.TabIndex = 37;
-            this.startTime.ValueChanged += new System.EventHandler(this.startTime_ValueChanged);
-            // 
-            // schedulerGroup
-            // 
-            this.schedulerGroup.Controls.Add(this.endLabel);
-            this.schedulerGroup.Controls.Add(this.endTime);
-            this.schedulerGroup.Controls.Add(this.startLabel);
-            this.schedulerGroup.Controls.Add(this.startTime);
-            this.schedulerGroup.Location = new System.Drawing.Point(6, 119);
-            this.schedulerGroup.Name = "schedulerGroup";
-            this.schedulerGroup.Size = new System.Drawing.Size(215, 85);
-            this.schedulerGroup.TabIndex = 38;
-            this.schedulerGroup.TabStop = false;
-            this.schedulerGroup.Text = "Scheduler Settings";
-            this.schedulerGroup.Visible = false;
-            // 
-            // startLabel
-            // 
-            this.startLabel.AutoSize = true;
-            this.startLabel.Location = new System.Drawing.Point(15, 25);
-            this.startLabel.Name = "startLabel";
-            this.startLabel.Size = new System.Drawing.Size(32, 13);
-            this.startLabel.TabIndex = 0;
-            this.startLabel.Text = "Start:";
-            // 
-            // endLabel
-            // 
-            this.endLabel.AutoSize = true;
-            this.endLabel.Location = new System.Drawing.Point(15, 60);
-            this.endLabel.Name = "endLabel";
-            this.endLabel.Size = new System.Drawing.Size(32, 13);
-            this.endLabel.TabIndex = 38;
-            this.endLabel.Text = "Stop:";
-            // 
-            // endTime
-            // 
-            this.endTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.endTime.Location = new System.Drawing.Point(75, 53);
-            this.endTime.Name = "endTime";
-            this.endTime.ShowUpDown = true;
-            this.endTime.Size = new System.Drawing.Size(100, 20);
-            this.endTime.TabIndex = 39;
-            this.endTime.ValueChanged += new System.EventHandler(this.endTime_ValueChanged);
-            // 
-            // reLiveImage
-            // 
-            this.reLiveImage.Image = ((System.Drawing.Image)(resources.GetObject("reLiveImage.Image")));
-            this.reLiveImage.Location = new System.Drawing.Point(236, 30);
-            this.reLiveImage.Name = "reLiveImage";
-            this.reLiveImage.Size = new System.Drawing.Size(340, 184);
-            this.reLiveImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.reLiveImage.TabIndex = 39;
-            this.reLiveImage.TabStop = false;
-            // 
             // reLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -890,13 +890,13 @@ namespace ReLive
             this.imageTab.PerformLayout();
             this.settingsTab.ResumeLayout(false);
             this.settingsTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reLiveImage)).EndInit();
+            this.schedulerGroup.ResumeLayout(false);
+            this.schedulerGroup.PerformLayout();
             this.gpsGroup.ResumeLayout(false);
             this.gpsGroup.PerformLayout();
             this.haloSearchGroup.ResumeLayout(false);
             this.haloSearchGroup.PerformLayout();
-            this.schedulerGroup.ResumeLayout(false);
-            this.schedulerGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reLiveImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
