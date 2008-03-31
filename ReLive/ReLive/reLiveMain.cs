@@ -222,6 +222,7 @@ namespace ReLive
 
                 MessageBox.Show("Uploaded Album: " + albumNameFull + " Successfully!");
                 calendarChanged = true;
+                Invoke(new MethodInvoker(UpdateAlbumFeed));
             }
             else
             {
@@ -397,6 +398,7 @@ namespace ReLive
                 if (this.albumCalendar.SelectionStart.ToShortDateString().Equals(entry.Published.ToShortDateString()))
                     setSelection(entry);
             }
+            albumCalendar.Update();//refresh gui element
         }
 
         private void albumCalendar_DateChanged(object sender, DateRangeEventArgs e)
@@ -424,11 +426,13 @@ namespace ReLive
             //enable changing of map browser url temporarily
             mapWindow.albumMap.AllowNavigation = true;
             curAlbum = entry.getPhotoExtensionValue("name");
-            mapWindow.albumMap.Navigate("http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
+            mapWindow.albumMap.Url = new Uri("http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
+            //mapWindow.albumMap.Navigate("http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
         }
 
         private void mapLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            //mapWindow.albumMap.Refresh();
             mapWindow.ShowDialog();
         }
 
