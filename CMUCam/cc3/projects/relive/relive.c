@@ -144,20 +144,22 @@ bool check_triggers( int deltaTime, double deltaDist, int second )
 		if ( distance >= config->halo_info->range)
 			return takePic;
 	}
-	
-	// it has schedule so must check if within time
-	if ( config->schedule )
+
+	// after start time
+	if ( gps->hour  >= config->start_hour && gps->minute >= config->start_min )
 	{
-		if ( gps->hour  >= config->stop_hour )
+		// before stop time
+		if ( gps->hour  <= config->stop_hour && gps->minute <= config->stop_min )
+		{
+			// see if covered min distance
+			if ( deltaDist >= config->min_dist)
+				takePic = true;
+			
+			// timer went off
+			if( deltaTime >= config->delay )
+				takePic = true;
+		}
 	}
-	
-	// see if covered min distance
-	if ( deltaDist >= config->min_dist)
-		takePic = true;
-	
-	// timer went off
-	if( deltaTime >= config->delay )
-		takePic = true;
 
 	return takePic;
 }

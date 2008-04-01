@@ -54,6 +54,7 @@ void parse_Config(char* config_string)
 			// an error ocurred return without making config good
 			return;
 		}
+		printf("String %d: %s\r\n", numComma, str1);
 		switch(numComma)
 		{
 		case 0:
@@ -78,7 +79,7 @@ void parse_Config(char* config_string)
 					config->schedule = true;
 				}
 				else
-					config->schedlue = false;
+					config->schedule = false;
 			}
 			break;
 		case 3:
@@ -117,7 +118,7 @@ void parse_Config(char* config_string)
 				}
 			}
 			break;
-		case 5:
+		case 6:
 			{
 				if(config->schedule)
 				{
@@ -129,7 +130,7 @@ void parse_Config(char* config_string)
 				}
 			}
 			break;
-		case 6:
+		case 7:
 			{
 				//halo enabled
 				if(strcmp(str1,"True")==0)
@@ -143,25 +144,25 @@ void parse_Config(char* config_string)
 				}
 			}
 			break;
-		case 7:
+		case 8:
 			{
 				//halo name
 				strcpy(config->halo_info->name, str1);
 			}
 			break;
-		case 8:
+		case 9:
 			{
 				//lat
 				config->halo_info->lat = atof(str1);
 			}
 			break;
-		case 9:
+		case 10:
 			{
 				//lon
 				config->halo_info->lon = atof(str1);
 			}
 			break;
-		case 10:
+		case 11:
 			{
 				//range
 				config->halo_info->range = atof(str1);
