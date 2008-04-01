@@ -34,9 +34,9 @@ typedef struct _ConfigInfo
 	bool halo;
 	bool schedule;
 	int start_hour;
-	int start_minute;
+	int start_min;
 	int stop_hour;
-	int stop_minute;
+	int stop_min;
 	HaloInfo* halo_info;
 	bool good;
 }ConfigInfo;
