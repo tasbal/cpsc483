@@ -324,10 +324,11 @@ namespace ReLive
             if (input != null)
             {
                 inputArray = input.Split(',');
-
+                if (inputArray[1] != "0")
+                    distanceCheck.Checked = true;
                 for (int value = 0; value < inputArray.Length; value++)
                 {
-                    if (value == 2 || value == 7) //special cases for halo check
+                    if (value == 2 || value == 7) //special cases for halo and scheduler check
                     {
                         ((CheckBox)configArray[value]).Checked = inputArray[value] == "True";
                         if (value == 2 && inputArray[value] == "False")
@@ -953,6 +954,14 @@ namespace ReLive
             //set startTime an hour earlier than end if invalid
             if (endTime.Value <= startTime.Value)
                 startTime.Value = endTime.Value.AddHours(-1);
+        }
+
+        private void distanceCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            distanceBox.Visible = !distanceBox.Visible;
+            meterLabel.Visible = !meterLabel.Visible;
+            if (!distanceCheck.Checked)
+                distanceBox.Text = "0";
         }
     }
 }

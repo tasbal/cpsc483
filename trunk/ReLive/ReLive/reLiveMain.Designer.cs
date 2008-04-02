@@ -83,12 +83,13 @@ namespace ReLive
             this.cityLabel = new System.Windows.Forms.Label();
             this.streetLabel = new System.Windows.Forms.Label();
             this.geoCode = new System.Windows.Forms.Button();
-            this.minFeetLabel = new System.Windows.Forms.Label();
+            this.meterLabel = new System.Windows.Forms.Label();
             this.minDistance = new System.Windows.Forms.Label();
             this.delayBox = new System.Windows.Forms.ComboBox();
             this.delayLabel = new System.Windows.Forms.Label();
             this.uploadProgress = new System.Windows.Forms.ProgressBar();
             this.progressLabel = new System.Windows.Forms.Label();
+            this.distanceCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.rightPanel.SuspendLayout();
             this.previewPanel.SuspendLayout();
@@ -337,6 +338,7 @@ namespace ReLive
             // settingsTab
             // 
             this.settingsTab.BackColor = System.Drawing.SystemColors.Control;
+            this.settingsTab.Controls.Add(this.distanceCheck);
             this.settingsTab.Controls.Add(this.reLiveImage);
             this.settingsTab.Controls.Add(this.schedulerGroup);
             this.settingsTab.Controls.Add(this.schedulerCheck);
@@ -347,7 +349,7 @@ namespace ReLive
             this.settingsTab.Controls.Add(this.writeConfig);
             this.settingsTab.Controls.Add(this.gpsGroup);
             this.settingsTab.Controls.Add(this.haloSearchGroup);
-            this.settingsTab.Controls.Add(this.minFeetLabel);
+            this.settingsTab.Controls.Add(this.meterLabel);
             this.settingsTab.Controls.Add(this.minDistance);
             this.settingsTab.Controls.Add(this.delayBox);
             this.settingsTab.Controls.Add(this.delayLabel);
@@ -361,9 +363,9 @@ namespace ReLive
             // reLiveImage
             // 
             this.reLiveImage.Image = ((System.Drawing.Image)(resources.GetObject("reLiveImage.Image")));
-            this.reLiveImage.Location = new System.Drawing.Point(236, 30);
+            this.reLiveImage.Location = new System.Drawing.Point(404, 3);
             this.reLiveImage.Name = "reLiveImage";
-            this.reLiveImage.Size = new System.Drawing.Size(340, 184);
+            this.reLiveImage.Size = new System.Drawing.Size(177, 96);
             this.reLiveImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.reLiveImage.TabIndex = 39;
             this.reLiveImage.TabStop = false;
@@ -442,13 +444,14 @@ namespace ReLive
             // 
             // distanceBox
             // 
-            this.distanceBox.Location = new System.Drawing.Point(135, 60);
+            this.distanceBox.Location = new System.Drawing.Point(206, 64);
             this.distanceBox.MaxLength = 7;
             this.distanceBox.Name = "distanceBox";
             this.distanceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.distanceBox.Size = new System.Drawing.Size(50, 20);
             this.distanceBox.TabIndex = 34;
             this.distanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.distanceBox.Visible = false;
             this.distanceBox.TextChanged += new System.EventHandler(this.distanceBox_TextChanged);
             // 
             // haloCheck
@@ -789,14 +792,15 @@ namespace ReLive
             this.geoCode.UseVisualStyleBackColor = true;
             this.geoCode.Click += new System.EventHandler(this.geoCode_Click);
             // 
-            // minFeetLabel
+            // meterLabel
             // 
-            this.minFeetLabel.AutoSize = true;
-            this.minFeetLabel.Location = new System.Drawing.Point(191, 67);
-            this.minFeetLabel.Name = "minFeetLabel";
-            this.minFeetLabel.Size = new System.Drawing.Size(39, 13);
-            this.minFeetLabel.TabIndex = 8;
-            this.minFeetLabel.Text = "Meters";
+            this.meterLabel.AutoSize = true;
+            this.meterLabel.Location = new System.Drawing.Point(262, 67);
+            this.meterLabel.Name = "meterLabel";
+            this.meterLabel.Size = new System.Drawing.Size(39, 13);
+            this.meterLabel.TabIndex = 8;
+            this.meterLabel.Text = "Meters";
+            this.meterLabel.Visible = false;
             // 
             // minDistance
             // 
@@ -825,7 +829,7 @@ namespace ReLive
             "50",
             "55",
             "60"});
-            this.delayBox.Location = new System.Drawing.Point(135, 30);
+            this.delayBox.Location = new System.Drawing.Point(135, 35);
             this.delayBox.Name = "delayBox";
             this.delayBox.Size = new System.Drawing.Size(50, 21);
             this.delayBox.TabIndex = 2;
@@ -859,6 +863,17 @@ namespace ReLive
             this.progressLabel.Text = "/";
             this.progressLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.progressLabel.Visible = false;
+            // 
+            // distanceCheck
+            // 
+            this.distanceCheck.AutoSize = true;
+            this.distanceCheck.Location = new System.Drawing.Point(135, 66);
+            this.distanceCheck.Name = "distanceCheck";
+            this.distanceCheck.Size = new System.Drawing.Size(65, 17);
+            this.distanceCheck.TabIndex = 40;
+            this.distanceCheck.Text = "Enabled";
+            this.distanceCheck.UseVisualStyleBackColor = true;
+            this.distanceCheck.CheckedChanged += new System.EventHandler(this.distanceCheck_CheckedChanged);
             // 
             // reLiveMain
             // 
@@ -926,7 +941,7 @@ namespace ReLive
         private System.Windows.Forms.Label delayLabel;
         private System.Windows.Forms.ComboBox delayBox;
         private System.Windows.Forms.Label minDistance;
-        private System.Windows.Forms.Label minFeetLabel;
+        private System.Windows.Forms.Label meterLabel;
         private System.Windows.Forms.Button geoCode;
         private System.Windows.Forms.ComboBox stateBox;
         private System.Windows.Forms.TextBox cityBox;
@@ -964,6 +979,7 @@ namespace ReLive
         private System.Windows.Forms.Label endLabel;
         private System.Windows.Forms.DateTimePicker endTime;
         private System.Windows.Forms.PictureBox reLiveImage;
+        private System.Windows.Forms.CheckBox distanceCheck;
     }
 }
 
