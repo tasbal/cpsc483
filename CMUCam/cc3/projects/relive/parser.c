@@ -203,8 +203,50 @@ bool parse_GPS(char* gps_string)
 /************************************************************************/
 
 bool parse_GPVTG(char* gps_string)
-{
-	//nothing useful out of GPVTG right now, maybe later
+{	
+	char* str1 = NULL;
+	int num_comma;	
+	char* time = NULL;
+	char* lat = NULL;
+	char* lon= NULL;
+  double speed;  //in m/s
+	if(gps_string == NULL || gps_string[0]!='$')
+		return NULL;
+
+	num_comma = 0;
+
+	str1 = strsep(&gps_string, ",");
+	while(1)
+	{
+		if(str1 == NULL)
+			break;
+
+		//don't want to try to convert this data until the fix quality has been checked
+		switch(num_comma)
+		{
+		case 0:  //GPVTG
+			{
+				if(strcmp(str1,"$GPVTG") != 0 )
+					return false;
+			}
+			break;
+		case 7:  //speed in km/hr
+			{
+				speed = atof(str1);
+        speed/=1000;  //change from km/hr to m/hr
+//FIXME:
+//Do something with speed and add this free to GPGGA
+        free(str1);
+        return true;
+			}
+			break;
+		}
+    
+    //this may be needed on GPGGA
+    free(str1);
+		str1 = strsep(&gps_string,",");
+		num_comma++;
+	}
 	return false;
 }
 
