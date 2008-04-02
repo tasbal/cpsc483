@@ -330,6 +330,7 @@ void convert(char* time,char* lat,char* lon,char* date)
 	tmp[1] = time[1];
 
 	gps->hour = atoi(tmp);
+	gps->hour-=5;  //account for UTC to CST
 
 	tmp[0] = time[2];
 	tmp[1] = time[3];
