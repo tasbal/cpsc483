@@ -289,11 +289,9 @@ namespace ReLive
             Directory.CreateDirectory(@userPictures + "\\reLive");
             fileBrowser.Navigate(userPictures + "\\reLive");
             //set file browser to view large icons
-            
-            
             FindListViewHandle();
             SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
-
+            //center calender (fix for different size for xp/vista)
             int x = (calendarPanel.Width - albumCalendar.Width) / 2;
             int y = albumCalendar.Location.Y;
             albumCalendar.Location = new Point(x, y);
@@ -340,7 +338,7 @@ namespace ReLive
                         if (value == 7 && inputArray[value] == "False")
                             return;
                     }
-                    if (value == 3 || value == 5)
+                    else if (value == 3 || value == 5)
                     {
                         if (value == 3)
                         {
@@ -355,7 +353,8 @@ namespace ReLive
                             continue;
                         }
                     }
-                    configArray[value].Text = inputArray[value];
+                    else
+                        configArray[value].Text = inputArray[value];
                 }
                 sr.Close();
             }
@@ -933,14 +932,13 @@ namespace ReLive
 
         private void schedulerCheck_CheckedChanged(object sender, EventArgs e)
         {
-            schedulerGroup.Show();
+            schedulerGroup.Visible = !schedulerGroup.Visible;
             //set endTime an hour later than start if invalid
             if (startTime.Value >= endTime.Value)
                 endTime.Value = startTime.Value.AddHours(1);
             //set startTime an hour earlier than end if invalid
             if (endTime.Value <= startTime.Value)
                 startTime.Value = endTime.Value.AddHours(-1);
-
         }
 
         private void startTime_ValueChanged(object sender, EventArgs e)
