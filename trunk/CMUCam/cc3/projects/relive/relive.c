@@ -80,6 +80,9 @@ void initialize()
 	
 	gps_com = cc3_uart_fopen(1,"r+");
 	
+	write_to_memory("\r\n------------New Session---------------\r\n", 1);
+	write_to_memory(NULL, 2);
+	
 	// init pixbuf with width and height
 	cc3_pixbuf_load();
 	
@@ -151,12 +154,8 @@ bool check_triggers( int deltaTime, double deltaDist, int second )
 		// before stop time
 		if ( gps->hour  <= config->stop_hour && gps->minute <= config->stop_min )
 		{
-			// see if covered min distance
-			if ( deltaDist >= config->min_dist)
-				takePic = true;
-			
-			// timer went off
-			if( deltaTime >= config->delay )
+			// see if covered min distance && timer went off
+			if ( deltaDist >= config->min_dist && deltaTime >= config->delay)
 				takePic = true;
 		}
 	}
