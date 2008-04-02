@@ -7,6 +7,8 @@
 #include "parser.h"
 #include "relive.h"
 
+#define gps_start_delay 8000
+
 int main (void)
 {
 	initialize();
@@ -52,7 +54,7 @@ printf("\r\nHello, Camera initialized\r\n");
 			}
 			
 			//first check if need to get out of power save
-			power_save = (config->delay - deltaTime >= 3000);
+			power_save = (config->delay - deltaTime >= gps_start_delay);
 			
 			if ( !power_save )
 			{
@@ -65,7 +67,7 @@ printf("\r\nHello, Camera initialized\r\n");
 		else
 		{
 			// first check if need to get into power save, if yes go to next iteration
-			power_save = (config->delay - deltaTime >= 3000);
+			power_save = (config->delay - deltaTime > gps_start_delay);
 			
 			if ( power_save )
 			{

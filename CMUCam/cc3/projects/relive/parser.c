@@ -310,7 +310,7 @@ bool parse_GPGGA(char* gps_string)
 						free(lon);
 						return false;
 				}
-				if(strcmp(str1,"7") && !gps->good)
+				if(strcmp(str1,"7")==0 && !gps->good)
 				{
 					// if we did not lock onto the gps before
 					// then dont accept a seven

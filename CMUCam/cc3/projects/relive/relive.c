@@ -97,12 +97,12 @@ printf("\r\nInitialize JPEG:\r\n");
 
 int takePict(int picNum)
 {
-	char filename[16];
+	char filename[24];
 	
 printf("\r\nTaking Picture:\n\r");
 	do
 	{
-		snprintf(filename, 16, "c:/%d/img%.5d.jpg", gps->hour, picNum);
+		snprintf(filename, 24, "c:/%d/img%.5d.jpg", gps->hour, picNum);
 		memory = fopen(filename, "r");
 		if ( memory != NULL )
 		{
