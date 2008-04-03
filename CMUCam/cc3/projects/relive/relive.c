@@ -14,6 +14,8 @@
 
 void initialize()
 {	
+	first_time_fix = false;
+	
 	parse_init();
 	
 	cc3_led_set_state (1, true);
