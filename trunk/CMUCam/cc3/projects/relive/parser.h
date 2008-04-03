@@ -46,6 +46,7 @@ typedef struct _ConfigInfo
 GPSData *gps;
 GPSData *prev_gps;
 ConfigInfo *config;
+bool first_time_fix;
 
 /************************************************************************/
 

@@ -204,7 +204,7 @@ bool parse_GPS(char* gps_string)
 
 bool parse_GPVTG(char* gps_string)
 {	
-	char* str1 = NULL;
+/*	char* str1 = NULL;
 	int num_comma;	
 	char* time = NULL;
 	char* lat = NULL;
@@ -247,7 +247,7 @@ bool parse_GPVTG(char* gps_string)
 		str1 = strsep(&gps_string,",");
 		num_comma++;
 	}
-	return false;
+	*/return false;
 }
 
 /************************************************************************/
@@ -321,17 +321,16 @@ bool parse_GPGGA(char* gps_string)
 				}
 				
 				convert(time,lat,lon,NULL);
+				gps->good = true;
 				
 				// first time to aquire signal
 				// will also save data into prev_gps
 				// for calculating travel distance
-				if (!gps->good)
+				if ( !first_time_fix )
 				{
 					copy_gps();
-					prev_gps->good = true;
+					first_time_fix = true;
 				}
-				
-				gps->good = true;
 				
 				free(time);
 				free(lat);
