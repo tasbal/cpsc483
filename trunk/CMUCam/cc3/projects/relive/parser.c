@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-
+#include <math.h>
 #include "parser.h"
 
 void parse_init()
@@ -33,8 +33,6 @@ void parse_init()
 	prev_gps = (GPSData*)malloc(sizeof(GPSData));
 	copy_gps();
 }
-
-/************************************************************************/
 
 void parse_Config(char* config_string)
 {
@@ -183,8 +181,6 @@ void parse_Config(char* config_string)
 	config->good = true;
 }
 
-/************************************************************************/
-
 bool parse_GPS(char* gps_string)
 {
 	if(gps_string == NULL || gps_string[0] != '$' || gps_string[1] != 'G' || gps_string[2] != 'P')
@@ -200,57 +196,10 @@ bool parse_GPS(char* gps_string)
 	return false;
 }
 
-/************************************************************************/
-
 bool parse_GPVTG(char* gps_string)
 {	
-/*	char* str1 = NULL;
-	int num_comma;	
-	char* time = NULL;
-	char* lat = NULL;
-	char* lon= NULL;
-  double speed;  //in m/s
-	if(gps_string == NULL || gps_string[0]!='$')
-		return NULL;
-
-	num_comma = 0;
-
-	str1 = strsep(&gps_string, ",");
-	while(1)
-	{
-		if(str1 == NULL)
-			break;
-
-		//don't want to try to convert this data until the fix quality has been checked
-		switch(num_comma)
-		{
-		case 0:  //GPVTG
-			{
-				if(strcmp(str1,"$GPVTG") != 0 )
-					return false;
-			}
-			break;
-		case 7:  //speed in km/hr
-			{
-				speed = atof(str1);
-        speed/=1000;  //change from km/hr to m/hr
-//FIXME:
-//Do something with speed and add this free to GPGGA
-        free(str1);
-        return true;
-			}
-			break;
-		}
-    
-    //this may be needed on GPGGA
-    free(str1);
-		str1 = strsep(&gps_string,",");
-		num_comma++;
-	}
-	*/return false;
+	return false;
 }
-
-/************************************************************************/
 
 bool parse_GPGGA(char* gps_string)
 {
@@ -345,8 +294,6 @@ bool parse_GPGGA(char* gps_string)
 	return false;
 }
 
-/************************************************************************/
-
 void convert(char* time,char* lat,char* lon,char* date)
 {
 	char* tmp = (char*)malloc(sizeof(char)*3);
@@ -385,8 +332,6 @@ void convert(char* time,char* lat,char* lon,char* date)
 	
 	free(tmp);
 }
-
-/************************************************************************/
 
 double toDeg(char* DDMM,int latorlon)
 {
@@ -442,8 +387,6 @@ double toDeg(char* DDMM,int latorlon)
 	return deg_d + (min_d*MINTODEG);
 }
 
-/************************************************************************/
-
 double toRad(double degrees)
 {
 	return degrees*DEGTORAD;
@@ -482,8 +425,6 @@ double calcDist( double nLat1, double nLon1, double nLat2, double nLon2 )
 	return nD; // Return our calculated distance
 }
 
-/************************************************************************/
-
 void copy_gps(void)
 {	
 	prev_gps->lat = gps->lat;
@@ -496,8 +437,6 @@ void copy_gps(void)
 	prev_gps->year = gps->year;
 	prev_gps->good = gps->good;
 }
-
-/************************************************************************/
 
 double sin(double x)
 {
@@ -519,8 +458,6 @@ double sin(double x)
 }
 
 
-/************************************************************************/
-
 double cos(double x)
 {
 	//taylor series implementation
@@ -540,8 +477,7 @@ double cos(double x)
 	return cos2;
 }
 
-/************************************************************************/
-
+/*
 double atan2(double num,double den)
 {
 	double x = num/den;
@@ -560,9 +496,7 @@ double atan2(double num,double den)
 	}
 	return arctan;
 }
-
-/************************************************************************/
-
+*/
 double pow(double base,double pow2)
 {
 	double toRet = 1;
@@ -574,23 +508,25 @@ double pow(double base,double pow2)
 	return toRet;
 }
 
-/************************************************************************/
-
-double sqrt (double y) 
+/*
+double sqrt(double m)
 {
-	double x, z, tempf;
-	unsigned long *tfptr;
-	tfptr = ((unsigned long *)&tempf) + 1;
-	tempf = y;
-	*tfptr = (0xbfcdd90a - *tfptr)>>1; 
-	x =  tempf;
-	z =  y*0.5;                        
-	x = (1.5*x) - (x*x)*(x*z);         
-	x = (1.5*x) - (x*x)*(x*z);
-	x = (1.5*x) - (x*x)*(x*z);
-	x = (1.5*x) - (x*x)*(x*z);
-	x = (1.5*x) - (x*x)*(x*z);
-	return x*y;
-}
+  double i=0;
+  double x1,x2;
+  int j;
 
-/************************************************************************/
+  while( (i*i) <= m )
+    i+=0.1;
+  x1=i;
+  for(j=0;j<10;j++)
+  {
+      x2=m;
+      x2/=x1;
+      x2+=x1;
+      x2/=2;
+      x1=x2;
+   }
+   return x2;
+}
+*/
+
