@@ -1,5 +1,5 @@
 #ifndef _PARSER_h_
-#define _PAESER_h_
+#define _PARSER_h_
 
 #define MINTODEG .01667
 #define DEGTORAD 0.017453293
@@ -41,14 +41,11 @@ typedef struct _ConfigInfo
 	bool good;
 }ConfigInfo;
 
-/************************************************************************/
 
 GPSData *gps;
 GPSData *prev_gps;
 ConfigInfo *config;
 bool first_time_fix;
-
-/************************************************************************/
 
 void parse_init(void);
 bool parse_GPS(char* gps_data);
@@ -61,12 +58,10 @@ double toDeg(char* data,int lat_or_lon);
 double calcDist( double nLat1, double nLon1, double nLat2, double nLon2 );
 void copy_gps(void);
 
-/************************************************************************/
-
 double sin(double x);
 double cos(double x);
-double atan2(double num,double den);
+//double atan2(double num,double den);
 double pow(double base,double pow2);
-double sqrt (double y);
+//double sqrt (double y);
 
 #endif
