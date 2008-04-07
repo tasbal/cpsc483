@@ -584,7 +584,8 @@ namespace ReLive
                     //copy file to dest dir
                     if(!file.Name.Equals("config.txt"))
                     {
-                    file.CopyTo(tmppath, true);
+                      file.CopyTo(tmppath, true);
+                      file.Delete();
 //                    file.CopyTo(destdir, true);
                     }
                 }

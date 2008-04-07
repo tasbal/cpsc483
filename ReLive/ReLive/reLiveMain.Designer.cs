@@ -50,6 +50,7 @@ namespace ReLive
             this.imageTab = new System.Windows.Forms.TabPage();
             this.backButton = new System.Windows.Forms.Button();
             this.settingsTab = new System.Windows.Forms.TabPage();
+            this.distanceCheck = new System.Windows.Forms.CheckBox();
             this.reLiveImage = new System.Windows.Forms.PictureBox();
             this.schedulerGroup = new System.Windows.Forms.GroupBox();
             this.endLabel = new System.Windows.Forms.Label();
@@ -89,7 +90,6 @@ namespace ReLive
             this.delayLabel = new System.Windows.Forms.Label();
             this.uploadProgress = new System.Windows.Forms.ProgressBar();
             this.progressLabel = new System.Windows.Forms.Label();
-            this.distanceCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.AlbumPicture)).BeginInit();
             this.rightPanel.SuspendLayout();
             this.previewPanel.SuspendLayout();
@@ -359,6 +359,17 @@ namespace ReLive
             this.settingsTab.Size = new System.Drawing.Size(582, 464);
             this.settingsTab.TabIndex = 1;
             this.settingsTab.Text = "Camera Settings";
+            // 
+            // distanceCheck
+            // 
+            this.distanceCheck.AutoSize = true;
+            this.distanceCheck.Location = new System.Drawing.Point(135, 66);
+            this.distanceCheck.Name = "distanceCheck";
+            this.distanceCheck.Size = new System.Drawing.Size(65, 17);
+            this.distanceCheck.TabIndex = 40;
+            this.distanceCheck.Text = "Enabled";
+            this.distanceCheck.UseVisualStyleBackColor = true;
+            this.distanceCheck.CheckedChanged += new System.EventHandler(this.distanceCheck_CheckedChanged);
             // 
             // reLiveImage
             // 
@@ -863,17 +874,6 @@ namespace ReLive
             this.progressLabel.Text = "/";
             this.progressLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.progressLabel.Visible = false;
-            // 
-            // distanceCheck
-            // 
-            this.distanceCheck.AutoSize = true;
-            this.distanceCheck.Location = new System.Drawing.Point(135, 66);
-            this.distanceCheck.Name = "distanceCheck";
-            this.distanceCheck.Size = new System.Drawing.Size(65, 17);
-            this.distanceCheck.TabIndex = 40;
-            this.distanceCheck.Text = "Enabled";
-            this.distanceCheck.UseVisualStyleBackColor = true;
-            this.distanceCheck.CheckedChanged += new System.EventHandler(this.distanceCheck_CheckedChanged);
             // 
             // reLiveMain
             // 
