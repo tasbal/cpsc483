@@ -72,14 +72,14 @@ namespace ReLive
             this.Password.Name = "Password";
             this.Password.PasswordChar = '*';
             this.Password.Size = new System.Drawing.Size(156, 20);
-            this.Password.TabIndex = 3;
+            this.Password.TabIndex = 1;
             // 
             // buttonLogin
             // 
             this.buttonLogin.Location = new System.Drawing.Point(68, 83);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 4;
+            this.buttonLogin.TabIndex = 2;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
@@ -90,7 +90,7 @@ namespace ReLive
             this.linkCreateAccount.Location = new System.Drawing.Point(62, 67);
             this.linkCreateAccount.Name = "linkCreateAccount";
             this.linkCreateAccount.Size = new System.Drawing.Size(81, 13);
-            this.linkCreateAccount.TabIndex = 5;
+            this.linkCreateAccount.TabIndex = 4;
             this.linkCreateAccount.TabStop = true;
             this.linkCreateAccount.Text = "Create Account";
             this.linkCreateAccount.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCreateAccount_LinkClicked);
@@ -100,7 +100,7 @@ namespace ReLive
             this.buttonCancel.Location = new System.Drawing.Point(149, 83);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 6;
+            this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Skip";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -111,7 +111,7 @@ namespace ReLive
             this.linkAddPicasaweb.Location = new System.Drawing.Point(150, 66);
             this.linkAddPicasaweb.Name = "linkAddPicasaweb";
             this.linkAddPicasaweb.Size = new System.Drawing.Size(81, 13);
-            this.linkAddPicasaweb.TabIndex = 7;
+            this.linkAddPicasaweb.TabIndex = 5;
             this.linkAddPicasaweb.TabStop = true;
             this.linkAddPicasaweb.Text = "Add Picasaweb";
             this.linkAddPicasaweb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAddPicasaweb_LinkClicked);

@@ -108,7 +108,7 @@ namespace ReLive
             this.directoryBrowse.Location = new System.Drawing.Point(475, 9);
             this.directoryBrowse.Name = "directoryBrowse";
             this.directoryBrowse.Size = new System.Drawing.Size(50, 25);
-            this.directoryBrowse.TabIndex = 2;
+            this.directoryBrowse.TabIndex = 3;
             this.directoryBrowse.Text = "Browse";
             this.directoryBrowse.UseVisualStyleBackColor = true;
             this.directoryBrowse.Click += new System.EventHandler(this.directoryBrowse_Click);
@@ -118,7 +118,7 @@ namespace ReLive
             this.uploadDir.Location = new System.Drawing.Point(531, 9);
             this.uploadDir.Name = "uploadDir";
             this.uploadDir.Size = new System.Drawing.Size(51, 25);
-            this.uploadDir.TabIndex = 2;
+            this.uploadDir.TabIndex = 4;
             this.uploadDir.Text = "Upload";
             this.uploadDir.UseVisualStyleBackColor = true;
             this.uploadDir.Click += new System.EventHandler(this.uploadDir_Click);
@@ -157,7 +157,7 @@ namespace ReLive
             this.mapLinkLabel.Location = new System.Drawing.Point(60, 182);
             this.mapLinkLabel.Name = "mapLinkLabel";
             this.mapLinkLabel.Size = new System.Drawing.Size(54, 13);
-            this.mapLinkLabel.TabIndex = 8;
+            this.mapLinkLabel.TabIndex = 5;
             this.mapLinkLabel.TabStop = true;
             this.mapLinkLabel.Text = "View Map";
             this.mapLinkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -181,7 +181,7 @@ namespace ReLive
             this.explorerText.Location = new System.Drawing.Point(8, 12);
             this.explorerText.Name = "explorerText";
             this.explorerText.Size = new System.Drawing.Size(412, 20);
-            this.explorerText.TabIndex = 10;
+            this.explorerText.TabIndex = 1;
             this.explorerText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.explorerText_Enter);
             // 
             // loginLink
@@ -191,7 +191,7 @@ namespace ReLive
             this.loginLink.Location = new System.Drawing.Point(0, 0);
             this.loginLink.Name = "loginLink";
             this.loginLink.Size = new System.Drawing.Size(133, 13);
-            this.loginLink.TabIndex = 11;
+            this.loginLink.TabIndex = 9;
             this.loginLink.TabStop = true;
             this.loginLink.Text = "Login or Change Accounts";
             this.loginLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.loginLink_LinkClicked);
@@ -202,7 +202,7 @@ namespace ReLive
             this.picasaLink.Location = new System.Drawing.Point(139, 0);
             this.picasaLink.Name = "picasaLink";
             this.picasaLink.Size = new System.Drawing.Size(81, 13);
-            this.picasaLink.TabIndex = 12;
+            this.picasaLink.TabIndex = 10;
             this.picasaLink.TabStop = true;
             this.picasaLink.Text = "Visit Picasaweb";
             this.picasaLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.picasaLink_LinkClicked);
@@ -224,7 +224,7 @@ namespace ReLive
             this.formatSD.Location = new System.Drawing.Point(49, 474);
             this.formatSD.Name = "formatSD";
             this.formatSD.Size = new System.Drawing.Size(156, 28);
-            this.formatSD.TabIndex = 14;
+            this.formatSD.TabIndex = 8;
             this.formatSD.Text = "Format SD Card";
             this.formatSD.UseVisualStyleBackColor = true;
             this.formatSD.Click += new System.EventHandler(this.formatSD_Click);
@@ -247,7 +247,7 @@ namespace ReLive
             this.albumLabel.Location = new System.Drawing.Point(120, 182);
             this.albumLabel.Name = "albumLabel";
             this.albumLabel.Size = new System.Drawing.Size(62, 13);
-            this.albumLabel.TabIndex = 9;
+            this.albumLabel.TabIndex = 6;
             this.albumLabel.TabStop = true;
             this.albumLabel.Text = "View Album";
             this.albumLabel.Visible = false;
@@ -294,7 +294,7 @@ namespace ReLive
             this.retrieveSD.Location = new System.Drawing.Point(49, 431);
             this.retrieveSD.Name = "retrieveSD";
             this.retrieveSD.Size = new System.Drawing.Size(154, 37);
-            this.retrieveSD.TabIndex = 9;
+            this.retrieveSD.TabIndex = 7;
             this.retrieveSD.Text = "Sync Pictures From SD Card";
             this.retrieveSD.UseVisualStyleBackColor = true;
             this.retrieveSD.Click += new System.EventHandler(this.retrieveSD_Click);
@@ -308,7 +308,7 @@ namespace ReLive
             this.tabViewer.Name = "tabViewer";
             this.tabViewer.SelectedIndex = 0;
             this.tabViewer.Size = new System.Drawing.Size(590, 490);
-            this.tabViewer.TabIndex = 14;
+            this.tabViewer.TabIndex = 11;
             // 
             // imageTab
             // 
@@ -330,7 +330,7 @@ namespace ReLive
             this.backButton.Location = new System.Drawing.Point(426, 9);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(43, 25);
-            this.backButton.TabIndex = 11;
+            this.backButton.TabIndex = 2;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
@@ -366,7 +366,7 @@ namespace ReLive
             this.distanceCheck.Location = new System.Drawing.Point(135, 66);
             this.distanceCheck.Name = "distanceCheck";
             this.distanceCheck.Size = new System.Drawing.Size(65, 17);
-            this.distanceCheck.TabIndex = 40;
+            this.distanceCheck.TabIndex = 3;
             this.distanceCheck.Text = "Enabled";
             this.distanceCheck.UseVisualStyleBackColor = true;
             this.distanceCheck.CheckedChanged += new System.EventHandler(this.distanceCheck_CheckedChanged);
@@ -390,7 +390,7 @@ namespace ReLive
             this.schedulerGroup.Location = new System.Drawing.Point(6, 119);
             this.schedulerGroup.Name = "schedulerGroup";
             this.schedulerGroup.Size = new System.Drawing.Size(215, 85);
-            this.schedulerGroup.TabIndex = 38;
+            this.schedulerGroup.TabIndex = 6;
             this.schedulerGroup.TabStop = false;
             this.schedulerGroup.Text = "Scheduler Settings";
             this.schedulerGroup.Visible = false;
@@ -411,7 +411,7 @@ namespace ReLive
             this.endTime.Name = "endTime";
             this.endTime.ShowUpDown = true;
             this.endTime.Size = new System.Drawing.Size(100, 20);
-            this.endTime.TabIndex = 39;
+            this.endTime.TabIndex = 7;
             this.endTime.ValueChanged += new System.EventHandler(this.endTime_ValueChanged);
             // 
             // startLabel
@@ -430,7 +430,7 @@ namespace ReLive
             this.startTime.Name = "startTime";
             this.startTime.ShowUpDown = true;
             this.startTime.Size = new System.Drawing.Size(100, 20);
-            this.startTime.TabIndex = 37;
+            this.startTime.TabIndex = 6;
             this.startTime.ValueChanged += new System.EventHandler(this.startTime_ValueChanged);
             // 
             // schedulerCheck
@@ -439,7 +439,7 @@ namespace ReLive
             this.schedulerCheck.Location = new System.Drawing.Point(135, 96);
             this.schedulerCheck.Name = "schedulerCheck";
             this.schedulerCheck.Size = new System.Drawing.Size(65, 17);
-            this.schedulerCheck.TabIndex = 36;
+            this.schedulerCheck.TabIndex = 5;
             this.schedulerCheck.Text = "Enabled";
             this.schedulerCheck.UseVisualStyleBackColor = true;
             this.schedulerCheck.CheckedChanged += new System.EventHandler(this.schedulerCheck_CheckedChanged);
@@ -460,7 +460,7 @@ namespace ReLive
             this.distanceBox.Name = "distanceBox";
             this.distanceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.distanceBox.Size = new System.Drawing.Size(50, 20);
-            this.distanceBox.TabIndex = 34;
+            this.distanceBox.TabIndex = 4;
             this.distanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.distanceBox.Visible = false;
             this.distanceBox.TextChanged += new System.EventHandler(this.distanceBox_TextChanged);
@@ -471,7 +471,7 @@ namespace ReLive
             this.haloCheck.Location = new System.Drawing.Point(137, 207);
             this.haloCheck.Name = "haloCheck";
             this.haloCheck.Size = new System.Drawing.Size(65, 17);
-            this.haloCheck.TabIndex = 33;
+            this.haloCheck.TabIndex = 8;
             this.haloCheck.Text = "Enabled";
             this.haloCheck.UseVisualStyleBackColor = true;
             this.haloCheck.CheckedChanged += new System.EventHandler(this.haloCheck_CheckedChanged);
@@ -490,7 +490,7 @@ namespace ReLive
             this.writeConfig.Location = new System.Drawing.Point(479, 426);
             this.writeConfig.Name = "writeConfig";
             this.writeConfig.Size = new System.Drawing.Size(97, 32);
-            this.writeConfig.TabIndex = 30;
+            this.writeConfig.TabIndex = 19;
             this.writeConfig.Text = "Save Config";
             this.writeConfig.UseVisualStyleBackColor = true;
             this.writeConfig.Click += new System.EventHandler(this.writeConfig_Click);
@@ -508,7 +508,7 @@ namespace ReLive
             this.gpsGroup.Location = new System.Drawing.Point(227, 230);
             this.gpsGroup.Name = "gpsGroup";
             this.gpsGroup.Size = new System.Drawing.Size(215, 175);
-            this.gpsGroup.TabIndex = 29;
+            this.gpsGroup.TabIndex = 15;
             this.gpsGroup.TabStop = false;
             this.gpsGroup.Text = "Halo Settings";
             this.gpsGroup.Visible = false;
@@ -520,7 +520,7 @@ namespace ReLive
             this.haloDistanceBox.Name = "haloDistanceBox";
             this.haloDistanceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.haloDistanceBox.Size = new System.Drawing.Size(50, 20);
-            this.haloDistanceBox.TabIndex = 35;
+            this.haloDistanceBox.TabIndex = 17;
             this.haloDistanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.haloDistanceBox.TextChanged += new System.EventHandler(this.haloDistanceBox_TextChanged);
             // 
@@ -529,7 +529,7 @@ namespace ReLive
             this.viewHalo.Location = new System.Drawing.Point(70, 123);
             this.viewHalo.Name = "viewHalo";
             this.viewHalo.Size = new System.Drawing.Size(50, 25);
-            this.viewHalo.TabIndex = 28;
+            this.viewHalo.TabIndex = 18;
             this.viewHalo.Text = "View";
             this.viewHalo.UseVisualStyleBackColor = true;
             this.viewHalo.Click += new System.EventHandler(this.viewHalo_Click);
@@ -566,7 +566,7 @@ namespace ReLive
             this.lngBox.Location = new System.Drawing.Point(70, 71);
             this.lngBox.Name = "lngBox";
             this.lngBox.Size = new System.Drawing.Size(120, 20);
-            this.lngBox.TabIndex = 23;
+            this.lngBox.TabIndex = 16;
             // 
             // latLabel
             // 
@@ -582,7 +582,7 @@ namespace ReLive
             this.latBox.Location = new System.Drawing.Point(70, 40);
             this.latBox.Name = "latBox";
             this.latBox.Size = new System.Drawing.Size(120, 20);
-            this.latBox.TabIndex = 21;
+            this.latBox.TabIndex = 15;
             // 
             // haloSearchGroup
             // 
@@ -600,7 +600,7 @@ namespace ReLive
             this.haloSearchGroup.Location = new System.Drawing.Point(6, 230);
             this.haloSearchGroup.Name = "haloSearchGroup";
             this.haloSearchGroup.Size = new System.Drawing.Size(215, 176);
-            this.haloSearchGroup.TabIndex = 28;
+            this.haloSearchGroup.TabIndex = 9;
             this.haloSearchGroup.TabStop = false;
             this.haloSearchGroup.Text = "Halo Location Search";
             this.haloSearchGroup.Visible = false;
@@ -619,14 +619,14 @@ namespace ReLive
             this.haloDescription.Location = new System.Drawing.Point(75, 40);
             this.haloDescription.Name = "haloDescription";
             this.haloDescription.Size = new System.Drawing.Size(135, 20);
-            this.haloDescription.TabIndex = 21;
+            this.haloDescription.TabIndex = 9;
             // 
             // zipBox
             // 
             this.zipBox.Location = new System.Drawing.Point(75, 147);
             this.zipBox.Name = "zipBox";
             this.zipBox.Size = new System.Drawing.Size(65, 20);
-            this.zipBox.TabIndex = 18;
+            this.zipBox.TabIndex = 13;
             this.zipBox.TextChanged += new System.EventHandler(this.zipBox_TextChanged);
             // 
             // stateBox
@@ -741,21 +741,21 @@ namespace ReLive
             this.stateBox.Location = new System.Drawing.Point(75, 120);
             this.stateBox.Name = "stateBox";
             this.stateBox.Size = new System.Drawing.Size(65, 21);
-            this.stateBox.TabIndex = 17;
+            this.stateBox.TabIndex = 12;
             // 
             // cityBox
             // 
             this.cityBox.Location = new System.Drawing.Point(75, 94);
             this.cityBox.Name = "cityBox";
             this.cityBox.Size = new System.Drawing.Size(135, 20);
-            this.cityBox.TabIndex = 16;
+            this.cityBox.TabIndex = 11;
             // 
             // streetBox
             // 
             this.streetBox.Location = new System.Drawing.Point(75, 68);
             this.streetBox.Name = "streetBox";
             this.streetBox.Size = new System.Drawing.Size(135, 20);
-            this.streetBox.TabIndex = 15;
+            this.streetBox.TabIndex = 10;
             // 
             // zipLabel
             // 
@@ -798,7 +798,7 @@ namespace ReLive
             this.geoCode.Location = new System.Drawing.Point(146, 120);
             this.geoCode.Name = "geoCode";
             this.geoCode.Size = new System.Drawing.Size(66, 50);
-            this.geoCode.TabIndex = 10;
+            this.geoCode.TabIndex = 14;
             this.geoCode.Text = "Get GPS";
             this.geoCode.UseVisualStyleBackColor = true;
             this.geoCode.Click += new System.EventHandler(this.geoCode_Click);
