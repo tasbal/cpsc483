@@ -99,7 +99,6 @@ namespace ReLive
         static double ConvertToUnixTimestamp(DateTime date)
         {
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            //origin.ToUniversalTime();
             TimeSpan diff = date - origin;
             return Math.Floor(diff.TotalMilliseconds);
         } 
@@ -122,11 +121,11 @@ namespace ReLive
         {
             if (InvokeRequired)
             {
-                // We're not in the UI thread, so we need to call BeginInvoke
+                //We're not in the UI thread, so we need to call BeginInvoke
                 BeginInvoke(new StringParameterDelegate(UpdateStatus), new object[] { step, value });
                 return;
             }
-            // Must be on the UI thread if we've got this far
+            //Must be on the UI thread if we've got this far
             uploadProgress.Step = (uploadProgress.Maximum / value);
             uploadProgress.Visible = true;
             progressLabel.Visible = true;
@@ -164,6 +163,7 @@ namespace ReLive
                 string[] dateArray = albumNameFull.Split('-');
                 String albumName = "";
                 int currentStep = 0;
+                bool validMeta = true;
 
                 foreach (string tempString in dateArray)
                 {
@@ -173,9 +173,6 @@ namespace ReLive
                 Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, albumName));
 
                 createNewAlbum(albumNameFull, desc, albumDate);
-                //UpdateStatus(jpgFiles.Length + 1);
-
-                bool validMeta = true;
 
                 foreach (FileInfo file in jpgFiles)
                 {
@@ -270,7 +267,6 @@ namespace ReLive
                     try
                     {
                         Invoke(new MethodInvoker(UpdateAlbumFeed));
-                        //UpdateAlbumFeed();
                     }
                     catch (Google.GData.Client.GDataRequestException)
                     {
@@ -288,9 +284,11 @@ namespace ReLive
             login();
             Directory.CreateDirectory(@userPictures + "\\reLive");
             fileBrowser.Navigate(userPictures + "\\reLive");
+
             //set file browser to view large icons
             FindListViewHandle();
             SendMessage(this.listViewHandle, LVM_SETVIEW, LV_VIEW_ICON, 0);
+
             //center calender (fix for different size for xp/vista)
             int x = (calendarPanel.Width - albumCalendar.Width) / 2;
             int y = albumCalendar.Location.Y;
@@ -308,6 +306,7 @@ namespace ReLive
             //array for iteratign through form controls
             Control[] configArray = { delayBox, distanceBox, schedulerCheck, startTime, startTime, endTime, endTime, haloCheck, haloDescription, latBox, lngBox, haloDistanceBox };
             StreamReader sr;
+
             if (File.Exists(memCardPath + "\\config.txt"))
             {
                 sr = File.OpenText(memCardPath + "\\config.txt");
@@ -391,7 +390,6 @@ namespace ReLive
             this.AlbumPicture.Image = null;
             this.mapLinkLabel.Hide();
             this.albumLabel.Hide();
-            //this.AlbumInspector.SelectedObject = null;
 
             foreach (PicasaEntry entry in this.albumList)
             {
@@ -418,21 +416,20 @@ namespace ReLive
             MediaThumbnail thumb = entry.Media.Thumbnails[0];
             Stream stream = this.picasaService.Query(new Uri(thumb.Attributes["url"] as string));
             this.AlbumPicture.Image = new Bitmap(stream);
-            //this.AlbumInspector.SelectedObject = new AlbumAccessor(entry);
             this.Cursor = Cursors.Default;
+
             //enable map link only when date selected
             this.mapLinkLabel.Show();
             this.albumLabel.Show();
+
             //enable changing of map browser url temporarily
             mapWindow.albumMap.AllowNavigation = true;
             curAlbum = entry.getPhotoExtensionValue("name");
             mapWindow.albumMap.Url = new Uri("http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
-            //mapWindow.albumMap.Navigate("http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
         }
 
         private void mapLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //mapWindow.albumMap.Refresh();
             mapWindow.ShowDialog();
         }
 
@@ -442,7 +439,6 @@ namespace ReLive
             explorerText.Text = fileBrowser.Url.LocalPath.ToString();
         }
 
-        //file browser view stuff
         private void FindListViewHandle()
         {
             this.listViewHandle = NullHandleRef;
@@ -511,7 +507,6 @@ namespace ReLive
 
                 if (reliveCnt != 1)
                 {
-                    //string msg = "Please choose from the list below, the removable to be used. \n";
                     SelectDrive selectWin = new SelectDrive();
 
                     for (int i = 0; i < rootNum; i++)
@@ -526,8 +521,9 @@ namespace ReLive
                         memCardPath = allRemovables[selectWin.choice];
                         driveSelected = true;
                     }
-                    else driveSelected = false;
-                    //MessageBox.Show(memCardPath + " was chosen to be the used drive.  \nPlease wait for directories to be set up");
+
+                    else 
+                        driveSelected = false;
                 }
                 
             }
@@ -570,7 +566,6 @@ namespace ReLive
                 {
                     if (file.Name.Equals(destFile.Name) && !file.Extension.Equals(".txt"))
                     {
-                        //MessageBox.Show(destFile.Name + " exists..skipping.. Please delete to upload.");
                         fileExists = true;
                     }
                 }
@@ -580,13 +575,11 @@ namespace ReLive
                     //create the path to where this file should be in destdir
                     tmppath = Path.Combine(destdir, file.Name);
 
-                    //MessageBox.Show("Copying " + tmppath);
                     //copy file to dest dir
                     if(!file.Name.Equals("config.txt"))
                     {
                       file.CopyTo(tmppath, true);
                       file.Delete();
-//                    file.CopyTo(destdir, true);
                     }
                 }
                 else fileExists = false;
@@ -609,7 +602,6 @@ namespace ReLive
             foreach (DirectoryInfo subdir in dirs)
             {
                 //create the path to the directory in destdir
-//                tmppath = Path.Combine(destdir, subdir.Name);
                 tmppath = destdir;
                 //recursively call this function over and over again
                 //with each new dir.
@@ -625,7 +617,6 @@ namespace ReLive
         {
             string home = @userPictures + "\\reLive";
             
-
             DateTime currTime = DateTime.Now;
             string day = currTime.ToString("yyyy-MM-dd");
             //create folder for current date
@@ -637,17 +628,8 @@ namespace ReLive
 
                 File.Delete(path + "\\metadata.txt");
                 File.Copy(memCardPath + "\\metadata.txt", path + "\\metadata.txt");
-
-                //String msg = "Copying Subdirectories: ";
                 string[] subDirs = Directory.GetDirectories(memCardPath);
 
-                /*
-                foreach (string subDir in subDirs)
-                {
-                    msg = msg + subDir + "\n";
-                }
-                MessageBox.Show(msg);
-                 */
                 fileCopy(memCardPath, path, true);  //make third parameter true for recursive copy
                 Invoke(new MethodInvoker(resetSync));
                 MessageBox.Show("Sync complete!");
@@ -685,7 +667,8 @@ namespace ReLive
             {
                 MessageBox.Show("No memory card found, please select a card to be formatted.");
                 memCardPath = findSDPath(); //reprompt for SD card
-                if (memCardPath == "") return;
+                if (memCardPath == "")
+                    return;
             }
 
             //take off the '\'
@@ -711,12 +694,6 @@ namespace ReLive
                 myStreamWriter.WriteLine();
 
                 myStreamWriter.Close();
-
-                //string output = p.StandardOutput.ReadToEnd();
-                //string output1 = output.Substring(0, 115);
-                //int nextStart = output.IndexOf("nitializ");
-                //string output2 = output.Substring(2030, 2050);
-
                 p.Close();
 
                 MessageBox.Show(pathNoSlash + " formatted to Fat16. \n Format Completed. \n Please wait awhile for directories to be set up.");
@@ -724,50 +701,24 @@ namespace ReLive
                 ThreadStart job = new ThreadStart(memCardDirSetup);
                 Thread thread = new Thread(job);
                 thread.Start();
+                
             }
         }
 
         private void memCardDirSetup()
         {
-         /*   
-            string[] day = new string[31];
-            DateTime currTime = DateTime.Now;
-            string msg = "";
-            day[0] = currTime.ToString("yyyy-MM-dd");
-            for (int i = 0; i < 31; i++)
-            {
-                day[i] = memCardPath + day[i];
-                if (i != 30)
-                {
-                    day[i + 1] = currTime.AddDays(i).ToString("yyyy-MM-dd");
-                }
-                msg = msg + day[i] + "\n";
-            }
-            //            MessageBox.Show(msg);
-            
-            for (int i = 0; i < 31; i++)
-            {
-          
-            
-                Directory.CreateDirectory(day[i]);
-          */
-
-             //MessageBox.Show(day[i] + " directory created");
+            System.Threading.Thread.Sleep(2000);
             for (int j = 0; j < 24; j++)
             {
-//              Directory.CreateDirectory(day[i] + "\\" + j);
                 try
                 {
                     Directory.CreateDirectory(memCardPath + j.ToString());
                 }
-                catch (IOException)
+                catch (Exception)
                 {
                     j -= 1;
                 }
- 
-                // MessageBox.Show(day[i] + "\\" + "hour" + j + 1 + " created");
             }
-//           }
             MessageBox.Show("Directories Created");
             //need to catch unauthorizedaccessexception
         }
@@ -810,7 +761,6 @@ namespace ReLive
 
         private void geoCode_Click(object sender, EventArgs e)
         {
-            //c# geocoding example
             string lat = "";
             string lng = "";
             string address = streetBox.Text + ", " + cityBox.Text + ", " + stateBox.Text + ", " + zipBox.Text;
@@ -895,9 +845,6 @@ namespace ReLive
                 MessageBox.Show("Problem accessing config file, make sure it is not open and try again!");
                 return;
             }
-
-            //int startHour = (startTime.Value.ToString("tt") == "AM") ? startTime.Value.Hour : startTime.Value.Hour + 12;
-            //int endHour = (endTime.Value.ToString("tt") == "AM") ? endTime.Value.Hour : endTime.Value.Hour + 12;
 
             config.WriteLine(delayBox.Text + "," + distanceBox.Text + "," + schedulerCheck.Checked + ","
                 + startTime.Value.Hour + "," + startTime.Value.Minute + "," + endTime.Value.Hour + "," 
