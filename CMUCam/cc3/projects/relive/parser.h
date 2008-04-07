@@ -60,8 +60,6 @@ void copy_gps(void);
 
 double sin(double x);
 double cos(double x);
-//double atan2(double num,double den);
 double pow(double base,double pow2);
-//double sqrt (double y);
 
 #endif
