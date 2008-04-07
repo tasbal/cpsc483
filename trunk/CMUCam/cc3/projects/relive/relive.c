@@ -136,7 +136,7 @@ printf("\r\nTaking Picture:\n\r");
 
 /************************************************************************/
 
-bool check_triggers( int deltaTime, double deltaDist, int second )
+bool check_triggers( int deltaTime, double deltaDist )
 {
 	bool takePic = false;
 

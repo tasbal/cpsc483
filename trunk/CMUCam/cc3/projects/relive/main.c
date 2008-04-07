@@ -80,7 +80,7 @@ printf("\r\nHello, Camera initialized\r\n");
 			
 			get_gps_data();
 			
-			if ( check_triggers(deltaTime, deltaDist, second)  )
+			if ( check_triggers(deltaTime, deltaDist)  )
 			{
 				picNum=takePict(picNum);
 				write_to_memory(NULL, 0);
@@ -123,18 +123,7 @@ printf("\r\nHello, Camera initialized\r\n");
 
 	destroy_jpeg();
 
-/* 
-  uint32_t val;
-  double dist;
-  cc3_uart_init (0, CC3_UART_RATE_115200, CC3_UART_MODE_8N1,
-    CC3_UART_BINMODE_TEXT);
-  val = setvbuf(stdout, NULL, _IONBF, 0);
-
-//  printf("%d",(int)sqrt(4));
-  dist = calcDist(30.6111,-96.34192,30.611,-96.34192);
-  printf("%d\n",(int)(dist*1000));
-  */
-  return 0;
+	return 0;
 
 }
 

@@ -457,7 +457,6 @@ double sin(double x)
 	return sin2;
 }
 
-
 double cos(double x)
 {
 	//taylor series implementation
@@ -477,26 +476,6 @@ double cos(double x)
 	return cos2;
 }
 
-/*
-double atan2(double num,double den)
-{
-	double x = num/den;
-	double numerator = x;
-	double denominator = 1.0;
-	double sign = 1.0;
-	double arctan = 0;
-	int i;
-	int terms = 20;
-	for ( i = 1; i <= terms; i++)
-	{
-		arctan += numerator / denominator * sign;
-		numerator *= x * x;
-		denominator = 2 * i + 1;
-		sign *= -1;
-	}
-	return arctan;
-}
-*/
 double pow(double base,double pow2)
 {
 	double toRet = 1;
@@ -508,25 +487,4 @@ double pow(double base,double pow2)
 	return toRet;
 }
 
-/*
-double sqrt(double m)
-{
-  double i=0;
-  double x1,x2;
-  int j;
-
-  while( (i*i) <= m )
-    i+=0.1;
-  x1=i;
-  for(j=0;j<10;j++)
-  {
-      x2=m;
-      x2/=x1;
-      x2+=x1;
-      x2/=2;
-      x1=x2;
-   }
-   return x2;
-}
-*/
 

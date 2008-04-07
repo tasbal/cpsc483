@@ -19,7 +19,7 @@ FILE *gps_com;
 
 void initialize(void);
 int takePict(int picNum);
-bool check_triggers( int delta_time, double delta_dist, int second );
+bool check_triggers( int delta_time, double delta_dist);
 void write_to_memory(char* data, int opt);
 void get_gps_data(void);
 
