@@ -14,7 +14,12 @@
 
 void initialize()
 {	
-	first_time_fix = false;
+	prevTime = 0;
+	deltaTime = 0;
+	second = 0;
+	deltaDist = 0;
+	power_save = false;
+	first_time_fix = true;
 	
 	parse_init();
 	
@@ -226,6 +231,22 @@ void get_gps_data()
 		printf("INVALID\r\n");
 	
 	free(gps_buff);
+}
+
+/************************************************************************/
+
+void update_time()
+{
+	deltaTime += cc3_timer_get_current_ms() - prevTime;
+	prevTime =  cc3_timer_get_current_ms();
+}
+
+/************************************************************************/
+
+void update_dist()
+{
+	deltaDist += calcDist( prev_gps->lat, prev_gps->lon, gps->lat, gps->lon );
+	copy_gps();
 }
 
 /************************************************************************/

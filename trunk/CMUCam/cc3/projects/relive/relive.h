@@ -3,17 +3,11 @@
 
 #include "jpeglib.h"
 
-#define DLE	0x10
-#define ETX	0x03
-
-#define DONE			1
-#define ERROR		2
-#define IN_PROGRESS	3
-#define STATE_DLE		4
-#define START			5
-
-FILE *memory;
-FILE *gps_com;
+FILE *memory, *gps_com;
+uint32_t prevTime, deltaTime;
+int second;
+double deltaDist;
+bool power_save, first_time_fix;
 
 /************************************************************************/
 
@@ -22,6 +16,8 @@ int takePict(int picNum);
 bool check_triggers( int delta_time, double delta_dist);
 void write_to_memory(char* data, int opt);
 void get_gps_data(void);
+void update_time(void);
+void update_dist(void);
 
 static void capture_current_jpeg(FILE *f);
 static void init_jpeg(void);

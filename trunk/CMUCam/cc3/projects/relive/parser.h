@@ -45,7 +45,6 @@ typedef struct _ConfigInfo
 GPSData *gps;
 GPSData *prev_gps;
 ConfigInfo *config;
-bool first_time_fix;
 
 void parse_init(void);
 bool parse_GPS(char* gps_data);

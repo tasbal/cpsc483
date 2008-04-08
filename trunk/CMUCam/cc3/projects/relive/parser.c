@@ -52,7 +52,6 @@ void parse_Config(char* config_string)
 			// an error ocurred return without making config good
 			return;
 		}
-		printf("String %d: %s\r\n", numComma, str1);
 		switch(numComma)
 		{
 		case 0:
@@ -270,17 +269,7 @@ bool parse_GPGGA(char* gps_string)
 				}
 				
 				convert(time,lat,lon,NULL);
-				gps->good = true;
-				
-				// first time to aquire signal
-				// will also save data into prev_gps
-				// for calculating travel distance
-				if ( !first_time_fix )
-				{
-					copy_gps();
-					first_time_fix = true;
-				}
-				
+				gps->good = true;			
 				free(time);
 				free(lat);
 				free(lon);
