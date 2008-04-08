@@ -40,6 +40,7 @@ void initialize()
 
 	// read config file from MMC
 	printf ("\n\rReading config file\r\n");
+	fprintf (log, "\n\rReading config file\r\n");
 	memory = fopen ("c:/config.txt", "r");
 	if (memory == NULL) {
 		perror ("fopen failed\r\n");
@@ -60,20 +61,33 @@ void initialize()
 	if(config->good)
 	{
 		printf("\r\nConfig File:\n\rDelay(ms) - %d\tMin Dist(mm) - %d",(int)config->delay,(int)(config->min_dist*1000));
+		fprintf(log, "\r\nConfig File:\n\rDelay(ms) - %d\tMin Dist(mm) - %d",(int)config->delay,(int)(config->min_dist*1000));
 		if(config->halo)
 		{
 			printf("\tHalo - true\r\n");
+			fprintf(log, "\tHalo - true\r\n");
 			printf("\tHalo %s:\t Lat*10000 - %d\tLon*10000 - %d\tRange(mm) - %d\r\n",
+				config->halo_info->name,
+				(int)(config->halo_info->lat*10000),
+				(int)(config->halo_info->lon*10000),
+				(int)(config->halo_info->range*1000) );
+			fprintf(log, "\tHalo %s:\t Lat*10000 - %d\tLon*10000 - %d\tRange(mm) - %d\r\n",
 				config->halo_info->name,
 				(int)(config->halo_info->lat*10000),
 				(int)(config->halo_info->lon*10000),
 				(int)(config->halo_info->range*1000) );
 		}
 		else
+		{
 			printf("\tHalo - false\r\n");
+			fprintf(log, "\tHalo - false\r\n");
+		}
 	}
 	else
+	{
 		printf("config.txt INVALID\r\n");
+		fprintf(log, "config.txt INVALID\r\n");
+	}
 	
 	//configure camera
 	cc3_camera_set_colorspace (CC3_COLORSPACE_RGB);
@@ -87,14 +101,14 @@ void initialize()
 	
 	gps_com = cc3_uart_fopen(1,"r+");
 	
-	write_to_memory("\r\n------------New Session---------------\r\n", 1);
-	write_to_memory(NULL, 2);
+	write_to_memory("\r\n------------New Session---------------\r\n", gps_mem);
 	
 	// init pixbuf with width and height
 	cc3_pixbuf_load();
 	
 	// init jpeg
-printf("\r\nInitialize JPEG:\r\n");
+	printf("\r\nInitialize JPEG:\r\n");
+	fprintf(log, "\r\nInitialize JPEG:\r\n");
 	init_jpeg();
 
 	cc3_timer_wait_ms(1000);	
@@ -109,14 +123,14 @@ int takePict(int picNum)
 {
 	char filename[24];
 	
-printf("\r\nTaking Picture:\n\r");
+	printf("\r\nTaking Picture:\n\r");
+	fprintf(log, "\r\nTaking Picture:\n\r");
 	do
 	{
 		snprintf(filename, 24, "c:/%d/img%.5d.jpg", gps->hour, picNum);
 		memory = fopen(filename, "r");
 		if ( memory != NULL )
-		{
-//			printf( "%s already exists...\r\n",filename); 
+		{ 
 			picNum++; 
 			fclose(memory);
 		}
@@ -141,7 +155,7 @@ printf("\r\nTaking Picture:\n\r");
 
 /************************************************************************/
 
-bool check_triggers( int deltaTime, double deltaDist )
+bool check_triggers()
 {
 	bool takePic = false;
 
@@ -172,19 +186,23 @@ bool check_triggers( int deltaTime, double deltaDist )
 
 /************************************************************************/
 
-void write_to_memory(char* data, int opt)
+void write_to_memory(char* data, mem_loc where)
 {
-	if(opt == 0)
-		memory = fopen ("c:/metadata.txt", "a");
-	else
+	switch(where)
+	{
+	case gps_mem:
 		memory = fopen ("c:/gpsData.txt", "a");
-	
+		break;
+	case meta_mem:
+		memory = fopen ("c:/metadata.txt", "a");
+		break;
+	}
 	if (memory == NULL) {
-	perror ("fopen failed");
-	return;
+		perror ("fopen failed");
+		return;
 	}
 	
-	if ( opt == 0 )
+	if ( where == meta_mem )
 	{
 		fprintf(memory, "%d, %d, %2d:%2d:%2d",
 			(int)(gps->lat*10000),
@@ -195,16 +213,14 @@ void write_to_memory(char* data, int opt)
 			fprintf(memory, ", %s", config->halo_info->name);
 		fprintf(memory, "\r\n");
 	}	
-	else if ( opt == 1 )
+	else
 	{
 		if ( data != NULL)
 			fprintf(memory, "%s", data);
 	}
-	else if ( opt == 2 )
-		fprintf(memory, "\r\n");
 
 	if ( fclose (memory) == EOF) {
-	perror ("fclose failed");
+		perror ("fclose failed");
 	}
 }
 
@@ -217,18 +233,29 @@ void get_gps_data()
 	fflush(gps_com);
 	fscanf(gps_com,"%s",gps_buff);
 	printf("\r\nGetting GPS Data: %s\r\n",gps_buff);
+	fprintf(log, "\r\nGetting GPS Data: %s\r\n",gps_buff);
 	
-	write_to_memory(gps_buff,1);
-	write_to_memory(NULL,2);
+	strcat(gps_buff, "\r\n");
+	write_to_memory(gps_buff, gps_mem);
 	
 	if(parse_GPS(gps_buff))
+	{
 		printf("Lat - %d\tLon - %d\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",
 			(int)(gps->lat*10000),
 			(int)(gps->lon*10000),
 			gps->month,gps->day,gps->year,
 			gps->hour,gps->minute,gps->second);
+		fprintf(log, "Lat - %d\tLon - %d\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",
+			(int)(gps->lat*10000),
+			(int)(gps->lon*10000),
+			gps->month,gps->day,gps->year,
+			gps->hour,gps->minute,gps->second);
+	}
 	else
+	{
 		printf("INVALID\r\n");
+		fprintf(log, "INVALID\r\n");
+	}
 	
 	free(gps_buff);
 }
