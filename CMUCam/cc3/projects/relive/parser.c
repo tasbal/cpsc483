@@ -392,8 +392,6 @@ double toRad(double degrees)
 	return degrees*DEGTORAD;
 }
 
-/************************************************************************/
-
 double calcDist( double nLat1, double nLon1, double nLat2, double nLon2 )
 {
 	double nDLat, nDLon, nA, nC, nD;
