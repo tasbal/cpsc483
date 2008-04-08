@@ -11,6 +11,14 @@
 
 int main (void)
 {
+	log = fopen ("c:/log.txt", "a");
+	if (log == NULL) {
+		perror ("fopen failed");
+		return 0;
+	}
+	
+	fprintf(log, "\r\n------------New Session---------------\r\n", gps_mem);
+	
 	initialize();
 	// if we could not get a good config file then quit
 	if( !config->good )
@@ -20,6 +28,7 @@ int main (void)
 	}
 	
 	printf("\r\nHello, Camera initialized\r\n");
+	fprintf(log,"\r\nHello, Camera initialized\r\n");
 
 	bool on = true;
 	int picNum = 0;
@@ -45,6 +54,7 @@ int main (void)
 				if(deltaTime > second*1000)
 				{
 					printf("\r\ndeltaTime: %d s\n\r",second);
+					fprintf(log,"\r\ndeltaTime: %d s\n\r",second);
 					second++;
 				}
 			}
@@ -69,6 +79,7 @@ int main (void)
 		if(deltaTime > second*1000)
 		{
 			printf("\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
+			fprintf(log,"\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
 			second++;
 		}
 
@@ -99,10 +110,10 @@ int main (void)
 			
 			get_gps_data();
 			
-			if ( check_triggers(deltaTime, deltaDist)  )
+			if ( check_triggers()  )
 			{
 				picNum=takePict(picNum);
-				write_to_memory(NULL, 0);
+				write_to_memory(NULL, meta_mem);
 				deltaTime = 0;
 				second = 0;
 			}
@@ -122,6 +133,9 @@ int main (void)
 	}
 
 	destroy_jpeg();
+	if ( fclose (log) == EOF) {
+		perror ("fclose failed");
+	}
 	return 0;
 }
 
