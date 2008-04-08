@@ -11,7 +11,6 @@
 
 int main (void)
 {
-  
 	initialize();
 	// if we could not get a good config file then quit
 	if( !config->good )
@@ -20,43 +19,64 @@ int main (void)
 		return 0;
 	}
 	
-	// set time to equal delay so it takes picture right away
-	uint32_t prevTime = 0;
-	uint32_t deltaTime = 0;
-	int second = 0;
-	double deltaDist = 0;
-	bool power_save = false;
-	
-printf("\r\nHello, Camera initialized\r\n");
+	printf("\r\nHello, Camera initialized\r\n");
 
 	bool on = true;
 	int picNum = 0;
 	while (1)
 	{
-		// wait until valid gps
-		while ( !gps->good )
+		// we have not gotten a fix on a sattelite
+		// when first turn on and after waking up GPS unit
+		if ( !gps->good )
 		{
-			get_gps_data();
-		}
-		
-		if ( power_save )
-		{
-			// update change in parameters
-			deltaTime += cc3_timer_get_current_ms() - prevTime;
-			
-			// update previous state
-			prevTime =  cc3_timer_get_current_ms();
-			
-			// for debugin outputs state every second
-			if(deltaTime > second*1000)
+			uint32_t saved_prevTime = prevTime;
+			uint32_t saved_deltaTime = deltaTime;
+			int saved_second = second;
+
+			prevTime = 0;
+			deltaTime = 0;
+			second = 0;
+
+			while( !gps->good )
 			{
-				printf("\r\ndeltaTime: %d s\n\r",second);
-				second++;
+				get_gps_data();
+
+				update_time();
+				if(deltaTime > second*1000)
+				{
+					printf("\r\ndeltaTime: %d s\n\r",second);
+					second++;
+				}
 			}
 			
+			// It is the first time we got a fix on a sattelite
+			// since the unit first turned on so also save the
+			// gps info into prev_gps
+			if( first_time_fix )
+			{
+				copy_gps();
+				first_time_fix = false;
+			}
+
+			prevTime = saved_prevTime;
+			deltaTime = saved_deltaTime;
+			second = saved_second;
+		}
+
+		//Main function First update time and distance
+		update_time();
+		update_dist();
+		if(deltaTime > second*1000)
+		{
+			printf("\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
+			second++;
+		}
+
+		// Now it is either in power saving mode or not
+		if ( power_save )
+		{
 			//first check if need to get out of power save
 			power_save = (config->delay - deltaTime >= gps_start_delay);
-			
 			if ( !power_save )
 			{
 				//turn on gps and camera
@@ -69,7 +89,6 @@ printf("\r\nHello, Camera initialized\r\n");
 		{
 			// first check if need to get into power save, if yes go to next iteration
 			power_save = (config->delay - deltaTime > gps_start_delay);
-			
 			if ( power_save )
 			{
 				//turn off gps and camera
@@ -87,25 +106,6 @@ printf("\r\nHello, Camera initialized\r\n");
 				deltaTime = 0;
 				second = 0;
 			}
-			// else update change in time by subtracting previous time off current time
-			// then updating previous time to current time
-			else
-			{
-				// update change in parameters
-				deltaTime += cc3_timer_get_current_ms() - prevTime;
-				deltaDist += calcDist( prev_gps->lat, prev_gps->lon, gps->lat, gps->lon );
-				
-				// update previous state
-				prevTime =  cc3_timer_get_current_ms();
-				copy_gps();
-				
-				// for debugin outputs state every second
-				if(deltaTime > second*1000)
-				{
-					printf("\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
-					second++;
-				}
-			}
 		
 			// blinking LED to make sure camera is working
 			if(on)
@@ -122,9 +122,7 @@ printf("\r\nHello, Camera initialized\r\n");
 	}
 
 	destroy_jpeg();
-
 	return 0;
-
 }
 
 /************************************************************************/
