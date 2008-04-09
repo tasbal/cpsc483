@@ -10,15 +10,7 @@
 #define gps_start_delay 8000
 
 int main (void)
-{
-	log = fopen ("c:/log.txt", "a");
-	if (log == NULL) {
-		perror ("fopen failed");
-		return 0;
-	}
-	
-	fprintf(log, "\r\n------------New Session---------------\r\n", gps_mem);
-	
+{	
 	initialize();
 	// if we could not get a good config file then quit
 	if( !config->good )
@@ -28,12 +20,17 @@ int main (void)
 	}
 	
 	printf("\r\nHello, Camera initialized\r\n");
-	fprintf(log,"\r\nHello, Camera initialized\r\n");
 
 	bool on = true;
 	int picNum = 0;
 	while (1)
 	{
+		log = fopen("c:/log.txt", "a");
+		if (log == NULL) {
+			perror ("fopen failed");
+			return ;
+		}
+		
 		// we have not gotten a fix on a sattelite
 		// when first turn on and after waking up GPS unit
 		if ( !gps->good )
@@ -66,6 +63,7 @@ int main (void)
 			{
 				copy_gps();
 				first_time_fix = false;
+				fprintf(log, "\r\n------------New Session---------------\r\n", gps_mem);
 			}
 
 			prevTime = saved_prevTime;
@@ -75,7 +73,7 @@ int main (void)
 
 		//Main function First update time and distance
 		update_time();
-		update_dist();
+		deltaDist = calcDist( prev_gps->lat, prev_gps->lon, gps->lat, gps->lon );
 		if(deltaTime > second*1000)
 		{
 			printf("\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
@@ -114,6 +112,8 @@ int main (void)
 			{
 				picNum=takePict(picNum);
 				write_to_memory(NULL, meta_mem);
+				copy_gps();
+				deltaDist = 0;
 				deltaTime = 0;
 				second = 0;
 			}
@@ -130,12 +130,14 @@ int main (void)
 				on = true;
 			}
 		}
+		
+		// close log
+		if ( fclose (log) == EOF) {
+			perror ("fclose failed");
+		}
 	}
 
 	destroy_jpeg();
-	if ( fclose (log) == EOF) {
-		perror ("fclose failed");
-	}
 	return 0;
 }
 
