@@ -40,7 +40,6 @@ void initialize()
 
 	// read config file from MMC
 	printf ("\n\rReading config file\r\n");
-	fprintf (log, "\n\rReading config file\r\n");
 	memory = fopen ("c:/config.txt", "r");
 	if (memory == NULL) {
 		perror ("fopen failed\r\n");
@@ -61,33 +60,20 @@ void initialize()
 	if(config->good)
 	{
 		printf("\r\nConfig File:\n\rDelay(ms) - %d\tMin Dist(mm) - %d",(int)config->delay,(int)(config->min_dist*1000));
-		fprintf(log, "\r\nConfig File:\n\rDelay(ms) - %d\tMin Dist(mm) - %d",(int)config->delay,(int)(config->min_dist*1000));
 		if(config->halo)
 		{
 			printf("\tHalo - true\r\n");
-			fprintf(log, "\tHalo - true\r\n");
 			printf("\tHalo %s:\t Lat*10000 - %d\tLon*10000 - %d\tRange(mm) - %d\r\n",
-				config->halo_info->name,
-				(int)(config->halo_info->lat*10000),
-				(int)(config->halo_info->lon*10000),
-				(int)(config->halo_info->range*1000) );
-			fprintf(log, "\tHalo %s:\t Lat*10000 - %d\tLon*10000 - %d\tRange(mm) - %d\r\n",
 				config->halo_info->name,
 				(int)(config->halo_info->lat*10000),
 				(int)(config->halo_info->lon*10000),
 				(int)(config->halo_info->range*1000) );
 		}
 		else
-		{
 			printf("\tHalo - false\r\n");
-			fprintf(log, "\tHalo - false\r\n");
-		}
 	}
 	else
-	{
 		printf("config.txt INVALID\r\n");
-		fprintf(log, "config.txt INVALID\r\n");
-	}
 	
 	//configure camera
 	cc3_camera_set_colorspace (CC3_COLORSPACE_RGB);
@@ -108,7 +94,6 @@ void initialize()
 	
 	// init jpeg
 	printf("\r\nInitialize JPEG:\r\n");
-	fprintf(log, "\r\nInitialize JPEG:\r\n");
 	init_jpeg();
 
 	cc3_timer_wait_ms(1000);	
@@ -124,7 +109,6 @@ int takePict(int picNum)
 	char filename[24];
 	
 	printf("\r\nTaking Picture:\n\r");
-	fprintf(log, "\r\nTaking Picture:\n\r");
 	do
 	{
 		snprintf(filename, 24, "c:/%d/img%.5d.jpg", gps->hour, picNum);
@@ -204,13 +188,13 @@ void write_to_memory(char* data, mem_loc where)
 	
 	if ( where == meta_mem )
 	{
-		fprintf(memory, "%d, %d, %2d:%2d:%2d",
+		fprintf(memory, "%d,%d,%2d:%2d:%2d,",
 			(int)(gps->lat*10000),
 			(int)(gps->lon*10000),
 			gps->hour, gps->minute, gps->second);
 		
 		if(config->halo)
-			fprintf(memory, ", %s", config->halo_info->name);
+			fprintf(memory, "%s", config->halo_info->name);
 		fprintf(memory, "\r\n");
 	}	
 	else
@@ -266,14 +250,6 @@ void update_time()
 {
 	deltaTime += cc3_timer_get_current_ms() - prevTime;
 	prevTime =  cc3_timer_get_current_ms();
-}
-
-/************************************************************************/
-
-void update_dist()
-{
-	deltaDist += calcDist( prev_gps->lat, prev_gps->lon, gps->lat, gps->lon );
-	copy_gps();
 }
 
 /************************************************************************/

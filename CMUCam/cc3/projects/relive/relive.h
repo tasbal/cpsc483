@@ -19,7 +19,6 @@ bool check_triggers(void);
 void write_to_memory(char* data, mem_loc where);
 void get_gps_data(void);
 void update_time(void);
-void update_dist(void);
 
 static void capture_current_jpeg(FILE *f);
 static void init_jpeg(void);
@@ -42,7 +41,6 @@ static void init_jpeg()
 	cinfo.image_width = cc3_g_pixbuf_frame.width;
 	cinfo.image_height = cc3_g_pixbuf_frame.height;
 	printf( "image width=%d image height=%d\n", cinfo.image_width, cinfo.image_height );
-	fprintf(log,"image width=%d image height=%d\n", cinfo.image_width, cinfo.image_height );
 	cinfo.input_components = 3;
 	// cinfo.in_color_space = JCS_YCbCr;
 	cinfo.in_color_space = JCS_RGB;
@@ -54,11 +52,7 @@ static void init_jpeg()
 	// allocate memory for 1 row
 	row = cc3_malloc_rows(1);
 	if(row==NULL)
-	{
 		printf( "Out of memory!\n" );
-		fprintf(log, "Out of memory!\n" );
-		
-	}
 }
 
 /************************************************************************/
