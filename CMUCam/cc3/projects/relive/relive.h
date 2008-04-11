@@ -3,9 +3,7 @@
 
 #include "jpeglib.h"
 
-typedef enum {gps_mem, meta_mem} mem_loc;
-
-FILE *memory, *gps_com, *log;
+FILE *memory, *gps_com;
 uint32_t prevTime, deltaTime;
 int second;
 double deltaDist;
@@ -16,7 +14,7 @@ bool power_save, first_time_fix;
 void initialize(void);
 int takePict(int picNum);
 bool check_triggers(void);
-void write_to_memory(char* data, mem_loc where);
+void write_metadata(void);
 void get_gps_data(void);
 void update_time(void);
 

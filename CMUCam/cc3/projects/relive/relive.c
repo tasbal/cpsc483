@@ -87,8 +87,6 @@ void initialize()
 	
 	gps_com = cc3_uart_fopen(1,"r+");
 	
-	write_to_memory("\r\n------------New Session---------------\r\n", gps_mem);
-	
 	// init pixbuf with width and height
 	cc3_pixbuf_load();
 	
@@ -170,38 +168,23 @@ bool check_triggers()
 
 /************************************************************************/
 
-void write_to_memory(char* data, mem_loc where)
+void write_metadata()
 {
-	switch(where)
-	{
-	case gps_mem:
-		memory = fopen ("c:/gpsData.txt", "a");
-		break;
-	case meta_mem:
-		memory = fopen ("c:/metadata.txt", "a");
-		break;
-	}
+	memory = fopen ("c:/metadata.txt", "a");\
 	if (memory == NULL) {
 		perror ("fopen failed");
 		return;
 	}
 	
-	if ( where == meta_mem )
-	{
-		fprintf(memory, "%d,%d,%2d:%2d:%2d,",
-			(int)(gps->lat*10000),
-			(int)(gps->lon*10000),
-			gps->hour, gps->minute, gps->second);
-		
-		if(config->halo)
-			fprintf(memory, "%s", config->halo_info->name);
-		fprintf(memory, "\r\n");
-	}	
-	else
-	{
-		if ( data != NULL)
-			fprintf(memory, "%s", data);
-	}
+	fprintf(memory, "%d,%d,%2d:%2d:%2d,",
+		(int)(gps->lat*10000),
+		(int)(gps->lon*10000),
+		gps->hour, gps->minute, gps->second);
+	
+	if(config->halo)
+		fprintf(memory, "%s", config->halo_info->name);
+	
+	fprintf(memory, "\r\n");
 
 	if ( fclose (memory) == EOF) {
 		perror ("fclose failed");
@@ -217,29 +200,15 @@ void get_gps_data()
 	fflush(gps_com);
 	fscanf(gps_com,"%s",gps_buff);
 	printf("\r\nGetting GPS Data: %s\r\n",gps_buff);
-	fprintf(log, "\r\nGetting GPS Data: %s\r\n",gps_buff);
-	
-	strcat(gps_buff, "\r\n");
-	write_to_memory(gps_buff, gps_mem);
 	
 	if(parse_GPS(gps_buff))
-	{
 		printf("Lat - %d\tLon - %d\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",
 			(int)(gps->lat*10000),
 			(int)(gps->lon*10000),
 			gps->month,gps->day,gps->year,
 			gps->hour,gps->minute,gps->second);
-		fprintf(log, "Lat - %d\tLon - %d\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",
-			(int)(gps->lat*10000),
-			(int)(gps->lon*10000),
-			gps->month,gps->day,gps->year,
-			gps->hour,gps->minute,gps->second);
-	}
 	else
-	{
 		printf("INVALID\r\n");
-		fprintf(log, "INVALID\r\n");
-	}
 	
 	free(gps_buff);
 }
