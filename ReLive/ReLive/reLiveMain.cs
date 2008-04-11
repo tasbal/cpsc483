@@ -497,7 +497,7 @@ namespace ReLive
                         reliveCnt++;
                     }
 
-                    else if (drvInfo.DriveType.Equals(DriveType.Removable) && !di.FullName.Equals("A:\\") && drvInfo.IsReady)
+                    if (drvInfo.DriveType.Equals(DriveType.Removable) && !di.FullName.Equals("A:\\") && drvInfo.IsReady)
                     {
                         allRemovables[rootNum] = di.FullName;
                         allRemNames[rootNum] = drvInfo.VolumeLabel;
