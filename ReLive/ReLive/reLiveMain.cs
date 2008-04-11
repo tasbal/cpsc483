@@ -670,9 +670,16 @@ namespace ReLive
                 if (memCardPath == "")
                     return;
             }
+            FileInfo memCardInfo = new FileInfo(memCardPath);
+            if (memCardInfo.IsReadOnly)
+            {
+                MessageBox.Show("Current card directory is set to read only.  Please change this and retry the format.");
+                return;
+            }
 
             //take off the '\'
             string pathNoSlash = memCardPath.Substring(0, 2);
+            
             if (MessageBox.Show("Are you sure you want to format your SD Card?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 //set dos process/command
