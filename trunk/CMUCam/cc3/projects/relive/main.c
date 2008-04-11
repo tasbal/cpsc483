@@ -25,12 +25,6 @@ int main (void)
 	int picNum = 0;
 	while (1)
 	{
-		log = fopen("c:/log.txt", "a");
-		if (log == NULL) {
-			perror ("fopen failed");
-			return ;
-		}
-		
 		// we have not gotten a fix on a sattelite
 		// when first turn on and after waking up GPS unit
 		if ( !gps->good )
@@ -38,21 +32,32 @@ int main (void)
 			uint32_t saved_prevTime = prevTime;
 			uint32_t saved_deltaTime = deltaTime;
 			int saved_second = second;
-
+			
 			prevTime = 0;
 			deltaTime = 0;
 			second = 0;
-
+			
 			while( !gps->good )
 			{
 				get_gps_data();
-
+				
 				update_time();
 				if(deltaTime > second*1000)
 				{
 					printf("\r\ndeltaTime: %d s\n\r",second);
-					fprintf(log,"\r\ndeltaTime: %d s\n\r",second);
 					second++;
+			
+					// blinking LED to make sure camera is working
+					if(on)
+					{
+						cc3_led_set_state (2, false);
+						on = false;
+					}
+					else
+					{
+						cc3_led_set_state (2, true);
+						on = true;
+					}
 				}
 			}
 			
@@ -63,24 +68,35 @@ int main (void)
 			{
 				copy_gps();
 				first_time_fix = false;
-				fprintf(log, "\r\n------------New Session---------------\r\n", gps_mem);
 			}
-
+			
 			prevTime = saved_prevTime;
 			deltaTime = saved_deltaTime;
-			second = saved_second;
+			second = saved_second;	
+			cc3_led_set_state (1, true);
 		}
-
+		
 		//Main function First update time and distance
 		update_time();
 		deltaDist = calcDist( prev_gps->lat, prev_gps->lon, gps->lat, gps->lon );
 		if(deltaTime > second*1000)
 		{
 			printf("\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
-			fprintf(log,"\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
 			second++;
+			
+			// blinking LED to make sure camera is working
+			if(on)
+			{
+				cc3_led_set_state (2, false);
+				on = false;
+			}
+			else
+			{
+				cc3_led_set_state (2, true);
+				on = true;
+			}
 		}
-
+		
 		// Now it is either in power saving mode or not
 		if ( power_save )
 		{
@@ -103,6 +119,7 @@ int main (void)
 				//turn off gps and camera
 				cc3_gpio_set_value (0, 0);
 				cc3_camera_set_power_state (false);
+				cc3_led_set_state (1, false);
 				continue;
 			}
 			
@@ -111,29 +128,12 @@ int main (void)
 			if ( check_triggers()  )
 			{
 				picNum=takePict(picNum);
-				write_to_memory(NULL, meta_mem);
+				write_metadata();
 				copy_gps();
 				deltaDist = 0;
 				deltaTime = 0;
 				second = 0;
 			}
-		
-			// blinking LED to make sure camera is working
-			if(on)
-			{
-				cc3_led_set_state (2, false);
-				on = false;
-			}
-			else
-			{
-				cc3_led_set_state (2, true);
-				on = true;
-			}
-		}
-		
-		// close log
-		if ( fclose (log) == EOF) {
-			perror ("fclose failed");
 		}
 	}
 
