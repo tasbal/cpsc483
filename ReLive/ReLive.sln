@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReLive", "ReLive\ReLive.csproj", "{0AA90109-4A92-4FB7-B335-C4969A8A5342}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reLive", "ReLive\reLive.csproj", "{0AA90109-4A92-4FB7-B335-C4969A8A5342}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "reLive Installer", "..\reLive Installer\reLive Installer\reLive Installer.vdproj", "{0C8DD4D2-0B63-4F6B-AD29-CD04FAA51FC0}"
 EndProject

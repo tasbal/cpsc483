@@ -1,6 +1,6 @@
 using Google.GData.Client;
 
-namespace ReLive
+namespace reLive
 {
     partial class GoogleLogin
     {
@@ -135,6 +135,7 @@ namespace ReLive
             this.MaximizeBox = false;
             this.Name = "GoogleLogin";
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Google Login";
             this.TopMost = true;
