@@ -416,21 +416,42 @@ namespace reLive
 
         private void setSelection(PicasaEntry entry)
         {
+            
             this.Cursor = Cursors.WaitCursor;
             MediaThumbnail thumb = entry.Media.Thumbnails[0];
 
+            this.AlbumPicture.ImageLocation = thumb.Attributes["url"] as string;
+            /*
+              
+              if (!File.Exists("temp1.jpg"))
+                {
+                    Client.DownloadFile(thumb.Attributes["url"] as string, "temp1.jpg");
+                    this.AlbumPicture.Image = new Bitmap("temp1.jpg");
+                    
+                    File.Delete("temp2.jpg");
+                }
+                else
+                {
+                    Client.DownloadFile(thumb.Attributes["url"] as string, "temp2.jpg");
+                    this.AlbumPicture.Image = new Bitmap("temp2.jpg");
+                    File.Delete("temp1.jpg");
+                }
             try
             {
-                Stream stream = this.picasaService.Query(new Uri(thumb.Attributes["url"] as string));
-                this.AlbumPicture.Image = new Bitmap(stream);
-                //this.Cursor = Cursors.Default;
+                //Stream stream = this.picasaService.Query(new Uri(thumb.Attributes["url"] as string));
+                System.Net.WebClient Client = new System.Net.WebClient();
+                
+                
+                this.Cursor = Cursors.Default;
             }
             catch (Google.GData.Client.GDataRequestException)
             {
                 //MessageBox.Show("There was a problem downloading the album thumbnail from Google!");
                 this.AlbumPicture.Image = this.AlbumPicture.ErrorImage;
             }
-        
+                */
+
+            this.Cursor = Cursors.Default;
             //enable map link only when date selected
             this.mapLinkLabel.Show();
             this.albumLabel.Show();
@@ -439,6 +460,7 @@ namespace reLive
             mapWindow.albumMap.AllowNavigation = true;
             curAlbum = entry.getPhotoExtensionValue("name");
             mapWindow.albumMap.Url = new Uri("http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
+            
         }
 
         private void mapLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -761,10 +783,12 @@ namespace reLive
             try
             {
                 Double.Parse(distanceBox.Text + "0");
+                if (Double.Parse(distanceBox.Text) < 10 && Double.Parse(distanceBox.Text) != 0)
+                    distanceBox.Text = "10";
             }
             catch (FormatException)
             {
-                distanceBox.Text = "";
+                distanceBox.Text = "10";
             }
         }
 
@@ -773,10 +797,12 @@ namespace reLive
             try
             {
                 Double.Parse(haloDistanceBox.Text + "0");
+                if (Double.Parse(haloDistanceBox.Text) < 10)
+                    haloDistanceBox.Text = "10";
             }
             catch (FormatException)
             {
-                haloDistanceBox.Text = "";
+                haloDistanceBox.Text = "10";
             }
         }
 
@@ -943,6 +969,20 @@ namespace reLive
             meterLabel.Visible = !meterLabel.Visible;
             if (!distanceCheck.Checked)
                 distanceBox.Text = "0";
+        }
+
+        private void delayBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Double.Parse(delayBox.Text + "0");
+                if (Double.Parse(delayBox.Text) < 1)
+                    delayBox.Text = "1";
+            }
+            catch (FormatException)
+            {
+                delayBox.Text = "1";
+            }
         }
     }
 }

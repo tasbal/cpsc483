@@ -463,7 +463,7 @@ namespace reLive
             this.distanceBox.TabIndex = 4;
             this.distanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.distanceBox.Visible = false;
-            this.distanceBox.TextChanged += new System.EventHandler(this.distanceBox_TextChanged);
+            this.distanceBox.Leave += new System.EventHandler(this.distanceBox_TextChanged);
             // 
             // haloCheck
             // 
@@ -522,7 +522,7 @@ namespace reLive
             this.haloDistanceBox.Size = new System.Drawing.Size(50, 20);
             this.haloDistanceBox.TabIndex = 17;
             this.haloDistanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.haloDistanceBox.TextChanged += new System.EventHandler(this.haloDistanceBox_TextChanged);
+            this.haloDistanceBox.Leave += new System.EventHandler(this.haloDistanceBox_TextChanged);
             // 
             // viewHalo
             // 
@@ -627,7 +627,7 @@ namespace reLive
             this.zipBox.Name = "zipBox";
             this.zipBox.Size = new System.Drawing.Size(65, 20);
             this.zipBox.TabIndex = 13;
-            this.zipBox.TextChanged += new System.EventHandler(this.zipBox_TextChanged);
+            this.zipBox.Leave += new System.EventHandler(this.zipBox_TextChanged);
             // 
             // stateBox
             // 
@@ -844,6 +844,7 @@ namespace reLive
             this.delayBox.Name = "delayBox";
             this.delayBox.Size = new System.Drawing.Size(50, 21);
             this.delayBox.TabIndex = 2;
+            this.delayBox.Leave += new System.EventHandler(this.delayBox_Leave);
             // 
             // delayLabel
             // 
