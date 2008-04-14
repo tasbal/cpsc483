@@ -515,7 +515,7 @@ namespace reLive
                     for (int i = 0; i < rootNum; i++)
                     {
                         string nextMsg = "Drive #" + (int)(i + 1) + ". " + allRemNames[i] + " " + allRemovables[i] + "\n";
-                        selectWin.comboBox1.Items.Add(nextMsg);
+                        selectWin.deviceBox.Items.Add(nextMsg);
                     }
                     
                     selectWin.ShowDialog(this); //show selectDrive window with this as parent

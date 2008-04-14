@@ -17,16 +17,21 @@ namespace reLive
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void selectButton_Click(object sender, EventArgs e)
         {
-            choice = comboBox1.SelectedIndex;
-            noChoice = false;
-            this.Close();
+            choice = deviceBox.SelectedIndex;
+            if (choice != -1)
+            {
+                noChoice = false;
+                this.Close();
+            }
+            else
+                MessageBox.Show("No drive was selected.  One will need to be selected in order to sync, save config, or format a drive.");
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void cancelButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("No drive was selected.  One will need to be selected in order to sync or format a drive.");
+            MessageBox.Show("No drive was selected.  One will need to be selected in order to sync, save config, or format a drive.");
             this.Close();
         }
     }
