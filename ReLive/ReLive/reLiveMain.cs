@@ -65,14 +65,24 @@ namespace reLive
                 explorerText.Text = fbd.SelectedPath;
                 fileBrowser.Url = new Uri(explorerText.Text);
             }
+            fbd.Dispose();
         }
           
         private bool checkAlbumExists(string albumName)
         {
             bool albumExists = false;
             AlbumQuery query = new AlbumQuery(PicasaQuery.CreatePicasaUri(this.user));
+            PicasaFeed feed = null;
 
-            PicasaFeed feed = picasaService.Query(query);
+            try
+            {
+                feed = picasaService.Query(query);
+            }
+            catch(Google.GData.Client.GDataRequestException)
+            {
+                MessageBox.Show("Please check your internet connection and try again.");
+                return true;
+            }
 
             foreach (PicasaEntry entry in feed.Entries)
             {
@@ -86,7 +96,17 @@ namespace reLive
             bool fileExists = false;
             
             PhotoQuery query = new PhotoQuery(PicasaQuery.CreatePicasaUri(this.user, albumName));
-            PicasaFeed feed = picasaService.Query(query);
+            PicasaFeed feed =null;
+
+            try
+            {
+                feed = picasaService.Query(query);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please check your internet connection and try again.");
+                return true;
+            }
 
             foreach (PicasaEntry entry in feed.Entries)
             {
@@ -186,7 +206,17 @@ namespace reLive
                     if (!checkFileExists(file.Name, albumName))
                     {
                         FileStream fileStream = file.OpenRead();
-                        PicasaEntry entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+                        PicasaEntry entry = null;
+
+                        try
+                        {   
+                            entry = this.picasaService.Insert(postUri, fileStream, "image/jpeg", fileStr) as PicasaEntry;
+                        }
+                        catch(Exception)
+                        {
+                            MessageBox.Show("Please check your internet connection and try again.");
+                            return;
+                        }
 
                         //parse and add metadata
                         if (validMeta)
@@ -392,6 +422,7 @@ namespace reLive
         private void calendarUpdate()
         {
             this.AlbumPicture.Image = null;
+            this.AlbumPicture.ImageLocation = null;
             this.mapLinkLabel.Hide();
             this.albumLabel.Hide();
 
@@ -416,7 +447,6 @@ namespace reLive
 
         private void setSelection(PicasaEntry entry)
         {
-            
             this.Cursor = Cursors.WaitCursor;
             MediaThumbnail thumb = entry.Media.Thumbnails[0];
 
@@ -838,6 +868,7 @@ namespace reLive
                 lat = lat.Substring(0, lat.IndexOf(",lng:"));
                 //Parse out Longitude
                 lng = str.Substring(str.IndexOf(",lng:") + 5);
+                client.Dispose();
             }
 
             catch (Exception)
