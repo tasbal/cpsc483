@@ -360,9 +360,12 @@ namespace reLive
             this.AlbumPicture.Image = null;
             this.mapLinkLabel.Hide();
             this.albumLabel.Hide();
+
+            query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
+
             try
             {
-                query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
+                
                 this.picasaFeed = this.picasaService.Query(query);
             }
             catch (Google.GData.Client.GDataRequestException)
@@ -373,8 +376,6 @@ namespace reLive
                 login();
                 return;
             }
-
-            
 
             if (this.picasaFeed != null && this.picasaFeed.Entries.Count > 0)
             {
@@ -417,10 +418,18 @@ namespace reLive
         {
             this.Cursor = Cursors.WaitCursor;
             MediaThumbnail thumb = entry.Media.Thumbnails[0];
-            Stream stream = this.picasaService.Query(new Uri(thumb.Attributes["url"] as string));
-            this.AlbumPicture.Image = new Bitmap(stream);
-            this.Cursor = Cursors.Default;
 
+            try
+            {
+                Stream stream = this.picasaService.Query(new Uri(thumb.Attributes["url"] as string));
+                this.AlbumPicture.Image = new Bitmap(stream);
+                //this.Cursor = Cursors.Default;
+            }
+            catch (Google.GData.Client.GDataRequestException)
+            {
+                MessageBox.Show("There was a problem downloading the album thumbnail from Google!");
+            }
+        
             //enable map link only when date selected
             this.mapLinkLabel.Show();
             this.albumLabel.Show();
