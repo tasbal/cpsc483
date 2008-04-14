@@ -13,7 +13,7 @@ using Google.GData.Extensions.MediaRss;
 using Google.GData.Extensions.Location;
 using System.Runtime.InteropServices;
 
-namespace ReLive
+namespace reLive
 {
     public partial class reLiveMain : Form
     {
@@ -261,20 +261,11 @@ namespace ReLive
 
                 if (this.googleAuthToken == null)
                     MessageBox.Show("You will not be able to access your web albums without logging in!");
+
                 else
                 {
                     picasaService.SetAuthenticationToken(loginDialog.AuthenticationToken);
-                    try
-                    {
-                        Invoke(new MethodInvoker(UpdateAlbumFeed));
-                    }
-                    catch (Google.GData.Client.GDataRequestException)
-                    {
-                        MessageBox.Show("You need to add the Picasaweb Service:\nLogin through your web browser and accept the terms of service.");
-                        System.Diagnostics.Process.Start("www.picasaweb.google.com");
-                        this.googleAuthToken = null;
-                        login();
-                    }
+                    Invoke(new MethodInvoker(UpdateAlbumFeed));
                 }
             }
         }
@@ -369,9 +360,21 @@ namespace ReLive
             this.AlbumPicture.Image = null;
             this.mapLinkLabel.Hide();
             this.albumLabel.Hide();
+            try
+            {
+                query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
+                this.picasaFeed = this.picasaService.Query(query);
+            }
+            catch (Google.GData.Client.GDataRequestException)
+            {
+                MessageBox.Show("You need to add the Picasaweb Service:\nLogin through your web browser and accept the terms of service.");
+                System.Diagnostics.Process.Start("www.picasaweb.google.com");
+                this.googleAuthToken = null;
+                login();
+                return;
+            }
 
-            query.Uri = new Uri(PicasaQuery.CreatePicasaUri(this.user));
-            this.picasaFeed = this.picasaService.Query(query);
+            
 
             if (this.picasaFeed != null && this.picasaFeed.Entries.Count > 0)
             {
@@ -613,19 +616,32 @@ namespace ReLive
             dir = null; 
         }
 
+        private string getSyncDate()
+        {
+            SyncDate dateForm = new SyncDate();
+            dateForm.ShowDialog();
+
+            return dateForm.getDate().ToString("yyyy-MM-dd");
+        }
+
         private void copySubDirs()
         {
             string home = @userPictures + "\\reLive";
             
             DateTime currTime = DateTime.Now;
-            string day = currTime.ToString("yyyy-MM-dd");
+            string day = getSyncDate();
             //create folder for current date
             string path = home + "\\" + day;
+            if (Directory.Exists(path))
+            {
+                MessageBox.Show("Album already created, please select a different date.");
+                copySubDirs();
+                return;
+            }
             Directory.CreateDirectory(path);
             //copy metadata.txt  
             try
             {
-
                 File.Delete(path + "\\metadata.txt");
                 File.Copy(memCardPath + "\\metadata.txt", path + "\\metadata.txt");
                 string[] subDirs = Directory.GetDirectories(memCardPath);

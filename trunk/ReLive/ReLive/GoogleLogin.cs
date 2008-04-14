@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Google.GData.Client;
 
-namespace ReLive
+namespace reLive
 {
     public partial class GoogleLogin : Form
     {

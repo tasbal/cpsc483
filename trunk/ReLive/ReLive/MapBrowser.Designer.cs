@@ -1,4 +1,4 @@
-namespace ReLive
+namespace reLive
 {
     partial class MapBrowser
     {
