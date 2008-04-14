@@ -29,30 +29,30 @@ namespace reLive
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectDrive));
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.deviceBox = new System.Windows.Forms.ComboBox();
+            this.selectButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // deviceBox
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(5, 40);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(230, 21);
-            this.comboBox1.TabIndex = 0;
+            this.deviceBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.deviceBox.FormattingEnabled = true;
+            this.deviceBox.Location = new System.Drawing.Point(5, 40);
+            this.deviceBox.Name = "deviceBox";
+            this.deviceBox.Size = new System.Drawing.Size(230, 21);
+            this.deviceBox.TabIndex = 0;
             // 
-            // button1
+            // selectButton
             // 
-            this.button1.Location = new System.Drawing.Point(72, 67);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 26);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Select";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.selectButton.Location = new System.Drawing.Point(72, 67);
+            this.selectButton.Name = "selectButton";
+            this.selectButton.Size = new System.Drawing.Size(78, 26);
+            this.selectButton.TabIndex = 1;
+            this.selectButton.Text = "Select";
+            this.selectButton.UseVisualStyleBackColor = true;
+            this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
             // 
             // label1
             // 
@@ -63,25 +63,25 @@ namespace reLive
             this.label1.TabIndex = 2;
             this.label1.Text = "Please choose from the list below:";
             // 
-            // button2
+            // cancelButton
             // 
-            this.button2.Location = new System.Drawing.Point(156, 67);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(79, 26);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.cancelButton.Location = new System.Drawing.Point(156, 67);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(79, 26);
+            this.cancelButton.TabIndex = 3;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // SelectDrive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(242, 116);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.selectButton);
+            this.Controls.Add(this.deviceBox);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -99,9 +99,9 @@ namespace reLive
 
         #endregion
 
-        public System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.ComboBox deviceBox;
+        private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button cancelButton;
     }
 }
