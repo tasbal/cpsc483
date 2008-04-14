@@ -427,7 +427,8 @@ namespace reLive
             }
             catch (Google.GData.Client.GDataRequestException)
             {
-                MessageBox.Show("There was a problem downloading the album thumbnail from Google!");
+                //MessageBox.Show("There was a problem downloading the album thumbnail from Google!");
+                this.AlbumPicture.Image = this.AlbumPicture.ErrorImage;
             }
         
             //enable map link only when date selected
