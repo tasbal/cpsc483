@@ -162,3 +162,4 @@ C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\Re
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.csproj.GenerateResource.Cache
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\reLive.exe
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\reLive.pdb
+C:\Documents and Settings\raushel\Desktop\cs483\ReLive\ReLive\obj\Debug\reLive.SyncDate.resources
