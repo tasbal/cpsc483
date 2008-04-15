@@ -78,10 +78,9 @@ namespace reLive
             {
                 feed = picasaService.Query(query);
             }
-            catch(Google.GData.Client.GDataRequestException)
+            catch(Exception)
             {
-                MessageBox.Show("Please check your internet connection and try again.");
-                return true;
+                return false;
             }
 
             foreach (PicasaEntry entry in feed.Entries)
@@ -104,7 +103,6 @@ namespace reLive
             }
             catch (Exception)
             {
-                MessageBox.Show("Please check your internet connection and try again.");
                 return true;
             }
 
@@ -123,18 +121,27 @@ namespace reLive
             return Math.Floor(diff.TotalMilliseconds);
         } 
 
-        private void createNewAlbum(string albumName, string desc, DateTime albumDate)
+        private bool createNewAlbum(string albumName, string desc, DateTime albumDate)
         {
             if(!checkAlbumExists(albumName))
             {
-                Uri feedUri = new Uri(this.picasaFeed.Post);
-                AlbumEntry newEntry = new AlbumEntry();
-                newEntry.Title.Text = albumName;
-                newEntry.Summary.Text = desc;
-                double timestamp = ConvertToUnixTimestamp(albumDate.ToUniversalTime());
-                newEntry.setPhotoExtension("timestamp", timestamp.ToString());
-                PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
+                try
+                {
+                    Uri feedUri = new Uri(this.picasaFeed.Post);
+                    AlbumEntry newEntry = new AlbumEntry();
+                    newEntry.Title.Text = albumName;
+                    newEntry.Summary.Text = desc;
+                    double timestamp = ConvertToUnixTimestamp(albumDate.ToUniversalTime());
+                    newEntry.setPhotoExtension("timestamp", timestamp.ToString());
+                    PicasaEntry createdEntry = (PicasaEntry)picasaService.Insert(feedUri, newEntry);
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return true;
+                }
             }
+            return false;
         }
 
         void UpdateStatus(int step, int value)
@@ -192,7 +199,12 @@ namespace reLive
                 DateTime albumDate = new DateTime(Int32.Parse(dateArray[0]), Int32.Parse(dateArray[1]), Int32.Parse(dateArray[2]), 12, 0, 0, DateTimeKind.Utc);
                 Uri postUri = new Uri(PicasaQuery.CreatePicasaUri(this.user, albumName));
 
-                createNewAlbum(albumNameFull, desc, albumDate);
+                if (createNewAlbum(albumNameFull, desc, albumDate))
+                {
+                    Invoke(new MethodInvoker(resetUpload));
+                    MessageBox.Show("Please check your internet connection and try again.");
+                    return;
+                }
 
                 foreach (FileInfo file in jpgFiles)
                 {
@@ -215,6 +227,7 @@ namespace reLive
                         catch(Exception)
                         {
                             MessageBox.Show("Please check your internet connection and try again.");
+                            Invoke(new MethodInvoker(resetUpload));
                             return;
                         }
 
@@ -395,25 +408,25 @@ namespace reLive
 
             try
             {
-                
                 this.picasaFeed = this.picasaService.Query(query);
             }
             catch (Google.GData.Client.GDataRequestException)
             {
-                MessageBox.Show("You need to add the Picasaweb Service:\nLogin through your web browser and accept the terms of service.");
+                MessageBox.Show("You need to add the Picasaweb Service:\nLogin through your web browser and accept the terms of service."
+                    + "\nIn addition, please check your internet connection and try again!");
                 System.Diagnostics.Process.Start("www.picasaweb.google.com");
                 this.googleAuthToken = null;
                 login();
                 return;
             }
-
+            
             if (this.picasaFeed != null && this.picasaFeed.Entries.Count > 0)
             {
-                foreach (PicasaEntry entry in this.picasaFeed.Entries)
-                {
-                    albumList.Add(entry);
-                    albumCalendar.AddBoldedDate(entry.Published); //adds album dates to calendar as bold entries
-                }
+            foreach (PicasaEntry entry in this.picasaFeed.Entries)
+            {
+                albumList.Add(entry);
+                albumCalendar.AddBoldedDate(entry.Published); //adds album dates to calendar as bold entries
+            }
             }
             this.albumCalendar.UpdateBoldedDates();
             calendarUpdate();
@@ -453,26 +466,9 @@ namespace reLive
             this.AlbumPicture.ImageLocation = thumb.Attributes["url"] as string;
             /*
               
-              if (!File.Exists("temp1.jpg"))
-                {
-                    Client.DownloadFile(thumb.Attributes["url"] as string, "temp1.jpg");
-                    this.AlbumPicture.Image = new Bitmap("temp1.jpg");
-                    
-                    File.Delete("temp2.jpg");
-                }
-                else
-                {
-                    Client.DownloadFile(thumb.Attributes["url"] as string, "temp2.jpg");
-                    this.AlbumPicture.Image = new Bitmap("temp2.jpg");
-                    File.Delete("temp1.jpg");
-                }
             try
             {
-                //Stream stream = this.picasaService.Query(new Uri(thumb.Attributes["url"] as string));
-                System.Net.WebClient Client = new System.Net.WebClient();
-                
-                
-                this.Cursor = Cursors.Default;
+                Stream stream = this.picasaService.Query(new Uri(thumb.Attributes["url"] as string));
             }
             catch (Google.GData.Client.GDataRequestException)
             {
@@ -529,8 +525,15 @@ namespace reLive
             //hitting enter loads new address
             if (e.KeyChar == (char)13)
             {
-                explorerText.Text = explorerText.Text;
-                fileBrowser.Url = new Uri(this.explorerText.Text);
+                try
+                {
+                    fileBrowser.Url = new Uri(this.explorerText.Text);
+                }
+                catch (Exception)
+                {
+                    explorerText.Text = fileBrowser.Url.LocalPath.ToString();
+                    MessageBox.Show("Please make sure you are trying to access a valid address and try again!");
+                }
             }
         }
 
@@ -590,7 +593,6 @@ namespace reLive
                     else 
                         driveSelected = false;
                 }
-                
             }
             return memCardPath;
         }
@@ -704,7 +706,6 @@ namespace reLive
             //copy metadata.txt  
             try
             {
-                File.Delete(path + "\\metadata.txt");
                 File.Copy(memCardPath + "\\metadata.txt", path + "\\metadata.txt");
                 string[] subDirs = Directory.GetDirectories(memCardPath);
 
