@@ -201,10 +201,10 @@ namespace reLive
             this.picasaLink.AutoSize = true;
             this.picasaLink.Location = new System.Drawing.Point(139, 0);
             this.picasaLink.Name = "picasaLink";
-            this.picasaLink.Size = new System.Drawing.Size(81, 13);
+            this.picasaLink.Size = new System.Drawing.Size(93, 13);
             this.picasaLink.TabIndex = 10;
             this.picasaLink.TabStop = true;
-            this.picasaLink.Text = "Visit Picasaweb";
+            this.picasaLink.Text = "View Web Albums";
             this.picasaLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.picasaLink_LinkClicked);
             // 
             // rightPanel
