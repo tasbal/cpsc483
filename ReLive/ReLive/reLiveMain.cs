@@ -22,10 +22,11 @@ namespace reLive
         private PicasaService picasaService = new PicasaService("ReLive");
         private PicasaFeed picasaFeed = null;
         private List<PicasaEntry> albumList = new List<PicasaEntry>();
-        MapBrowser mapWindow = new MapBrowser();
+        //MapBrowser mapWindow = new MapBrowser();
         String userPictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures).ToString();
         private bool calendarChanged = false;
         private string curAlbum;
+        private string mapUri;
 
         //file browser view settings
         private const int LV_VIEW_ICON = 0x0000;
@@ -302,9 +303,11 @@ namespace reLive
                 this.googleAuthToken = loginDialog.AuthenticationToken;
                 this.user = loginDialog.User;
 
+                albumCalendar.BoldedDates = null;
+                albumList.Clear();
+
                 if (this.googleAuthToken == null)
                     MessageBox.Show("You will not be able to access your web albums without logging in!");
-
                 else
                 {
                     picasaService.SetAuthenticationToken(loginDialog.AuthenticationToken);
@@ -483,15 +486,16 @@ namespace reLive
             this.albumLabel.Show();
 
             //enable changing of map browser url temporarily
-            mapWindow.albumMap.AllowNavigation = true;
+            //mapWindow.albumMap.AllowNavigation = true;
             curAlbum = entry.getPhotoExtensionValue("name");
-            mapWindow.albumMap.Url = new Uri("http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map");
-            
+            mapUri = "http://picasaweb.google.com/" + this.user + "/" + entry.getPhotoExtensionValue("name") + "/photo#map";
         }
 
         private void mapLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            mapWindow.ShowDialog();
+            //mapWindow.albumMap.Url = new Uri(mapUri);
+            System.Diagnostics.Process.Start(mapUri);
+            //mapWindow.ShowDialog();
         }
 
         private void fileBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -564,8 +568,7 @@ namespace reLive
                         memCardPath = di.FullName;
                         reliveCnt++;
                     }
-
-                    if (drvInfo.DriveType.Equals(DriveType.Removable) && !di.FullName.Equals("A:\\") && drvInfo.IsReady)
+                    else if (drvInfo.DriveType.Equals(DriveType.Removable) && !di.FullName.Equals("A:\\") && drvInfo.IsReady)
                     {
                         allRemovables[rootNum] = di.FullName;
                         allRemNames[rootNum] = drvInfo.VolumeLabel;
@@ -573,7 +576,7 @@ namespace reLive
                     }
                 }
 
-                if (reliveCnt != 1)
+                if (reliveCnt != 1 && rootNum != 0)
                 {
                     SelectDrive selectWin = new SelectDrive();
 
@@ -593,6 +596,8 @@ namespace reLive
                     else 
                         driveSelected = false;
                 }
+                else if(rootNum == 0)
+                    MessageBox.Show("No available drives were found.  One will need to be inserted in order to sync, save config, or format a drive.");
             }
             return memCardPath;
         }
