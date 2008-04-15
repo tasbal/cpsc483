@@ -53,6 +53,7 @@ namespace reLive
             try
             {
                 authToken = this.service.QueryAuthenticationToken();
+                this.Cursor = Cursors.WaitCursor;
             }
             catch (InvalidCredentialsException)
             {
@@ -62,6 +63,11 @@ namespace reLive
             {
                 MessageBox.Show("Invalid Credentials");
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Please check your internet connection and try again.");
+            }
+            this.Cursor = Cursors.Default;
             if (authToken != null) //proceed once login accepted
                 Close();
         }
