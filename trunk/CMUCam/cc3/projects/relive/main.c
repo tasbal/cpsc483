@@ -7,8 +7,6 @@
 #include "parser.h"
 #include "relive.h"
 
-#define gps_start_delay 8000
-
 int main (void)
 {	
 	initialize();
@@ -19,21 +17,48 @@ int main (void)
 		return 0;
 	}
 	
+	int picNum;
+	// try to open picNum.txt if exist that will be the 
+	// picture number we will start with if not start at 0
+	printf ("\n\rReading config file\r\n");
+	memory = fopen ("c:/picNum.txt", "r");
+	if (memory == NULL) {
+		picNum = 0;
+	}
+	else
+	{
+		char* picNum_buff = (char*)malloc(sizeof(char)*100);
+		fscanf(memory, "%s", picNum_buff);
+		picNum = atoi(picNum_buff);
+	}
+	if (fclose (memory) == EOF) {
+		perror ("fclose failed\r\n");
+		while(1);
+	}
+	printf("%d",picNum);
+	
+	// if delay is greater than 20 min than wake up 1 min before
+	// having to take a pic
+	if(config->delay >= 20*60000)
+		gps_start_delay = 60000;
+	else
+		gps_start_delay = 8000;
+	
 	printf("\r\nHello, Camera initialized\r\n");
+	
+	// start timing at this point
+	prevTime =  cc3_timer_get_current_ms();
 
 	bool on = true;
-	int picNum = 0;
 	while (1)
 	{
 		// we have not gotten a fix on a sattelite
 		// when first turn on and after waking up GPS unit
 		if ( !gps->good )
 		{
-			uint32_t saved_prevTime = prevTime;
 			uint32_t saved_deltaTime = deltaTime;
 			int saved_second = second;
 			
-			prevTime = 0;
 			deltaTime = 0;
 			second = 0;
 			
@@ -70,7 +95,6 @@ int main (void)
 				first_time_fix = false;
 			}
 			
-			prevTime = saved_prevTime;
 			deltaTime = saved_deltaTime;
 			second = saved_second;	
 			cc3_led_set_state (1, true);
@@ -107,7 +131,11 @@ int main (void)
 				//turn on gps and camera
 				cc3_gpio_set_value (0, 1);
 				cc3_camera_set_power_state (true);
-				gps->good = false;
+				
+				//if delay is greater than 20 min than the gps will
+				//probably have a cold start
+				if(config->delay >=20*60000)
+					gps->good = false;
 			}
 		}
 		else
