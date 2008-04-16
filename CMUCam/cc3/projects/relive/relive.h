@@ -8,6 +8,7 @@ uint32_t prevTime, deltaTime;
 int second;
 double deltaDist;
 bool power_save, first_time_fix;
+int gps_start_delay;
 
 /************************************************************************/
 

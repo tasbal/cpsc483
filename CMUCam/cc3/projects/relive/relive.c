@@ -104,19 +104,11 @@ void initialize()
 
 int takePict(int picNum)
 {
-	char filename[24];
-	
 	printf("\r\nTaking Picture:\n\r");
-	do
-	{
-		snprintf(filename, 24, "c:/%d/img%.5d.jpg", gps->hour, picNum);
-		memory = fopen(filename, "r");
-		if ( memory != NULL )
-		{ 
-			picNum++; 
-			fclose(memory);
-		}
-	}while( memory!=NULL );
+	
+	// Take picture
+	char filename[24];
+	snprintf(filename, 24, "c:/%d/img%.5d.jpg", gps->hour, picNum);
 	
 	// print file that you are going to write to stderr
 	fprintf(stderr,"%s\r\n", filename);
@@ -132,6 +124,15 @@ int takePict(int picNum)
 	fclose(memory);
 	
 	picNum++;
+	
+	// save the picture number just in case the camera is turned
+	// off it will start naming with that number
+	memory = fopen("c:/picNum.txt", "w");
+	fprintf(memory, "%d", picNum);
+	if ( fclose (memory) == EOF) {
+		perror ("fclose failed");
+	}
+	
 	return picNum;
 }
 
@@ -169,7 +170,7 @@ bool check_triggers()
 /************************************************************************/
 
 void write_metadata()
-{
+{	
 	memory = fopen ("c:/metadata.txt", "a");\
 	if (memory == NULL) {
 		perror ("fopen failed");
