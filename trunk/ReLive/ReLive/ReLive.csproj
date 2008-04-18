@@ -50,12 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MapBrowser.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MapBrowser.Designer.cs">
-      <DependentUpon>MapBrowser.cs</DependentUpon>
-    </Compile>
     <Compile Include="reLiveMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,10 +64,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MapBrowser.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>MapBrowser.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="reLiveMain.resx">
       <SubType>Designer</SubType>
       <DependentUpon>reLiveMain.cs</DependentUpon>
