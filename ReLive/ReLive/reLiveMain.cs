@@ -177,7 +177,7 @@ namespace reLive
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("There was a problem reading your metadata file.\nVerify it exists and not currently in use and try again.");
+                    MessageBox.Show("There was a problem reading your metadata file.\nVerify you opened an album and try again!");
                     Invoke(new MethodInvoker(resetUpload));
                     return;
                 }
@@ -251,6 +251,15 @@ namespace reLive
                             {
                                 MessageBox.Show("Metadata file may not have been complete!");
                                 validMeta = false;
+                            }
+
+                            catch (Google.GData.Client.GDataRequestException)
+                            {
+                                MessageBox.Show("There was a problem uploading your metadata to google!");
+                            }
+                            catch (IndexOutOfRangeException)
+                            {
+                                MessageBox.Show("There was a problem with your metadata file (index out of range):\n" + line);
                             }
                         }
                     }
@@ -354,46 +363,53 @@ namespace reLive
                 return;
             }
 
-            string input = sr.ReadLine();
-            string[] inputArray;
-            //parse file for details and load into form
-            if (input != null)
+            try
             {
-                inputArray = input.Split(',');
-                if (inputArray[1] != "0")
-                    distanceCheck.Checked = true;
-                for (int value = 0; value < inputArray.Length; value++)
+                string input = sr.ReadLine();
+                string[] inputArray;
+                //parse file for details and load into form
+                if (input != null)
                 {
-                    if (value == 2 || value == 7) //special cases for halo and scheduler check
+                    inputArray = input.Split(',');
+                    if (inputArray[1] != "0")
+                        distanceCheck.Checked = true;
+                    for (int value = 0; value < inputArray.Length; value++)
                     {
-                        ((CheckBox)configArray[value]).Checked = inputArray[value] == "True";
-                        if (value == 2 && inputArray[value] == "False")
+                        if (value == 2 || value == 7) //special cases for halo and scheduler check
                         {
-                            value = 6;
-                            continue;
+                            ((CheckBox)configArray[value]).Checked = inputArray[value] == "True";
+                            if (value == 2 && inputArray[value] == "False")
+                            {
+                                value = 6;
+                                continue;
+                            }
+                            if (value == 7 && inputArray[value] == "False")
+                                return;
                         }
-                        if (value == 7 && inputArray[value] == "False")
-                            return;
+                        else if (value == 3 || value == 5)
+                        {
+                            if (value == 3)
+                            {
+                                startTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Int32.Parse(inputArray[value]), Int32.Parse(inputArray[value + 1]), 0);
+                                value += 1;
+                                continue;
+                            }
+                            if (value == 5)
+                            {
+                                endTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Int32.Parse(inputArray[value]), Int32.Parse(inputArray[value + 1]), 0);
+                                value += 1;
+                                continue;
+                            }
+                        }
+                        else
+                            configArray[value].Text = inputArray[value];
                     }
-                    else if (value == 3 || value == 5)
-                    {
-                        if (value == 3)
-                        {
-                            startTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Int32.Parse(inputArray[value]), Int32.Parse(inputArray[value + 1]), 0);
-                            value += 1;
-                            continue;
-                        }
-                        if (value == 5)
-                        {
-                            endTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Int32.Parse(inputArray[value]), Int32.Parse(inputArray[value + 1]), 0);
-                            value += 1;
-                            continue;
-                        }
-                    }
-                    else
-                        configArray[value].Text = inputArray[value];
+                    sr.Close();
                 }
-                sr.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was a problem reading your config file, create and save a new one before using your camera!");
             }
         }
 
