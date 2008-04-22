@@ -240,8 +240,8 @@ namespace reLive
                                 line = sr.ReadLine();
                                 data = line.Split(',');
                                 entry.Location = new GeoRssWhere();
-                                entry.Location.Latitude = Double.Parse(data[0]) / 10000;
-                                entry.Location.Longitude = Double.Parse(data[1]) / 10000;
+                                entry.Location.Latitude = Double.Parse(data[0]) / 1000000;
+                                entry.Location.Longitude = Double.Parse(data[1]) / 1000000;
                                 entry.Summary.Text = data[2]; //time caption below image
                                 entry.Media.Keywords.Value = data[3]; //tags for halo description
 
@@ -253,8 +253,9 @@ namespace reLive
                                 validMeta = false;
                             }
 
-                            catch (Google.GData.Client.GDataRequestException)
+                            catch (Google.GData.Client.GDataRequestException ex)
                             {
+                                MessageBox.Show(ex.Message.ToString());
                                 MessageBox.Show("There was a problem uploading your metadata to google!");
                             }
                             catch (IndexOutOfRangeException)
@@ -1029,12 +1030,12 @@ namespace reLive
             try
             {
                 Double.Parse(delayBox.Text + "0");
-                if (Double.Parse(delayBox.Text) < 1)
-                    delayBox.Text = "1";
+                if (Double.Parse(delayBox.Text) < 1.5)
+                    delayBox.Text = "1.5";
             }
             catch (FormatException)
             {
-                delayBox.Text = "1";
+                delayBox.Text = "1.5";
             }
         }
     }

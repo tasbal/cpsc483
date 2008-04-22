@@ -138,7 +138,6 @@ C:\Documents and Settings\Mario\Desktop\Senior Design\ReLive\ReLive\bin\Debug\Go
 C:\Documents and Settings\Mario\Desktop\Senior Design\ReLive\ReLive\bin\Debug\Google.GData.Extensions.DLL
 C:\Documents and Settings\Mario\Desktop\Senior Design\ReLive\ReLive\bin\Debug\Google.GData.Photos.dll
 C:\Documents and Settings\Mario\Desktop\Senior Design\ReLive\ReLive\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Mario\Desktop\Senior Design\ReLive\ReLive\obj\Debug\ReLive.MapBrowser.resources
 C:\Documents and Settings\Mario\Desktop\Senior Design\ReLive\ReLive\obj\Debug\ReLive.reLiveMain.resources
 C:\Documents and Settings\Mario\Desktop\Senior Design\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
 C:\Documents and Settings\Mario\Desktop\Senior Design\ReLive\ReLive\obj\Debug\reLive.Properties.Resources.resources
