@@ -97,6 +97,8 @@ void initialize()
 	cc3_timer_wait_ms(1000);	
 	cc3_led_set_state (1, false);
 	cc3_led_set_state (2, false);
+	//turn off camera until ready to take picture
+	cc3_camera_set_power_state (false);
 	free(config_buff);
 }
 
