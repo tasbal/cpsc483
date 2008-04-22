@@ -65,8 +65,8 @@ void initialize()
 			printf("\tHalo - true\r\n");
 			printf("\tHalo %s:\t Lat*10000 - %d\tLon*10000 - %d\tRange(mm) - %d\r\n",
 				config->halo_info->name,
-				(int)(config->halo_info->lat*10000),
-				(int)(config->halo_info->lon*10000),
+				(int)(config->halo_info->lat*1000000),
+				(int)(config->halo_info->lon*1000000),
 				(int)(config->halo_info->range*1000) );
 		}
 		else
@@ -142,31 +142,24 @@ int takePict(int picNum)
 
 bool check_triggers()
 {
-	bool takePic = false;
-
 	// it has halo so must check if within halo
 	if ( config->halo )
 	{
 		// if distance is greater than range then return with false
 		// else check rest of triggers
-		double distance = calcDist( config->halo_info->lon, config->halo_info->lat, gps->lat, gps->lon );
+		double distance = calcDist( config->halo_info->lat, config->halo_info->lon, gps->lat, gps->lon );
+		printf("\r\ndistance from halo - %d (mm)\r\n", (int)(distance*1000));
 		if ( distance >= config->halo_info->range)
-			return takePic;
+			return false;
 	}
 
 	// after start time
 	if ( gps->hour  >= config->start_hour && gps->minute >= config->start_min )
-	{
 		// before stop time
 		if ( gps->hour  <= config->stop_hour && gps->minute <= config->stop_min )
-		{
-			// see if covered min distance && timer went off
-			if ( deltaDist >= config->min_dist && deltaTime >= config->delay)
-				takePic = true;
-		}
-	}
+				return true;
 
-	return takePic;
+	return false;
 }
 
 /************************************************************************/
@@ -180,8 +173,8 @@ void write_metadata()
 	}
 	
 	fprintf(memory, "%d,%d,%2d:%2d:%2d,",
-		(int)(gps->lat*10000),
-		(int)(gps->lon*10000),
+		(int)(gps->lat*1000000),
+		(int)(gps->lon*1000000),
 		gps->hour, gps->minute, gps->second);
 	
 	if(config->halo)
@@ -206,8 +199,8 @@ void get_gps_data()
 	
 	if(parse_GPS(gps_buff))
 		printf("Lat - %d\tLon - %d\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",
-			(int)(gps->lat*10000),
-			(int)(gps->lon*10000),
+			(int)(gps->lat*1000000),
+			(int)(gps->lon*1000000),
 			gps->month,gps->day,gps->year,
 			gps->hour,gps->minute,gps->second);
 	else

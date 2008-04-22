@@ -20,7 +20,7 @@ int main (void)
 	int picNum;
 	// try to open picNum.txt if exist that will be the 
 	// picture number we will start with if not start at 0
-	printf ("\n\rReading config file\r\n");
+	printf ("\n\rReading picNum file\r\n");
 	memory = fopen ("c:/picNum.txt", "r");
 	if (memory == NULL) {
 		picNum = 0;
@@ -35,21 +35,22 @@ int main (void)
 		perror ("fclose failed\r\n");
 		while(1);
 	}
-	printf("%d",picNum);
+	printf("Starting picture numbering at: %d\r\n",picNum);
 	
 	// if delay is greater than 20 min than wake up 1 min before
 	// having to take a pic
 	if(config->delay >= 20*60000)
 		gps_start_delay = 60000;
 	else
-		gps_start_delay = 8000;
+		gps_start_delay = 15000;
 	
 	printf("\r\nHello, Camera initialized\r\n");
 	
 	// start timing at this point
 	prevTime =  cc3_timer_get_current_ms();
-
-	bool on = false;
+	// starts out awake
+	cc3_led_set_state (2, true);
+	bool on = true;
 	while (1)
 	{
 		// we have not gotten a fix on a sattelite
@@ -71,20 +72,6 @@ int main (void)
 				{
 					printf("\r\ndeltaTime: %d s\n\r",second);
 					second++;
-					
-					//blink led2 to know cam is working
-					if(on)
-					{
-						cc3_led_set_state (2, false);
-						cc3_timer_wait_ms(100);
-						cc3_led_set_state (2, true);
-					}
-					else
-					{
-						cc3_led_set_state (2, true);
-						cc3_timer_wait_ms(100);
-						cc3_led_set_state (2, false);
-					}
 				}
 			}
 			
@@ -109,20 +96,6 @@ int main (void)
 		{
 			printf("\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
 			second++;
-		
-			//blink led2 to know cam is working
-			if(on)
-			{
-				cc3_led_set_state (2, false);
-				cc3_timer_wait_ms(100);
-				cc3_led_set_state (2, true);
-			}
-			else
-			{
-				cc3_led_set_state (2, true);
-				cc3_timer_wait_ms(100);
-				cc3_led_set_state (2, false);
-			}
 		}
 		
 		// Now it is either in power saving mode or not
@@ -136,7 +109,8 @@ int main (void)
 				cc3_led_set_state(2,true);
 				on = true;
 				
-				//turn on gps
+				//turn on gps and camera
+				cc3_camera_set_power_state (true);
 				cc3_gpio_set_value (0, 1);
 				
 				//if delay is greater than 20 min than the gps will
@@ -155,7 +129,8 @@ int main (void)
 				cc3_led_set_state (2, false);
 				on = false;
 				
-				//turn off gps
+				//turn off gps and camera
+				cc3_camera_set_power_state (false);
 				cc3_gpio_set_value (0, 0);
 				cc3_led_set_state (1, false);
 				continue;
@@ -163,20 +138,17 @@ int main (void)
 			
 			get_gps_data();
 			
-			if ( check_triggers()  )
+			if ( deltaDist >= config->min_dist && deltaTime >= config->delay  )
 			{
-				//turn on camera before taking picture
-				cc3_camera_set_power_state (true);
-				
-				picNum=takePict(picNum);
-				write_metadata();
+				if( check_triggers() )
+				{
+					picNum=takePict(picNum);
+					write_metadata();
+				}
 				copy_gps();
 				deltaDist = 0;
 				deltaTime = 0;
 				second = 0;
-				
-				//turn off camera after taking picture
-				cc3_camera_set_power_state (false);
 			}
 		}
 	}
