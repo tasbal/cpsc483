@@ -49,7 +49,7 @@ int main (void)
 	// start timing at this point
 	prevTime =  cc3_timer_get_current_ms();
 
-	bool on = true;
+	bool on = false;
 	while (1)
 	{
 		// we have not gotten a fix on a sattelite
@@ -71,17 +71,19 @@ int main (void)
 				{
 					printf("\r\ndeltaTime: %d s\n\r",second);
 					second++;
-			
-					// blinking LED to make sure camera is working
+					
+					//blink led2 to know cam is working
 					if(on)
 					{
 						cc3_led_set_state (2, false);
-						on = false;
+						cc3_timer_wait_ms(100);
+						cc3_led_set_state (2, true);
 					}
 					else
 					{
 						cc3_led_set_state (2, true);
-						on = true;
+						cc3_timer_wait_ms(100);
+						cc3_led_set_state (2, false);
 					}
 				}
 			}
@@ -107,17 +109,19 @@ int main (void)
 		{
 			printf("\r\ndeltaTime: %d s\n\rdeltaDist: %d mm\n\r",second,(int)(deltaDist*1000));
 			second++;
-			
-			// blinking LED to make sure camera is working
+		
+			//blink led2 to know cam is working
 			if(on)
 			{
 				cc3_led_set_state (2, false);
-				on = false;
+				cc3_timer_wait_ms(100);
+				cc3_led_set_state (2, true);
 			}
 			else
 			{
 				cc3_led_set_state (2, true);
-				on = true;
+				cc3_timer_wait_ms(100);
+				cc3_led_set_state (2, false);
 			}
 		}
 		
@@ -128,9 +132,12 @@ int main (void)
 			power_save = (config->delay - deltaTime >= gps_start_delay);
 			if ( !power_save )
 			{
-				//turn on gps and camera
+				//turn on led2 to know its going to wake up
+				cc3_led_set_state(2,true);
+				on = true;
+				
+				//turn on gps
 				cc3_gpio_set_value (0, 1);
-				cc3_camera_set_power_state (true);
 				
 				//if delay is greater than 20 min than the gps will
 				//probably have a cold start
@@ -144,9 +151,12 @@ int main (void)
 			power_save = (config->delay - deltaTime > gps_start_delay);
 			if ( power_save )
 			{
-				//turn off gps and camera
+				//turn off led2 to now its going to sleep
+				cc3_led_set_state (2, false);
+				on = false;
+				
+				//turn off gps
 				cc3_gpio_set_value (0, 0);
-				cc3_camera_set_power_state (false);
 				cc3_led_set_state (1, false);
 				continue;
 			}
@@ -155,12 +165,18 @@ int main (void)
 			
 			if ( check_triggers()  )
 			{
+				//turn on camera before taking picture
+				cc3_camera_set_power_state (true);
+				
 				picNum=takePict(picNum);
 				write_metadata();
 				copy_gps();
 				deltaDist = 0;
 				deltaTime = 0;
 				second = 0;
+				
+				//turn off camera after taking picture
+				cc3_camera_set_power_state (false);
 			}
 		}
 	}
