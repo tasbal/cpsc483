@@ -94,11 +94,7 @@ void initialize()
 	printf("\r\nInitialize JPEG:\r\n");
 	init_jpeg();
 
-	cc3_timer_wait_ms(1000);	
-	cc3_led_set_state (1, false);
-	cc3_led_set_state (2, false);
-	//turn off camera until ready to take picture
-	cc3_camera_set_power_state (false);
+	cc3_timer_wait_ms(1000);
 	free(config_buff);
 }
 
@@ -198,11 +194,16 @@ void get_gps_data()
 	printf("\r\nGetting GPS Data: %s\r\n",gps_buff);
 	
 	if(parse_GPS(gps_buff))
+	{
 		printf("Lat - %d\tLon - %d\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",
 			(int)(gps->lat*1000000),
 			(int)(gps->lon*1000000),
 			gps->month,gps->day,gps->year,
 			gps->hour,gps->minute,gps->second);
+		
+		// turn on 'Good GPS LED'
+		cc3_led_set_state (1, true);
+	}
 	else
 		printf("INVALID\r\n");
 	
