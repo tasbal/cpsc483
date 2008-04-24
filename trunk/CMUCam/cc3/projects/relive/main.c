@@ -37,20 +37,20 @@ int main (void)
 	}
 	printf("Starting picture numbering at: %d\r\n",picNum);
 	
-	// if delay is greater than 20 min than wake up 1 min before
+	// if delay is greater than 20 min than wake up 1.5 min before
 	// having to take a pic
 	if(config->delay >= 20*60000)
-		gps_start_delay = 60000;
+		gps_start_delay = 90000;
 	else
-		gps_start_delay = 15000;
+		gps_start_delay = 30000;
 	
 	printf("\r\nHello, Camera initialized\r\n");
 	
 	// start timing at this point
 	prevTime =  cc3_timer_get_current_ms();
-	// starts out awake
+	// starts out awake with no gps signal
+	cc3_led_set_state (1, false);
 	cc3_led_set_state (2, true);
-	bool on = true;
 	while (1)
 	{
 		// we have not gotten a fix on a sattelite
@@ -85,8 +85,7 @@ int main (void)
 			}
 			
 			deltaTime = saved_deltaTime;
-			second = saved_second;	
-			cc3_led_set_state (1, true);
+			second = saved_second;
 		}
 		
 		//Main function First update time and distance
@@ -107,14 +106,13 @@ int main (void)
 			{
 				//turn on led2 to know its going to wake up
 				cc3_led_set_state(2,true);
-				on = true;
 				
 				//turn on gps and camera
 				cc3_camera_set_power_state (true);
 				cc3_gpio_set_value (0, 1);
 				
 				//if delay is greater than 20 min than the gps will
-				//probably have a cold start
+				//probably have a cold start so set gps signal to bad
 				if(config->delay >=20*60000)
 					gps->good = false;
 			}
@@ -127,11 +125,12 @@ int main (void)
 			{
 				//turn off led2 to now its going to sleep
 				cc3_led_set_state (2, false);
-				on = false;
 				
 				//turn off gps and camera
 				cc3_camera_set_power_state (false);
 				cc3_gpio_set_value (0, 0);
+				
+				//turn off 'Good GPS LED'
 				cc3_led_set_state (1, false);
 				continue;
 			}
