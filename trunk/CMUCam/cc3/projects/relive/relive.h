@@ -7,13 +7,14 @@ FILE *memory, *gps_com;
 uint32_t prevTime, deltaTime;
 int second;
 double deltaDist;
-bool power_save, first_time_fix;
+bool power_save;
 int gps_start_delay;
+int picNum;
 
 /************************************************************************/
 
-void initialize(void);
-int takePict(int picNum);
+bool initialize(void);
+void takePict(void);
 bool check_triggers(void);
 void write_metadata(void);
 void get_gps_data(void);
