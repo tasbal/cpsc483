@@ -9,86 +9,46 @@
 
 int main (void)
 {	
+	// if initialization fails then quit
 	initialize();
-	// if we could not get a good config file then quit
-	if( !config->good )
+	if( !initialize() )
 	{
 		destroy_jpeg();
 		return 0;
 	}
 	
-	int picNum;
-	// try to open picNum.txt if exist that will be the 
-	// picture number we will start with if not start at 0
-	printf ("\n\rReading picNum file\r\n");
-	memory = fopen ("c:/picNum.txt", "r");
-	if (memory == NULL) {
-		picNum = 0;
-	}
-	else
-	{
-		char* picNum_buff = (char*)malloc(sizeof(char)*100);
-		fscanf(memory, "%s", picNum_buff);
-		picNum = atoi(picNum_buff);
-	}
-	if (fclose (memory) == EOF) {
-		perror ("fclose failed\r\n");
-		while(1);
-	}
-	printf("Starting picture numbering at: %d\r\n",picNum);
-	
-	// if delay is greater than 20 min than wake up 1.5 min before
-	// having to take a pic
-	if(config->delay >= 20*60000)
-		gps_start_delay = 90000;
-	else
-		gps_start_delay = 30000;
-	
 	printf("\r\nHello, Camera initialized\r\n");
 	
 	// start timing at this point
 	prevTime =  cc3_timer_get_current_ms();
-	// starts out awake with no gps signal
-	cc3_led_set_state (1, false);
-	cc3_led_set_state (2, true);
+	
+	// wait for a fix from gps
+	while( !gps->good )
+	{
+		get_gps_data();
+		
+		update_time();
+		if(deltaTime > second*1000)
+		{
+			printf("\r\ndeltaTime: %d s\n\r",second);
+			second++;
+		}
+	}
+	
+	// It is the first time we got a fix on a sattelite
+	// since the unit first turned on so also save the
+	// gps info into prev_gps
+	copy_gps();
+	
+	// reset deltaTime and second
+	deltaTime = 0;
+	second = 0;
+	
+	// main loop that has two cases when its in power saving mode
+	// and when its not
 	while (1)
 	{
-		// we have not gotten a fix on a sattelite
-		// when first turn on and after waking up GPS unit
-		if ( !gps->good )
-		{
-			uint32_t saved_deltaTime = deltaTime;
-			int saved_second = second;
-			
-			deltaTime = 0;
-			second = 0;
-			
-			while( !gps->good )
-			{
-				get_gps_data();
-				
-				update_time();
-				if(deltaTime > second*1000)
-				{
-					printf("\r\ndeltaTime: %d s\n\r",second);
-					second++;
-				}
-			}
-			
-			// It is the first time we got a fix on a sattelite
-			// since the unit first turned on so also save the
-			// gps info into prev_gps
-			if( first_time_fix )
-			{
-				copy_gps();
-				first_time_fix = false;
-			}
-			
-			deltaTime = saved_deltaTime;
-			second = saved_second;
-		}
-		
-		//Main function First update time and distance
+		//First update time and distance
 		update_time();
 		deltaDist = calcDist( prev_gps->lat, prev_gps->lon, gps->lat, gps->lon );
 		if(deltaTime > second*1000)
@@ -123,7 +83,7 @@ int main (void)
 			power_save = (config->delay - deltaTime > gps_start_delay);
 			if ( power_save )
 			{
-				//turn off led2 to now its going to sleep
+				//turn off led2 to know its going to sleep
 				cc3_led_set_state (2, false);
 				
 				//turn off gps and camera
@@ -137,11 +97,13 @@ int main (void)
 			
 			get_gps_data();
 			
+			// if we have covered the distance and the time is up then
+			// check whether to take a picture or not
 			if ( deltaDist >= config->min_dist && deltaTime >= config->delay  )
 			{
 				if( check_triggers() )
 				{
-					picNum=takePict(picNum);
+					takePict();
 					write_metadata();
 				}
 				copy_gps();

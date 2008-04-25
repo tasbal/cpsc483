@@ -12,14 +12,14 @@
 #include "parser.h"
 #include "relive.h"
 
-void initialize()
+bool initialize()
 {	
 	prevTime = 0;
 	deltaTime = 0;
 	second = 0;
 	deltaDist = 0;
 	power_save = false;
-	first_time_fix = true;
+	gps_start_delay = 30000;
 	
 	parse_init();
 	
@@ -43,14 +43,14 @@ void initialize()
 	memory = fopen ("c:/config.txt", "r");
 	if (memory == NULL) {
 		perror ("fopen failed\r\n");
-		return;
+		return false;
 	}
 	// get config file
 	char* config_buff = (char*)malloc(sizeof(char)*100);
 	fscanf(memory, "%s", config_buff);
 	if (fclose (memory) == EOF) {
 		perror ("fclose failed\r\n");
-		while(1);
+		return false;
 	}
 	
 	// parse config file
@@ -81,10 +81,7 @@ void initialize()
 	cc3_camera_set_auto_white_balance (true);
 	cc3_camera_set_auto_exposure (true);
 
-	//turn on gps
-	cc3_gpio_set_mode (0, CC3_GPIO_MODE_OUTPUT);
-	cc3_gpio_set_value (0, 1);
-	
+	// open gps serial com.
 	gps_com = cc3_uart_fopen(1,"r+");
 	
 	// init pixbuf with width and height
@@ -94,13 +91,37 @@ void initialize()
 	printf("\r\nInitialize JPEG:\r\n");
 	init_jpeg();
 
+	// try to open picNum.txt if exist that will be the 
+	// picture number we will start with if not start at 0
+	printf ("\n\rReading picNum file\r\n");
+	memory = fopen ("c:/picNum.txt", "r");
+	if (memory == NULL) {
+		picNum = 0;
+	}
+	else
+	{
+		char* picNum_buff = (char*)malloc(sizeof(char)*100);
+		fscanf(memory, "%s", picNum_buff);
+		picNum = atoi(picNum_buff);
+	}
+	if (fclose (memory) == EOF) {
+		perror ("fclose failed\r\n");
+		return false;
+	}
+	printf("Starting picture numbering at: %d\r\n",picNum);
+	
+	// starts out awake with no gps signal
+	cc3_led_set_state (1, false);
+	cc3_led_set_state (2, true);
+
 	cc3_timer_wait_ms(1000);
 	free(config_buff);
+	return true;
 }
 
 /************************************************************************/
 
-int takePict(int picNum)
+void takePict()
 {
 	printf("\r\nTaking Picture:\n\r");
 	
@@ -129,9 +150,8 @@ int takePict(int picNum)
 	fprintf(memory, "%d", picNum);
 	if ( fclose (memory) == EOF) {
 		perror ("fclose failed");
+		while(1);
 	}
-	
-	return picNum;
 }
 
 /************************************************************************/
@@ -165,7 +185,7 @@ void write_metadata()
 	memory = fopen ("c:/metadata.txt", "a");\
 	if (memory == NULL) {
 		perror ("fopen failed");
-		return;
+		while(1);
 	}
 	
 	fprintf(memory, "%d,%d,%2d:%2d:%2d,",
@@ -180,6 +200,7 @@ void write_metadata()
 
 	if ( fclose (memory) == EOF) {
 		perror ("fclose failed");
+		while(1);
 	}
 }
 
@@ -187,12 +208,16 @@ void write_metadata()
 
 void get_gps_data()
 {
+	// gps buffer
 	char* gps_buff = (char*)malloc(sizeof(char)*100);
 	
+	// first flush anything in the serial buffer and scan the
+	// incoming data
 	fflush(gps_com);
 	fscanf(gps_com,"%s",gps_buff);
 	printf("\r\nGetting GPS Data: %s\r\n",gps_buff);
 	
+	// now try to parst the gps string
 	if(parse_GPS(gps_buff))
 	{
 		printf("Lat - %d\tLon - %d\tDate - %d\\%d\\%d\tTime - %02d:%02d:%02d\r\n",
