@@ -3,13 +3,16 @@
 
 #include "jpeglib.h"
 
-FILE *memory, *gps_com;
+#define LOG
+#define LOG_GPS
+
+FILE *memory;
 uint32_t prevTime, deltaTime;
-int second;
 double deltaDist;
 bool power_save;
-int gps_start_delay;
+int cam_focus_delay;
 int picNum;
+char log_str[100];
 
 /************************************************************************/
 
@@ -17,6 +20,7 @@ bool initialize(void);
 void takePict(void);
 bool check_triggers(void);
 void write_metadata(void);
+void write_log(void);
 void get_gps_data(void);
 void update_time(void);
 
@@ -40,9 +44,13 @@ static void init_jpeg()
 	// parameters for jpeg image
 	cinfo.image_width = cc3_g_pixbuf_frame.width;
 	cinfo.image_height = cc3_g_pixbuf_frame.height;
-	printf( "image width=%d image height=%d\n", cinfo.image_width, cinfo.image_height );
+	
+#ifdef LOG
+	snprintf(log_str, 100, "\r\nInitialize JPEG:\r\nimage width=%d image height=%d\n", cinfo.image_width, cinfo.image_height );
+	write_log();
+#endif
+	
 	cinfo.input_components = 3;
-	// cinfo.in_color_space = JCS_YCbCr;
 	cinfo.in_color_space = JCS_RGB;
 
 	// set image quality, etc.
@@ -51,8 +59,14 @@ static void init_jpeg()
 
 	// allocate memory for 1 row
 	row = cc3_malloc_rows(1);
+	
+#ifdef LOG
 	if(row==NULL)
-		printf( "Out of memory!\n" );
+	{
+		snprintf(log_str, 100, "Out of memory!\r\n" );
+		write_log();
+	}
+#endif
 }
 
 /************************************************************************/

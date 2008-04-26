@@ -25,9 +25,6 @@ void parse_init()
 	gps->hour = 0;
 	gps->minute = 0;
 	gps->second = 0;
-	gps->month = 0;
-	gps->day = 0;
-	gps->year = 0;
 	gps->good = false;
 	
 	prev_gps = (GPSData*)malloc(sizeof(GPSData));
@@ -188,15 +185,6 @@ bool parse_GPS(char* gps_string)
 	{
 		return parse_GPGGA(gps_string);
 	}
-	if(gps_string[3] == 'V' && gps_string[4] == 'T' && gps_string[5] == 'G')
-	{
-		return parse_GPVTG(gps_string);
-	}
-	return false;
-}
-
-bool parse_GPVTG(char* gps_string)
-{	
 	return false;
 }
 
@@ -268,7 +256,7 @@ bool parse_GPGGA(char* gps_string)
 						return false;
 				}
 				
-				convert(time,lat,lon,NULL);
+				convert(time,lat,lon);
 				gps->good = true;			
 				free(time);
 				free(lat);
@@ -283,25 +271,12 @@ bool parse_GPGGA(char* gps_string)
 	return false;
 }
 
-void convert(char* time,char* lat,char* lon,char* date)
+void convert(char* time,char* lat,char* lon)
 {
 	char* tmp = (char*)malloc(sizeof(char)*3);
 
 	gps->lat = toDeg(lat,0);
 	gps->lon = toDeg(lon,1)*-1;
-
-	tmp[0] = date[0];
-	tmp[1] = date[1];
-	tmp[2] = '\0';
-	gps->day = atoi(tmp);
-	
-	tmp[0] = date[2];
-	tmp[1] = date[3];
-	gps->month = atoi(tmp);
-
-	tmp[0] = date[4];
-	tmp[1] = date[5];
-	gps->year = atoi(tmp)+2000;
 
 	tmp[0] = time[0];
 	tmp[1] = time[1];
@@ -419,9 +394,6 @@ void copy_gps(void)
 	prev_gps->hour = gps->hour;
 	prev_gps->minute = gps->minute;
 	prev_gps->second = gps->second;
-	prev_gps->month = gps->month;
-	prev_gps->day = gps->day;
-	prev_gps->year = gps->year;
 	prev_gps->good = gps->good;
 }
 

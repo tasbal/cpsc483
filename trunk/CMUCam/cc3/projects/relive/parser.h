@@ -12,9 +12,6 @@ typedef struct _GPSData
 	int hour;
 	int minute;
 	int second;
-	int month;
-	int day;
-	int year;
 	bool good;
 }GPSData;
 
@@ -49,9 +46,8 @@ ConfigInfo *config;
 void parse_init(void);
 bool parse_GPS(char* gps_data);
 bool parse_GPGGA(char* gps_string);
-bool parse_GPVTG(char* gps_string);
 void parse_Config(char* config_string);
-void convert(char* time,char* lat,char* lon,char* date);
+void convert(char* time,char* lat,char* lon);
 double toRad(double degrees);
 double toDeg(char* data,int lat_or_lon);
 double calcDist( double nLat1, double nLon1, double nLat2, double nLon2 );
