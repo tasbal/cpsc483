@@ -149,7 +149,6 @@ C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\Re
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\bin\Debug\Google.GData.Extensions.DLL
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\bin\Debug\Google.GData.Photos.dll
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.MapBrowser.resources
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.reLiveMain.resources
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\ReLive.GoogleLogin.resources
 C:\Users\iceraven\Documents\TAMU\Spring 2008\CPSC483-501\Senior Design\ReLive\ReLive\obj\Debug\reLive.Properties.Resources.resources
