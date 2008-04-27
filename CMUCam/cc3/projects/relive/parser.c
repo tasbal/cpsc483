@@ -18,7 +18,7 @@ void parse_init()
 	config->halo_info->lon = 0;
 	config->halo_info->range = 0;
 	config->good = false;
-	
+
 	gps = (GPSData*)malloc(sizeof(GPSData));
 	gps->lat = 0;
 	gps->lon = 0;
@@ -26,7 +26,7 @@ void parse_init()
 	gps->minute = 0;
 	gps->second = 0;
 	gps->good = false;
-	
+
 	prev_gps = (GPSData*)malloc(sizeof(GPSData));
 	copy_gps();
 }
@@ -36,7 +36,7 @@ void parse_Config(char* config_string)
 	int numComma;
 	char* str1;
 	bool cont = true;
-	
+
 	numComma = 0;
 	if(config_string == NULL)
 		return;
@@ -56,8 +56,8 @@ void parse_Config(char* config_string)
 				//delay
 				config->delay  = atof(str1);
 				config->delay *= 60000;
-					// times 60000 because we need millisec
-					// but config file is in minutes
+				// times 60000 because we need millisec
+				// but config file is in minutes
 			}
 			break;
 		case 1:
@@ -241,21 +241,21 @@ bool parse_GPGGA(char* gps_string)
 				//7 from GPS memory?
 				if(strcmp(str1,"0")==0 || strcmp(str1,"") ==0)  
 				{
-						free(time);
-						free(lat);
-						free(lon);
-						return false;
+					free(time);
+					free(lat);
+					free(lon);
+					return false;
 				}
 				if(strcmp(str1,"7")==0 && !gps->good)
 				{
 					// if we did not lock onto the gps before
 					// then dont accept a seven
-						free(time);
-						free(lat);
-						free(lon);
-						return false;
+					free(time);
+					free(lat);
+					free(lon);
+					return false;
 				}
-				
+
 				convert(time,lat,lon);
 				gps->good = true;			
 				free(time);
@@ -289,11 +289,11 @@ void convert(char* time,char* lat,char* lon)
 	tmp[0] = time[2];
 	tmp[1] = time[3];
 	gps->minute = atoi(tmp);
-	
+
 	tmp[0] = time[4];
 	tmp[1] = time[5];
 	gps->second = atoi(tmp);
-	
+
 	free(tmp);
 }
 
@@ -314,7 +314,7 @@ double toDeg(char* DDMM,int latorlon)
 		return -99999;
 
 	DDMM_len = (int)strlen(DDMM);
-    
+
 	deg = (char*)malloc(sizeof(char)*4);
 	min = (char*)malloc(sizeof(char)*10);
 
@@ -332,7 +332,7 @@ double toDeg(char* DDMM,int latorlon)
 	}
 	else
 	{
-				//store the degrees
+		//store the degrees
 		for(i=0;i<2;i++)
 			deg[i] = DDMM[i];
 		deg[2] = '\0';
@@ -344,7 +344,7 @@ double toDeg(char* DDMM,int latorlon)
 	}
 	deg_d = strtod(deg,&ptr);
 	free(deg);
-	
+
 	min_d = strtod(min,&ptr);
 	free(min);
 
@@ -377,9 +377,9 @@ double calcDist( double nLat1, double nLon1, double nLat2, double nLon2 )
 
 	nA = pow ( sin(nDLat/2), 2 ) +
 
-	cos(nLat1) * cos(nLat2) * 
+		cos(nLat1) * cos(nLat2) * 
 
-	pow ( sin(nDLon/2), 2 );
+		pow ( sin(nDLon/2), 2 );
 
 	nC = 2 * atan2( sqrt(nA), sqrt( 1 - nA ));
 

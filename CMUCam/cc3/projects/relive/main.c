@@ -16,31 +16,31 @@ int main (void)
 		destroy_jpeg();
 		return 0;
 	}
-	
+
 	// start timing at this point
 	prevTime =  cc3_timer_get_current_ms();
-	
+
 	// wait for a fix from gps
 	while( !gps->good )
 	{
 		get_gps_data();
 		update_time();
 	}
-	
+
 #ifdef LOG
 	snprintf(log_str, 100, "\n\r It took %d s to get GPS Signal\n\r", (int)(deltaTime/1000));
 	write_log();
 #endif
-	
+
 	// It is the first time we got a fix on a sattelite
 	// since the unit first turned on so also save the
 	// gps info into prev_gps
 	copy_gps();
-	
+
 	// reset deltaTime and start timing from this point
 	deltaTime = 0;
 	prevTime =  cc3_timer_get_current_ms();
-	
+
 	// main loop that has two cases when its in power saving mode
 	// and when its not
 	while (1)
@@ -48,7 +48,7 @@ int main (void)
 		//First update time and distance
 		update_time();
 		deltaDist = calcDist( prev_gps->lat, prev_gps->lon, gps->lat, gps->lon );
-		
+
 		// Now it is either in power saving mode or not
 		if ( power_save )
 		{
@@ -58,7 +58,7 @@ int main (void)
 			{
 				//turn on led2 to know its going to wake up
 				cc3_led_set_state(2,true);
-				
+
 				//turn on camera
 				cc3_camera_set_power_state (true);
 			}
@@ -71,15 +71,15 @@ int main (void)
 			{
 				//turn off led2 to know its going to sleep
 				cc3_led_set_state (2, false);
-				
+
 				//turn off camera
 				cc3_camera_set_power_state (false);
-				
+
 				continue;
 			}
-			
+
 			get_gps_data();
-			
+
 			// if we have covered the distance and the time is up then
 			// check whether to take a picture or not
 			if ( deltaDist >= config->min_dist && deltaTime >= config->delay  )
