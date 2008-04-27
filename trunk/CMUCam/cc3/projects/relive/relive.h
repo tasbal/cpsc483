@@ -44,12 +44,12 @@ static void init_jpeg()
 	// parameters for jpeg image
 	cinfo.image_width = cc3_g_pixbuf_frame.width;
 	cinfo.image_height = cc3_g_pixbuf_frame.height;
-	
+
 #ifdef LOG
 	snprintf(log_str, 100, "\r\nInitialize JPEG:\r\nimage width=%d image height=%d\n", cinfo.image_width, cinfo.image_height );
 	write_log();
 #endif
-	
+
 	cinfo.input_components = 3;
 	cinfo.in_color_space = JCS_RGB;
 
@@ -59,7 +59,7 @@ static void init_jpeg()
 
 	// allocate memory for 1 row
 	row = cc3_malloc_rows(1);
-	
+
 #ifdef LOG
 	if(row==NULL)
 	{
