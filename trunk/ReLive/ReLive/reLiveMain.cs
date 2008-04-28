@@ -613,7 +613,7 @@ namespace reLive
                     else 
                         driveSelected = false;
                 }
-                else if(rootNum == 0)
+                else if(reliveCnt == 0 && rootNum == 0)
                     MessageBox.Show("No available drives were found.  One will need to be inserted in order to sync, save config, or format a drive.");
             }
             return memCardPath;
