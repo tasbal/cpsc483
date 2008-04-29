@@ -1,7 +1,6 @@
 obj\Release\ReLive.exe
 obj\Release\ReLive.pdb
 obj\Debug\ResolveAssemblyReference.cache
-obj\Debug\reLive.MapBrowser.resources
 obj\Debug\reLive.reLiveMain.resources
 obj\Debug\reLive.GoogleLogin.resources
 obj\Debug\reLive.Properties.Resources.resources
