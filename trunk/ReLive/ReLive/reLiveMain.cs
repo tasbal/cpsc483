@@ -305,8 +305,12 @@ namespace reLive
 
         private void login()
         {
-            if (this.googleAuthToken == null)
+            if (MessageBox.Show("This product is not intended to be used for illegal or malicious reasons.\n\nThis device must be used where it is visible to the public\n\nDo you agree?", "User Agreement", MessageBoxButtons.YesNo) == DialogResult.No)
             {
+                this.Close();
+            }
+            if (this.googleAuthToken == null)
+            {  
                 GoogleLogin loginDialog = new GoogleLogin(new PicasaService("reLive"));
                 loginDialog.ShowDialog();
 
