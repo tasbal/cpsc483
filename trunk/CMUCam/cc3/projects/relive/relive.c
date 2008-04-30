@@ -21,7 +21,7 @@ bool initialize()
 	deltaTime = 0;
 	deltaDist = 0;
 	power_save = false;
-	cam_focus_delay = 20000;
+	cam_focus_delay = 8000;
 
 	// init parser structures for gps and config
 	parse_init();
@@ -77,7 +77,7 @@ bool initialize()
 	{
 		snprintf(log_str, 100, "\tHalo - true\r\n");
 		write_log();
-		snprintf(log_str, 100, "\tHalo %s:\t Lat*10000 - %d\tLon*10000 - %d\tRange(mm) - %d\r\n",
+		snprintf(log_str, 100, "\tHalo %s:\t Lat*1000000 - %d\tLon*1000000 - %d\tRange(mm) - %d\r\n",
 			config->halo_info->name,
 			(int)(config->halo_info->lat*1000000),
 			(int)(config->halo_info->lon*1000000),
@@ -116,6 +116,7 @@ bool initialize()
 		char* picNum_buff = (char*)malloc(sizeof(char)*100);
 		fscanf(memory, "%s", picNum_buff);
 		picNum = atoi(picNum_buff);
+		free(picNum_buff);
 	}
 	if (fclose (memory) == EOF) {
 		perror ("fclose failed\r\n");
@@ -151,7 +152,7 @@ void takePict()
 	// print file that you are going to write to stderr
 	fprintf(stderr,"%s\r\n", filename);
 	memory = fopen(filename, "w");
-	if(memory==NULL || picNum>200 )
+	if(memory==NULL)
 	{
 		cc3_led_set_state(3, true);
 #ifdef LOG
